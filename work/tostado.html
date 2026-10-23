@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tostado case study · Yainel Garcia Alfonso</title>
+<meta name="description" content="How I designed and built a website concept for Tostado, a small-batch coffee roaster and ventanita in Little Havana.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600&family=Fraunces:opsz,wght@9..144,400&family=DM+Sans:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<style>
+.frame,.phone{background:#FBF6EE}
+.specimen .a{font-family:"Fraunces",Georgia,serif;color:#2B1D16}
+.specimen .b{font-family:"DM Sans",system-ui,sans-serif;font-weight:400;color:#2B1D16}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="name" href="../index.html">Yainel Garcia Alfonso</a>
+    <nav aria-label="Main">
+      <a href="../index.html#projects">Work</a>
+      <a href="../index.html#playground">Skills</a>
+      <a href="../index.html#contact" class="keep">Contact</a>
+      <button class="toggle" type="button" aria-pressed="false">Grid</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="cs-hero" style="border:0">
+    <div class="wrap cols">
+      <h1 class="display">Tostado: a coffee shop that sells the morning, not the menu.</h1>
+      <dl class="cs-meta">
+        <div><dt>Project</dt><dd>Self-initiated concept</dd></div>
+        <div><dt>My role</dt><dd>Brand direction, UX and UI design, front-end build</dd></div>
+        <div><dt>Sector</dt><dd>Food and drink, e-commerce</dd></div>
+        <div><dt>Deliverables</dt><dd>Homepage, ordering, subscription builder, live site</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <div class="cs-shot">
+    <div class="wrap">
+      <div class="frame"><iframe src="../tostado/index.html" title="Tostado homepage preview" tabindex="-1" scrolling="no"></iframe></div>
+      <p class="caption">The homepage on desktop. <a href="../tostado/index.html">Open the live site</a> to order a cafecito or build a subscription.</p>
+    </div>
+  </div>
+
+  <section>
+    <div class="wrap cols">
+      <h2 class="side">The brief</h2>
+      <div class="main">
+        <p class="big">A neighborhood roaster on Calle Ocho with two very different customers: the regular who wants a cafecito in thirty seconds, and the coffee nerd who wants to know the farm.</p>
+        <p>The site had to work for both without making either one wait. It also had to sell what keeps a small roaster alive between rushes: bags of beans and subscriptions.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap cols">
+      <h2 class="side">The idea</h2>
+      <div class="main">
+        <p class="big">Everything is a circle seen from above: the cup, the logo, the roast-date stamp. It's what you see when someone hands you a coffee through the window.</p>
+        <p>The hero is a cup of café con leche with latte art that turns slowly, and a stamp that reads "Roasted Tuesday, brewed today". Freshness is the one claim that matters, so it's the first thing on the page and it's said plainly.</p>
+        <p>The ordering menu sits right below the hero on a dark espresso background. Regulars can add a cortadito in one tap without scrolling past a story they already know.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap cols">
+      <h2 class="side">Color and type</h2>
+      <div class="main">
+        <p>The palette follows a cup from bottom to top: dark roast, the brown of a cortadito, terracotta from the tiles on 8th Street, and the cream of the espumita. A muted sage stands in for the plants outside the ventanita.</p>
+        <div class="swatches" aria-label="Color palette">
+          <div style="background:#2B1D16;color:#F3E6D3">Roast<br>#2B1D16</div>
+          <div style="background:#4A3426;color:#F3E6D3">Bean<br>#4A3426</div>
+          <div style="background:#C8643B;color:#FBF6EE">Clay<br>#C8643B</div>
+          <div style="background:#6E7F5C;color:#FBF6EE">Leaf<br>#6E7F5C</div>
+          <div style="background:#F3E6D3;color:#2B1D16">Crema<br>#F3E6D3</div>
+          <div style="background:#FBF6EE;color:#2B1D16">Milk<br>#FBF6EE</div>
+        </div>
+        <div class="specimen">
+          <div><p class="a">Tostado</p><small>Fraunces for display. A soft, warm serif with a little wobble, like hand-painted shop lettering.</small></div>
+          <div><p class="b">Roasted this week, on Calle Ocho.</p><small>DM Sans for text and prices. Clear at small sizes and friendly without being cute.</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap cols">
+      <h2 class="side">Challenges</h2>
+      <div class="main">
+        <h3>Ordering in seconds</h3>
+        <p>Each menu item is one row with a price and a single add button. The button turns into a check, the order counter in the header bounces, and a short message confirms it, so you always know it worked. The order opens in a side drawer you can close with Escape, and focus returns to where you were.</p>
+        <h3 style="margin-top:40px">A subscription you can understand</h3>
+        <p>Subscription forms usually hide the price until the last step. Here, every choice (coffee, grind, bag size, how often) updates a summary card beside the form, with the regular price crossed out next to the 10% subscriber price. Nothing is a surprise at checkout.</p>
+        <h3 style="margin-top:40px">Telling the beans apart</h3>
+        <p>Each bag card shows the origin, three tasting notes and a roast level drawn as five dots, with a text label so it doesn't depend on reading the dots. People who know coffee get the detail, everyone else gets "chocolate, molasses, almond".</p>
+        <div class="phones">
+          <div class="phone"><iframe src="../tostado/index.html" title="Tostado on a phone" tabindex="-1" scrolling="no"></iframe></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap cols">
+      <h2 class="side">The build</h2>
+      <div class="main">
+        <p>Hand-written HTML, CSS and a small amount of plain JavaScript for the menu tabs, the order drawer and the subscription builder. The menu tabs follow the ARIA tabs pattern with arrow-key support, the form uses real radio buttons styled as cards, and all animation stops for visitors who prefer reduced motion.</p>
+        <p>For a real launch, this would connect to a store platform such as Shopify for checkout and recurring orders, with the same front end on top.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="border:0">
+    <div class="wrap next">
+      <h2>See it for yourself.</h2>
+      <div style="display:flex;gap:16px;flex-wrap:wrap">
+        <a class="btn" href="../tostado/index.html">Open the live site</a>
+        <a class="btn ghost" href="../index.html#contact">Get in touch</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Yainel Garcia Alfonso, Miami</span>
+    <span>Tostado is a fictional coffee shop created as a design concept.</span>
+  </div>
+</footer>
+
+<script src="../guides.js"></script>
+</body>
+</html>

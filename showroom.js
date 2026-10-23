@@ -217,25 +217,45 @@
       b: '<p>A self-initiated website concept for a fourteen-room hotel inside a restored 1926 house in Coral Gables.</p><h4>My role</h4><ul><li>Brand direction, UI design and responsive layouts</li><li>Front-end build in hand-written HTML and CSS</li></ul><h4>Design thinking</h4><ul><li>The arch, the signature shape of Coral Gables, is the one bold element; everything else stays quiet</li><li>A palette taken from the place: banyan greens, coral rock pinks, brass from the iron gates</li></ul><h4>Challenge solved</h4><ul><li>Keeping the booking path visible without breaking the mood. On phones it moves into a slim bar within thumb reach</li></ul>',
       f: '<a class="btn" href="work/palma-alta.html">Read case study</a><a class="btn btn-primary" href="palma-alta/index.html">Open live site</a>'
     },
-    consent: {
+    tostado: {
       es: {
-        t: 'Plataforma de consentimiento de pacientes',
-        b: '<p>Una aplicación web que reemplazó los formularios de consentimiento en papel en una clínica quirúrgica con varios especialistas. Es privada, así que muestro pantallas con datos de ejemplo si me lo pides.</p><h4>Mi papel</h4><ul><li>Único diseñador y desarrollador, de la UX a producción, en más de 16 versiones</li></ul><h4>Pensamiento de diseño</h4><ul><li>Dos públicos, dos experiencias: un flujo de firma tranquilo, paso a paso, para pacientes nerviosos, y una consola rápida para un personal ocupado</li><li>Ilustraciones de cada procedimiento para que los pacientes reconozcan su cirugía de un vistazo</li><li>Una vista de dos paneles donde la lista de pacientes sigue visible mientras aparecen los detalles</li></ul><h4>Retos resueltos</h4><ul><li>Mantener los registros de pacientes sincronizados en tiempo real con el CRM y las herramientas de formularios</li><li>Un registro de auditoría con filtros por día, semana y año, para tener constancia de cada firma</li><li>Permisos y manejo de datos que respetan la privacidad médica</li></ul>',
-        f: '<a class="btn btn-primary" href="#contact" data-close>Pedir una demostración</a>'
+        t: 'Tostado, café de especialidad',
+        b: '<p>Un concepto de sitio web para un tostador artesanal con ventanita en la Calle Ocho, con dos clientes muy distintos: quien quiere su cafecito en treinta segundos y quien quiere conocer la finca.</p><h4>Mi papel</h4><ul><li>Dirección de marca, diseño UX y de interfaz, y desarrollo front end</li></ul><h4>Pensamiento de diseño</h4><ul><li>Todo es un círculo visto desde arriba: la taza, el logo, el sello con la fecha de tostado</li><li>El menú para pedir va justo debajo de la portada, para que los habituales pidan en un toque</li></ul><h4>Retos resueltos</h4><ul><li>Un pedido con respuesta clara en cada paso: contador, mensaje y un panel lateral accesible</li><li>Un creador de suscripción que muestra el precio real con cada elección, sin sorpresas al pagar</li></ul>',
+        f: '<a class="btn" href="work/tostado.html">Leer el caso de estudio</a><a class="btn btn-primary" href="tostado/index.html">Abrir el sitio</a>'
       },
-      t: 'Patient consent platform',
-      b: '<p>A web application that replaced paper consent forms at a multi-provider surgical practice. It is private, so I share screens with sample data on request.</p><h4>My role</h4><ul><li>Sole designer and developer, from UX to production, across 16+ releases</li></ul><h4>Design thinking</h4><ul><li>Two audiences, two experiences: a calm step-by-step signing flow for nervous patients, and a fast console for busy staff</li><li>Procedure illustrations as visual cues so patients recognize their surgery at a glance</li><li>A two-panel staff layout where the patient list stays in view while details slide in</li></ul><h4>Challenges solved</h4><ul><li>Keeping patient records in sync with the CRM and form tools in real time</li><li>An audit log with day, week and year filters for a clear record of every signature</li><li>Permissions and data handling that respect healthcare privacy</li></ul>',
-      f: '<a class="btn btn-primary" href="#contact" data-close>Ask for a walkthrough</a>'
+      t: 'Tostado, specialty coffee',
+      b: '<p>A website concept for a small-batch roaster with a walk-up window on Calle Ocho, serving two very different customers: the regular who wants a cafecito in thirty seconds, and the coffee lover who wants to know the farm.</p><h4>My role</h4><ul><li>Brand direction, UX and UI design, front-end build</li></ul><h4>Design thinking</h4><ul><li>Everything is a circle seen from above: the cup, the logo, the roast-date stamp</li><li>The ordering menu sits right below the hero, so regulars can order in one tap</li></ul><h4>Challenges solved</h4><ul><li>Ordering with clear feedback at every step: a counter, a message and an accessible side drawer</li><li>A subscription builder that shows the real price with every choice, so checkout has no surprises</li></ul>',
+      f: '<a class="btn" href="work/tostado.html">Read case study</a><a class="btn btn-primary" href="tostado/index.html">Open live site</a>'
     },
-    golf: {
+    tally: {
       es: {
-        t: 'Golf Mapify',
-        b: '<p>Una app de golf, en desarrollo, con dos partes que trabajan juntas.</p><h4>Cómo funciona</h4><ul><li>Un panel interno para mapear campos de golf reales, hoyo por hoyo</li><li>Una app para iPhone y Android que sabe en qué hoyo estás por tu ubicación y te pide el resultado</li></ul><h4>Enfoque de diseño</h4><ul><li>Pantallas grandes y fáciles de leer, que funcionan a pleno sol y con una sola mano</li></ul>',
-        f: '<a class="btn" href="#contact" data-close>Preguntar por el proyecto</a>'
+        t: 'Tally, panel de ventas',
+        b: '<p>Un concepto de producto: un panel de ventas e inventario para dueños de tiendas pequeñas que revisan sus números entre cliente y cliente, muchas veces desde el móvil.</p><h4>Mi papel</h4><ul><li>Diseño de producto, sistema de interfaz y desarrollo front end</li></ul><h4>Pensamiento de diseño</h4><ul><li>Una sola pantalla que se lee de arriba abajo: cuatro cifras, una tendencia, los productos más vendidos y los últimos pedidos</li><li>Cada cifra se compara con el periodo anterior, con flecha y texto, nunca solo con color</li></ul><h4>Retos resueltos</h4><ul><li>Gráficos en SVG hechos a mano, con tooltip y lectura con flechas del teclado</li><li>La misma app en el móvil: barra inferior, tarjetas en lugar de tabla y modo oscuro con colores propios</li></ul>',
+        f: '<a class="btn" href="work/tally.html">Leer el caso de estudio</a><a class="btn btn-primary" href="tally/index.html">Abrir la app</a>'
       },
-      t: 'Golf Mapify',
-      b: '<p>A golf app, currently in development, with two parts that work together.</p><h4>How it works</h4><ul><li>A back office for mapping real golf courses, hole by hole</li><li>A player app for iPhone and Android that knows which hole you are on from your location, and asks for your score</li></ul><h4>Design focus</h4><ul><li>Big, glanceable screens that work in bright sun with one hand</li></ul>',
-      f: '<a class="btn" href="#contact" data-close>Ask about it</a>'
+      t: 'Tally, sales dashboard',
+      b: '<p>A product concept: a sales and inventory dashboard for owners of small shops who check their numbers between customers, often on a phone.</p><h4>My role</h4><ul><li>Product design, UI system and front-end build</li></ul><h4>Design thinking</h4><ul><li>One screen, read top to bottom: four numbers, one trend, the top products, then the latest orders</li><li>Every number is compared with the previous period, with an arrow and text, never color alone</li></ul><h4>Challenges solved</h4><ul><li>Hand-built SVG charts with a crosshair tooltip and arrow-key reading</li><li>The same app on a phone: a bottom tab bar, cards instead of a table, and a dark mode with its own colors</li></ul>',
+      f: '<a class="btn" href="work/tally.html">Read case study</a><a class="btn btn-primary" href="tally/index.html">Open live app</a>'
+    },
+    brasa: {
+      es: {
+        t: 'Brasa, cocina a la leña',
+        b: '<p>Un concepto de sitio web para un restaurante en el Design District donde cada plato pasa por el fuego. Tenía que sentirse tan cálido como el salón y llevar rápido a una mesa reservada.</p><h4>Mi papel</h4><ul><li>Dirección de marca, diseño UX y de interfaz, y desarrollo front end</li></ul><h4>Pensamiento de diseño</h4><ul><li>Fuego literal: un resplandor de brasas y chispas que suben por el nombre</li><li>Un letrero móvil con lo que hay en el fuego hoy, para que el menú se sienta vivo</li></ul><h4>Retos resueltos</h4><ul><li>Reservas en tres pasos: personas, fecha y hora, con un resumen que se completa a tu lado</li><li>Un menú fácil de recorrer, con etiquetas explicadas y un filtro vegetariano</li></ul>',
+        f: '<a class="btn" href="work/brasa.html">Leer el caso de estudio</a><a class="btn btn-primary" href="brasa/index.html">Abrir el sitio</a>'
+      },
+      t: 'Brasa, wood-fire kitchen',
+      b: '<p>A website concept for a Design District restaurant where every dish touches the fire. It had to feel as warm as the room and still get people to a booked table quickly.</p><h4>My role</h4><ul><li>Brand direction, UX and UI design, front-end build</li></ul><h4>Design thinking</h4><ul><li>Fire, used literally: an ember glow and sparks rising through the name</li><li>A ticker of what is on the fire today, so the menu feels alive</li></ul><h4>Challenges solved</h4><ul><li>A three-step reservation: party size, date and time, with a summary that fills in beside you</li><li>A menu that is easy to scan, with explained tags and a vegetarian filter</li></ul>',
+      f: '<a class="btn" href="work/brasa.html">Read case study</a><a class="btn btn-primary" href="brasa/index.html">Open live site</a>'
+    },
+    marea: {
+      es: {
+        t: 'Marea, estudio de pilates',
+        b: '<p>Un concepto de sitio web para un estudio de pilates, respiración y recuperación en Brickell, cuyos miembros vienen a bajar el ritmo.</p><h4>Mi papel</h4><ul><li>Dirección de marca, diseño UX y de interfaz, y desarrollo front end</li></ul><h4>Pensamiento de diseño</h4><ul><li>Todo se mueve al ritmo de la respiración: olas lentas, letra ligera y mucho espacio</li><li>Un pequeño ejercicio guiado de respiración en lugar de un discurso de ventas</li></ul><h4>Retos resueltos</h4><ul><li>Un horario que se entiende de un vistazo, con filtros y plazas disponibles</li><li>Reservas con un diálogo nativo y precios honestos, con el costo real por clase</li></ul>',
+        f: '<a class="btn" href="work/marea.html">Leer el caso de estudio</a><a class="btn btn-primary" href="marea/index.html">Abrir el sitio</a>'
+      },
+      t: 'Marea, pilates studio',
+      b: '<p>A website concept for a pilates, breathwork and recovery studio in Brickell, whose members come to slow down.</p><h4>My role</h4><ul><li>Brand direction, UX and UI design, front-end build</li></ul><h4>Design thinking</h4><ul><li>Everything moves at the pace of breathing: slow waves, light type, generous space</li><li>A short guided breathing exercise instead of a sales pitch</li></ul><h4>Challenges solved</h4><ul><li>A schedule you can read at a glance, with filters and spots left</li><li>Booking with a native dialog, and honest pricing that shows the real cost per class</li></ul>',
+      f: '<a class="btn" href="work/marea.html">Read case study</a><a class="btn btn-primary" href="marea/index.html">Open live site</a>'
     }
   };
 
@@ -265,8 +285,10 @@
     { g: 'Go to', t: 'Experience', run: go('#experience') },
     { g: 'Go to', t: 'Start a project', run: go('#contact') },
     { g: 'Selected work', t: 'Palma Alta hotel concept', run: function () { openProject('palma'); } },
-    { g: 'Selected work', t: 'Patient consent platform', run: function () { openProject('consent'); } },
-    { g: 'Selected work', t: 'Golf Mapify', run: function () { openProject('golf'); } },
+    { g: 'Selected work', t: 'Tostado coffee roaster', run: function () { openProject('tostado'); } },
+    { g: 'Selected work', t: 'Tally sales dashboard', run: function () { openProject('tally'); } },
+    { g: 'Selected work', t: 'Brasa wood-fire restaurant', run: function () { openProject('brasa'); } },
+    { g: 'Selected work', t: 'Marea pilates studio', run: function () { openProject('marea'); } },
     { g: 'Actions', t: 'Toggle dark mode', k: 'D', run: function () { setTheme(root.dataset.theme === 'dark' ? 'light' : 'dark'); } },
     { g: 'Actions', t: 'Copy email address', run: function () { copy('garcia.yainel@gmail.com', 'Email copied to clipboard'); } },
     { g: 'Actions', t: 'Celebrate', run: function () { confetti(); } },

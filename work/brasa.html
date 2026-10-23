@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brasa case study · Yainel Garcia Alfonso</title>
+<meta name="description" content="How I designed and built a website concept for Brasa, a wood-fire restaurant in Miami's Design District.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600&family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Newsreader:ital,opsz,wght@1,6..72,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<style>
+.frame,.phone{background:#141110}
+.specimen .a{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;letter-spacing:-.06em;color:#141110}
+.specimen .b{font-family:"Newsreader",Georgia,serif;font-style:italic;font-weight:400;color:#141110}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="name" href="../index.html">Yainel Garcia Alfonso</a>
+    <nav aria-label="Main">
+      <a href="../index.html#projects">Work</a>
+      <a href="../index.html#playground">Skills</a>
+      <a href="../index.html#contact" class="keep">Contact</a>
+      <button class="toggle" type="button" aria-pressed="false">Grid</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="cs-hero" style="border:0">
+    <div class="wrap cols">
+      <h1 class="display">Brasa: a restaurant website you can almost smell.</h1>
+      <dl class="cs-meta">
+        <div><dt>Project</dt><dd>Self-initiated concept</dd></div>
+        <div><dt>My role</dt><dd>Brand direction, UX and UI design, front-end build</dd></div>
+        <div><dt>Sector</dt><dd>Restaurants and hospitality</dd></div>
+        <div><dt>Deliverables</dt><dd>Homepage, menu, reservation flow, live site</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <div class="cs-shot">
+    <div class="wrap">
+      <div class="frame"><iframe src="../brasa/index.html" title="Brasa homepage preview" tabindex="-1" scrolling="no"></iframe></div>
+      <p class="caption">The homepage on desktop. <a href="../brasa/index.html">Open the live site</a> to browse the menu and book a table.</p>
+    </div>
+  </div>
+
+  <section>
+    <div class="wrap cols">
+      <h2 class="side">The brief</h2>
+      <div class="main">
+        <p class="big">A wood-fire restaurant where every dish touches a twelve-foot hearth. The site had to feel as warm and loud as the room, and still get people to a booked table quickly.</p>
+        <p>Most restaurant visitors come for three things: the menu, the hours and a reservation. Everything else on the site is there to make them want to come, not to slow them down.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap cols">
+      <h2 class="side">The idea</h2>
+      <div class="main">
+        <p class="big">Fire, used literally: the page opens on a near-black screen with a slow ember glow rising from the bottom and sparks drifting up through the name.</p>
+        <p>The name is set huge and heavy, half filled and half outlined, as if it's still catching. Below it, a ticker lists what's on the fire today, which tells regulars the menu changes and gives first-timers something to crave.</p>
+        <p>The voice is short and confident, with italic serif lines for the menu descriptions, the way a server would describe the dish at your table.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap cols">
+      <h2 class="side">Color and type</h2>
+      <div class="main">
+        <p>Charcoal and ash for the room, ember orange and flame yellow for heat, and a warm bone white for the paper menus. The reservation section switches to bone, like turning the lights up when it's time to make a decision.</p>
+        <div class="swatches" aria-label="Color palette">
+          <div style="background:#141110;color:#EFE7DA">Char<br>#141110</div>
+          <div style="background:#221D1A;color:#EFE7DA">Ash<br>#221D1A</div>
+          <div style="background:#E8622C;color:#141110">Ember<br>#E8622C</div>
+          <div style="background:#F2A541;color:#141110">Flame<br>#F2A541</div>
+          <div style="background:#A39A90;color:#141110">Smoke<br>#A39A90</div>
+          <div style="background:#EFE7DA;color:#141110">Bone<br>#EFE7DA</div>
+        </div>
+        <div class="specimen">
+          <div><p class="a">brasa.</p><small>Bricolage Grotesque ExtraBold. Chunky and a little rough, like letters burned into wood.</small></div>
+          <div><p class="b">Split and grilled, mojo verde, sweet plantain.</p><small>Newsreader Italic for menu descriptions. It reads like a handwritten note from the kitchen.</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap cols">
+      <h2 class="side">Challenges</h2>
+      <div class="main">
+        <h3>A reservation in three taps</h3>
+        <p>The booking flow asks for exactly three things, in order: party size, date and time. Days the restaurant is closed never appear, full time slots are shown crossed out instead of hidden, and the summary ticket on the side fills in as you go. The confirm button stays disabled until everything is chosen, and the confirmation shows a booking code straight away.</p>
+        <h3 style="margin-top:40px">A menu that's easy to scan</h3>
+        <p>Dishes sit in two columns on desktop with the price aligned on the same line as the name. Vegetarian and gluten-free tags are labeled in a legend, and a "vegetarian only" switch filters the list in place.</p>
+        <h3 style="margin-top:40px">Booking on a phone</h3>
+        <p>On phones, a slim bar at the bottom of the screen keeps "Book a table" one tap away while you read the menu, the same pattern I used for Palma Alta.</p>
+        <div class="phones">
+          <div class="phone"><iframe src="../brasa/index.html" title="Brasa on a phone" tabindex="-1" scrolling="no"></iframe></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap cols">
+      <h2 class="side">The build</h2>
+      <div class="main">
+        <p>Hand-written HTML, CSS and JavaScript. The ember glow, sparks and ticker are CSS animations, and all of them stop for visitors who prefer reduced motion. Menu tabs support the arrow keys, and every booking option is a real button with its pressed state announced to screen readers.</p>
+        <p>For a real restaurant, the time slots would come from a reservation system such as OpenTable or Resy, and the menu from a simple content editor the kitchen can update daily.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="border:0">
+    <div class="wrap next">
+      <h2>Take a seat.</h2>
+      <div style="display:flex;gap:16px;flex-wrap:wrap">
+        <a class="btn" href="../brasa/index.html">Open the live site</a>
+        <a class="btn ghost" href="../index.html#contact">Get in touch</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Yainel Garcia Alfonso, Miami</span>
+    <span>Brasa is a fictional restaurant created as a design concept.</span>
+  </div>
+</footer>
+
+<script src="../guides.js"></script>
+</body>
+</html>

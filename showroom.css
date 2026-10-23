@@ -251,17 +251,6 @@ kbd{font-family:inherit;font-size:11px;line-height:16px;padding:1px 6px;border-r
 .empty[hidden]{display:none}
 
 /* Mock thumbnails built in CSS */
-.mock{position:absolute;inset:0;padding:14px;display:flex;flex-direction:column;gap:8px}
-.mock-consent{background:linear-gradient(160deg,#EEF4FF,#F8F5FF)}
-.mock-consent .win{flex:1;background:#fff;border-radius:8px;box-shadow:0 4px 14px rgba(40,40,90,.12);display:grid;grid-template-columns:38% 1fr;overflow:hidden}
-.mock-consent .list{border-right:1px solid #EEE;padding:8px;display:flex;flex-direction:column;gap:5px}
-.mock-consent .list i{height:14px;border-radius:4px;background:#F1F1F1}
-.mock-consent .list i:first-child{background:#E9E1FF}
-.mock-consent .detail{padding:10px;display:flex;flex-direction:column;gap:6px}
-.mock-consent .detail i{height:8px;border-radius:3px;background:#EEE}
-.mock-consent .detail b{margin-top:auto;height:20px;width:60%;border-radius:6px;background:#303030}
-.mock-golf{background:linear-gradient(160deg,#E4F7EA,#D3F0E6)}
-.mock-golf svg{position:absolute;inset:0;width:100%;height:100%}
 
 /* ---------- Component lab ---------- */
 .lab{columns:3;column-gap:16px}

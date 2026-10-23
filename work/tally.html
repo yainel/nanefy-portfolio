@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tally case study · Yainel Garcia Alfonso</title>
+<meta name="description" content="How I designed and built Tally, a sales and inventory dashboard concept for small independent shops.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600&family=Manrope:wght@400;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<style>
+.frame,.phone{background:#F4F5F8}
+.specimen .a{font-family:"Manrope",system-ui,sans-serif;font-weight:800;letter-spacing:-.04em;color:#151823}
+.specimen .b{font-family:"Manrope",system-ui,sans-serif;font-weight:400;font-size:1.3rem;color:#151823}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="name" href="../index.html">Yainel Garcia Alfonso</a>
+    <nav aria-label="Main">
+      <a href="../index.html#projects">Work</a>
+      <a href="../index.html#playground">Skills</a>
+      <a href="../index.html#contact" class="keep">Contact</a>
+      <button class="toggle" type="button" aria-pressed="false">Grid</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="cs-hero" style="border:0">
+    <div class="wrap cols">
+      <h1 class="display">Tally: a dashboard that answers "how's the shop doing?" in five seconds.</h1>
+      <dl class="cs-meta">
+        <div><dt>Project</dt><dd>Self-initiated product concept</dd></div>
+        <div><dt>My role</dt><dd>Product design, UI system, front-end build</dd></div>
+        <div><dt>Sector</dt><dd>SaaS, retail operations</dd></div>
+        <div><dt>Deliverables</dt><dd>Overview dashboard, settings, onboarding, dark mode</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <div class="cs-shot">
+    <div class="wrap">
+      <div class="frame"><iframe src="../tally/index.html" title="Tally dashboard preview" tabindex="-1" scrolling="no"></iframe></div>
+      <p class="caption">The overview screen with sample data. <a href="../tally/index.html">Open the live app</a> to change the date range, filter orders and try settings.</p>
+    </div>
+  </div>
+
+  <section>
+    <div class="wrap cols">
+      <h2 class="side">The brief</h2>
+      <div class="main">
+        <p class="big">Owners of small shops, a plant store, a bookshop, a bakery, check their numbers between customers, often on a phone, rarely for more than a minute.</p>
+        <p>Most analytics tools are built for analysts. Tally is built for the owner who wants three answers: am I selling more than last month, what's selling, and is anything about to run out.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap cols">
+      <h2 class="side">The idea</h2>
+      <div class="main">
+        <p class="big">One screen, read top to bottom, from the big picture to the details: four numbers, one trend, the top products, then the latest orders.</p>
+        <p>Every number comes with its comparison to the previous period and a direction arrow, so a change is never shown by color alone. The date range control at the top changes everything on the page at once, so there's never a mismatch between a chart and a number.</p>
+        <p>New shops see a short setup checklist at the top. It shows progress, can be dismissed, and disappears by itself once everything is done.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap cols">
+      <h2 class="side">Color and type</h2>
+      <div class="main">
+        <p>A calm, cool base so the data stands out, and a single cobalt accent for everything interactive and for the charts. Green, amber and red are reserved for status (paid, pending, refunded) and always appear with an icon and a label. Dark mode uses its own adjusted colors rather than a simple inversion.</p>
+        <div class="swatches" aria-label="Color palette">
+          <div style="background:#151823;color:#fff">Ink<br>#151823</div>
+          <div style="background:#2F5BEA;color:#fff">Cobalt<br>#2F5BEA</div>
+          <div style="background:#E8EEFE;color:#151823">Cobalt soft<br>#E8EEFE</div>
+          <div style="background:#1F8A5B;color:#fff">Paid<br>#1F8A5B</div>
+          <div style="background:#9A6A00;color:#fff">Pending<br>#9A6A00</div>
+          <div style="background:#C4321F;color:#fff">Refunded<br>#C4321F</div>
+        </div>
+        <div class="specimen">
+          <div><p class="a">$48,210</p><small>Manrope ExtraBold for numbers. Tabular figures keep columns aligned as values change.</small></div>
+          <div><p class="b">Good morning, Marisol. Revenue is up 12% this month.</p><small>Manrope Regular for interface text. One family keeps the UI quiet and consistent.</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap cols">
+      <h2 class="side">Challenges</h2>
+      <div class="main">
+        <h3>Charts people can actually read</h3>
+        <p>The revenue chart has one line, a soft fill and four gridlines on round numbers. Hovering shows a crosshair with the exact day, revenue and order count, and keyboard users can step through the days with the arrow keys while a screen reader reads each value. The top products list uses labeled bars rather than a pie chart, and flags low stock with a warning icon and text.</p>
+        <h3 style="margin-top:40px">The same app on a phone</h3>
+        <p>On small screens the sidebar becomes a bottom tab bar within thumb reach, the four numbers form a two-by-two grid, and the orders table turns into stacked cards so nothing needs sideways scrolling.</p>
+        <h3 style="margin-top:40px">Settings without leaving the page</h3>
+        <p>Settings open in a side drawer over the dashboard, so you can change the store name or turn on low-stock alerts and see the result immediately. Turning on alerts also checks off that step in the setup list.</p>
+        <div class="phones">
+          <div class="phone"><iframe src="../tally/index.html" title="Tally on a phone" tabindex="-1" scrolling="no"></iframe></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap cols">
+      <h2 class="side">The build</h2>
+      <div class="main">
+        <p>Plain HTML, CSS and JavaScript with no chart library: the charts are SVG drawn from the data, and they redraw when the panel is resized. Colors are design tokens, which is what makes the dark mode a single attribute change. The sample data is generated with a fixed seed so it looks realistic and stays the same between visits.</p>
+        <p>A production version would load real orders from an API, with the same components and states for loading, empty and error.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="border:0">
+    <div class="wrap next">
+      <h2>Try the app.</h2>
+      <div style="display:flex;gap:16px;flex-wrap:wrap">
+        <a class="btn" href="../tally/index.html">Open the live app</a>
+        <a class="btn ghost" href="../index.html#contact">Get in touch</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Yainel Garcia Alfonso, Miami</span>
+    <span>Tally and Lirio Plant Shop are fictional and use sample data.</span>
+  </div>
+</footer>
+
+<script src="../guides.js"></script>
+</body>
+</html>

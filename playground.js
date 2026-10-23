@@ -1480,7 +1480,7 @@ Escribe en **Markdown** y míralo *al instante*.
 
   demo({
     id: 'signature', cat: 'apps', wide: true, title: 'Signature pad', tags: ['Canvas', 'Pointer pressure'],
-    desc: 'Smooth, pressure-aware ink with undo and PNG export. The same idea powers the consent platform I built.',
+    desc: 'Smooth, pressure-aware ink with undo and PNG export.',
     html: `
 <div class="d-sig">
   <canvas class="d-sig-pad" aria-label="{{Signature area. Draw with a mouse, finger or stylus.|Área de firma. Dibuja con el ratón, el dedo o un lápiz.}}"></canvas>

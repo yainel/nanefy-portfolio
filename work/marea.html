@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Marea case study · Yainel Garcia Alfonso</title>
+<meta name="description" content="How I designed and built a website concept for Marea, a pilates, breathwork and recovery studio in Brickell.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600&family=Outfit:wght@300&family=Karla:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<style>
+.frame,.phone{background:#FFFBF5}
+.specimen .a{font-family:"Outfit",system-ui,sans-serif;font-weight:300;letter-spacing:-.04em;color:#10283A}
+.specimen .b{font-family:"Karla",system-ui,sans-serif;font-weight:400;font-size:1.35rem;color:#10283A}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="name" href="../index.html">Yainel Garcia Alfonso</a>
+    <nav aria-label="Main">
+      <a href="../index.html#projects">Work</a>
+      <a href="../index.html#playground">Skills</a>
+      <a href="../index.html#contact" class="keep">Contact</a>
+      <button class="toggle" type="button" aria-pressed="false">Grid</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="cs-hero" style="border:0">
+    <div class="wrap cols">
+      <h1 class="display">Marea: a studio website that lowers your heart rate.</h1>
+      <dl class="cs-meta">
+        <div><dt>Project</dt><dd>Self-initiated concept</dd></div>
+        <div><dt>My role</dt><dd>Brand direction, UX and UI design, front-end build</dd></div>
+        <div><dt>Sector</dt><dd>Fitness and wellness</dd></div>
+        <div><dt>Deliverables</dt><dd>Homepage, class schedule, booking, pricing, live site</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <div class="cs-shot">
+    <div class="wrap">
+      <div class="frame"><iframe src="../marea/index.html" title="Marea homepage preview" tabindex="-1" scrolling="no"></iframe></div>
+      <p class="caption">The homepage on desktop. <a href="../marea/index.html">Open the live site</a> to browse the schedule and book a class.</p>
+    </div>
+  </div>
+
+  <section>
+    <div class="wrap cols">
+      <h2 class="side">The brief</h2>
+      <div class="main">
+        <p class="big">A boutique studio for reformer pilates, breathwork and recovery, in the busiest neighborhood in Miami. Its members come to slow down.</p>
+        <p>Fitness sites tend to shout: countdown timers, flashing offers, transformation photos. Marea's site had to do the opposite and still fill classes, because an empty reformer is lost money.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap cols">
+      <h2 class="side">The idea</h2>
+      <div class="main">
+        <p class="big">Marea means tide. The whole site moves at the pace of breathing: soft waves drifting at the bottom of the hero, light type, generous space.</p>
+        <p>Halfway down the page there's a small exercise instead of a sales pitch: a circle that grows and shrinks to guide three breaths. It's the fastest way to explain what the studio feels like, and it gives the visitor something before asking for anything.</p>
+        <p>The schedule is the real homepage for members, so it sits right after the hero, on a deep navy background that sets it apart from the rest of the page.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap cols">
+      <h2 class="side">Color and type</h2>
+      <div class="main">
+        <p>Deep navy and tide teal from Biscayne Bay at dusk, sea foam and sand for the light sections, and a single coral accent saved for the moments that need attention: filters in use, few spots left, the most popular plan.</p>
+        <div class="swatches" aria-label="Color palette">
+          <div style="background:#10283A;color:#FFFBF5">Deep<br>#10283A</div>
+          <div style="background:#2F6F7E;color:#FFFBF5">Tide<br>#2F6F7E</div>
+          <div style="background:#DDEFEA;color:#10283A">Foam<br>#DDEFEA</div>
+          <div style="background:#F6EFE4;color:#10283A">Sand<br>#F6EFE4</div>
+          <div style="background:#FFFBF5;color:#10283A">Shell<br>#FFFBF5</div>
+          <div style="background:#E9826B;color:#10283A">Coral<br>#E9826B</div>
+        </div>
+        <div class="specimen">
+          <div><p class="a">Breathe deeper.</p><small>Outfit Light for headlines. Rounded, open letters that feel calm even at large sizes.</small></div>
+          <div><p class="b">Small classes, eight people at most.</p><small>Karla for text. A friendly grotesque that stays readable on the dark schedule.</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap cols">
+      <h2 class="side">Challenges</h2>
+      <div class="main">
+        <h3>A schedule you can scan in one glance</h3>
+        <p>Seven day buttons across the top, class type filters below, then one row per class: time, name and level, instructor, and how many spots are left, shown as text and a small bar that turns coral when only one or two remain. Full classes offer a waitlist instead of a dead end.</p>
+        <h3 style="margin-top:40px">Booking without a new page</h3>
+        <p>Booking opens a native dialog that confirms the class, time, instructor and the cancellation rule, then updates the row in place to "Booked" with one fewer spot. Focus handling, Escape to close and the dimmed background come from the browser's own dialog element.</p>
+        <h3 style="margin-top:40px">Honest pricing</h3>
+        <p>Three plans, a monthly or yearly switch, and the per-class cost written out under the price. The yearly view shows the total billed per year, so the discount never hides what you actually pay.</p>
+        <div class="phones">
+          <div class="phone"><iframe src="../marea/index.html" title="Marea on a phone" tabindex="-1" scrolling="no"></iframe></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap cols">
+      <h2 class="side">The build</h2>
+      <div class="main">
+        <p>Hand-written HTML, CSS and JavaScript. The week's schedule is generated from a small set of class templates so every day looks different, the waves are three SVG layers drifting at different speeds, and every animation respects reduced-motion settings. On phones, each class row reflows into a compact card with the booking button always on the right.</p>
+        <p>A real studio would connect this front end to its booking software, such as Mindbody, so members see live availability and can book from the same page.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="border:0">
+    <div class="wrap next">
+      <h2>Take a breath.</h2>
+      <div style="display:flex;gap:16px;flex-wrap:wrap">
+        <a class="btn" href="../marea/index.html">Open the live site</a>
+        <a class="btn ghost" href="../index.html#contact">Get in touch</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Yainel Garcia Alfonso, Miami</span>
+    <span>Marea is a fictional studio created as a design concept.</span>
+  </div>
+</footer>
+
+<script src="../guides.js"></script>
+</body>
+</html>

@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brasa · Wood-fire kitchen, Design District</title>
+<meta name="description" content="Brasa is a wood-fire restaurant in Miami's Design District. A design concept by Yainel Garcia Alfonso.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Newsreader:ital,opsz,wght@1,6..72,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --char:#141110;
+  --ash:#221D1A;
+  --coal:#2E2723;
+  --ember:#E8622C;
+  --flame:#F2A541;
+  --bone:#EFE7DA;
+  --smoke:#A39A90;
+  --display:"Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+  --serif:"Newsreader", Georgia, serif;
+  --wrap:1200px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{overflow-x:hidden;overflow-x:clip;overscroll-behavior-x:none;touch-action:manipulation;scroll-behavior:smooth;scroll-padding-top:80px}
+body{overflow-x:clip;background:var(--char);color:var(--bone);font-family:var(--display);font-size:1.0625rem;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--flame);outline-offset:3px}
+svg{display:block}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 32px}
+
+/* Header */
+.top{position:fixed;inset:0 0 auto;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:18px 32px;mix-blend-mode:normal;background:linear-gradient(rgba(20,17,16,.92),rgba(20,17,16,0))}
+.logo{font-weight:800;font-size:1.5rem;letter-spacing:-.04em;text-decoration:none}
+.logo span{color:var(--ember)}
+.nav{display:flex;gap:28px;font-weight:600;font-size:.95rem}
+.nav a{text-decoration:none;opacity:.8}
+.nav a:hover{opacity:1;color:var(--flame)}
+.cta{display:inline-flex;align-items:center;gap:8px;background:var(--ember);color:var(--char);border:0;border-radius:6px;padding:12px 20px;font-weight:800;text-decoration:none;font-size:.95rem;letter-spacing:.01em;transition:background .2s,transform .2s}
+.cta:hover{background:var(--flame)}
+.cta:active{transform:scale(.97)}
+
+/* Hero */
+.hero{min-height:100vh;display:grid;align-content:end;padding:140px 32px 48px;position:relative;overflow:hidden}
+.glow{position:absolute;left:50%;bottom:-30vh;width:120vw;height:90vh;transform:translateX(-50%);background:radial-gradient(closest-side,rgba(242,165,65,.55),rgba(232,98,44,.35) 45%,rgba(20,17,16,0) 75%);filter:blur(10px)}
+@media (prefers-reduced-motion:no-preference){.glow{animation:flicker 4s ease-in-out infinite alternate}}
+@keyframes flicker{0%{opacity:.75;transform:translateX(-50%) scale(1)}35%{opacity:1}60%{opacity:.82;transform:translateX(-50%) scale(1.04)}100%{opacity:.95;transform:translateX(-50%) scale(.98)}}
+.hero h1{position:relative;font-weight:800;font-size:clamp(5rem,25vw,22rem);line-height:.78;letter-spacing:-.065em;margin-left:-.04em}
+.hero h1 span{color:transparent;-webkit-text-stroke:2px var(--bone)}
+.hero .row{position:relative;display:flex;justify-content:space-between;align-items:end;gap:32px;margin-top:28px;flex-wrap:wrap}
+.hero p{font-family:var(--serif);font-style:italic;font-size:clamp(1.3rem,2.4vw,1.9rem);line-height:1.3;max-width:26ch}
+.sparks{position:absolute;inset:0;pointer-events:none}
+.sparks i{position:absolute;bottom:-10px;width:4px;height:4px;border-radius:50%;background:var(--flame);box-shadow:0 0 8px var(--ember);opacity:0}
+@media (prefers-reduced-motion:no-preference){.sparks i{animation:rise linear infinite}}
+@keyframes rise{0%{opacity:0;transform:translate(0,0)}10%{opacity:1}100%{opacity:0;transform:translate(var(--dx),-70vh)}}
+
+/* Ticker */
+.ticker{border-block:1px solid var(--coal);overflow:hidden;white-space:nowrap;font-weight:600;font-size:1.05rem;padding:16px 0;color:var(--smoke)}
+.ticker div{display:inline-flex;gap:40px;padding-right:40px}
+.ticker .move{gap:0;padding:0}
+.ticker b{color:var(--flame);font-weight:600}
+@media (prefers-reduced-motion:no-preference){.ticker .move{animation:slide 30s linear infinite}}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+section{padding:112px 0}
+h2{font-weight:800;font-size:clamp(2.6rem,7vw,5.6rem);line-height:.9;letter-spacing:-.05em}
+h2 em{font-family:var(--serif);font-weight:400;letter-spacing:-.02em;color:var(--flame)}
+.head{display:flex;justify-content:space-between;align-items:end;gap:32px;flex-wrap:wrap;margin-bottom:48px}
+.head p{max-width:40ch;color:var(--smoke)}
+
+/* Menu */
+.menu-tools{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:24px}
+.tabs{display:flex;gap:4px;background:var(--ash);padding:4px;border-radius:8px}
+.tabs button{border:0;background:none;padding:9px 18px;border-radius:6px;font-weight:600;color:var(--smoke)}
+.tabs button[aria-selected="true"]{background:var(--bone);color:var(--char)}
+.veg{display:flex;align-items:center;gap:10px;font-weight:600;font-size:.95rem;cursor:pointer}
+.veg input{width:20px;height:20px;accent-color:var(--ember)}
+.dishes{list-style:none;columns:2;column-gap:64px}
+.dishes li{break-inside:avoid;padding:20px 0;border-top:1px solid var(--coal);display:grid;grid-template-columns:1fr auto;gap:4px 16px}
+.dishes h3{font-weight:600;font-size:1.25rem;letter-spacing:-.02em}
+.dishes .price{font-weight:600;font-variant-numeric:tabular-nums}
+.dishes p{grid-column:1 / -1;font-family:var(--serif);font-style:italic;color:var(--smoke);font-size:1.08rem}
+.tag{display:inline-block;margin-left:8px;font-size:.72rem;font-weight:800;letter-spacing:.06em;border:1px solid currentColor;border-radius:4px;padding:1px 5px;vertical-align:3px;color:var(--flame)}
+.legend{margin-top:20px;font-size:.88rem;color:var(--smoke)}
+
+/* Reservation */
+.book{background:var(--bone);color:var(--char)}
+.book h2 em{color:var(--ember)}
+.book .head p{color:#5d544c}
+.res{display:grid;grid-template-columns:1.4fr .6fr;gap:40px;align-items:start}
+.step{border-top:2px solid var(--char);padding:22px 0 30px}
+.step h3{font-weight:800;font-size:1rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px;display:flex;gap:10px;align-items:center}
+.step h3 b{width:26px;height:26px;border-radius:50%;background:var(--char);color:var(--bone);display:grid;place-items:center;font-size:.8rem;letter-spacing:0}
+.party{display:inline-flex;align-items:center;border:2px solid var(--char);border-radius:8px;overflow:hidden}
+.party button{width:48px;height:48px;border:0;background:none;font-size:1.4rem;font-weight:600}
+.party button:hover:not(:disabled){background:rgba(20,17,16,.08)}
+.party button:disabled{opacity:.3;cursor:default}
+.party output{min-width:110px;text-align:center;font-weight:800;font-size:1.1rem}
+.opts{display:flex;gap:8px;flex-wrap:wrap}
+.opt{border:2px solid rgba(20,17,16,.18);background:none;border-radius:8px;padding:10px 14px;font-weight:600;min-width:74px;text-align:center;transition:border-color .15s,background .15s}
+.opt small{display:block;font-weight:400;font-size:.8rem;color:#6b625a}
+.opt:hover:not(:disabled){border-color:var(--char)}
+.opt[aria-pressed="true"]{background:var(--char);color:var(--bone);border-color:var(--char)}
+.opt[aria-pressed="true"] small{color:var(--smoke)}
+.opt:disabled{text-decoration:line-through;opacity:.4;cursor:not-allowed}
+.ticket{position:sticky;top:96px;background:var(--char);color:var(--bone);border-radius:10px;padding:26px;overflow:hidden}
+.ticket::before{content:"";position:absolute;inset:auto -30% -60% -30%;height:80%;background:radial-gradient(closest-side,rgba(232,98,44,.45),transparent)}
+.ticket > *{position:relative}
+.ticket h3{font-weight:800;font-size:1.5rem;letter-spacing:-.03em}
+.ticket dl{display:grid;gap:10px;margin:18px 0 22px}
+.ticket dl div{display:flex;justify-content:space-between;gap:10px;border-bottom:1px dashed var(--coal);padding-bottom:10px}
+.ticket dt{color:var(--smoke)}
+.ticket .cta{width:100%;justify-content:center;padding:15px}
+.ticket .cta:disabled{background:var(--coal);color:var(--smoke);cursor:not-allowed}
+.ticket .done{display:none;text-align:center}
+.ticket.confirmed .form{display:none}
+.ticket.confirmed .done{display:block}
+.code{font-weight:800;font-size:2.2rem;letter-spacing:.12em;color:var(--flame);margin:10px 0}
+
+/* Nights */
+.nights{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.night{background:var(--ash);border-radius:10px;padding:28px;display:flex;flex-direction:column;gap:12px;min-height:280px;position:relative;overflow:hidden;transition:transform .3s}
+.night:hover{transform:translateY(-4px)}
+.night .when{font-weight:800;font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;color:var(--flame)}
+.night h3{font-weight:800;font-size:1.9rem;letter-spacing:-.04em;line-height:1}
+.night p{font-family:var(--serif);font-style:italic;color:var(--smoke);font-size:1.1rem}
+.night .seats{margin-top:auto;font-weight:600;font-size:.9rem}
+.night svg{position:absolute;right:-20px;bottom:-20px;width:140px;opacity:.18}
+
+/* Visit */
+.visit .wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;border-top:1px solid var(--coal);padding-top:48px}
+.visit h3{font-weight:800;font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;color:var(--flame);margin-bottom:12px}
+.visit p{color:var(--smoke)}
+footer{padding:32px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:.88rem;color:var(--smoke);border-top:1px solid var(--coal)}
+.mbar{display:none}
+
+@media (max-width:900px){
+  .nav{display:none}
+  .dishes{columns:1}
+  .res{grid-template-columns:1fr}
+  .ticket{position:relative;top:auto}
+  .nights,.visit .wrap{grid-template-columns:1fr}
+  section{padding:80px 0}
+}
+@media (max-width:560px){
+  .wrap{padding:0 20px}
+  .top{padding:14px 20px}
+  .top .cta{display:none}
+  .hero{padding:120px 20px 40px}
+  .mbar{display:flex;position:fixed;inset:auto 12px 12px;z-index:30;justify-content:space-between;align-items:center;gap:12px;background:var(--ember);color:var(--char);border-radius:10px;padding:8px 8px 8px 18px;font-weight:800}
+  .mbar a{background:var(--char);color:var(--bone);text-decoration:none;border-radius:6px;padding:10px 16px}
+  footer{padding-bottom:96px}
+}
+@media (pointer:coarse){input,select{font-size:16px}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <a class="logo" href="#">brasa<span>.</span></a>
+  <nav class="nav" aria-label="Main">
+    <a href="#menu">Menu</a>
+    <a href="#nights">Fire nights</a>
+    <a href="#visit">Visit</a>
+  </nav>
+  <a class="cta" href="#book">Book a table</a>
+</header>
+
+<main>
+  <section class="hero" aria-label="Welcome">
+    <div class="glow" aria-hidden="true"></div>
+    <div class="sparks" aria-hidden="true" id="sparks"></div>
+    <h1>bra<span>sa</span></h1>
+    <div class="row">
+      <p>Everything on the menu touches the fire. Nothing on the menu is in a hurry.</p>
+      <a class="cta" href="#book">Book a table &rarr;</a>
+    </div>
+  </section>
+
+  <div class="ticker" aria-label="On the fire today">
+    <div class="move"><div id="tick"></div><div id="tick2" aria-hidden="true"></div></div>
+  </div>
+
+  <section id="menu">
+    <div class="wrap">
+      <div class="head">
+        <h2>The <em>menu</em></h2>
+        <p>Cooked over Florida oak and citrus wood in a twelve-foot hearth. The menu changes with the boats and the farms, so this is a sample of a good night.</p>
+      </div>
+      <div class="menu-tools">
+        <div class="tabs" role="tablist" aria-label="Menu">
+          <button role="tab" aria-selected="true" data-tab="dinner">Dinner</button>
+          <button role="tab" aria-selected="false" data-tab="drinks" tabindex="-1">Drinks</button>
+          <button role="tab" aria-selected="false" data-tab="sweet" tabindex="-1">Dessert</button>
+        </div>
+        <label class="veg"><input type="checkbox" id="vegOnly"> Vegetarian only</label>
+      </div>
+      <ul class="dishes" id="dishes" role="tabpanel" aria-live="polite"></ul>
+      <p class="legend"><span class="tag" style="margin:0 4px 0 0">V</span> vegetarian &nbsp; <span class="tag" style="margin:0 4px 0 0">GF</span> gluten free</p>
+    </div>
+  </section>
+
+  <section id="book" class="book">
+    <div class="wrap">
+      <div class="head">
+        <h2>Book a <em>table</em></h2>
+        <p>Tables are held for 15 minutes. For parties larger than eight, the chef's counter or private dining, write to us.</p>
+      </div>
+      <div class="res">
+        <div>
+          <div class="step">
+            <h3><b>1</b>Party size</h3>
+            <div class="party"><button id="minus" aria-label="Fewer guests">&minus;</button><output id="guests" aria-live="polite">2 guests</output><button id="plus" aria-label="More guests">+</button></div>
+          </div>
+          <div class="step">
+            <h3><b>2</b>Date</h3>
+            <div class="opts" id="dates" role="group" aria-label="Date"></div>
+          </div>
+          <div class="step">
+            <h3><b>3</b>Time</h3>
+            <div class="opts" id="times" role="group" aria-label="Time"></div>
+          </div>
+        </div>
+        <aside class="ticket" id="ticket" aria-live="polite">
+          <div class="form">
+            <h3>Your table</h3>
+            <dl>
+              <div><dt>Guests</dt><dd id="tGuests">2</dd></div>
+              <div><dt>Date</dt><dd id="tDate">Choose a date</dd></div>
+              <div><dt>Time</dt><dd id="tTime">Choose a time</dd></div>
+            </dl>
+            <button class="cta" id="confirm" disabled>Confirm reservation</button>
+          </div>
+          <div class="done">
+            <h3>See you by the fire.</h3>
+            <p class="code" id="code"></p>
+            <p id="doneText" style="color:var(--smoke)"></p>
+            <button class="cta" id="again" style="margin-top:20px;background:var(--bone)">Make another</button>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section id="nights">
+    <div class="wrap">
+      <div class="head">
+        <h2>Fire <em>nights</em></h2>
+        <p>Once a week the kitchen does something it can't do on a regular night. Seats are limited and go fast.</p>
+      </div>
+      <div class="nights">
+        <article class="night"><span class="when">Sundays · 5 pm</span><h3>Asado al fuego</h3><p>Whole cuts on the parrilla, long tables, a guitarist who knows every song your abuelo does.</p><span class="seats">14 seats left</span><svg viewBox="0 0 100 100" aria-hidden="true"><path d="M50 95c-22 0-36-15-36-34 0-21 18-30 22-50 10 10 12 20 10 30 6-6 10-14 10-22 14 12 30 26 30 44 0 19-14 32-36 32Z" fill="#E8622C"/></svg></article>
+        <article class="night"><span class="when">Thursdays · 8 pm</span><h3>Smoke &amp; mezcal</h3><p>Five courses paired with five small-batch mezcals from Oaxaca, introduced by the people who make them.</p><span class="seats">6 seats left</span><svg viewBox="0 0 100 100" aria-hidden="true"><path d="M50 95c-22 0-36-15-36-34 0-21 18-30 22-50 10 10 12 20 10 30 6-6 10-14 10-22 14 12 30 26 30 44 0 19-14 32-36 32Z" fill="#F2A541"/></svg></article>
+        <article class="night"><span class="when">Nightly · 2 seatings</span><h3>Chef's counter</h3><p>Eight stools facing the hearth. Tell us what you don't eat and let the cooks decide the rest.</p><span class="seats">Booked through Friday</span><svg viewBox="0 0 100 100" aria-hidden="true"><path d="M50 95c-22 0-36-15-36-34 0-21 18-30 22-50 10 10 12 20 10 30 6-6 10-14 10-22 14 12 30 26 30 44 0 19-14 32-36 32Z" fill="#EFE7DA"/></svg></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="visit" class="visit">
+    <div class="wrap">
+      <div><h3>Find us</h3><p>140 NE 40th Street<br>Design District, Miami<br>Valet and garage on 41st</p></div>
+      <div><h3>Hours</h3><p>Tuesday to Thursday, 5:30 – 11 pm<br>Friday and Saturday, 5:30 pm – midnight<br>Sunday, 5 – 10 pm</p></div>
+      <div><h3>Private dining</h3><p>The cellar room seats 18 beside the wood store. Write to events@brasa.example</p></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span>Brasa, Design District, Miami</span>
+  <span>A fictional restaurant. Design concept by <a href="../index.html">Yainel Garcia Alfonso</a>.</span>
+</footer>
+<div class="mbar"><span>Tonight from 5:30</span><a href="#book">Book a table</a></div>
+
+<script>
+(function () {
+  'use strict';
+  var $ = function (s) { return document.querySelector(s); };
+  var $$ = function (s) { return [].slice.call(document.querySelectorAll(s)); };
+
+  /* Sparks rising from the fire */
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var sp = $('#sparks');
+    for (var i = 0; i < 26; i++) {
+      var s = document.createElement('i');
+      s.style.left = (10 + Math.random() * 80) + '%';
+      s.style.setProperty('--dx', (Math.random() * 120 - 60) + 'px');
+      s.style.animationDuration = (4 + Math.random() * 5) + 's';
+      s.style.animationDelay = (-Math.random() * 8) + 's';
+      sp.appendChild(s);
+    }
+  }
+
+  /* Ticker: duplicated so the loop is seamless */
+  var market = ['whole yellowtail snapper', 'Florida pink shrimp', 'charred cabbage', 'guava from Homestead', 'dry-aged ribeye', 'smoked eggplant', 'sour orange', 'stone crab, last week of season'];
+  var tick = '<b>On the fire today</b>' + market.map(function (m) { return '<span>' + m + '</span>'; }).join('');
+  $('#tick').innerHTML = tick; $('#tick2').innerHTML = tick;
+
+  /* Menu */
+  var menu = {
+    dinner: [
+      ['Ember-roasted oysters', 'Datil pepper butter, lime, grilled bread', 18, ''],
+      ['Charred cabbage', 'Burnt honey, crispy shallot, aged cheese', 16, 'V GF'],
+      ['Smoked eggplant', 'Tahini, pomegranate, flatbread from the hearth', 15, 'V'],
+      ['Whole snapper', 'Split and grilled, mojo verde, sweet plantain. For two.', 68, 'GF'],
+      ['Florida pink shrimp', 'Garlic, guindilla, a lot of olive oil', 24, 'GF'],
+      ['Ribeye, 45 days', 'Bone-in, chimichurri, fire-roasted potatoes. For two.', 96, 'GF'],
+      ['Hearth carrots', 'Mole negro, sesame, cilantro', 14, 'V GF'],
+      ['Black beans & rice', 'Cooked in the coals overnight', 9, 'V GF']
+    ],
+    drinks: [
+      ['Smoked old fashioned', 'Bourbon, oak smoke, demerara, orange', 17, ''],
+      ['Guava paloma', 'Tequila, guava, grapefruit, salt', 15, ''],
+      ['Mezcal negroni', 'Espadín, Campari, sweet vermouth', 16, ''],
+      ['Hibiscus spritz', 'No alcohol. Hibiscus, ginger, soda', 9, 'V'],
+      ['Wines by the glass', 'Ask for the list, mostly Spain and South America', 14, '']
+    ],
+    sweet: [
+      ['Burnt Basque cheesecake', 'Guava jam, sea salt', 12, 'V'],
+      ['Grilled pineapple', 'Rum caramel, coconut ice cream', 11, 'V GF'],
+      ['Chocolate & ember', 'Dark chocolate pot, smoked cream, cocoa nib', 12, 'V GF'],
+      ['Cafecito', 'Because you are in Miami', 4, 'V GF']
+    ]
+  };
+  var tab = 'dinner';
+  function renderMenu() {
+    var veg = $('#vegOnly').checked;
+    var list = menu[tab].filter(function (d) { return !veg || d[3].indexOf('V') > -1; });
+    $('#dishes').innerHTML = list.map(function (d) {
+      var tags = d[3] ? d[3].split(' ').map(function (t) { return '<span class="tag" title="' + (t === 'V' ? 'Vegetarian' : 'Gluten free') + '">' + t + '</span>'; }).join('') : '';
+      return '<li><h3>' + d[0] + tags + '</h3><span class="price">' + d[2] + '</span><p>' + d[1] + '</p></li>';
+    }).join('') || '<li><p>Nothing vegetarian on this list. Try the dinner menu.</p></li>';
+  }
+  var tabs = $$('[role=tab]');
+  tabs.forEach(function (t, i) {
+    function select(focus) {
+      tabs.forEach(function (x) { x.setAttribute('aria-selected', x === t); x.tabIndex = x === t ? 0 : -1; });
+      tab = t.dataset.tab; renderMenu(); if (focus) t.focus();
+    }
+    t.addEventListener('click', function () { select(); });
+    t.addEventListener('keydown', function (e) {
+      var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+      if (d) { var n = tabs[(i + d + tabs.length) % tabs.length]; n.click(); n.focus(); }
+    });
+  });
+  $('#vegOnly').addEventListener('change', renderMenu);
+  renderMenu();
+
+  /* Reservation */
+  var guests = 2, date = null, time = null;
+  var dayFmt = new Intl.DateTimeFormat('en-US', { weekday: 'short' }), numFmt = new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric' });
+  var longFmt = new Intl.DateTimeFormat('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+  var dates = [], today = new Date(); today.setHours(0, 0, 0, 0);
+  for (var d = 0; dates.length < 7; d++) {
+    var dt = new Date(today); dt.setDate(today.getDate() + d);
+    if (dt.getDay() !== 1) dates.push(dt); // closed Mondays
+  }
+  $('#dates').innerHTML = dates.map(function (dt, i) {
+    return '<button class="opt" data-i="' + i + '" aria-pressed="false" aria-label="' + longFmt.format(dt) + '">' + (i === 0 ? 'Today' : dayFmt.format(dt)) + '<small>' + numFmt.format(dt) + '</small></button>';
+  }).join('');
+  var slots = ['5:30', '6:00', '6:30', '7:00', '7:30', '8:00', '8:30', '9:00', '9:30', '10:00'];
+  function renderTimes() {
+    var seed = (date ? date.getDate() : 1) * 7 + guests * 3;
+    $('#times').innerHTML = slots.map(function (s, i) {
+      var full = !date || ((seed + i * 5) % 7 < 2) || (guests > 6 && i % 2); // some slots are taken; bigger parties have fewer
+      return '<button class="opt" data-t="' + s + '" aria-pressed="' + (s === time && !full) + '"' + (full ? ' disabled' : '') + '>' + s + ' pm</button>';
+    }).join('');
+    if (time && $('#times [data-t="' + time + '"]').disabled) time = null;
+    summary();
+  }
+  function summary() {
+    $('#tGuests').textContent = guests + (guests === 1 ? ' guest' : ' guests');
+    $('#tDate').textContent = date ? longFmt.format(date) : 'Choose a date';
+    $('#tTime').textContent = time ? time + ' pm' : (date ? 'Choose a time' : 'Pick a date first');
+    $('#confirm').disabled = !(date && time);
+  }
+  function setGuests(n) {
+    guests = Math.max(1, Math.min(8, n));
+    $('#guests').textContent = guests + (guests === 1 ? ' guest' : ' guests');
+    $('#minus').disabled = guests === 1; $('#plus').disabled = guests === 8;
+    renderTimes();
+  }
+  $('#minus').addEventListener('click', function () { setGuests(guests - 1); });
+  $('#plus').addEventListener('click', function () { setGuests(guests + 1); });
+  $('#dates').addEventListener('click', function (e) {
+    var b = e.target.closest('.opt'); if (!b) return;
+    $$('#dates .opt').forEach(function (x) { x.setAttribute('aria-pressed', x === b); });
+    date = dates[+b.dataset.i]; renderTimes();
+  });
+  $('#times').addEventListener('click', function (e) {
+    var b = e.target.closest('.opt'); if (!b || b.disabled) return;
+    $$('#times .opt').forEach(function (x) { x.setAttribute('aria-pressed', x === b); });
+    time = b.dataset.t; summary();
+  });
+  $('#confirm').addEventListener('click', function () {
+    var code = 'BR-' + Math.random().toString(36).slice(2, 6).toUpperCase();
+    $('#code').textContent = code;
+    $('#doneText').textContent = guests + (guests === 1 ? ' guest' : ' guests') + ', ' + longFmt.format(date) + ' at ' + time + ' pm. We sent the details to your email.';
+    $('#ticket').classList.add('confirmed');
+    $('#again').focus();
+  });
+  $('#again').addEventListener('click', function () {
+    $('#ticket').classList.remove('confirmed'); date = null; time = null;
+    $$('#dates .opt').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
+    setGuests(2);
+  });
+  setGuests(2);
+})();
+</script>
+</body>
+</html>
