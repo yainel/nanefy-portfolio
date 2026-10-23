@@ -448,24 +448,24 @@
   <div class="d-kb-cols">
     <section class="d-kb-col"><h4>{{To do|Pendiente}} <span class="badge">3</span></h4>
       <ul class="d-kb-list" aria-label="{{To do|Pendiente}}">
-        <li class="d-kb-card" tabindex="0">Moodboard<span style="--c:#8051FF">{{Design|Diseño}}</span></li>
-        <li class="d-kb-card" tabindex="0">{{Write homepage copy|Textos de la portada}}<span style="--c:#29845A">{{Content|Contenido}}</span></li>
-        <li class="d-kb-card" tabindex="0">{{Set up analytics|Configurar analítica}}<span style="--c:#2C6ECB">Dev</span></li>
+        <li class="d-kb-card" tabindex="0">Moodboard<span style="--c:#8051FF">{{Design|Diseño}}</span><i class="d-kb-grip" aria-hidden="true">&#8942;&#8942;</i></li>
+        <li class="d-kb-card" tabindex="0">{{Write homepage copy|Textos de la portada}}<span style="--c:#29845A">{{Content|Contenido}}</span><i class="d-kb-grip" aria-hidden="true">&#8942;&#8942;</i></li>
+        <li class="d-kb-card" tabindex="0">{{Set up analytics|Configurar analítica}}<span style="--c:#2C6ECB">Dev</span><i class="d-kb-grip" aria-hidden="true">&#8942;&#8942;</i></li>
       </ul>
     </section>
     <section class="d-kb-col"><h4>{{In progress|En curso}} <span class="badge">2</span></h4>
       <ul class="d-kb-list" aria-label="{{In progress|En curso}}">
-        <li class="d-kb-card" tabindex="0">Design tokens<span style="--c:#8051FF">{{Design|Diseño}}</span></li>
-        <li class="d-kb-card" tabindex="0">{{Checkout API|API de pago}}<span style="--c:#2C6ECB">Dev</span></li>
+        <li class="d-kb-card" tabindex="0">Design tokens<span style="--c:#8051FF">{{Design|Diseño}}</span><i class="d-kb-grip" aria-hidden="true">&#8942;&#8942;</i></li>
+        <li class="d-kb-card" tabindex="0">{{Checkout API|API de pago}}<span style="--c:#2C6ECB">Dev</span><i class="d-kb-grip" aria-hidden="true">&#8942;&#8942;</i></li>
       </ul>
     </section>
     <section class="d-kb-col"><h4>{{Done|Hecho}} <span class="badge">1</span></h4>
       <ul class="d-kb-list" aria-label="{{Done|Hecho}}">
-        <li class="d-kb-card" tabindex="0">{{Mobile QA pass|Pruebas en móvil}}<span style="--c:#E8731F">QA</span></li>
+        <li class="d-kb-card" tabindex="0">{{Mobile QA pass|Pruebas en móvil}}<span style="--c:#E8731F">QA</span><i class="d-kb-grip" aria-hidden="true">&#8942;&#8942;</i></li>
       </ul>
     </section>
   </div>
-  <p class="sub" style="margin-top:10px">{{Drag a card, or focus one and use the arrow keys.|Arrastra una tarjeta, o enfócala y usa las flechas.}}</p>
+  <p class="sub" style="margin-top:10px">{{Drag a card (on touch screens, by its &#8942;&#8942; handle), or focus one and use the arrow keys.|Arrastra una tarjeta (en pantallas táctiles, por su asa &#8942;&#8942;), o enfócala y usa las flechas.}}</p>
   <div class="sr d-kb-live" aria-live="polite"></div>
 </div>`,
     css: `
@@ -474,11 +474,18 @@
 .d-kb-col h4{font-size:13px;display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
 .d-kb-list{list-style:none;display:grid;gap:8px;min-height:120px;align-content:start}
 .d-kb-card{background:var(--surface);border-radius:10px;padding:10px;box-shadow:var(--shadow-card);font-weight:550;font-size:13px;
-  cursor:grab;user-select:none;touch-action:none;display:grid;gap:6px}
+  cursor:grab;user-select:none;-webkit-user-select:none;display:grid;gap:6px;position:relative;padding-right:40px}
+.d-kb-grip{position:absolute;top:4px;right:4px;width:32px;height:32px;display:grid;place-items:center;border-radius:8px;color:var(--text-3);
+  font-style:normal;font-size:14px;letter-spacing:-2px;touch-action:none;cursor:grab}
+.d-kb-grip:hover{background:var(--surface-3)}
 .d-kb-card span{justify-self:start;font-size:11px;font-weight:600;padding:1px 8px;border-radius:6px;color:var(--c);background:color-mix(in srgb,var(--c) 14%,transparent)}
 .d-kb-card:focus-visible{outline:2px solid var(--magic);outline-offset:2px}
 .d-kb-card.dragging{position:fixed;z-index:400;pointer-events:none;cursor:grabbing;transform:rotate(3deg) scale(1.04);box-shadow:0 18px 40px rgba(0,0,0,.25)}
-.d-kb-ph{border:2px dashed var(--border-strong);border-radius:10px;background:transparent}`,
+.d-kb-ph{border:2px dashed var(--border-strong);border-radius:10px;background:transparent}
+@media (max-width:600px){
+  .d-kb-cols{grid-template-columns:1fr}
+  .d-kb-list{min-height:56px}
+}`,
     js: function (el, t) {
       var lists = [].slice.call(el.querySelectorAll('.d-kb-list')), live = el.querySelector('.d-kb-live'), drag = null;
       function counts() { lists.forEach(function (l) { l.parentNode.querySelector('.badge').textContent = l.children.length; }); }
@@ -490,6 +497,7 @@
       el.addEventListener('pointerdown', function (e) {
         var card = e.target.closest('.d-kb-card');
         if (!card || e.button !== 0) return;
+        if (e.pointerType === 'touch' && !e.target.closest('.d-kb-grip')) return; // touch drags by the handle, so swiping a card still scrolls the page
         var r = card.getBoundingClientRect();
         drag = { card: card, dx: e.clientX - r.left, dy: e.clientY - r.top, x0: e.clientX, y0: e.clientY, moved: false };
         document.addEventListener('pointermove', move);
