@@ -8,6 +8,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../fx/fx.css">
+<script>document.documentElement.classList.add('fx')</script>
 <style>
 :root{
   --banyan:#1F3329;
@@ -101,6 +103,42 @@ h2{font-family:var(--display);font-weight:400;font-size:clamp(2.2rem,5vw,3.6rem)
 footer{padding:40px 32px;display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;font-size:.88rem;opacity:.75;border-top:1px solid rgba(242,198,180,.2)}
 footer a{text-underline-offset:4px}
 
+/* Effects */
+[data-progress]{background:var(--brass)}
+.top.fx-scrolled{background:rgba(31,51,41,.96)}
+.hero{--p:0}
+.hero .arch{transform:scale(calc(1 - var(--p) * .14));transform-origin:50% 0}
+.hero-copy{position:relative}
+.room .frame{transition:transform .5s cubic-bezier(.2,.8,.2,1.2),box-shadow .5s}
+.room .frame:hover{box-shadow:0 30px 60px -30px rgba(31,51,41,.55)}
+
+/* A day at Palma Alta: sticky window, the scene changes with each step */
+.day{--sky:#F9D9C3;--sun:#FFF1D6;--sun-y:70px;--night:0}
+.day[data-active="1"]{--sky:#BFE3E8;--sun:#FFF8E6;--sun-y:-80px}
+.day[data-active="2"]{--sky:#F2A07B;--sun:#FFD6A0;--sun-y:120px}
+.day[data-active="3"]{--sky:#1B2733;--sun:#FFD6A0;--sun-y:320px;--night:1}
+.day-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px}
+.day-sticky{position:sticky;top:12vh;align-self:start;height:76vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px}
+.day-window{height:100%;max-height:560px;aspect-ratio:3/4;border-radius:999px 999px 6px 6px;overflow:hidden;box-shadow:0 0 0 10px var(--banyan),0 0 0 11px rgba(184,155,94,.55)}
+.day-window svg{width:100%;height:100%}
+.day-sky{fill:var(--sky);transition:fill 1.2s ease}
+.day-sun{fill:var(--sun);transform:translateY(var(--sun-y));transition:transform 1.4s cubic-bezier(.4,0,.2,1),fill 1.2s}
+.day-night{opacity:var(--night);transition:opacity 1.2s}
+.day-pool{transition:fill 1.2s}
+.day[data-active="3"] .day-pool{fill:#0F1A22}
+.day-clock{font-family:var(--display);font-size:1.4rem;color:var(--coral);min-height:1.4em}
+.day-steps{list-style:none}
+.day-steps li{min-height:72vh;display:flex;flex-direction:column;justify-content:center;opacity:.28;transition:opacity .6s}
+.day-steps li.on{opacity:1}
+.day-steps .time{font-size:.95rem;letter-spacing:.14em;text-transform:uppercase;color:var(--brass)}
+.day-steps h3{font-family:var(--display);font-weight:400;font-size:clamp(2rem,3.6vw,2.9rem);line-height:1.05;color:var(--coral);margin:10px 0 14px}
+.day-steps p{max-width:40ch}
+@media (max-width:900px){
+  .day-grid{display:block}
+  .day-sticky{top:12px;height:46vh;z-index:2;background:var(--banyan);padding:12px 0}
+  .day-steps li{min-height:58vh}
+}
+
 /* Mobile booking bar */
 .bar{display:none}
 
@@ -128,7 +166,8 @@ footer a{text-underline-offset:4px}
 </head>
 <body>
 
-<header class="top">
+<div data-progress aria-hidden="true"></div>
+<header class="top" data-autohide>
   <a class="mark" href="#">Palma Alta</a>
   <nav class="nav" aria-label="Main">
     <a href="#house">The house</a>
@@ -136,11 +175,11 @@ footer a{text-underline-offset:4px}
     <a href="#table">The table</a>
     <a href="#place">Nearby</a>
   </nav>
-  <a class="book" href="#visit">Check availability</a>
+  <a class="book" href="#visit" data-magnetic=".25">Check availability</a>
 </header>
 
 <main>
-  <section class="hero" aria-label="Welcome">
+  <section class="hero" aria-label="Welcome" data-scrub="exit">
     <div>
       <div class="arch" aria-hidden="true">
         <svg viewBox="0 0 300 410" preserveAspectRatio="xMidYMid slice">
@@ -153,9 +192,9 @@ footer a{text-underline-offset:4px}
             </linearGradient>
           </defs>
           <rect width="300" height="410" fill="url(#sky)"/>
-          <circle class="sun" cx="150" cy="232" r="58" fill="#F7E7DE" opacity=".9"/>
+          <g data-parallax="-0.22"><circle class="sun" cx="150" cy="232" r="58" fill="#F7E7DE" opacity=".9"/></g>
           <!-- palms -->
-          <g fill="#2E4A3C">
+          <g fill="#2E4A3C" data-parallax="0.06">
             <path d="M58 300 C60 240 66 190 74 140 L78 140 C72 190 68 240 66 300Z"/>
             <path d="M76 142 C50 126 26 132 10 150 C34 138 54 140 76 146Z"/>
             <path d="M76 142 C70 112 52 96 30 94 C50 104 64 120 74 146Z"/>
@@ -176,38 +215,70 @@ footer a{text-underline-offset:4px}
           <path d="M100 312 L200 312 L188 410 L112 410Z" fill="#F7E7DE" opacity=".18"/>
         </svg>
       </div>
-      <h1 class="title">Palma Alta<em>Coral Gables</em></h1>
-      <p>Fourteen rooms in a 1926 house, five minutes from the Venetian Pool.</p>
+      <div class="hero-copy" data-parallax="0.18">
+        <h1 class="title">Palma Alta<em>Coral Gables</em></h1>
+        <p>Fourteen rooms in a 1926 house, five minutes from the Venetian Pool.</p>
+      </div>
     </div>
   </section>
 
   <section id="house">
     <div class="wrap">
       <div class="house">
-        <h2>A house first, a hotel second.</h2>
-        <div class="copy">
+        <h2 data-split>A house first, a hotel second.</h2>
+        <div class="copy" data-stagger="up">
           <p class="lede">Built in coral rock for a family who never left, restored a century later for guests who don't want to.</p>
           <p>The original tile, the iron gates and the courtyard banyan all stayed. We added quiet rooms, good beds and a kitchen that cooks for the people staying here, not for a crowd.</p>
           <p>There's no lobby. Someone meets you at the gate, walks you through the loggia, and hands you a key.</p>
         </div>
       </div>
       <dl class="facts">
-        <div><dt>14</dt><dd>rooms and suites</dd></div>
-        <div><dt>1926</dt><dd>original Mediterranean Revival house</dd></div>
-        <div><dt>1</dt><dd>courtyard pool, shaded by the banyan</dd></div>
+        <div><dt data-count="14">14</dt><dd>rooms and suites</dd></div>
+        <div><dt data-count="1926" data-from="1850" data-grouping="false">1926</dt><dd>original Mediterranean Revival house</dd></div>
+        <div><dt data-count="1" data-duration="900">1</dt><dd>courtyard pool, shaded by the banyan</dd></div>
       </dl>
+    </div>
+  </section>
+
+  <section id="day" class="day" data-steps aria-labelledby="dayTitle">
+    <div class="wrap">
+      <h2 id="dayTitle" data-split style="margin-bottom:24px">A day at Palma Alta</h2>
+      <div class="day-grid">
+        <div class="day-sticky" aria-hidden="true">
+          <div class="day-window">
+            <svg viewBox="0 0 300 400" preserveAspectRatio="xMidYMid slice">
+              <rect class="day-sky" width="300" height="400"/>
+              <g class="day-night" fill="#F7E7DE"><circle cx="40" cy="60" r="1.6"/><circle cx="90" cy="30" r="1.2"/><circle cx="210" cy="50" r="1.8"/><circle cx="260" cy="95" r="1.2"/><circle cx="150" cy="22" r="1.4"/><circle cx="60" cy="140" r="1"/><circle cx="240" cy="160" r="1.4"/><circle cx="215" cy="92" r="22" fill="#F7E7DE"/><circle cx="224" cy="86" r="20" fill="#1B2733"/></g>
+              <circle class="day-sun" cx="150" cy="180" r="44"/>
+              <g fill="#2E4A3C">
+                <path d="M58 300 C60 240 66 190 74 140 L78 140 C72 190 68 240 66 300Z"/><path d="M76 142 C50 126 26 132 10 150 C34 138 54 140 76 146Z"/><path d="M76 142 C70 112 52 96 30 94 C50 104 64 120 74 146Z"/><path d="M76 142 C90 112 112 104 134 110 C112 112 94 126 78 146Z"/><path d="M76 142 C104 136 124 146 136 166 C118 152 98 146 78 146Z"/>
+                <path d="M226 300 C228 250 232 214 240 176 L244 176 C238 214 234 250 234 300Z"/><path d="M242 178 C222 164 202 168 188 184 C208 174 224 176 242 182Z"/><path d="M242 178 C256 154 276 150 296 158 C276 160 258 168 244 182Z"/><path d="M242 178 C238 154 224 140 206 138 C222 148 234 162 240 182Z"/>
+              </g>
+              <rect x="0" y="292" width="300" height="20" fill="#E9DACB"/>
+              <rect class="day-pool" x="0" y="312" width="300" height="98" fill="#6F9C93"/>
+              <g class="day-night"><path d="M0 250 Q75 285 150 255 T300 250" fill="none" stroke="#B89B5E" stroke-width="1"/><g fill="#FFD27A"><circle cx="30" cy="262" r="3"/><circle cx="70" cy="272" r="3"/><circle cx="110" cy="268" r="3"/><circle cx="150" cy="256" r="3"/><circle cx="190" cy="262" r="3"/><circle cx="230" cy="266" r="3"/><circle cx="270" cy="256" r="3"/></g></g>
+            </svg>
+          </div>
+        </div>
+        <ol class="day-steps">
+          <li data-step><span class="time">7:30 am</span><h3>Coffee in the courtyard</h3><p>Cuban coffee and guava pastries on the long table while the banyan is still full of birds. Nobody is in a hurry, including the kitchen.</p></li>
+          <li data-step><span class="time">Noon</span><h3>The pool, in the shade</h3><p>The courtyard pool sits under the banyan, so the water stays cool even in August. Towels, lemonade and a stack of paperbacks are already there.</p></li>
+          <li data-step><span class="time">6:45 pm</span><h3>Sunset on the loggia</h3><p>The arches turn pink, then gold. A glass of something cold appears, and someone from the front desk points out the best table for later.</p></li>
+          <li data-step><span class="time">9 pm</span><h3>Dinner under the lights</h3><p>Ten seats, one menu and a string of lights through the branches. The gate closes at midnight; your key opens it after that.</p></li>
+        </ol>
+      </div>
     </div>
   </section>
 
   <section id="rooms" class="rooms">
     <div class="wrap">
       <div class="rooms-head">
-        <h2>Rooms</h2>
+        <h2 data-split>Rooms</h2>
         <p>Every room has shutters that close completely, a deep tub or rain shower, and windows onto the courtyard or the garden.</p>
       </div>
-      <div class="room-list">
+      <div class="room-list" data-stagger="up" data-gap="140">
         <article class="room">
-          <div class="frame" aria-hidden="true">
+          <div class="frame" aria-hidden="true" data-tilt="7">
             <svg viewBox="0 0 300 400" preserveAspectRatio="xMidYMid slice"><rect width="300" height="400" fill="#E9C2AE"/><rect x="60" y="70" width="180" height="210" rx="90" ry="90" fill="#F7E7DE"/><g stroke="#2E4A3C" stroke-width="3"><line x1="150" y1="70" x2="150" y2="280"/><line x1="60" y1="175" x2="240" y2="175"/></g><rect x="30" y="290" width="240" height="70" rx="6" fill="#2E4A3C"/><rect x="40" y="276" width="220" height="22" rx="10" fill="#F7E7DE"/></svg>
           </div>
           <h3>Courtyard room</h3>
@@ -215,7 +286,7 @@ footer a{text-underline-offset:4px}
           <p class="meta">28 m² · sleeps 2</p>
         </article>
         <article class="room">
-          <div class="frame" aria-hidden="true">
+          <div class="frame" aria-hidden="true" data-tilt="7">
             <svg viewBox="0 0 300 400" preserveAspectRatio="xMidYMid slice"><rect width="300" height="400" fill="#6F9C93"/><path d="M40 400 V190 a110 110 0 0 1 220 0 V400Z" fill="#F2C6B4"/><path d="M80 400 V210 a70 70 0 0 1 140 0 V400Z" fill="#F7E7DE"/><rect x="0" y="330" width="300" height="70" fill="#2E4A3C"/><circle cx="150" cy="250" r="26" fill="#E9A98F"/></svg>
           </div>
           <h3>Loggia suite</h3>
@@ -223,7 +294,7 @@ footer a{text-underline-offset:4px}
           <p class="meta">44 m² · sleeps 2</p>
         </article>
         <article class="room">
-          <div class="frame" aria-hidden="true">
+          <div class="frame" aria-hidden="true" data-tilt="7">
             <svg viewBox="0 0 300 400" preserveAspectRatio="xMidYMid slice"><rect width="300" height="400" fill="#2E4A3C"/><rect x="30" y="80" width="110" height="200" rx="55" fill="#F2C6B4"/><rect x="160" y="80" width="110" height="200" rx="55" fill="#F2C6B4"/><rect x="0" y="300" width="300" height="100" fill="#B89B5E"/><rect x="40" y="286" width="220" height="30" rx="12" fill="#F7E7DE"/></svg>
           </div>
           <h3>Garden house</h3>
@@ -238,12 +309,12 @@ footer a{text-underline-offset:4px}
     <div class="wrap">
       <div class="table">
         <div class="copy">
-          <h2>One long table under the banyan.</h2>
+          <h2 data-split>One long table under the banyan.</h2>
           <p>Breakfast is included and served until noon: Cuban coffee, guava pastries from down the street, eggs any way you like them.</p>
           <p>Three nights a week, the kitchen cooks a set dinner for guests and a few neighbors. Ten seats, one menu, whatever looked best at the market that morning.</p>
           <p class="hours">Breakfast daily, 7:30 to noon. Dinner Thursday to Saturday at 8, by reservation.</p>
         </div>
-        <div class="menu">
+        <div class="menu" data-reveal="zoom">
           <h3>Thursday dinner</h3>
           <ul>
             <li>Stone crab, sour orange<span>to start</span></li>
@@ -257,8 +328,8 @@ footer a{text-underline-offset:4px}
 
   <section id="place" class="place">
     <div class="wrap">
-      <h2>Close to everything worth walking to.</h2>
-      <div class="place-grid">
+      <h2 data-split>Close to everything worth walking to.</h2>
+      <div class="place-grid" data-stagger="up">
         <div><h3>Venetian Pool</h3><p>A 1924 lagoon carved from the old coral rock quarry.</p><p class="min">5 min walk</p></div>
         <div><h3>Miracle Mile</h3><p>Bookshops, cafés and a Saturday farmers market.</p><p class="min">10 min walk</p></div>
         <div><h3>Fairchild Garden</h3><p>Eighty-three acres of tropical plants and a butterfly house.</p><p class="min">15 min drive</p></div>
@@ -269,9 +340,9 @@ footer a{text-underline-offset:4px}
 
   <section id="visit" class="visit">
     <div class="wrap">
-      <h2>Come stay a while.</h2>
+      <h2 data-split>Come stay a while.</h2>
       <p>Rooms from $340 a night, breakfast included. Stays of five nights or more get the sixth free.</p>
-      <a class="book" href="#visit">Check availability</a>
+      <a class="book" href="#visit" data-magnetic=".3">Check availability</a>
     </div>
   </section>
 </main>
@@ -286,5 +357,6 @@ footer a{text-underline-offset:4px}
   <a class="book" href="#visit">Check availability</a>
 </div>
 
+<script src="../fx/fx.js"></script>
 </body>
 </html>

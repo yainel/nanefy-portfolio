@@ -8,6 +8,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Karla:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../fx/fx.css">
+<script>document.documentElement.classList.add('fx')</script>
 <style>
 :root{
   --deep:#10283A;
@@ -162,8 +164,48 @@ dialog .row{display:flex;gap:10px;justify-content:flex-end;margin-top:8px}
 .toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,16px);background:var(--deep);color:var(--shell);padding:12px 20px;border-radius:999px;opacity:0;transition:opacity .25s,transform .25s;z-index:50;pointer-events:none;max-width:calc(100vw - 32px)}
 .toast.show{opacity:1;transform:translate(-50%,0)}
 
+/* Effects */
+[data-progress]{background:var(--coral)}
+.top .wrap{transition:height .3s}
+.top.fx-scrolled{box-shadow:0 8px 30px -18px rgba(16,40,58,.4)}
+.top.fx-scrolled .wrap{height:58px}
+.hero{--p:0}
+.hero .wrap{opacity:calc(1 - var(--p) * 1.5);transform:translateY(calc(var(--p) * 90px))}
+.numbers{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-bottom:64px;padding-bottom:40px;border-bottom:1px solid rgba(255,251,245,.12)}
+.numbers b{display:block;font-family:var(--display);font-weight:300;font-size:clamp(2.6rem,5vw,4rem);line-height:1;color:var(--foam);font-variant-numeric:tabular-nums}
+.numbers span{font-size:.95rem;color:rgba(255,251,245,.7)}
+
+/* Your first class: steps scroll past a sticky dial */
+.first{--step:0}
+.first[data-active="1"]{--step:1}.first[data-active="2"]{--step:2}.first[data-active="3"]{--step:3}
+.first-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px}
+.first-steps{list-style:none}
+.first-steps li{min-height:66vh;display:flex;flex-direction:column;justify-content:center;opacity:.3;transition:opacity .6s}
+.first-steps li.on{opacity:1}
+.first-steps .k{font-weight:600;font-size:.9rem;color:var(--tide);letter-spacing:.06em;text-transform:uppercase}
+.first-steps h3{font-family:var(--display);font-weight:400;font-size:clamp(2rem,3.6vw,2.8rem);line-height:1.05;margin:10px 0 12px}
+.first-steps p{color:var(--muted);max-width:40ch}
+.first-sticky{position:sticky;top:14vh;align-self:start;height:72vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px}
+.dial{position:relative;width:min(380px,80%);aspect-ratio:1}
+.dial svg.ring{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)}
+.dial .track{fill:none;stroke:var(--foam);stroke-width:10}
+.dial .prog{fill:none;stroke:var(--tide);stroke-width:10;stroke-linecap:round;stroke-dasharray:553;stroke-dashoffset:calc(553 * (1 - (var(--step) + 1) / 4));transition:stroke-dashoffset .9s cubic-bezier(.4,0,.2,1)}
+.dial .face{position:absolute;inset:14%;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,var(--foam) 60%,#bfe0d8);display:grid;place-items:center}
+.dial .ic{grid-area:1/1;width:46%;opacity:0;transform:scale(.8) translateY(10px);transition:opacity .5s,transform .6s cubic-bezier(.2,.8,.2,1.2)}
+.first[data-active="0"] .ic:nth-child(1),.first[data-active="1"] .ic:nth-child(2),.first[data-active="2"] .ic:nth-child(3),.first[data-active="3"] .ic:nth-child(4),.first:not([data-active]) .ic:nth-child(1){opacity:1;transform:none}
+.dial-label{font-family:var(--display);font-size:1.3rem;color:var(--tide)}
+.dial-label span{display:none}
+.first[data-active="0"] .dial-label span:nth-child(1),.first[data-active="1"] .dial-label span:nth-child(2),.first[data-active="2"] .dial-label span:nth-child(3),.first[data-active="3"] .dial-label span:nth-child(4),.first:not([data-active]) .dial-label span:nth-child(1){display:inline}
+.plan{transition:transform .4s cubic-bezier(.2,.8,.2,1.2),box-shadow .4s}
+.plan:hover{transform:translateY(-6px);box-shadow:0 24px 50px -28px rgba(16,40,58,.45)}
+
 @media (max-width:960px){
   .nav{display:none}
+  .numbers{grid-template-columns:1fr 1fr}
+  .first-grid{display:flex;flex-direction:column-reverse;gap:0}
+  .first-sticky{top:8px;height:auto;padding:14px 0;z-index:2;background:var(--shell);flex-direction:row;justify-content:center;align-self:stretch;box-shadow:0 12px 16px -12px rgba(16,40,58,.15)}
+  .dial{width:120px}
+  .first-steps li{min-height:56vh}
   .types{grid-template-columns:1fr 1fr}
   .plans,.team{grid-template-columns:1fr}
   .class{grid-template-columns:72px 1fr auto;gap:6px 14px}
@@ -188,7 +230,8 @@ dialog .row{display:flex;gap:10px;justify-content:flex-end;margin-top:8px}
 </head>
 <body>
 
-<header class="top">
+<div data-progress aria-hidden="true"></div>
+<header class="top" data-autohide>
   <div class="wrap">
     <a class="logo" href="#"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="15" fill="#DDEFEA"/><path d="M4 18c4-4 8-4 12 0s8 4 12 0" fill="none" stroke="#10283A" stroke-width="2.2" stroke-linecap="round"/><path d="M6 23c3.3-3 6.7-3 10 0s6.7 3 10 0" fill="none" stroke="#2F6F7E" stroke-width="2" stroke-linecap="round"/></svg>marea</a>
     <nav class="nav" aria-label="Main">
@@ -202,14 +245,14 @@ dialog .row{display:flex;gap:10px;justify-content:flex-end;margin-top:8px}
 </header>
 
 <main>
-  <section class="hero" aria-label="Welcome" style="padding-bottom:0">
+  <section class="hero" aria-label="Welcome" style="padding-bottom:0" data-scrub="exit">
     <div class="wrap">
-      <span class="eyebrow">Brickell · reformer, breath, recovery</span>
-      <h1>Move slower. <strong>Breathe deeper.</strong></h1>
-      <p>Small classes, eight people at most, led by instructors who learn your name and notice how you move.</p>
-      <div class="actions">
-        <a class="btn" href="#schedule">See this week's classes</a>
-        <a class="btn soft" href="#pricing">Your first class is free</a>
+      <span class="eyebrow" data-reveal="fade">Brickell · reformer, breath, recovery</span>
+      <h1 data-split>Move slower. <strong>Breathe deeper.</strong></h1>
+      <p data-reveal="up" data-delay="450">Small classes, eight people at most, led by instructors who learn your name and notice how you move.</p>
+      <div class="actions" data-reveal="up" data-delay="600">
+        <a class="btn" href="#schedule" data-magnetic>See this week's classes</a>
+        <a class="btn soft" href="#pricing" data-magnetic>Your first class is free</a>
       </div>
     </div>
     <div class="waves" aria-hidden="true">
@@ -221,8 +264,14 @@ dialog .row{display:flex;gap:10px;justify-content:flex-end;margin-top:8px}
 
   <section id="schedule" class="schedule">
     <div class="wrap">
+      <div class="numbers" data-stagger="up" aria-label="Marea in numbers">
+        <div><b data-count="8">8</b><span>people at most per class</span></div>
+        <div><b data-count="50" data-suffix=" min">50 min</b><span>longest class, by design</span></div>
+        <div><b data-count="4.9" data-decimals="1">4.9</b><span>average rating from 600+ members</span></div>
+        <div><b data-count="12" data-suffix=" yrs">12 yrs</b><span>teaching pilates in Miami</span></div>
+      </div>
       <div class="head">
-        <h2>This <strong>week</strong></h2>
+        <h2 data-split>This <strong>week</strong></h2>
         <p>Book up to seven days ahead. Cancel up to 8 hours before class and the credit goes right back to you.</p>
       </div>
       <div class="days" id="days" role="group" aria-label="Day"></div>
@@ -240,10 +289,10 @@ dialog .row{display:flex;gap:10px;justify-content:flex-end;margin-top:8px}
   <section id="classes">
     <div class="wrap">
       <div class="head">
-        <h2>Four ways to <strong>reset</strong></h2>
+        <h2 data-split>Four ways to <strong>reset</strong></h2>
         <p>Every class is 50 minutes or less, and every class ends lying down. That part is not optional.</p>
       </div>
-      <div class="types">
+      <div class="types" data-stagger="up">
         <article class="type"><div class="ico" style="background:#DDEFEA"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><rect x="3" y="15" width="24" height="6" rx="3" fill="none" stroke="#10283A" stroke-width="2"/><path d="M8 15V9M22 15V9" stroke="#10283A" stroke-width="2" stroke-linecap="round"/></svg></div><h3>Reformer</h3><p>Spring-loaded strength for your core, back and everything that holds you up.</p><span class="meta">50 min · all levels</span></article>
         <article class="type"><div class="ico" style="background:#FBE3DC"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path d="M4 20h22M9 20c0-6 2.5-10 6-10s6 4 6 10" fill="none" stroke="#10283A" stroke-width="2" stroke-linecap="round"/></svg></div><h3>Mat</h3><p>Classical pilates on the floor. No machines, just control, breath and a lot of shaking.</p><span class="meta">45 min · all levels</span></article>
         <article class="type"><div class="ico" style="background:#E3ECF6"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="10" fill="none" stroke="#10283A" stroke-width="2"/><circle cx="15" cy="15" r="4" fill="#10283A"/></svg></div><h3>Breathwork</h3><p>Guided breathing to settle your nervous system. Lights low, phones away, blankets on.</p><span class="meta">40 min · no experience needed</span></article>
@@ -252,9 +301,35 @@ dialog .row{display:flex;gap:10px;justify-content:flex-end;margin-top:8px}
     </div>
   </section>
 
+  <section class="first" data-steps aria-labelledby="firstTitle">
+    <div class="wrap">
+      <h2 id="firstTitle" data-split style="margin-bottom:12px">Your first <strong>class</strong></h2>
+      <div class="first-grid">
+        <ol class="first-steps">
+          <li data-step><span class="k">Step 1 · 10 minutes before</span><h3>Arrive and settle in</h3><p>Grab a pair of grip socks at the desk, leave your phone in a cubby and take a minute on the bench. Your instructor will come and say hello.</p></li>
+          <li data-step><span class="k">Step 2 · 5 minutes</span><h3>Set up your reformer</h3><p>We adjust the springs, straps and foot bar to your height and tell you exactly what each one does. Nobody expects you to know.</p></li>
+          <li data-step><span class="k">Step 3 · 40 minutes</span><h3>Move, slowly</h3><p>Small, controlled movements with your breath. You will shake. That's the point, and it's quiet enough to hear yourself think.</p></li>
+          <li data-step><span class="k">Step 4 · the last 5 minutes</span><h3>Lie down and rest</h3><p>Every class ends lying flat with the lights low. Then tea in the lounge, if you want to stay a little longer.</p></li>
+        </ol>
+        <div class="first-sticky" aria-hidden="true">
+          <div class="dial">
+            <svg class="ring" viewBox="0 0 200 200"><circle class="track" cx="100" cy="100" r="88"/><circle class="prog" cx="100" cy="100" r="88"/></svg>
+            <div class="face">
+              <svg class="ic" viewBox="0 0 80 80"><path d="M26 58 h28 a6 6 0 0 0 0 -12 h-6 l-4 -16 h-10 l4 16 h-12z" fill="#2F6F7E"/><path d="M50 22 q6 -6 12 0" fill="none" stroke="#E9826B" stroke-width="3" stroke-linecap="round"/></svg>
+              <svg class="ic" viewBox="0 0 80 80"><rect x="10" y="44" width="60" height="10" rx="5" fill="#10283A"/><circle cx="20" cy="62" r="5" fill="#2F6F7E"/><circle cx="60" cy="62" r="5" fill="#2F6F7E"/><path d="M60 44 V26" stroke="#10283A" stroke-width="4" stroke-linecap="round"/><path d="M24 40 c6 -8 14 -8 20 0" fill="none" stroke="#E9826B" stroke-width="3" stroke-linecap="round"/></svg>
+              <svg class="ic" viewBox="0 0 80 80"><circle cx="40" cy="20" r="7" fill="#E9826B"/><path d="M40 28 v20 M40 34 l-14 10 M40 34 l14 -10 M40 48 l-10 16 M40 48 l12 14" stroke="#10283A" stroke-width="5" stroke-linecap="round" fill="none"/></svg>
+              <svg class="ic" viewBox="0 0 80 80"><path d="M10 54 h60" stroke="#2F6F7E" stroke-width="5" stroke-linecap="round"/><circle cx="20" cy="46" r="6" fill="#E9826B"/><path d="M26 48 h36" stroke="#10283A" stroke-width="6" stroke-linecap="round"/><path d="M56 24 a8 8 0 1 0 8 10 a6 6 0 1 1 -8 -10z" fill="#10283A"/></svg>
+            </div>
+          </div>
+          <p class="dial-label"><span>Arrive</span><span>Set up</span><span>Move</span><span>Rest</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="breathe" aria-labelledby="breatheTitle">
     <div class="wrap">
-      <h2 id="breatheTitle">Try it <strong>now</strong></h2>
+      <h2 id="breatheTitle" data-split>Try it <strong>now</strong></h2>
       <p style="color:var(--muted);margin-top:12px">Follow the circle for three breaths. In for four, hold, out for four.</p>
       <div class="orb breath" aria-hidden="true"></div>
       <p class="breath-text" id="breathText" aria-live="polite"></p>
@@ -265,21 +340,21 @@ dialog .row{display:flex;gap:10px;justify-content:flex-end;margin-top:8px}
   <section id="pricing">
     <div class="wrap">
       <div class="head">
-        <h2>Simple <strong>pricing</strong></h2>
+        <h2 data-split>Simple <strong>pricing</strong></h2>
         <p>No sign-up fee, no contract. Change or pause your plan anytime from the app.</p>
       </div>
       <div class="billing" role="group" aria-label="Billing">
         <button aria-pressed="true" data-yearly="0">Monthly</button>
         <button aria-pressed="false" data-yearly="1">Yearly <em>save 15%</em></button>
       </div>
-      <div class="plans" id="plans"></div>
+      <div class="plans" id="plans" data-stagger="zoom" data-gap="120"></div>
     </div>
   </section>
 
   <section id="team" style="background:var(--sand)">
     <div class="wrap">
-      <div class="head"><h2>Your <strong>instructors</strong></h2><p>Certified, kind, and a little bit obsessed with posture.</p></div>
-      <div class="team">
+      <div class="head"><h2 data-split>Your <strong>instructors</strong></h2><p>Certified, kind, and a little bit obsessed with posture.</p></div>
+      <div class="team" data-stagger="up">
         <div class="coach"><div class="face" style="background:#DDEFEA">IV</div><div><h3>Isabel Vega</h3><p>Founder. Reformer and rehab pilates, 12 years. Former dancer.</p></div></div>
         <div class="coach"><div class="face" style="background:#FBE3DC">TO</div><div><h3>Tomás Ortiz</h3><p>Breathwork and mobility. Teaches the 7 am class nobody regrets.</p></div></div>
         <div class="coach"><div class="face" style="background:#E3ECF6">NB</div><div><h3>Nia Bello</h3><p>Mat pilates and prenatal. Makes the hardest hold feel like a joke.</p></div></div>
@@ -431,5 +506,6 @@ dialog .row{display:flex;gap:10px;justify-content:flex-end;margin-top:8px}
   renderPlans();
 })();
 </script>
+<script src="../fx/fx.js"></script>
 </body>
 </html>

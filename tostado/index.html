@@ -8,6 +8,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../fx/fx.css">
+<script>document.documentElement.classList.add('fx')</script>
 <style>
 :root{
   --roast:#2B1D16;
@@ -53,7 +55,7 @@ h1 em{color:var(--clay)}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:999px;padding:14px 26px;font-weight:600;font-size:1rem;text-decoration:none;background:var(--roast);color:var(--milk);transition:background .2s,transform .2s}
 .btn:hover{background:var(--clay)}
 .btn:active{transform:scale(.97)}
-.btn.ghost{background:none;color:var(--roast);box-shadow:inset 0 0 0 1.5px var(--roast)}
+.btn.ghost{background:var(--milk);color:var(--roast);box-shadow:inset 0 0 0 1.5px var(--roast)}
 .btn.ghost:hover{background:var(--roast);color:var(--milk)}
 .cup{position:relative;aspect-ratio:1;max-width:460px;justify-self:center;width:100%}
 .cup > svg:first-child{width:100%;height:100%}
@@ -152,8 +154,43 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);background:var(--roast);color:var(--crema);padding:12px 20px;border-radius:999px;font-weight:500;opacity:0;transition:opacity .25s,transform .25s;z-index:50;pointer-events:none;max-width:calc(100vw - 32px)}
 .toast.show{opacity:1;transform:translate(-50%,0)}
 
+/* Effects */
+[data-progress]{background:var(--clay)}
+.top.fx-scrolled{box-shadow:0 6px 24px -12px rgba(43,29,22,.35)}
+.hero{position:relative;overflow:hidden}
+.beans-float{position:absolute;inset:0;pointer-events:none;z-index:0}
+.hero .wrap{position:relative;z-index:1}
+.fb{position:absolute;display:block}
+.fb svg{display:block;transform:rotate(var(--r));opacity:.45}
+@media (prefers-reduced-motion:no-preference){.fb svg{animation:bob 6s ease-in-out infinite alternate}.fb.b2 svg{animation-duration:8s}.fb.b3 svg{animation-duration:7s}}
+@keyframes bob{to{transform:rotate(calc(var(--r) + 25deg)) translateY(-10px)}}
+.fb.b1{left:1.5%;top:62%}.fb.b2{left:47%;top:4%}.fb.b3{right:3%;bottom:6%}.fb.b4{left:30%;bottom:2%}.fb.b5{right:44%;bottom:22%}
+.cup{--p:.5}
+.cup > svg:first-child{transform:rotate(calc((var(--p) - .5) * 50deg))}
+.stats{background:var(--clay);color:var(--milk);padding:44px 0}
+.stats .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.stats b{display:block;font-family:var(--display);font-weight:400;font-size:clamp(2.4rem,4.4vw,3.6rem);line-height:1;font-variant-numeric:tabular-nums}
+.stats span{font-size:.95rem;opacity:.9}
+.journey{background:var(--crema)}
+.journey .hs-pin{gap:28px}
+.journey-head{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;width:100%}
+.journey-head p{max-width:38ch;color:var(--bean)}
+.journey-bar{width:100%;height:3px;background:rgba(43,29,22,.12);border-radius:3px;overflow:hidden}
+.journey-bar i{display:block;height:100%;background:var(--clay);transform-origin:0 50%;transform:scaleX(var(--p,0))}
+.journey .hs-track{gap:24px;padding:0 max(32px,calc((100vw - var(--wrap)) / 2 + 32px))}
+.stop{width:min(520px,78vw);flex:none;background:var(--milk);border-radius:28px;padding:32px;display:flex;flex-direction:column;gap:12px;min-height:360px;position:relative;overflow:hidden}
+.stop .num{font-family:var(--display);font-size:4.5rem;line-height:1;color:var(--clay);opacity:.25;position:absolute;right:24px;top:16px}
+.stop svg{width:96px;height:96px}
+.stop h3{font-family:var(--display);font-weight:400;font-size:2rem;line-height:1.05}
+.stop p{color:var(--bean)}
+.stop .fact{margin-top:auto;font-weight:600;font-size:.92rem;color:var(--leaf)}
+.journey.hs-native{padding:72px 0}
+.journey.hs-native .hs-track{padding:0 20px}
+.bag{transition:transform .4s cubic-bezier(.2,.8,.2,1.2)}
+
 @media (max-width:900px){
   .nav{display:none}
+  .stats .wrap{grid-template-columns:1fr 1fr}
   .hero .wrap,.sub-wrap,.visit .wrap{grid-template-columns:1fr}
   .items{grid-template-columns:1fr}
   .beans{grid-template-columns:1fr}
@@ -171,7 +208,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 </head>
 <body>
 
-<header class="top">
+<div data-progress aria-hidden="true"></div>
+<header class="top" data-autohide>
   <div class="wrap">
     <a class="logo" href="#"><i aria-hidden="true"></i>Tostado</a>
     <nav class="nav" aria-label="Main">
@@ -186,17 +224,18 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 
 <main>
   <section class="hero" aria-label="Welcome">
+    <div class="beans-float" aria-hidden="true"><span class="fb b1" data-parallax="-0.18"><svg viewBox="0 0 40 56" style="width:34px;--r:-20deg"><ellipse cx="20" cy="28" rx="17" ry="25" fill="#4A3426"/><path d="M20 5 C 10 18 30 38 20 51" fill="none" stroke="#2B1D16" stroke-width="3" stroke-linecap="round"/></svg></span><span class="fb b2" data-parallax="0.14"><svg viewBox="0 0 40 56" style="width:22px;--r:35deg"><ellipse cx="20" cy="28" rx="17" ry="25" fill="#4A3426"/><path d="M20 5 C 10 18 30 38 20 51" fill="none" stroke="#2B1D16" stroke-width="3" stroke-linecap="round"/></svg></span><span class="fb b3" data-parallax="-0.24"><svg viewBox="0 0 40 56" style="width:44px;--r:60deg"><ellipse cx="20" cy="28" rx="17" ry="25" fill="#4A3426"/><path d="M20 5 C 10 18 30 38 20 51" fill="none" stroke="#2B1D16" stroke-width="3" stroke-linecap="round"/></svg></span><span class="fb b4" data-parallax="0.2"><svg viewBox="0 0 40 56" style="width:26px;--r:-50deg"><ellipse cx="20" cy="28" rx="17" ry="25" fill="#4A3426"/><path d="M20 5 C 10 18 30 38 20 51" fill="none" stroke="#2B1D16" stroke-width="3" stroke-linecap="round"/></svg></span><span class="fb b5" data-parallax="-0.1"><svg viewBox="0 0 40 56" style="width:18px;--r:10deg"><ellipse cx="20" cy="28" rx="17" ry="25" fill="#4A3426"/><path d="M20 5 C 10 18 30 38 20 51" fill="none" stroke="#2B1D16" stroke-width="3" stroke-linecap="round"/></svg></span></div>
     <div class="wrap">
       <div>
         <p class="kicker">Little Havana · since 2019</p>
-        <h1>Coffee roasted this week, on <em>Calle Ocho.</em></h1>
-        <p class="sub">A ventanita for cafecito on the go, a slow bar for single origins, and beans you can take home before they lose a single note.</p>
-        <div class="actions">
-          <a class="btn" href="#menu">Order for pickup</a>
-          <a class="btn ghost" href="#subscribe">Build a subscription</a>
+        <h1 data-split>Coffee roasted this week, on <em>Calle Ocho.</em></h1>
+        <p class="sub" data-reveal="up" data-delay="350">A ventanita for cafecito on the go, a slow bar for single origins, and beans you can take home before they lose a single note.</p>
+        <div class="actions" data-reveal="up" data-delay="500">
+          <a class="btn" href="#menu" data-magnetic>Order for pickup</a>
+          <a class="btn ghost" href="#subscribe" data-magnetic>Build a subscription</a>
         </div>
       </div>
-      <div class="cup" aria-hidden="true">
+      <div class="cup" aria-hidden="true" data-scrub data-reveal="zoom" data-delay="200">
         <svg viewBox="0 0 460 460">
           <circle cx="230" cy="230" r="214" fill="#F3E6D3"/>
           <circle cx="230" cy="230" r="168" fill="#FBF6EE" stroke="#E7D4BC" stroke-width="2"/>
@@ -220,10 +259,19 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     </div>
   </section>
 
+  <div class="stats" aria-label="Tostado in numbers">
+    <div class="wrap" data-stagger="up">
+      <div><b data-count="312">312</b><span>bags roasted this week</span></div>
+      <div><b data-count="18" data-suffix=" h">18 h</b><span>of cold brew steeping</span></div>
+      <div><b data-count="4" data-suffix=" min" data-duration="900">4 min</b><span>average wait at the window</span></div>
+      <div><b data-count="3">3</b><span>farms we buy from directly</span></div>
+    </div>
+  </div>
+
   <section id="menu" class="menu">
     <div class="wrap">
       <div class="head">
-        <h2>The ventanita menu</h2>
+        <h2 data-split>The ventanita menu</h2>
         <p>Order ahead and skip the line. Your coffee is ready at the window in about four minutes.</p>
       </div>
       <div class="tabs" role="tablist" aria-label="Menu categories">
@@ -238,17 +286,34 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   <section id="beans">
     <div class="wrap">
       <div class="head">
-        <h2>On the roaster this week</h2>
+        <h2 data-split>On the roaster this week</h2>
         <p>We roast small batches every Tuesday and Friday. Every bag says the roast date, and nothing sits on the shelf longer than three weeks.</p>
       </div>
-      <div class="beans" id="beanList"></div>
+      <div class="beans" id="beanList" data-reveal="up"></div>
+    </div>
+  </section>
+
+  <section class="journey" data-hscroll aria-labelledby="journeyTitle">
+    <div class="hs-pin">
+      <div class="wrap journey-head">
+        <h2 id="journeyTitle" data-split>From farm to cup</h2>
+        <p>Keep scrolling to follow one bag of Huila from the mountain to your hands.</p>
+        <div class="journey-bar" aria-hidden="true"><i></i></div>
+      </div>
+      <div class="hs-track">
+        <article class="stop"><span class="num" aria-hidden="true">01</span><svg viewBox="0 0 96 96" aria-hidden="true"><path d="M48 14 C 52 30 60 34 70 36" fill="none" stroke="#6E7F5C" stroke-width="4" stroke-linecap="round"/><circle cx="36" cy="54" r="16" fill="#C8643B"/><circle cx="60" cy="60" r="16" fill="#A84E2C"/><circle cx="46" cy="76" r="12" fill="#C8643B"/></svg><h3>The farm</h3><p>Ripe coffee cherries are picked by hand on the Ramírez family farm in Huila, Colombia, one pass at a time.</p><span class="fact">1,700 m above sea level</span></article>
+        <article class="stop"><span class="num" aria-hidden="true">02</span><svg viewBox="0 0 96 96" aria-hidden="true"><rect x="12" y="56" width="72" height="10" rx="5" fill="#6E7F5C"/><g fill="#B97B4E"><ellipse cx="26" cy="50" rx="6" ry="8"/><ellipse cx="42" cy="48" rx="6" ry="8"/><ellipse cx="58" cy="50" rx="6" ry="8"/><ellipse cx="74" cy="48" rx="6" ry="8"/></g><circle cx="72" cy="20" r="10" fill="#E8A54B"/></svg><h3>Washed and dried</h3><p>The fruit is washed off and the beans dry slowly on raised beds in the sun, turned every hour.</p><span class="fact">21 days on the beds</span></article>
+        <article class="stop"><span class="num" aria-hidden="true">03</span><svg viewBox="0 0 96 96" aria-hidden="true"><rect x="18" y="30" width="60" height="44" rx="22" fill="#2B1D16"/><circle cx="48" cy="52" r="14" fill="#C8643B"/><path d="M40 22 q4 -8 0 -14 M52 22 q4 -8 0 -14" stroke="#4A3426" stroke-width="3" fill="none" stroke-linecap="round"/></svg><h3>Roasted on Tuesday</h3><p>Small batches on our drum roaster on Calle Ocho, stopped by ear the moment the first crack settles.</p><span class="fact">14 minutes at 205 °C</span></article>
+        <article class="stop"><span class="num" aria-hidden="true">04</span><svg viewBox="0 0 96 96" aria-hidden="true"><path d="M28 24 h40 l6 56 h-52z" fill="#F3E6D3" stroke="#4A3426" stroke-width="3"/><circle cx="48" cy="52" r="10" fill="#C8643B"/><path d="M28 24 l6 -8 h28 l6 8" fill="none" stroke="#4A3426" stroke-width="3"/></svg><h3>Rested five days</h3><p>Fresh beans need a few days to calm down. We bag them with a one-way valve and the roast date on the front.</p><span class="fact">Best within 3 weeks</span></article>
+        <article class="stop"><span class="num" aria-hidden="true">05</span><svg viewBox="0 0 96 96" aria-hidden="true"><path d="M20 38 h48 v18 a24 24 0 0 1 -48 0z" fill="#F3E6D3" stroke="#4A3426" stroke-width="3"/><path d="M68 44 h6 a8 8 0 0 1 0 16 h-6" fill="none" stroke="#4A3426" stroke-width="3"/><ellipse cx="44" cy="40" rx="20" ry="4" fill="#B97B4E"/><path d="M36 28 q4 -6 0 -12 M50 28 q4 -6 0 -12" stroke="#B97B4E" stroke-width="3" fill="none" stroke-linecap="round"/></svg><h3>Your cup</h3><p>Panela, red apple and cocoa, whether you brew it at home or order it at the window.</p><span class="fact">About 4 minutes from order to hand</span></article>
+      </div>
     </div>
   </section>
 
   <section id="subscribe" style="background:var(--crema)">
     <div class="wrap">
       <div class="head">
-        <h2>Build your subscription</h2>
+        <h2 data-split>Build your subscription</h2>
         <p>Fresh beans at your door on your schedule. Pause, skip or change anytime. Subscribers save 10%.</p>
       </div>
       <div class="sub-wrap">
@@ -282,7 +347,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
             </div>
           </fieldset>
         </form>
-        <aside class="summary" aria-live="polite">
+        <aside class="summary" aria-live="polite" data-reveal="right">
           <h3>Your box</h3>
           <dl>
             <div><dt>Coffee</dt><dd id="sBean"></dd></div>
@@ -301,7 +366,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   <section id="visit" class="visit">
     <div class="wrap">
       <div>
-        <h2>Come to the window.</h2>
+        <h2 data-split>Come to the window.</h2>
         <p style="margin-top:16px;max-width:42ch;color:var(--bean)">Corner of SW 8th Street and 15th Avenue, across from Domino Park. Walk up to the ventanita or grab a stool at the slow bar inside.</p>
         <ul class="hours">
           <li><span>Monday to Friday</span><span>6:30 am – 5 pm</span></li>
@@ -309,7 +374,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
           <li><span>Sunday</span><span>8 am – 3 pm</span></li>
         </ul>
       </div>
-      <div class="map" aria-hidden="true">
+      <div class="map" aria-hidden="true" data-reveal="clip">
         <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
           <rect width="400" height="300" fill="#FBF6EE"/>
           <g stroke="#E7D4BC" stroke-width="14"><path d="M0 70 H400 M0 160 H400 M0 250 H400 M60 0 V300 M170 0 V300 M280 0 V300 M370 0 V300"/></g>
@@ -456,7 +521,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   $('#beanList').innerHTML = beans.map(function (b, i) {
     var dots = '';
     for (var k = 1; k <= 5; k++) dots += '<b class="' + (k <= b.roast ? 'on' : '') + '"></b>';
-    return '<article class="bag">' +
+    return '<article class="bag" data-tilt="6">' +
       '<svg class="ring" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="40" fill="none" stroke="#C8643B" stroke-width="2" stroke-dasharray="4 6"/></svg>' +
       '<span class="origin">' + b.origin + '</span><h3>' + b.name + '</h3>' +
       '<div class="notes">' + b.notes.map(function (n) { return '<span>' + n + '</span>'; }).join('') + '</div>' +
@@ -497,5 +562,6 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   renderCart();
 })();
 </script>
+<script src="../fx/fx.js"></script>
 </body>
 </html>

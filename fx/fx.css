@@ -1,0 +1,37 @@
+/* fx.css: styles for fx.js. Elements stay visible if JavaScript never runs. */
+
+/* Reveal */
+.fx [data-reveal]{opacity:0;transition:opacity .8s cubic-bezier(.2,.7,.2,1) var(--d,0ms),transform .9s cubic-bezier(.2,.7,.2,1) var(--d,0ms),clip-path 1.1s cubic-bezier(.7,0,.2,1) var(--d,0ms)}
+.fx [data-reveal="up"]{transform:translateY(36px)}
+.fx [data-reveal="left"]{transform:translateX(-48px)}
+.fx [data-reveal="right"]{transform:translateX(48px)}
+.fx [data-reveal="zoom"]{transform:scale(.9)}
+.fx [data-reveal="clip"]{opacity:1;clip-path:inset(100% 0 0 0)}
+.fx [data-reveal].in{opacity:1;transform:none;clip-path:inset(0 0 0 0)}
+
+/* Word-by-word headings */
+.fx [data-split] .w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.12em;margin-bottom:-.12em}
+.fx [data-split] .w > span{display:inline-block;transform:translateY(110%);transition:transform .9s cubic-bezier(.2,.7,.2,1);transition-delay:calc(var(--i) * 60ms + var(--d,0ms))}
+.fx [data-split].in .w > span{transform:none}
+
+/* Safety net: if fx.js never loads (it adds .fx-ready), show everything after a moment */
+@keyframes fx-show{to{opacity:1;transform:none;clip-path:inset(0 0 0 0)}}
+.fx:not(.fx-ready) [data-reveal],.fx:not(.fx-ready) [data-split] .w > span{animation:fx-show 0s 4s forwards}
+
+/* Reduced motion: final state, no movement */
+.fx-still [data-reveal],.fx-still [data-split] .w > span,.fx-still [data-parallax]{opacity:1 !important;transform:none !important;clip-path:none !important;transition:none !important;animation:none !important}
+
+/* Progress bar and auto-hiding header */
+[data-progress]{position:fixed;top:0;left:0;right:0;height:3px;z-index:100;transform-origin:0 50%;transform:scaleX(var(--p,0));pointer-events:none}
+[data-autohide]{transition:transform .4s cubic-bezier(.2,.7,.2,1),background-color .3s,box-shadow .3s,height .3s,padding .3s}
+[data-autohide].fx-hide{transform:translateY(-110%)}
+
+/* Horizontal scroll section: pinned while the track slides; native swipe on small screens */
+[data-hscroll]{position:relative}
+[data-hscroll] > .hs-pin{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;flex-direction:column;justify-content:center}
+[data-hscroll] .hs-track{display:flex;width:max-content;will-change:transform}
+[data-hscroll].hs-native > .hs-pin{position:static;height:auto;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:12px;-webkit-overflow-scrolling:touch}
+[data-hscroll].hs-native .hs-track > *{scroll-snap-align:start}
+
+[data-magnetic],[data-tilt]{transition:transform .35s cubic-bezier(.2,.8,.2,1.2)}
+[data-parallax]{will-change:transform}

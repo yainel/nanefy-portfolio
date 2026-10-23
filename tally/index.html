@@ -8,6 +8,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../fx/fx.css">
+<script>document.documentElement.classList.add('fx')</script>
 <style>
 :root{
   --bg:#F4F5F8;
@@ -235,7 +237,7 @@ td.num,th.num{text-align:right}
       <div class="avatar" aria-hidden="true">MR</div>
     </div>
 
-    <section class="card onboard" id="onboard" aria-label="Setup checklist">
+    <section class="card onboard" id="onboard" aria-label="Setup checklist" data-reveal="up">
       <div>
         <h2>Finish setting up Lirio Plant Shop</h2>
         <div class="prog"><span id="progText">3 of 5 done</span><div class="meter"><i id="progBar"></i></div></div>
@@ -250,9 +252,9 @@ td.num,th.num{text-align:right}
       <button class="dismiss" id="dismiss" aria-label="Hide checklist">&times;</button>
     </section>
 
-    <div class="grid kpis" id="kpis"></div>
+    <div class="grid kpis" id="kpis" data-stagger="up" data-gap="80"></div>
 
-    <div class="grid charts">
+    <div class="grid charts" data-stagger="up" data-gap="120">
       <section class="card">
         <div class="chart-head">
           <div><h2>Revenue</h2><p class="hint">Daily, before refunds. Hover or use the arrow keys.</p></div>
@@ -269,7 +271,7 @@ td.num,th.num{text-align:right}
       </section>
     </div>
 
-    <section class="card orders">
+    <section class="card orders" data-reveal="up">
       <div class="chart-head">
         <div><h2>Recent orders</h2><p class="hint" id="orderCount"></p></div>
         <div class="chips" role="group" aria-label="Filter by status">
@@ -332,22 +334,24 @@ td.num,th.num{text-align:right}
   function sum(arr, k) { return arr.reduce(function (s, x) { return s + x[k]; }, 0); }
 
   /* KPIs */
+  var firstKpis = true;
   function kpis() {
     var cur = data.slice(-days), prev = data.slice(-days * 2, -days);
     var rev = sum(cur, 'rev'), prevRev = sum(prev, 'rev'), ord = sum(cur, 'orders'), prevOrd = sum(prev, 'orders');
     var items = [
-      ['Revenue', money.format(rev), rev / prevRev - 1, cur.map(function (x) { return x.rev; })],
-      ['Orders', num.format(ord), ord / prevOrd - 1, cur.map(function (x) { return x.orders; })],
-      ['Average order', money2.format(rev / ord), (rev / ord) / (prevRev / prevOrd) - 1, cur.map(function (x) { return x.rev / x.orders; })],
-      ['Returning customers', Math.round(36 + days / 30) + '%', .024 * (days / 30), cur.map(function (x, k) { return 30 + k / cur.length * 8 + Math.sin(k) * 2; })]
+      ['Revenue', money.format(rev), rev / prevRev - 1, cur.map(function (x) { return x.rev; }), rev, '$', '', 0],
+      ['Orders', num.format(ord), ord / prevOrd - 1, cur.map(function (x) { return x.orders; }), ord, '', '', 0],
+      ['Average order', money2.format(rev / ord), (rev / ord) / (prevRev / prevOrd) - 1, cur.map(function (x) { return x.rev / x.orders; }), rev / ord, '$', '', 2],
+      ['Returning customers', Math.round(36 + days / 30) + '%', .024 * (days / 30), cur.map(function (x, k) { return 30 + k / cur.length * 8 + Math.sin(k) * 2; }), Math.round(36 + days / 30), '', '%', 0]
     ];
     $('#kpis').innerHTML = items.map(function (k) {
       var up = k[2] >= 0, pts = k[3], max = Math.max.apply(null, pts), min = Math.min.apply(null, pts);
       var path = pts.map(function (v, j) { return (j ? 'L' : 'M') + (j / (pts.length - 1) * 84).toFixed(1) + ' ' + (30 - (v - min) / (max - min || 1) * 28).toFixed(1); }).join(' ');
-      return '<div class="card kpi"><div class="label">' + k[0] + '</div><div class="val">' + k[1] + '</div><div class="row">' +
+      return '<div class="card kpi"><div class="label">' + k[0] + '</div><div class="val"' + (firstKpis ? ' data-count="' + k[4] + '" data-prefix="' + k[5] + '" data-suffix="' + k[6] + '" data-decimals="' + k[7] + '"' : '') + '>' + k[1] + '</div><div class="row">' +
         '<span class="delta ' + (up ? 'up' : 'down') + '">' + (up ? '↑' : '↓') + ' ' + Math.abs(k[2] * 100).toFixed(1) + '%</span>' +
         '<svg class="spark" viewBox="0 0 84 32" aria-hidden="true"><path d="' + path + '"/></svg></div></div>';
     }).join('');
+    firstKpis = false;
   }
 
   /* Revenue chart: one series, so no legend; crosshair tooltip and keyboard reading */
@@ -475,5 +479,6 @@ td.num,th.num{text-align:right}
   kpis(); bars(); rows(); progress();
 })();
 </script>
+<script src="../fx/fx.js"></script>
 </body>
 </html>
