@@ -217,11 +217,6 @@
       b: '<p>A web application that replaced paper consent forms at a multi-provider surgical practice. It is private, so I share screens with sample data on request.</p><h4>My role</h4><ul><li>Sole designer and developer, from UX to production, across 16+ releases</li></ul><h4>Design thinking</h4><ul><li>Two audiences, two experiences: a calm step-by-step signing flow for nervous patients, and a fast console for busy staff</li><li>Procedure illustrations as visual cues so patients recognize their surgery at a glance</li><li>A two-panel staff layout where the patient list stays in view while details slide in</li></ul><h4>Challenges solved</h4><ul><li>Keeping patient records in sync with the CRM and form tools in real time</li><li>An audit log with day, week and year filters for a clear record of every signature</li><li>Permissions and data handling that respect healthcare privacy</li></ul>',
       f: '<a class="btn btn-primary" href="#contact" data-close>Ask for a walkthrough</a>'
     },
-    label: {
-      t: 'Nanefy Label Designer',
-      b: '<p>A browser-based tool for designing printable labels, currently in development.</p><h4>What it does</h4><ul><li>Labels with flexible elements, sizes, units and orientation</li><li>Reusable templates, so a team can design once and print many times</li></ul><h4>Built with</h4><ul><li>Laravel 11, Tailwind CSS, Vite and a REST API with secure sign-in</li></ul>',
-      f: '<a class="btn" href="https://github.com/yainel">View GitHub</a>'
-    },
     golf: {
       t: 'Golf Mapify',
       b: '<p>A golf app, currently in development, with two parts that work together.</p><h4>How it works</h4><ul><li>A back office for mapping real golf courses, hole by hole</li><li>A player app for iPhone and Android that knows which hole you are on from your location, and asks for your score</li></ul><h4>Design focus</h4><ul><li>Big, glanceable screens that work in bright sun with one hand</li></ul>',
@@ -254,7 +249,6 @@
     { g: 'Go to', t: 'Start a project', run: go('#contact') },
     { g: 'Projects', t: 'Palma Alta hotel concept', run: function () { openProject('palma'); } },
     { g: 'Projects', t: 'Patient consent platform', run: function () { openProject('consent'); } },
-    { g: 'Projects', t: 'Nanefy Label Designer', run: function () { openProject('label'); } },
     { g: 'Projects', t: 'Golf Mapify', run: function () { openProject('golf'); } },
     { g: 'Actions', t: 'Toggle dark mode', k: 'D', run: function () { setTheme(root.dataset.theme === 'dark' ? 'light' : 'dark'); } },
     { g: 'Actions', t: 'Copy email address', run: function () { copy('garcia.yainel@gmail.com', 'Email copied to clipboard'); } },

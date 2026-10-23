@@ -249,14 +249,6 @@ kbd{font-family:inherit;font-size:11px;line-height:16px;padding:1px 6px;border-r
 .mock-consent .detail{padding:10px;display:flex;flex-direction:column;gap:6px}
 .mock-consent .detail i{height:8px;border-radius:3px;background:#EEE}
 .mock-consent .detail b{margin-top:auto;height:20px;width:60%;border-radius:6px;background:#303030}
-.mock-label{background:linear-gradient(160deg,#FFF6E5,#FFEFF6);align-items:center;justify-content:center}
-.mock-label .paper{width:70%;aspect-ratio:3/2;background:#fff;border-radius:6px;box-shadow:0 6px 18px rgba(120,60,20,.15);border:1.5px dashed #F0B37E;position:relative;padding:10px;display:flex;flex-direction:column;justify-content:space-between}
-.mock-label .paper i{display:block;height:9px;width:55%;border-radius:3px;background:#303030}
-.mock-label .paper em{display:block;height:6px;width:80%;border-radius:3px;background:#DDD}
-.mock-label .bar{display:flex;gap:2px;height:20px}
-.mock-label .bar span{flex:1;background:#303030}
-.mock-label .bar span:nth-child(3n){flex:.4}
-.mock-label .bar span:nth-child(4n){background:transparent}
 .mock-golf{background:linear-gradient(160deg,#E4F7EA,#D3F0E6)}
 .mock-golf svg{position:absolute;inset:0;width:100%;height:100%}
 
