@@ -47,3 +47,6 @@
 .cm-pre .t-a{color:#f9a8d4}
 .cm-pre .t-p{color:#7dd3fc}
 .cm-foot{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 16px;border-top:1px solid var(--border)}
+
+/* Same 16px rule for demo fields, which set their own smaller sizes (the code input keeps its larger digits) */
+@media (pointer:coarse){.pg-stage input:not(.d-otp-boxes input),.pg-stage select,.pg-stage textarea{font-size:16px}}

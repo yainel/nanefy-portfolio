@@ -50,7 +50,7 @@
   --btn-bevel:0 0 0 1px #F5F5F5 inset,0 -1px 0 1px rgba(0,0,0,.25) inset;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{overflow-x:hidden;overflow-x:clip;overscroll-behavior-x:none;scroll-behavior:smooth;scroll-padding-top:80px}
+html{overflow-x:hidden;overflow-x:clip;overscroll-behavior-x:none;touch-action:manipulation;scroll-behavior:smooth;scroll-padding-top:80px}
 body{overflow-x:clip;background:var(--bg);color:var(--text);font-family:var(--font);font-size:14px;line-height:20px;-webkit-font-smoothing:antialiased;transition:background .3s,color .3s}
 a{color:var(--magic);text-decoration:none}
 a:hover{text-decoration:underline}
@@ -359,7 +359,7 @@ tbody tr:hover{background:var(--surface-2)}
 
 /* ---------- Overlays ---------- */
 .toasts{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:200;display:flex;flex-direction:column;gap:8px;align-items:center;pointer-events:none}
-.toast{background:#1A1A1A;color:#fff;padding:10px 14px;border-radius:10px;box-shadow:var(--shadow-modal);display:flex;align-items:center;gap:10px;font-weight:500;pointer-events:auto;animation:toastIn .35s cubic-bezier(.3,1.4,.5,1)}
+.toast{max-width:calc(100vw - 32px);background:#1A1A1A;color:#fff;padding:10px 14px;border-radius:10px;box-shadow:var(--shadow-modal);display:flex;align-items:center;gap:10px;font-weight:500;pointer-events:auto;animation:toastIn .35s cubic-bezier(.3,1.4,.5,1)}
 .toast.err{background:var(--critical)}
 .toast.out{animation:toastOut .25s ease forwards}
 .toast button{border:0;background:none;color:#B5B5B5;cursor:pointer;font-size:16px}
@@ -419,3 +419,6 @@ footer{color:var(--text-3);font-size:13px;text-align:center;padding:24px 0 0;bor
   .stat svg{display:none}
   .steps .label-t{display:none}
 }
+
+/* Touch screens: iOS zooms the page when a field's text is under 16px, which leaves it zoomed and sliding sideways */
+@media (pointer:coarse){input,select,textarea,.palette .input{font-size:16px}}
