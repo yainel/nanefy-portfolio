@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Palma Alta case study · Yainel Garcia Alfonso</title>
+<meta name="description" content="How I designed and built a website concept for Palma Alta, a fourteen-room boutique hotel in Coral Gables.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600&family=Bodoni+Moda:opsz,wght@6..96,400&family=Jost:wght@300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="name" href="../index.html">Yainel Garcia Alfonso</a>
+    <nav aria-label="Main">
+      <a href="../index.html#work">Work</a>
+      <a href="../index.html#about">About</a>
+      <a href="../index.html#contact" class="keep">Contact</a>
+      <button class="toggle" type="button" aria-pressed="false">Grid</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="cs-hero" style="border:0">
+    <div class="wrap cols">
+      <h1 class="display">Palma Alta: a hotel website that feels like arriving.</h1>
+      <dl class="cs-meta">
+        <div><dt>Project</dt><dd>Self-initiated concept</dd></div>
+        <div><dt>My role</dt><dd>Brand direction, UI design, front-end build</dd></div>
+        <div><dt>Sector</dt><dd>Hospitality, boutique luxury</dd></div>
+        <div><dt>Deliverables</dt><dd>Homepage, responsive design, live site</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <div class="cs-shot">
+    <div class="wrap">
+      <div class="frame"><iframe src="../palma-alta/index.html" title="Palma Alta homepage preview" tabindex="-1"></iframe></div>
+      <p class="caption">The homepage on desktop. <a href="../palma-alta/index.html">Open the live site</a> to scroll through it.</p>
+    </div>
+  </div>
+
+  <section>
+    <div class="wrap cols">
+      <h2 class="side">The brief</h2>
+      <div class="main">
+        <p class="big">I set myself a brief: a website for a small, independent hotel inside a restored 1926 Mediterranean Revival house in Coral Gables.</p>
+        <p>The audience is travelers who choose a place for its character, not its amenities list. The site had two jobs: make someone feel the house before they arrive, and get them to check availability without the booking path feeling pushy.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap cols">
+      <h2 class="side">The idea</h2>
+      <div class="main">
+        <p class="big">Coral Gables is a city of arches. I made the arch the one bold element of the site and kept everything around it quiet.</p>
+        <p>The homepage opens on a single arched window, the way you'd see the courtyard from the loggia, with the name set large in a high-contrast serif that overlaps its base. Room images use the same arch, so the motif carries the brand through the page without needing decoration anywhere else.</p>
+        <p>The copy is written the way the owner would talk: short, specific, a little dry. "There's no lobby" says more about the experience than a paragraph of adjectives.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap cols">
+      <h2 class="side">Color and type</h2>
+      <div class="main">
+        <p>The palette comes straight from the place: banyan leaves and painted shutters for the greens, sunset on coral rock for the pinks, and a brass accent from the old iron gates. Dark green carries most of the page so the light sections feel like stepping into the courtyard.</p>
+        <div class="swatches" aria-label="Color palette">
+          <div style="background:#1F3329;color:#F7E7DE">Banyan<br>#1F3329</div>
+          <div style="background:#2E4A3C;color:#F7E7DE">Shutter<br>#2E4A3C</div>
+          <div style="background:#6F9C93;color:#1F3329">Pool<br>#6F9C93</div>
+          <div style="background:#F2C6B4;color:#1F3329">Coral<br>#F2C6B4</div>
+          <div style="background:#F7E7DE;color:#1F3329">Blush<br>#F7E7DE</div>
+          <div style="background:#B89B5E;color:#1F3329">Brass<br>#B89B5E</div>
+        </div>
+        <div class="specimen">
+          <div><p class="a">Palma Alta</p><small>Bodoni Moda for display. Its sharp contrast echoes 1920s hotel signage.</small></div>
+          <div><p class="b">Fourteen rooms in a 1926 house.</p><small>Jost Light for text. A geometric sans from the same era that stays quiet next to the serif.</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap cols">
+      <h2 class="side">Challenges</h2>
+      <div class="main">
+        <h3>Booking without breaking the mood</h3>
+        <p>Hotel sites often either hide the booking button under the imagery or shout it everywhere. I kept one understated "Check availability" button in the header on desktop. On phones, where the header gets crowded, it moves into a slim bar at the bottom of the screen, within thumb reach, showing the starting price.</p>
+        <h3 style="margin-top:40px">Pacing a long page</h3>
+        <p>The homepage tells the story in the order a guest would experience it: the house, the rooms, the table, the neighborhood, then the invitation to stay. Each section alternates between dark and light so the scroll has a rhythm, like moving between shade and sun.</p>
+        <h3 style="margin-top:40px">Designing mobile alongside desktop</h3>
+        <p>The rooms sit in a staggered row on desktop and stack into a single column on phones, with the arch shape kept intact at every size. Text never runs wider than a comfortable reading line.</p>
+        <div class="phones">
+          <div class="phone"><iframe src="../palma-alta/index.html" title="Palma Alta on a phone" tabindex="-1"></iframe></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap cols">
+      <h2 class="side">The build</h2>
+      <div class="main">
+        <p>I built the site myself in hand-written HTML and CSS with no framework, so it loads fast and the live version matches the design exactly. It respects reduced-motion settings, has visible keyboard focus, and the only animation is a single reveal of the arch when the page opens.</p>
+        <p>If this were a real client, my next steps would be professional photography inside the arch frames, a full rooms page, and a connection to the hotel's booking engine.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="border:0">
+    <div class="wrap next">
+      <h2>See it for yourself.</h2>
+      <div style="display:flex;gap:16px;flex-wrap:wrap">
+        <a class="btn" href="../palma-alta/index.html">Open the live site</a>
+        <a class="btn ghost" href="../index.html#contact">Get in touch</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Yainel Garcia Alfonso, Miami</span>
+    <span>Palma Alta is a fictional hotel created as a design concept.</span>
+  </div>
+</footer>
+
+<script src="../guides.js"></script>
+</body>
+</html>

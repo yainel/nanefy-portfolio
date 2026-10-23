@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Palma Alta · Coral Gables</title>
+<meta name="description" content="Palma Alta is a fourteen-room hotel in a 1926 Coral Gables house. A design concept by Yainel Garcia Alfonso.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --banyan:#1F3329;
+  --shutter:#2E4A3C;
+  --coral:#F2C6B4;
+  --blush:#F7E7DE;
+  --brass:#B89B5E;
+  --water:#6F9C93;
+  --display:"Bodoni Moda", "Didot", Georgia, serif;
+  --body:"Jost", "Futura", "Avenir Next", system-ui, sans-serif;
+  --wrap:1180px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--banyan);color:var(--blush);font-family:var(--body);font-weight:300;font-size:1.0625rem;line-height:1.6;-webkit-font-smoothing:antialiased}
+img,svg{display:block;max-width:100%}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--brass);outline-offset:4px}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 32px}
+
+/* Header */
+.top{position:fixed;inset:0 0 auto 0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:20px 32px;background:linear-gradient(var(--banyan) 40%, transparent)}
+.mark{font-family:var(--display);font-size:1.35rem;letter-spacing:.02em;text-decoration:none}
+.nav{display:flex;gap:32px;font-size:.95rem}
+.nav a{text-decoration:none;opacity:.85}
+.nav a:hover{opacity:1;text-decoration:underline;text-underline-offset:6px}
+.book{font-family:var(--body);font-size:.95rem;font-weight:400;color:var(--banyan);background:var(--coral);border:0;border-radius:999px;padding:11px 22px;text-decoration:none;cursor:pointer;white-space:nowrap}
+.book:hover{background:var(--blush)}
+
+/* Hero */
+.hero{min-height:100vh;padding:120px 32px 64px;display:grid;place-items:center;text-align:center;position:relative;overflow:hidden}
+.arch{width:min(460px,78vw);aspect-ratio:3/4.1;border-radius:999px 999px 0 0;overflow:hidden;position:relative;box-shadow:0 0 0 10px var(--banyan),0 0 0 11px rgba(184,155,94,.55)}
+.arch svg{width:100%;height:100%}
+.title{font-family:var(--display);font-weight:400;font-size:clamp(3.6rem,13vw,10.5rem);line-height:.86;letter-spacing:-.01em;color:var(--coral);margin-top:-.55em;position:relative}
+.title em{font-style:italic;display:block;font-size:.5em;color:var(--blush);letter-spacing:0}
+.hero p{max-width:34ch;margin:28px auto 0;font-size:1.125rem;opacity:.9}
+@media (prefers-reduced-motion:no-preference){
+  .arch{animation:rise 1.6s cubic-bezier(.2,.7,.2,1) both}
+  .title{animation:fade 1.4s .5s ease both}
+  .sun{animation:sun 2.4s .2s cubic-bezier(.2,.7,.2,1) both}
+}
+@keyframes rise{from{clip-path:inset(100% 0 0 0)}to{clip-path:inset(0)}}
+@keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes sun{from{transform:translateY(60px)}to{transform:none}}
+
+/* Sections */
+section{padding:120px 0}
+h2{font-family:var(--display);font-weight:400;font-size:clamp(2.2rem,5vw,3.6rem);line-height:1.05;letter-spacing:-.005em;color:var(--coral)}
+.lede{font-family:var(--display);font-size:clamp(1.4rem,2.6vw,1.9rem);line-height:1.35;max-width:30ch}
+.house{display:grid;grid-template-columns:5fr 6fr;gap:64px;align-items:end}
+.house .copy p+p{margin-top:1em}
+.house .copy{max-width:52ch}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:72px;padding-top:28px;border-top:1px solid rgba(242,198,180,.25)}
+.facts dt{font-family:var(--display);font-size:2.4rem;color:var(--coral);line-height:1}
+.facts dd{font-size:.95rem;opacity:.8;margin-top:8px}
+
+/* Rooms */
+.rooms{background:var(--blush);color:var(--banyan)}
+.rooms h2{color:var(--banyan)}
+.rooms-head{display:flex;justify-content:space-between;align-items:end;gap:32px;margin-bottom:64px}
+.rooms-head p{max-width:40ch}
+.room-list{display:grid;grid-template-columns:repeat(3,1fr);gap:40px}
+.room .frame{aspect-ratio:3/4;border-radius:999px 999px 6px 6px;overflow:hidden}
+.room h3{font-family:var(--display);font-weight:400;font-size:1.7rem;margin-top:24px}
+.room p{font-size:1rem;margin-top:8px;max-width:34ch}
+.room .meta{margin-top:14px;font-size:.92rem;color:var(--shutter)}
+.room:nth-child(2){margin-top:72px}
+
+/* Table */
+.table{display:grid;grid-template-columns:6fr 5fr;gap:72px;align-items:center}
+.menu{border:1px solid rgba(184,155,94,.55);border-radius:999px 999px 8px 8px;padding:72px 48px 48px;text-align:center}
+.menu h3{font-family:var(--display);font-style:italic;font-weight:400;font-size:2rem;color:var(--coral)}
+.menu ul{list-style:none;margin-top:28px}
+.menu li{padding:14px 0;border-top:1px solid rgba(242,198,180,.18)}
+.menu li span{display:block;font-size:.9rem;opacity:.7}
+.table .copy p{margin-top:20px;max-width:46ch}
+.hours{margin-top:28px;font-size:.95rem;opacity:.85}
+
+/* Place */
+.place{background:var(--shutter)}
+.place-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;margin-top:56px}
+.place-grid h3{font-family:var(--display);font-weight:400;font-size:1.35rem;color:var(--coral)}
+.place-grid p{font-size:.98rem;margin-top:6px;opacity:.9}
+.place-grid .min{font-size:.9rem;color:var(--brass);margin-top:10px}
+
+/* Visit */
+.visit{text-align:center}
+.visit h2{font-size:clamp(2.6rem,7vw,5rem)}
+.visit p{margin:20px auto 36px;max-width:40ch}
+.visit .book{font-size:1.05rem;padding:15px 32px}
+footer{padding:40px 32px;display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;font-size:.88rem;opacity:.75;border-top:1px solid rgba(242,198,180,.2)}
+footer a{text-underline-offset:4px}
+
+/* Mobile booking bar */
+.bar{display:none}
+
+@media (max-width:900px){
+  .nav{display:none}
+  .house,.table{grid-template-columns:1fr;gap:40px}
+  .room-list{grid-template-columns:1fr;gap:56px}
+  .room:nth-child(2){margin-top:0}
+  .rooms-head{flex-direction:column;align-items:start}
+  .place-grid{grid-template-columns:1fr 1fr}
+  section{padding:88px 0}
+}
+@media (max-width:560px){
+  .wrap{padding:0 20px}
+  .top{padding:16px 20px}
+  .top .book{display:none}
+  .facts{grid-template-columns:1fr;gap:20px}
+  .place-grid{grid-template-columns:1fr}
+  .menu{padding:56px 24px 32px}
+  .bar{display:flex;position:fixed;inset:auto 12px 12px 12px;z-index:30;justify-content:space-between;align-items:center;gap:12px;background:var(--coral);color:var(--banyan);border-radius:999px;padding:8px 8px 8px 22px;font-size:.95rem}
+  .bar .book{background:var(--banyan);color:var(--blush)}
+  footer{padding-bottom:96px}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <a class="mark" href="#">Palma Alta</a>
+  <nav class="nav" aria-label="Main">
+    <a href="#house">The house</a>
+    <a href="#rooms">Rooms</a>
+    <a href="#table">The table</a>
+    <a href="#place">Nearby</a>
+  </nav>
+  <a class="book" href="#visit">Check availability</a>
+</header>
+
+<main>
+  <section class="hero" aria-label="Welcome">
+    <div>
+      <div class="arch" aria-hidden="true">
+        <svg viewBox="0 0 300 410" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#F7E7DE"/><stop offset=".55" stop-color="#F2C6B4"/><stop offset="1" stop-color="#E9A98F"/>
+            </linearGradient>
+            <linearGradient id="pool" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#6F9C93"/><stop offset="1" stop-color="#2E4A3C"/>
+            </linearGradient>
+          </defs>
+          <rect width="300" height="410" fill="url(#sky)"/>
+          <circle class="sun" cx="150" cy="232" r="58" fill="#F7E7DE" opacity=".9"/>
+          <!-- palms -->
+          <g fill="#2E4A3C">
+            <path d="M58 300 C60 240 66 190 74 140 L78 140 C72 190 68 240 66 300Z"/>
+            <path d="M76 142 C50 126 26 132 10 150 C34 138 54 140 76 146Z"/>
+            <path d="M76 142 C70 112 52 96 30 94 C50 104 64 120 74 146Z"/>
+            <path d="M76 142 C90 112 112 104 134 110 C112 112 94 126 78 146Z"/>
+            <path d="M76 142 C104 136 124 146 136 166 C118 152 98 146 78 146Z"/>
+            <path d="M226 300 C228 250 232 214 240 176 L244 176 C238 214 234 250 234 300Z"/>
+            <path d="M242 178 C222 164 202 168 188 184 C208 174 224 176 242 182Z"/>
+            <path d="M242 178 C256 154 276 150 296 158 C276 160 258 168 244 182Z"/>
+            <path d="M242 178 C238 154 224 140 206 138 C222 148 234 162 240 182Z"/>
+          </g>
+          <!-- loggia -->
+          <rect x="0" y="292" width="300" height="20" fill="#E9DACB"/>
+          <rect x="0" y="312" width="300" height="98" fill="url(#pool)"/>
+          <g stroke="#F7E7DE" stroke-width="1.4" opacity=".55" fill="none">
+            <path d="M40 336 q15 -4 30 0 t30 0"/><path d="M160 350 q15 -4 30 0 t30 0"/>
+            <path d="M90 372 q15 -4 30 0 t30 0"/><path d="M200 392 q15 -4 30 0 t30 0"/>
+          </g>
+          <path d="M100 312 L200 312 L188 410 L112 410Z" fill="#F7E7DE" opacity=".18"/>
+        </svg>
+      </div>
+      <h1 class="title">Palma Alta<em>Coral Gables</em></h1>
+      <p>Fourteen rooms in a 1926 house, five minutes from the Venetian Pool.</p>
+    </div>
+  </section>
+
+  <section id="house">
+    <div class="wrap">
+      <div class="house">
+        <h2>A house first, a hotel second.</h2>
+        <div class="copy">
+          <p class="lede">Built in coral rock for a family who never left, restored a century later for guests who don't want to.</p>
+          <p>The original tile, the iron gates and the courtyard banyan all stayed. We added quiet rooms, good beds and a kitchen that cooks for the people staying here, not for a crowd.</p>
+          <p>There's no lobby. Someone meets you at the gate, walks you through the loggia, and hands you a key.</p>
+        </div>
+      </div>
+      <dl class="facts">
+        <div><dt>14</dt><dd>rooms and suites</dd></div>
+        <div><dt>1926</dt><dd>original Mediterranean Revival house</dd></div>
+        <div><dt>1</dt><dd>courtyard pool, shaded by the banyan</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section id="rooms" class="rooms">
+    <div class="wrap">
+      <div class="rooms-head">
+        <h2>Rooms</h2>
+        <p>Every room has shutters that close completely, a deep tub or rain shower, and windows onto the courtyard or the garden.</p>
+      </div>
+      <div class="room-list">
+        <article class="room">
+          <div class="frame" aria-hidden="true">
+            <svg viewBox="0 0 300 400" preserveAspectRatio="xMidYMid slice"><rect width="300" height="400" fill="#E9C2AE"/><rect x="60" y="70" width="180" height="210" rx="90" ry="90" fill="#F7E7DE"/><g stroke="#2E4A3C" stroke-width="3"><line x1="150" y1="70" x2="150" y2="280"/><line x1="60" y1="175" x2="240" y2="175"/></g><rect x="30" y="290" width="240" height="70" rx="6" fill="#2E4A3C"/><rect x="40" y="276" width="220" height="22" rx="10" fill="#F7E7DE"/></svg>
+          </div>
+          <h3>Courtyard room</h3>
+          <p>A queen bed facing the banyan. Morning light, ceiling fan, writing desk.</p>
+          <p class="meta">28 m² · sleeps 2</p>
+        </article>
+        <article class="room">
+          <div class="frame" aria-hidden="true">
+            <svg viewBox="0 0 300 400" preserveAspectRatio="xMidYMid slice"><rect width="300" height="400" fill="#6F9C93"/><path d="M40 400 V190 a110 110 0 0 1 220 0 V400Z" fill="#F2C6B4"/><path d="M80 400 V210 a70 70 0 0 1 140 0 V400Z" fill="#F7E7DE"/><rect x="0" y="330" width="300" height="70" fill="#2E4A3C"/><circle cx="150" cy="250" r="26" fill="#E9A98F"/></svg>
+          </div>
+          <h3>Loggia suite</h3>
+          <p>A king bed and a private arched terrace over the pool. Our most requested room.</p>
+          <p class="meta">44 m² · sleeps 2</p>
+        </article>
+        <article class="room">
+          <div class="frame" aria-hidden="true">
+            <svg viewBox="0 0 300 400" preserveAspectRatio="xMidYMid slice"><rect width="300" height="400" fill="#2E4A3C"/><rect x="30" y="80" width="110" height="200" rx="55" fill="#F2C6B4"/><rect x="160" y="80" width="110" height="200" rx="55" fill="#F2C6B4"/><rect x="0" y="300" width="300" height="100" fill="#B89B5E"/><rect x="40" y="286" width="220" height="30" rx="12" fill="#F7E7DE"/></svg>
+          </div>
+          <h3>Garden house</h3>
+          <p>A separate cottage with two bedrooms and its own gate. Good for families or long stays.</p>
+          <p class="meta">70 m² · sleeps 4</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="table">
+    <div class="wrap">
+      <div class="table">
+        <div class="copy">
+          <h2>One long table under the banyan.</h2>
+          <p>Breakfast is included and served until noon: Cuban coffee, guava pastries from down the street, eggs any way you like them.</p>
+          <p>Three nights a week, the kitchen cooks a set dinner for guests and a few neighbors. Ten seats, one menu, whatever looked best at the market that morning.</p>
+          <p class="hours">Breakfast daily, 7:30 to noon. Dinner Thursday to Saturday at 8, by reservation.</p>
+        </div>
+        <div class="menu">
+          <h3>Thursday dinner</h3>
+          <ul>
+            <li>Stone crab, sour orange<span>to start</span></li>
+            <li>Grilled snapper, black beans, mojo<span>to share</span></li>
+            <li>Plantain tarte tatin<span>to finish</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="place" class="place">
+    <div class="wrap">
+      <h2>Close to everything worth walking to.</h2>
+      <div class="place-grid">
+        <div><h3>Venetian Pool</h3><p>A 1924 lagoon carved from the old coral rock quarry.</p><p class="min">5 min walk</p></div>
+        <div><h3>Miracle Mile</h3><p>Bookshops, cafés and a Saturday farmers market.</p><p class="min">10 min walk</p></div>
+        <div><h3>Fairchild Garden</h3><p>Eighty-three acres of tropical plants and a butterfly house.</p><p class="min">15 min drive</p></div>
+        <div><h3>Miami Beach</h3><p>When you want the ocean, and then want to come back.</p><p class="min">30 min drive</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="visit" class="visit">
+    <div class="wrap">
+      <h2>Come stay a while.</h2>
+      <p>Rooms from $340 a night, breakfast included. Stays of five nights or more get the sixth free.</p>
+      <a class="book" href="#visit">Check availability</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span>Palma Alta, Coral Gables, Florida</span>
+  <span>A fictional hotel. Design concept by <a href="../index.html">Yainel Garcia Alfonso</a>.</span>
+</footer>
+
+<div class="bar" aria-hidden="false">
+  <span>From $340 a night</span>
+  <a class="book" href="#visit">Check availability</a>
+</div>
+
+</body>
+</html>
