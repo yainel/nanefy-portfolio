@@ -1,0 +1,49 @@
+/* Skills playground: layout, cards and code viewer. Demo styles live with each demo in playground.js. */
+.pg-intro{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.pg-group{margin-bottom:32px;container-type:inline-size}
+.pg-group[hidden]{display:none}
+.pg-group-head{margin-bottom:12px}
+.pg-group-head h3{font-size:16px;font-weight:700;display:flex;align-items:center;gap:8px}
+.pg-group-head p{color:var(--text-2);font-size:13px;margin-top:2px;max-width:70ch}
+.pg-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:16px}
+@container (min-width:640px){
+  .pg-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .pg-card.wide{grid-column:1/-1}
+}
+
+.pg-card{display:flex;flex-direction:column;gap:10px}
+.pg-card[hidden]{display:none}
+.pg-head{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;flex-wrap:wrap}
+.pg-head h3{font-size:14px;font-weight:650}
+.pg-tags{display:flex;gap:4px;flex-wrap:wrap}
+.pg-tags .badge{height:18px;font-size:11px;padding:0 6px}
+.pg-desc{color:var(--text-2);font-size:13px;margin-top:-4px}
+.pg-stage{flex:1;position:relative;min-width:0}
+.pg-foot{display:flex;justify-content:flex-end;border-top:1px solid var(--border);margin:0 -16px -6px;padding:8px 10px 0}
+.pg-code{color:var(--text-2);height:28px;font-size:13px}
+.pg-code:hover{color:var(--magic)}
+.pg-flash{animation:pg-flash 1.4s ease}
+@keyframes pg-flash{0%,40%{box-shadow:0 0 0 3px var(--magic)}}
+
+/* Sidebar sub-links */
+.nav-item.nav-sub{padding:4px 10px 4px 38px;font-weight:500;font-size:13px;color:var(--text-2)}
+.nav-item.nav-sub:hover{color:var(--text)}
+
+/* Compact selected work */
+.work-grid .project .thumb{aspect-ratio:16/9}
+.work-grid .project .body p{margin-bottom:8px}
+@media (max-width:900px){.work-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:600px){.work-grid{grid-template-columns:1fr}}
+
+/* Code viewer */
+.code-modal{width:min(860px,100%);display:flex;flex-direction:column;overflow:hidden}
+.code-modal .tabs{margin:0;padding:0 12px}
+.cm-pre{margin:0;background:#15141c;color:#e7e4f0;font:12.5px/1.65 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;padding:16px 18px;overflow:auto;flex:1;min-height:0;tab-size:2;white-space:pre-wrap;overflow-wrap:anywhere}
+.cm-pre .t-c{color:#7f7a93;font-style:italic}
+.cm-pre .t-s{color:#a5e6b0}
+.cm-pre .t-k{color:#c9a8ff}
+.cm-pre .t-n{color:#ffc777}
+.cm-pre .t-t{color:#7dd3fc}
+.cm-pre .t-a{color:#f9a8d4}
+.cm-pre .t-p{color:#7dd3fc}
+.cm-foot{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 16px;border-top:1px solid var(--border)}

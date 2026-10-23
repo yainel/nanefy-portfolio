@@ -4,11 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Yainel Garcia Alfonso · Web designer and developer</title>
-<meta name="description" content="The showroom of Yainel Garcia Alfonso, web designer and developer in Miami: projects, live UI components, and a way to start a project together.">
+<meta name="description" content="Yainel Garcia Alfonso, web designer and developer in Miami. A live skills playground: motion and effects, pro UI patterns, modern CSS and browser APIs, and mini apps, each with its source code one click away.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;550;600;650;700;750&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="showroom.css">
+<link rel="stylesheet" href="playground.css">
 <script>try{var t=localStorage.getItem('yg-theme');if(t)document.documentElement.dataset.theme=t;var a=localStorage.getItem('yg-accent');if(a)document.documentElement.style.setProperty('--magic',a)}catch(e){}</script>
 </head>
 <body>
@@ -36,7 +37,7 @@
   <button class="icon-btn menu-btn" id="menuBtn" aria-label="Open navigation" aria-expanded="false"><svg width="20" height="20"><use href="#i-menu"/></svg></button>
   <a class="brand" href="#home"><span class="logo">YG</span><span class="name">Yainel Garcia</span></a>
   <button class="search" id="openPalette" aria-label="Search and quick actions">
-    <svg width="16" height="16"><use href="#i-search"/></svg><span>Search projects, skills, actions</span><kbd>⌘ K</kbd>
+    <svg width="16" height="16"><use href="#i-search"/></svg><span>Search demos, skills, actions</span><kbd>⌘ K</kbd>
   </button>
   <div class="top-actions">
     <button class="icon-btn tooltip" id="themeBtn" data-tip="Toggle dark mode" aria-label="Toggle dark mode"><svg width="18" height="18"><use href="#i-moon"/></svg></button>
@@ -46,16 +47,21 @@
 
 <nav class="sidebar" id="sidebar" aria-label="Sections">
   <a class="nav-item active" href="#home"><svg><use href="#i-home"/></svg>Home</a>
-  <a class="nav-item" href="#projects"><svg><use href="#i-grid"/></svg>Projects<span class="count">4</span></a>
-  <a class="nav-item" href="#lab"><svg><use href="#i-spark"/></svg>Component lab<span class="count">14</span></a>
+  <a class="nav-item" href="#playground" data-pg-link><svg><use href="#i-spark"/></svg>Skills playground<span class="count" id="pgCount">25</span></a>
+  <a class="nav-item nav-sub" href="#pg-motion" data-pg-link>Motion &amp; effects</a>
+  <a class="nav-item nav-sub" href="#pg-ui" data-pg-link>Pro UI patterns</a>
+  <a class="nav-item nav-sub" href="#pg-web" data-pg-link>Modern web platform</a>
+  <a class="nav-item nav-sub" href="#pg-apps" data-pg-link>Mini apps</a>
+  <a class="nav-item" href="#lab"><svg><use href="#i-grid"/></svg>UI kit<span class="count">14</span></a>
+  <a class="nav-item" href="#projects"><svg><use href="#i-brief"/></svg>Selected work<span class="count">3</span></a>
   <a class="nav-item" href="#experience"><svg><use href="#i-clock"/></svg>Experience</a>
-  <a class="nav-item" href="#contact"><svg><use href="#i-brief"/></svg>Start a project</a>
+  <a class="nav-item" href="#contact"><svg><use href="#i-mail"/></svg>Start a project</a>
   <div class="nav-label">Concepts</div>
   <a class="nav-item" href="palma-alta/index.html"><svg><use href="#i-spark"/></svg>Palma Alta hotel</a>
   <a class="nav-item" href="work/palma-alta.html"><svg><use href="#i-grid"/></svg>Palma Alta case study</a>
   <div class="side-card">
     <b>Everything here is live.</b>
-    Every button, form and chart on this page is a working component I designed and coded. Press <kbd style="background:var(--surface-3);border-color:var(--border)">⌘ K</kbd> to jump anywhere.
+    Every demo on this page is a working component I designed and coded, and each one shows its source. Press <kbd style="background:var(--surface-3);border-color:var(--border)">⌘ K</kbd> to jump anywhere.
   </div>
 </nav>
 <div class="scrim" id="scrim"></div>
@@ -71,10 +77,10 @@
         <div>
           <p class="greet" id="greet">Hello there</p>
           <h1>I design and build <span class="typed" id="typed">websites</span><span class="caret" aria-hidden="true"></span></h1>
-          <p class="lede">I'm Yainel, a web designer and developer in Miami. I turn complicated workflows into interfaces that feel simple, and I code them myself so they ship exactly as designed.</p>
+          <p class="lede">I'm Yainel, a web designer and developer in Miami. This site is my playground: <span data-pg-total>25</span> live demos of motion, interface patterns and modern web features, all hand-coded, each with its source one click away.</p>
           <div class="row">
-            <a class="btn btn-magic btn-lg" href="#contact"><svg width="16" height="16"><use href="#i-spark"/></svg>Start a project</a>
-            <a class="btn btn-lg" href="#projects">See my work</a>
+            <a class="btn btn-magic btn-lg" href="#playground" data-pg-link><svg width="16" height="16"><use href="#i-spark"/></svg>Explore the playground</a>
+            <a class="btn btn-lg" href="#contact">Start a project</a>
           </div>
         </div>
         <aside class="profile" aria-label="Profile">
@@ -100,7 +106,7 @@
       <div class="card stat reveal"><div class="sub">Years building for the web</div><div class="num" data-count="10" data-suffix="+">0</div><svg viewBox="0 0 80 32"><path class="area" d="M0 28 L12 24 L24 26 L36 18 L48 20 L60 10 L72 12 L80 4 L80 32 L0 32Z"/><path d="M0 28 L12 24 L24 26 L36 18 L48 20 L60 10 L72 12 L80 4"/></svg></div>
       <div class="card stat reveal"><div class="sub">Production releases shipped</div><div class="num" data-count="16" data-suffix="+">0</div><svg viewBox="0 0 80 32"><path class="area" d="M0 26 L10 22 L20 23 L30 16 L40 17 L50 12 L60 14 L70 6 L80 8 L80 32 L0 32Z"/><path d="M0 26 L10 22 L20 23 L30 16 L40 17 L50 12 L60 14 L70 6 L80 8"/></svg></div>
       <div class="card stat reveal"><div class="sub">Teammates supported daily</div><div class="num" data-count="25" data-suffix="+">0</div><svg viewBox="0 0 80 32"><path class="area" d="M0 24 L16 20 L28 22 L40 14 L52 16 L64 8 L80 6 L80 32 L0 32Z"/><path d="M0 24 L16 20 L28 22 L40 14 L52 16 L64 8 L80 6"/></svg></div>
-      <div class="card stat reveal"><div class="sub">Languages spoken</div><div class="num" data-count="3">0</div><svg viewBox="0 0 80 32"><path class="area" d="M0 26 L26 26 L28 16 L52 16 L54 6 L80 6 L80 32 L0 32Z"/><path d="M0 26 L26 26 L28 16 L52 16 L54 6 L80 6"/></svg></div>
+      <div class="card stat reveal"><div class="sub">Live demos on this page</div><div class="num" data-count="39">0</div><svg viewBox="0 0 80 32"><path class="area" d="M0 26 L26 26 L28 16 L52 16 L54 6 L80 6 L80 32 L0 32Z"/><path d="M0 26 L26 26 L28 16 L52 16 L54 6 L80 6"/></svg></div>
     </div>
 
     <div class="card ask reveal" style="margin-top:16px">
@@ -118,70 +124,43 @@
         <button type="button">What do you do best?</button>
         <button type="button">What tools do you use?</button>
         <button type="button">Can you code the designs?</button>
-        <button type="button">Where can I see your work?</button>
+        <button type="button">What skills can I see here?</button>
       </div>
     </div>
   </section>
 
-  <!-- PROJECTS -->
-  <section class="section" id="projects">
+  <!-- SKILLS PLAYGROUND -->
+  <section class="section" id="playground">
     <div class="section-head">
-      <div><h2>Projects</h2><p>Websites, web apps and tools I've designed and built.</p></div>
+      <div><h2>Skills playground</h2><p><span data-pg-total>25</span> live demos, grouped by skill. Every card has a View code button with its real source.</p></div>
     </div>
     <div class="toolbar">
-      <div class="segmented" id="filter" role="group" aria-label="Filter projects">
+      <div class="segmented" id="pgFilter" role="group" aria-label="Filter demos">
         <span class="thumb"></span>
         <button aria-pressed="true" data-f="all">All</button>
-        <button aria-pressed="false" data-f="web">Websites</button>
-        <button aria-pressed="false" data-f="app">Web apps</button>
-        <button aria-pressed="false" data-f="mobile">Mobile</button>
+        <button aria-pressed="false" data-f="motion">Motion</button>
+        <button aria-pressed="false" data-f="ui">UI patterns</button>
+        <button aria-pressed="false" data-f="web">Modern web</button>
+        <button aria-pressed="false" data-f="apps">Mini apps</button>
       </div>
-      <div class="input-wrap" style="width:240px;max-width:100%">
+      <div class="input-wrap" style="width:220px;max-width:100%">
         <svg><use href="#i-search"/></svg>
-        <label class="sr" for="projSearch">Search projects</label>
-        <input class="input" id="projSearch" placeholder="Search by name or tool">
+        <label class="sr" for="pgSearch">Search demos</label>
+        <input class="input" id="pgSearch" placeholder="Search, e.g. canvas, a11y">
       </div>
     </div>
-    <div class="grid g2" id="projectGrid">
-      <button class="card project reveal" data-cat="web" data-id="palma" data-tags="palma alta hotel hospitality luxury html css figma">
-        <span class="spot"></span>
-        <div class="thumb"><iframe src="palma-alta/index.html" tabindex="-1" title="" aria-hidden="true"></iframe></div>
-        <div class="body">
-          <div class="row between"><h3>Palma Alta</h3><span class="badge magic">Concept</span></div>
-          <p>Website for a fourteen-room boutique hotel in a 1926 Coral Gables house.</p>
-          <div class="row"><span class="badge">Hospitality</span><span class="badge">UI design</span><span class="badge">HTML/CSS</span></div>
-        </div>
-      </button>
-      <button class="card project reveal" data-cat="app" data-id="consent" data-tags="consent healthcare wordpress php javascript patient staff pipedrive">
-        <span class="spot"></span>
-        <div class="thumb"><div class="mock mock-consent"><div class="win"><div class="list"><i></i><i></i><i></i><i></i><i></i></div><div class="detail"><i style="width:70%"></i><i></i><i style="width:85%"></i><i style="width:50%"></i><b></b></div></div></div></div>
-        <div class="body">
-          <div class="row between"><h3>Patient consent platform</h3><span class="badge success"><span class="dot"></span>In production</span></div>
-          <p>Paperless signing for patients and a management console for staff at a surgical practice.</p>
-          <div class="row"><span class="badge">Healthcare</span><span class="badge">UX</span><span class="badge">WordPress</span><span class="badge">PHP</span></div>
-        </div>
-      </button>
-      <button class="card project reveal" data-cat="mobile" data-id="golf" data-tags="golf mapify mobile ios android location maps">
-        <span class="spot"></span>
-        <div class="thumb"><div class="mock mock-golf"><svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice"><path d="M40 170 C70 120 90 140 130 100 S200 40 260 50" stroke="#29845A" stroke-width="26" fill="none" stroke-linecap="round" opacity=".35"/><ellipse cx="262" cy="50" rx="30" ry="20" fill="#7CD4A3"/><circle cx="268" cy="46" r="3" fill="#303030"/><path d="M268 46 V26 L284 31 L268 36" fill="#E51C00"/><ellipse cx="150" cy="128" rx="20" ry="11" fill="#F6E7B8"/><circle cx="48" cy="166" r="7" fill="#fff" stroke="#8051FF" stroke-width="3"/><g transform="translate(18 18)"><rect width="104" height="46" rx="10" fill="#fff"/><text x="12" y="20" font-size="11" font-family="Inter,sans-serif" fill="#616161">Hole 7 · Par 4</text><text x="12" y="36" font-size="13" font-weight="700" font-family="Inter,sans-serif" fill="#303030">212 yds to pin</text></g></svg></div></div>
-        <div class="body">
-          <div class="row between"><h3>Golf Mapify</h3><span class="badge warning">In progress</span></div>
-          <p>Maps real golf courses so the player app knows your hole by location and asks for your score.</p>
-          <div class="row"><span class="badge">Mobile</span><span class="badge">Maps</span><span class="badge">iOS &amp; Android</span></div>
-        </div>
-      </button>
-    </div>
-    <div class="card empty" id="projEmpty" hidden>
-      <b>No projects match that search.</b>
-      <p style="margin:6px 0 12px">Try a tool like "WordPress" or a word like "hotel".</p>
-      <button class="btn" id="clearSearch">Clear search</button>
+    <div id="pgRoot"></div>
+    <div class="card empty" id="pgEmpty" hidden>
+      <b>No demos match that search.</b>
+      <p style="margin:6px 0 12px">Try a word like "CSS", "keyboard" or "canvas".</p>
+      <button class="btn" id="pgClear">Clear search</button>
     </div>
   </section>
 
-  <!-- COMPONENT LAB -->
+  <!-- UI KIT -->
   <section class="section" id="lab">
     <div class="section-head">
-      <div><h2>Component lab</h2><p>A working sample of my UI system. Try everything.</p></div>
+      <div><h2>UI kit</h2><p>The everyday building blocks of my design system: buttons, forms, feedback and data. Try everything.</p></div>
       <button class="btn" id="resetLab">Reset all</button>
     </div>
     <div class="lab">
@@ -345,6 +324,42 @@
     </div>
   </section>
 
+  <!-- SELECTED WORK -->
+  <section class="section" id="projects">
+    <div class="section-head">
+      <div><h2>Selected work</h2><p>Real projects behind the skills above. Click one for the story.</p></div>
+    </div>
+    <div class="grid g3 work-grid">
+      <button class="card project reveal" data-cat="web" data-id="palma" data-tags="palma alta hotel hospitality luxury html css figma">
+        <span class="spot"></span>
+        <div class="thumb"><iframe src="palma-alta/index.html" tabindex="-1" title="" aria-hidden="true"></iframe></div>
+        <div class="body">
+          <div class="row between"><h3>Palma Alta</h3><span class="badge magic">Concept</span></div>
+          <p>Website for a fourteen-room boutique hotel in a 1926 Coral Gables house.</p>
+          <div class="row"><span class="badge">Hospitality</span><span class="badge">UI design</span><span class="badge">HTML/CSS</span></div>
+        </div>
+      </button>
+      <button class="card project reveal" data-cat="app" data-id="consent" data-tags="consent healthcare wordpress php javascript patient staff pipedrive">
+        <span class="spot"></span>
+        <div class="thumb"><div class="mock mock-consent"><div class="win"><div class="list"><i></i><i></i><i></i><i></i><i></i></div><div class="detail"><i style="width:70%"></i><i></i><i style="width:85%"></i><i style="width:50%"></i><b></b></div></div></div></div>
+        <div class="body">
+          <div class="row between"><h3>Patient consent platform</h3><span class="badge success"><span class="dot"></span>In production</span></div>
+          <p>Paperless signing for patients and a management console for staff at a surgical practice.</p>
+          <div class="row"><span class="badge">Healthcare</span><span class="badge">UX</span><span class="badge">WordPress</span><span class="badge">PHP</span></div>
+        </div>
+      </button>
+      <button class="card project reveal" data-cat="mobile" data-id="golf" data-tags="golf mapify mobile ios android location maps">
+        <span class="spot"></span>
+        <div class="thumb"><div class="mock mock-golf"><svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice"><path d="M40 170 C70 120 90 140 130 100 S200 40 260 50" stroke="#29845A" stroke-width="26" fill="none" stroke-linecap="round" opacity=".35"/><ellipse cx="262" cy="50" rx="30" ry="20" fill="#7CD4A3"/><circle cx="268" cy="46" r="3" fill="#303030"/><path d="M268 46 V26 L284 31 L268 36" fill="#E51C00"/><ellipse cx="150" cy="128" rx="20" ry="11" fill="#F6E7B8"/><circle cx="48" cy="166" r="7" fill="#fff" stroke="#8051FF" stroke-width="3"/><g transform="translate(18 18)"><rect width="104" height="46" rx="10" fill="#fff"/><text x="12" y="20" font-size="11" font-family="Inter,sans-serif" fill="#616161">Hole 7 · Par 4</text><text x="12" y="36" font-size="13" font-weight="700" font-family="Inter,sans-serif" fill="#303030">212 yds to pin</text></g></svg></div></div>
+        <div class="body">
+          <div class="row between"><h3>Golf Mapify</h3><span class="badge warning">In progress</span></div>
+          <p>Maps real golf courses so the player app knows your hole by location and asks for your score.</p>
+          <div class="row"><span class="badge">Mobile</span><span class="badge">Maps</span><span class="badge">iOS &amp; Android</span></div>
+        </div>
+      </button>
+    </div>
+  </section>
+
   <!-- EXPERIENCE -->
   <section class="section" id="experience">
     <div class="section-head"><div><h2>Experience</h2><p>Where I've worked and what I've learned.</p></div><a class="btn" href="work/palma-alta.html">Read a case study</a></div>
@@ -452,6 +467,20 @@
   </div>
 </div>
 
+<!-- Code viewer -->
+<div class="overlay" id="codeModal" role="dialog" aria-modal="true" aria-labelledby="cmTitle">
+  <div class="modal code-modal">
+    <div class="modal-head"><h3 id="cmTitle">Code</h3><button class="icon-btn" data-close aria-label="Close" style="color:var(--text-2)"><svg width="18" height="18"><use href="#i-x"/></svg></button></div>
+    <div class="tabs" role="tablist" aria-label="Language">
+      <button role="tab" data-lang="html" aria-selected="true">HTML</button>
+      <button role="tab" data-lang="css" aria-selected="false" tabindex="-1">CSS</button>
+      <button role="tab" data-lang="js" aria-selected="false" tabindex="-1">JavaScript</button>
+    </div>
+    <pre class="cm-pre" tabindex="0"><code id="cmCode"></code></pre>
+    <div class="cm-foot"><span class="sub" id="cmNote"></span><button class="btn btn-primary" id="cmCopy">Copy</button></div>
+  </div>
+</div>
+
 <!-- Command palette -->
 <div class="overlay" id="palette" role="dialog" aria-modal="true" aria-label="Quick actions">
   <div class="modal palette">
@@ -465,5 +494,6 @@
 <div class="toasts" id="toasts" aria-live="polite"></div>
 <canvas id="confetti"></canvas>
 <script src="showroom.js"></script>
+<script src="playground.js"></script>
 </body>
 </html>

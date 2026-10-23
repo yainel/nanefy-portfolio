@@ -96,7 +96,7 @@
     try { $('#localTime').textContent = new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', timeZone: 'America/New_York' }) + ' in Miami'; } catch (e) {}
   }
   clock(); setInterval(clock, 30000);
-  var words = ['websites', 'design systems', 'web apps', 'calm interfaces'];
+  var words = ['interfaces', 'animations', 'design systems', 'web apps'];
   var typed = $('#typed'), wi = 0, ci = words[0].length, del = true;
   function type() {
     var w = words[wi];
@@ -137,8 +137,8 @@
   var answers = [
     { k: ['best', 'good at', 'strength', 'special'], a: "Taking a messy, stressful process and turning it into a calm interface people actually enjoy using. Then building it so it works exactly as designed." },
     { k: ['tool', 'figma', 'software', 'adobe', 'use'], a: 'Figma, Adobe XD and Photoshop for design. HTML, CSS, JavaScript, React, WordPress and Laravel to build.' },
-    { k: ['code', 'build', 'develop', 'program'], a: "Yes. I'm a designer who codes. Everything on this page, including this box, is hand-built by me." },
-    { k: ['work', 'portfolio', 'project', 'see', 'example'], a: 'Scroll to Projects, or open the Palma Alta concept hotel site from the sidebar. Some client work is private, and I can walk you through it on a call.' },
+    { k: ['code', 'build', 'develop', 'program'], a: "Yes. I'm a designer who codes. Everything on this page is hand-built by me, and every demo in the Skills playground has a View code button so you can read the source." },
+    { k: ['work', 'portfolio', 'project', 'see', 'example', 'skill', 'demo'], a: 'Start with the Skills playground just below: live demos of motion, UI patterns, modern CSS and browser APIs, and small apps. Selected client work is further down, and I can walk you through private projects on a call.' },
     { k: ['process', 'approach', 'how do you'], a: 'Listen first, then structure (grid, type scale, content order), then refine the details, then build. Desktop and mobile get designed side by side.' },
     { k: ['spanish', 'language', 'english', 'french'], a: 'Spanish is my first language, I work in English every day, and I know some French.' },
     { k: ['where', 'location', 'miami', 'remote', 'based'], a: "I'm in Miami and happy to work remote, hybrid or on site." },
@@ -181,20 +181,8 @@
     return { reset: function () { btns[0].click(); } };
   }
 
-  /* ---------- Projects: filter, search, tilt, modal ---------- */
-  var cards = $$('.project'), fCat = 'all';
-  function filterProjects() {
-    var q = $('#projSearch').value.trim().toLowerCase(), n = 0;
-    cards.forEach(function (c) {
-      var ok = (fCat === 'all' || c.dataset.cat === fCat) && (!q || (c.dataset.tags + ' ' + c.textContent).toLowerCase().indexOf(q) > -1);
-      c.hidden = !ok; if (ok) n++;
-    });
-    $('#projEmpty').hidden = n > 0;
-  }
-  var projSeg = segmented($('#filter'), function (b) { fCat = b.dataset.f; filterProjects(); });
-  $('#projSearch').addEventListener('input', filterProjects);
-  $('#clearSearch').addEventListener('click', function () { $('#projSearch').value = ''; projSeg.reset(); filterProjects(); });
-
+  /* ---------- Selected work: tilt, modal ---------- */
+  var cards = $$('.project');
   cards.forEach(function (c) {
     c.addEventListener('pointermove', function (e) {
       if (!$('#motionSwitch').checked || reduce || e.pointerType !== 'mouse') return;
@@ -243,13 +231,14 @@
   var go = function (h) { return function () { location.hash = ''; location.hash = h; }; };
   var commands = [
     { g: 'Go to', t: 'Home', run: go('#home') },
-    { g: 'Go to', t: 'Projects', run: go('#projects') },
-    { g: 'Go to', t: 'Component lab', run: go('#lab') },
+    { g: 'Go to', t: 'Skills playground', run: go('#playground') },
+    { g: 'Go to', t: 'UI kit', run: go('#lab') },
+    { g: 'Go to', t: 'Selected work', run: go('#projects') },
     { g: 'Go to', t: 'Experience', run: go('#experience') },
     { g: 'Go to', t: 'Start a project', run: go('#contact') },
-    { g: 'Projects', t: 'Palma Alta hotel concept', run: function () { openProject('palma'); } },
-    { g: 'Projects', t: 'Patient consent platform', run: function () { openProject('consent'); } },
-    { g: 'Projects', t: 'Golf Mapify', run: function () { openProject('golf'); } },
+    { g: 'Selected work', t: 'Palma Alta hotel concept', run: function () { openProject('palma'); } },
+    { g: 'Selected work', t: 'Patient consent platform', run: function () { openProject('consent'); } },
+    { g: 'Selected work', t: 'Golf Mapify', run: function () { openProject('golf'); } },
     { g: 'Actions', t: 'Toggle dark mode', k: 'D', run: function () { setTheme(root.dataset.theme === 'dark' ? 'light' : 'dark'); } },
     { g: 'Actions', t: 'Copy email address', run: function () { copy('garcia.yainel@gmail.com', 'Email copied to clipboard'); } },
     { g: 'Actions', t: 'Celebrate', run: function () { confetti(); } },
@@ -433,7 +422,7 @@
     $('#pages').value = 5; billSeg.reset(); price();
     rating = 0; paintStars(0); $('#starsOut').textContent = 'Rate this showroom';
     ringN = 72; ring(); $('#files').innerHTML = ''; $('#tblSearch').value = ''; $$('tr', tbody).forEach(function (r) { r.hidden = false; });
-    toast('Component lab reset');
+    toast('UI kit reset');
   });
 
   /* ---------- Contact wizard ---------- */
@@ -532,4 +521,10 @@
     });
     if (bits.length) requestAnimationFrame(draw); else { running = false; cx.clearRect(0, 0, cv.width, cv.height); }
   }
+
+  /* ---------- Shared helpers for playground.js ---------- */
+  window.yg = {
+    toast: toast, copy: copy, confetti: confetti, openOverlay: openOverlay, segmented: segmented, commands: commands,
+    reveal: function (el) { el.style.transitionDelay = (rev.n = (rev.n || 0) + 1) % 2 * 60 + 'ms'; rev.observe(el); }
+  };
 })();
