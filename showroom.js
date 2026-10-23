@@ -97,8 +97,17 @@
     try { $('#localTime').textContent = T('{t} in Miami', { t: new Date().toLocaleTimeString(spanish ? 'es-US' : 'en-US', { hour: 'numeric', minute: '2-digit', timeZone: 'America/New_York' }) }); } catch (e) {}
   }
   clock(); setInterval(clock, 30000);
-  var words = ['interfaces', 'animations', 'design systems', 'web apps'].map(function (w) { return T(w); });
-  $('.typed-ghost').textContent = words.reduce(function (a, b) { return b.length > a.length ? b : a; });
+  var words = ['web applications', 'API integrations', 'PHP back ends', 'calm interfaces'].map(function (w) { return T(w); });
+  // The invisible ghost holds the widest word (measured, not counted) so the heading never changes height
+  function sizeGhost() {
+    var ghost = $('.typed-ghost');
+    ghost.textContent = words.reduce(function (a, b) {
+      ghost.textContent = a; var wa = ghost.offsetWidth;
+      ghost.textContent = b; return ghost.offsetWidth > wa ? b : a;
+    });
+  }
+  sizeGhost();
+  if (document.fonts) document.fonts.ready.then(sizeGhost);
   var typed = $('#typed'), wi = 0, ci = words[0].length, del = true;
   function type() {
     var w = words[wi];
@@ -138,7 +147,7 @@
   /* ---------- Ask about me ---------- */
   var answers = [
     { k: ['best', 'good at', 'strength', 'special', 'mejor', 'fuerte'], a: "Taking a messy, stressful process and turning it into a calm interface people actually enjoy using. Then building it so it works exactly as designed." },
-    { k: ['tool', 'figma', 'software', 'adobe', 'use', 'herramienta'], a: 'Figma, Adobe XD and Photoshop for design. HTML, CSS, JavaScript, React, WordPress and Laravel to build.' },
+    { k: ['tool', 'figma', 'software', 'adobe', 'use', 'herramienta'], a: 'PHP, Laravel, Symfony and MySQL on the back end, REST APIs to connect business systems, and HTML, CSS, JavaScript, TypeScript and React on the front end. Figma, Adobe XD and Photoshop for design.' },
     { k: ['code', 'build', 'develop', 'program', 'código', 'codigo', 'desarroll', 'constru'], a: "Yes. I'm a designer who codes. Everything on this page is hand-built by me, and every demo in the Skills playground has a View code button so you can read the source." },
     { k: ['work', 'portfolio', 'project', 'see', 'example', 'skill', 'demo', 'habilidad', 'trabajo', 'proyecto', 'ejemplo', 'portafolio'], a: 'Start with the Skills playground just below: live demos of motion, UI patterns, modern CSS and browser APIs, and small apps. Selected client work is further down, and I can walk you through private projects on a call.' },
     { k: ['process', 'approach', 'how do you', 'proceso', 'cómo trabajas'], a: 'Listen first, then structure (grid, type scale, content order), then refine the details, then build. Desktop and mobile get designed side by side.' },

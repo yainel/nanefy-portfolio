@@ -54,11 +54,18 @@
     'Good afternoon, thanks for stopping by': 'Buenas tardes, gracias por pasar',
     'Good evening, thanks for stopping by': 'Buenas noches, gracias por pasar',
     'I design and build': 'Diseño y desarrollo',
-    'interfaces': 'interfaces',
-    'animations': 'animaciones',
-    'design systems': 'sistemas de diseño',
-    'web apps': 'aplicaciones web',
-    "I'm Yainel, a web designer and developer in Miami. This site is my playground:": 'Soy Yainel, diseñador y desarrollador web en Miami. Este sitio es mi laboratorio:',
+    'web applications': 'aplicaciones web',
+    'API integrations': 'integraciones de API',
+    'PHP back ends': 'back ends en PHP',
+    'calm interfaces': 'interfaces serenas',
+    'Web designer & full-stack developer · PHP, JavaScript & API integrations': 'Diseñador web y desarrollador full-stack · PHP, JavaScript e integraciones de API',
+    'Web designer & full-stack developer': 'Diseñador web y desarrollador full-stack',
+    'APIs and web apps': 'APIs y aplicaciones web',
+    'Database': 'Base de datos',
+    'Every back end': 'Todos los back ends',
+    'Integrations': 'Integraciones',
+    'CRM and form systems': 'CRM y sistemas de formularios',
+    "I'm Yainel, based in Miami, with 10+ years of experience. I build PHP and Laravel back ends, connect business systems through APIs, and design the interfaces on top. This site is my playground:": 'Soy Yainel, vivo en Miami y tengo más de 10 años de experiencia. Construyo back ends en PHP y Laravel, conecto sistemas de negocio mediante APIs y diseño las interfaces que van encima. Este sitio es mi laboratorio:',
     'live demos of motion, interface patterns and modern web features, all hand-coded, each with its source one click away.': 'demos en vivo de animación, patrones de interfaz y funciones web modernas, todas programadas a mano y con su código a un clic.',
     'Explore the playground': 'Explora el laboratorio',
     'Web designer & developer': 'Diseñador y desarrollador web',
@@ -86,7 +93,7 @@
     'What skills can I see here?': '¿Qué habilidades puedo ver aquí?',
     'Pick a question below or type your own. Answers are written by me ahead of time.': 'Elige una pregunta o escribe la tuya. Las respuestas las escribí yo de antemano.',
     "Taking a messy, stressful process and turning it into a calm interface people actually enjoy using. Then building it so it works exactly as designed.": 'Tomar un proceso caótico y estresante y convertirlo en una interfaz tranquila que la gente disfruta usar. Y luego programarla para que funcione exactamente como se diseñó.',
-    'Figma, Adobe XD and Photoshop for design. HTML, CSS, JavaScript, React, WordPress and Laravel to build.': 'Figma, Adobe XD y Photoshop para diseñar. HTML, CSS, JavaScript, React, WordPress y Laravel para programar.',
+    'PHP, Laravel, Symfony and MySQL on the back end, REST APIs to connect business systems, and HTML, CSS, JavaScript, TypeScript and React on the front end. Figma, Adobe XD and Photoshop for design.': 'PHP, Laravel, Symfony y MySQL en el back end, APIs REST para conectar sistemas de negocio, y HTML, CSS, JavaScript, TypeScript y React en el front end. Figma, Adobe XD y Photoshop para diseñar.',
     "Yes. I'm a designer who codes. Everything on this page is hand-built by me, and every demo in the Skills playground has a View code button so you can read the source.": 'Sí. Soy un diseñador que programa. Todo en esta página lo hice a mano, y cada demo del laboratorio tiene un botón Ver código para que leas el código fuente.',
     'Start with the Skills playground just below: live demos of motion, UI patterns, modern CSS and browser APIs, and small apps. Selected client work is further down, and I can walk you through private projects on a call.': 'Empieza por el laboratorio de habilidades, justo abajo: demos en vivo de animación, patrones de interfaz, CSS moderno, APIs del navegador y pequeñas apps. Más abajo está el trabajo con clientes, y puedo mostrarte proyectos privados en una llamada.',
     'Listen first, then structure (grid, type scale, content order), then refine the details, then build. Desktop and mobile get designed side by side.': 'Primero escucho, luego estructuro (retícula, escala tipográfica, orden del contenido), después refino los detalles y programo. Escritorio y móvil se diseñan a la par.',
@@ -481,7 +488,7 @@
       if (es[v]) el.setAttribute(a, es[v]);
     });
   });
-  document.title = 'Yainel Garcia Alfonso · Diseñador y desarrollador web';
+  document.title = 'Yainel Garcia Alfonso · Diseñador web y desarrollador full-stack';
   var desc = document.querySelector('meta[name=description]');
-  if (desc) desc.content = 'Yainel Garcia Alfonso, diseñador y desarrollador web en Miami. Un laboratorio de habilidades en vivo: animación y efectos, patrones de interfaz, CSS moderno y APIs del navegador, y mini apps, cada una con su código a un clic.';
+  if (desc) desc.content = 'Yainel Garcia Alfonso, diseñador web y desarrollador full-stack en Miami: back ends en PHP y Laravel, integraciones de API y las interfaces que van encima. Un laboratorio de habilidades en vivo: animación y efectos, patrones de interfaz, CSS moderno y APIs del navegador, y mini apps, cada una con su código a un clic.';
 })();

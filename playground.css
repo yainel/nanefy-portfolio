@@ -54,3 +54,7 @@
 /* Reduce transparency inside demos */
 html.pref-solid .d-aur-glass{background:#2B2350;border-color:#4A3F80}
 html.pref-solid .d-aur-blob{opacity:.5}
+
+/* Selected work previews are images (fast), not live iframes */
+.work-grid .project .thumb img{display:block;width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.work-grid .project:hover .thumb img{transform:scale(1.03)}

@@ -215,6 +215,7 @@ kbd{font-family:inherit;font-size:.6875rem;line-height:1rem;padding:1px 6px;bord
 .typed-ghost{visibility:hidden;padding-right:4px}
 .caret{display:inline-block;width:2px;height:1em;background:var(--magic);vertical-align:-.12em;margin-left:2px;animation:blink 1s steps(1) infinite}
 @keyframes blink{50%{opacity:0}}
+.hero .role{font-weight:600;color:var(--text-2);margin:-4px 0 10px;font-size:.9375rem}
 .hero p.lede{font-size:1rem;line-height:1.5rem;color:var(--text-2);max-width:46ch}
 .hero .row{margin-top:20px}
 .profile{background:color-mix(in srgb,var(--surface) 85%,transparent);backdrop-filter:blur(12px);border-radius:var(--radius-lg);padding:20px;box-shadow:var(--shadow-pop);border:1px solid var(--border)}
