@@ -97,6 +97,7 @@
   }
   clock(); setInterval(clock, 30000);
   var words = ['interfaces', 'animations', 'design systems', 'web apps'];
+  $('.typed-ghost').textContent = words.reduce(function (a, b) { return b.length > a.length ? b : a; });
   var typed = $('#typed'), wi = 0, ci = words[0].length, del = true;
   function type() {
     var w = words[wi];

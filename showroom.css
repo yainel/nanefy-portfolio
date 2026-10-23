@@ -202,6 +202,10 @@ kbd{font-family:inherit;font-size:11px;line-height:16px;padding:1px 6px;border-r
 .greet{font-size:13px;color:var(--text-2);font-weight:550}
 .hero h1{font-size:40px;line-height:46px;letter-spacing:-.03em;font-weight:750;margin:8px 0 12px}
 .typed{background:linear-gradient(90deg,var(--magic),#B24BF3,var(--magic-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+/* The ghost holds the longest word invisibly, so the heading keeps one fixed size while words are typed */
+.typed-slot{display:inline-grid;vertical-align:top}
+.typed-slot>*{grid-area:1/1}
+.typed-ghost{visibility:hidden;padding-right:4px}
 .caret{display:inline-block;width:2px;height:1em;background:var(--magic);vertical-align:-.12em;margin-left:2px;animation:blink 1s steps(1) infinite}
 @keyframes blink{50%{opacity:0}}
 .hero p.lede{font-size:16px;line-height:24px;color:var(--text-2);max-width:46ch}
