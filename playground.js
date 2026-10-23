@@ -1179,16 +1179,17 @@
 </div>`,
     css: `
 .d-pal{outline:none}
-.d-pal-row{display:grid;grid-template-columns:repeat(5,1fr);height:150px;border-radius:12px;overflow:hidden}
+.d-pal-row{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));height:150px;border-radius:12px;overflow:hidden}
 .d-pal-sw{display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:6px;padding:10px 4px;transition:background .4s}
 .d-pal-sw button{border:0;background:rgba(255,255,255,.18);color:inherit;border-radius:6px;font:600 11px/1 ui-monospace,Menlo,Consolas,monospace;padding:5px 6px;cursor:pointer}
 .d-pal-sw .lock{font-size:14px;padding:4px 6px;opacity:.6}
 .d-pal-sw .lock[aria-pressed="true"]{opacity:1;background:rgba(0,0,0,.2)}
 .d-pal kbd{font:inherit;font-size:11px;opacity:.7;border:1px solid currentColor;border-radius:4px;padding:0 4px;margin-left:4px}
-.d-pal:focus-visible .d-pal-row{outline:2px solid var(--magic);outline-offset:3px}`,
+.d-pal:focus-visible .d-pal-row{outline:2px solid var(--magic);outline-offset:3px}
+@media (max-width:420px){.d-pal-sw button{font-size:10px;padding:4px 3px}}`,
     js: function (el, t) {
       var row = el.querySelector('.d-pal-row'), mode = el.querySelector('.d-pal-mode'), colors = [], locked = [false, false, false, false, false];
-      var names = { Analogous: t('Analogous', 'Análoga'), Complementary: t('Complementary', 'Complementaria'), Triadic: t('Triadic', 'Triádica'),
+      var ruleNames = { Analogous: t('Analogous', 'Análoga'), Complementary: t('Complementary', 'Complementaria'), Triadic: t('Triadic', 'Triádica'),
         'Split complementary': t('Split complementary', 'Complementaria dividida'), Monochrome: t('Monochrome', 'Monocromática') };
       var rules = {
         Analogous: [-40, -20, 0, 20, 40], Complementary: [0, 10, 0, 180, 190], Triadic: [0, 120, 0, 240, 120],
@@ -1208,7 +1209,7 @@
       function generate() {
         var names = Object.keys(rules), name = names[Math.floor(Math.random() * names.length)];
         var base = Math.random() * 360, sat = 55 + Math.random() * 30, light = [88, 70, 55, 38, 20];
-        mode.textContent = names[name];
+        mode.textContent = ruleNames[name];
         rules[name].forEach(function (off, i) {
           if (!locked[i]) colors[i] = hex((base + off + 360) % 360, sat - (name === 'Monochrome' ? i * 4 : 0), light[i]);
           swatches[i].style.background = colors[i];

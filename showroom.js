@@ -170,16 +170,26 @@
   function segmented(el, onChange) {
     var thumb = $('.thumb', el), btns = $$('button', el);
     function place(b) { thumb.style.left = b.offsetLeft + 'px'; thumb.style.width = b.offsetWidth + 'px'; }
+    // On narrow screens the bar scrolls sideways: fade the edge that hides more tabs, and bring the chosen tab into view
+    function fade() {
+      el.classList.toggle('fade-l', el.scrollLeft > 2);
+      el.classList.toggle('fade-r', el.scrollLeft + el.clientWidth < el.scrollWidth - 2);
+    }
+    function reveal(b) {
+      if (b.offsetLeft < el.scrollLeft || b.offsetLeft + b.offsetWidth > el.scrollLeft + el.clientWidth)
+        el.scrollTo({ left: b.offsetLeft - (el.clientWidth - b.offsetWidth) / 2, behavior: reduce ? 'auto' : 'smooth' });
+    }
+    el.addEventListener('scroll', fade, { passive: true });
     btns.forEach(function (b) {
       b.addEventListener('click', function () {
         btns.forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
-        place(b); onChange(b);
+        place(b); reveal(b); onChange(b);
       });
     });
     var cur = function () { return btns.filter(function (b) { return b.getAttribute('aria-pressed') === 'true'; })[0]; };
-    requestAnimationFrame(function () { place(cur()); });
-    window.addEventListener('resize', function () { place(cur()); });
-    document.fonts && document.fonts.ready.then(function () { place(cur()); });
+    requestAnimationFrame(function () { place(cur()); fade(); });
+    window.addEventListener('resize', function () { place(cur()); fade(); });
+    document.fonts && document.fonts.ready.then(function () { place(cur()); fade(); });
     return { reset: function () { btns[0].click(); } };
   }
 
