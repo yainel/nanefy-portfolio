@@ -422,3 +422,4 @@ footer{color:var(--text-3);font-size:13px;text-align:center;padding:24px 0 0;bor
 
 /* Touch screens: iOS zooms the page when a field's text is under 16px, which leaves it zoomed and sliding sideways */
 @media (pointer:coarse){input,select,textarea,.palette .input{font-size:16px}}
+.lang-btn{font-size:12px;font-weight:700;letter-spacing:.04em}

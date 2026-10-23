@@ -5,14 +5,15 @@
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
   var root = document.documentElement;
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var T = window.ygT || function (s) { return s; }, spanish = window.ygLang === 'es'; // from i18n.js
   function store(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } }
 
   /* ---------- Toasts ---------- */
   function toast(msg, err) {
     var t = document.createElement('div');
     t.className = 'toast' + (err ? ' err' : '');
-    t.innerHTML = '<span></span><button aria-label="Dismiss">×</button>';
-    t.firstChild.textContent = msg;
+    t.innerHTML = '<span></span><button aria-label="' + T('Dismiss') + '">×</button>';
+    t.firstChild.textContent = T(msg);
     $('#toasts').appendChild(t);
     var kill = function () { t.classList.add('out'); setTimeout(function () { t.remove(); }, 250); };
     t.lastChild.onclick = kill;
@@ -91,12 +92,12 @@
 
   /* ---------- Greeting, clock, typing ---------- */
   var h = new Date().getHours();
-  $('#greet').textContent = (h < 12 ? 'Good morning' : h < 18 ? 'Good afternoon' : 'Good evening') + ', thanks for stopping by';
+  $('#greet').textContent = T((h < 12 ? 'Good morning' : h < 18 ? 'Good afternoon' : 'Good evening') + ', thanks for stopping by');
   function clock() {
-    try { $('#localTime').textContent = new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', timeZone: 'America/New_York' }) + ' in Miami'; } catch (e) {}
+    try { $('#localTime').textContent = T('{t} in Miami', { t: new Date().toLocaleTimeString(spanish ? 'es-US' : 'en-US', { hour: 'numeric', minute: '2-digit', timeZone: 'America/New_York' }) }); } catch (e) {}
   }
   clock(); setInterval(clock, 30000);
-  var words = ['interfaces', 'animations', 'design systems', 'web apps'];
+  var words = ['interfaces', 'animations', 'design systems', 'web apps'].map(function (w) { return T(w); });
   $('.typed-ghost').textContent = words.reduce(function (a, b) { return b.length > a.length ? b : a; });
   var typed = $('#typed'), wi = 0, ci = words[0].length, del = true;
   function type() {
@@ -136,19 +137,19 @@
 
   /* ---------- Ask about me ---------- */
   var answers = [
-    { k: ['best', 'good at', 'strength', 'special'], a: "Taking a messy, stressful process and turning it into a calm interface people actually enjoy using. Then building it so it works exactly as designed." },
-    { k: ['tool', 'figma', 'software', 'adobe', 'use'], a: 'Figma, Adobe XD and Photoshop for design. HTML, CSS, JavaScript, React, WordPress and Laravel to build.' },
-    { k: ['code', 'build', 'develop', 'program'], a: "Yes. I'm a designer who codes. Everything on this page is hand-built by me, and every demo in the Skills playground has a View code button so you can read the source." },
-    { k: ['work', 'portfolio', 'project', 'see', 'example', 'skill', 'demo'], a: 'Start with the Skills playground just below: live demos of motion, UI patterns, modern CSS and browser APIs, and small apps. Selected client work is further down, and I can walk you through private projects on a call.' },
-    { k: ['process', 'approach', 'how do you'], a: 'Listen first, then structure (grid, type scale, content order), then refine the details, then build. Desktop and mobile get designed side by side.' },
-    { k: ['spanish', 'language', 'english', 'french'], a: 'Spanish is my first language, I work in English every day, and I know some French.' },
-    { k: ['where', 'location', 'miami', 'remote', 'based'], a: "I'm in Miami and happy to work remote, hybrid or on site." },
-    { k: ['hire', 'available', 'freelance', 'contact', 'email', 'price', 'cost', 'rate'], a: "I'm available for freelance and full-time work. The quickest way to start is the Start a project form at the bottom of the page." }
+    { k: ['best', 'good at', 'strength', 'special', 'mejor', 'fuerte'], a: "Taking a messy, stressful process and turning it into a calm interface people actually enjoy using. Then building it so it works exactly as designed." },
+    { k: ['tool', 'figma', 'software', 'adobe', 'use', 'herramienta'], a: 'Figma, Adobe XD and Photoshop for design. HTML, CSS, JavaScript, React, WordPress and Laravel to build.' },
+    { k: ['code', 'build', 'develop', 'program', 'código', 'codigo', 'desarroll', 'constru'], a: "Yes. I'm a designer who codes. Everything on this page is hand-built by me, and every demo in the Skills playground has a View code button so you can read the source." },
+    { k: ['work', 'portfolio', 'project', 'see', 'example', 'skill', 'demo', 'habilidad', 'trabajo', 'proyecto', 'ejemplo', 'portafolio'], a: 'Start with the Skills playground just below: live demos of motion, UI patterns, modern CSS and browser APIs, and small apps. Selected client work is further down, and I can walk you through private projects on a call.' },
+    { k: ['process', 'approach', 'how do you', 'proceso', 'cómo trabajas'], a: 'Listen first, then structure (grid, type scale, content order), then refine the details, then build. Desktop and mobile get designed side by side.' },
+    { k: ['spanish', 'language', 'english', 'french', 'español', 'idioma', 'inglés', 'francés'], a: 'Spanish is my first language, I work in English every day, and I know some French.' },
+    { k: ['where', 'location', 'miami', 'remote', 'based', 'dónde', 'donde', 'remoto'], a: "I'm in Miami and happy to work remote, hybrid or on site." },
+    { k: ['hire', 'available', 'freelance', 'contact', 'email', 'price', 'cost', 'rate', 'contrat', 'disponib', 'precio', 'costo', 'tarifa', 'correo', 'contacto'], a: "I'm available for freelance and full-time work. The quickest way to start is the Start a project form at the bottom of the page." }
   ];
   function answer(q) {
     var l = q.toLowerCase(), hit = null;
-    answers.forEach(function (x) { if (!hit && x.k.some(function (k) { return l.indexOf(k) > -1; })) hit = x.a; });
-    return hit || "Good question. That one is better answered in person, so send it through the Start a project form and I'll reply within a day.";
+    answers.forEach(function (x) { if (!hit && x.k.some(function (k) { return l.indexOf(k) > -1; })) hit = T(x.a); });
+    return hit || T("Good question. That one is better answered in person, so send it through the Start a project form and I'll reply within a day.");
   }
   function ask(q) {
     if (!q.trim()) return;
@@ -197,16 +198,31 @@
 
   var projects = {
     palma: {
+      es: {
+        t: 'Palma Alta, concepto de hotel boutique',
+        b: '<p>Un concepto de sitio web, por iniciativa propia, para un hotel de catorce habitaciones en una casa restaurada de 1926 en Coral Gables.</p><h4>Mi papel</h4><ul><li>Dirección de marca, diseño de interfaz y maquetas adaptables</li><li>Front end escrito a mano en HTML y CSS</li></ul><h4>Pensamiento de diseño</h4><ul><li>El arco, la forma emblemática de Coral Gables, es el único elemento audaz; todo lo demás se mantiene sereno</li><li>Una paleta tomada del lugar: verdes de banyan, rosas de piedra coralina y latón de las rejas de hierro</li></ul><h4>Reto resuelto</h4><ul><li>Mantener visible la reserva sin romper el ambiente. En móviles pasa a una barra fina al alcance del pulgar</li></ul>',
+        f: '<a class="btn" href="work/palma-alta.html">Leer el caso de estudio</a><a class="btn btn-primary" href="palma-alta/index.html">Abrir el sitio</a>'
+      },
       t: 'Palma Alta, boutique hotel concept',
       b: '<p>A self-initiated website concept for a fourteen-room hotel inside a restored 1926 house in Coral Gables.</p><h4>My role</h4><ul><li>Brand direction, UI design and responsive layouts</li><li>Front-end build in hand-written HTML and CSS</li></ul><h4>Design thinking</h4><ul><li>The arch, the signature shape of Coral Gables, is the one bold element; everything else stays quiet</li><li>A palette taken from the place: banyan greens, coral rock pinks, brass from the iron gates</li></ul><h4>Challenge solved</h4><ul><li>Keeping the booking path visible without breaking the mood. On phones it moves into a slim bar within thumb reach</li></ul>',
       f: '<a class="btn" href="work/palma-alta.html">Read case study</a><a class="btn btn-primary" href="palma-alta/index.html">Open live site</a>'
     },
     consent: {
+      es: {
+        t: 'Plataforma de consentimiento de pacientes',
+        b: '<p>Una aplicación web que reemplazó los formularios de consentimiento en papel en una clínica quirúrgica con varios especialistas. Es privada, así que muestro pantallas con datos de ejemplo si me lo pides.</p><h4>Mi papel</h4><ul><li>Único diseñador y desarrollador, de la UX a producción, en más de 16 versiones</li></ul><h4>Pensamiento de diseño</h4><ul><li>Dos públicos, dos experiencias: un flujo de firma tranquilo, paso a paso, para pacientes nerviosos, y una consola rápida para un personal ocupado</li><li>Ilustraciones de cada procedimiento para que los pacientes reconozcan su cirugía de un vistazo</li><li>Una vista de dos paneles donde la lista de pacientes sigue visible mientras aparecen los detalles</li></ul><h4>Retos resueltos</h4><ul><li>Mantener los registros de pacientes sincronizados en tiempo real con el CRM y las herramientas de formularios</li><li>Un registro de auditoría con filtros por día, semana y año, para tener constancia de cada firma</li><li>Permisos y manejo de datos que respetan la privacidad médica</li></ul>',
+        f: '<a class="btn btn-primary" href="#contact" data-close>Pedir una demostración</a>'
+      },
       t: 'Patient consent platform',
       b: '<p>A web application that replaced paper consent forms at a multi-provider surgical practice. It is private, so I share screens with sample data on request.</p><h4>My role</h4><ul><li>Sole designer and developer, from UX to production, across 16+ releases</li></ul><h4>Design thinking</h4><ul><li>Two audiences, two experiences: a calm step-by-step signing flow for nervous patients, and a fast console for busy staff</li><li>Procedure illustrations as visual cues so patients recognize their surgery at a glance</li><li>A two-panel staff layout where the patient list stays in view while details slide in</li></ul><h4>Challenges solved</h4><ul><li>Keeping patient records in sync with the CRM and form tools in real time</li><li>An audit log with day, week and year filters for a clear record of every signature</li><li>Permissions and data handling that respect healthcare privacy</li></ul>',
       f: '<a class="btn btn-primary" href="#contact" data-close>Ask for a walkthrough</a>'
     },
     golf: {
+      es: {
+        t: 'Golf Mapify',
+        b: '<p>Una app de golf, en desarrollo, con dos partes que trabajan juntas.</p><h4>Cómo funciona</h4><ul><li>Un panel interno para mapear campos de golf reales, hoyo por hoyo</li><li>Una app para iPhone y Android que sabe en qué hoyo estás por tu ubicación y te pide el resultado</li></ul><h4>Enfoque de diseño</h4><ul><li>Pantallas grandes y fáciles de leer, que funcionan a pleno sol y con una sola mano</li></ul>',
+        f: '<a class="btn" href="#contact" data-close>Preguntar por el proyecto</a>'
+      },
       t: 'Golf Mapify',
       b: '<p>A golf app, currently in development, with two parts that work together.</p><h4>How it works</h4><ul><li>A back office for mapping real golf courses, hole by hole</li><li>A player app for iPhone and Android that knows which hole you are on from your location, and asks for your score</li></ul><h4>Design focus</h4><ul><li>Big, glanceable screens that work in bright sun with one hand</li></ul>',
       f: '<a class="btn" href="#contact" data-close>Ask about it</a>'
@@ -218,6 +234,7 @@
   function closeOverlay(o) { o.classList.remove('open'); document.body.style.overflow = ''; lastFocus && lastFocus.focus && lastFocus.focus(); }
   function openProject(id) {
     var p = projects[id]; if (!p) return;
+    if (spanish) p = p.es;
     $('#pmTitle').textContent = p.t; $('#pmBody').innerHTML = p.b; $('#pmFoot').innerHTML = p.f;
     openOverlay($('#projModal'));
   }
@@ -243,17 +260,18 @@
     { g: 'Actions', t: 'Toggle dark mode', k: 'D', run: function () { setTheme(root.dataset.theme === 'dark' ? 'light' : 'dark'); } },
     { g: 'Actions', t: 'Copy email address', run: function () { copy('garcia.yainel@gmail.com', 'Email copied to clipboard'); } },
     { g: 'Actions', t: 'Celebrate', run: function () { confetti(); } },
+    { g: 'Actions', t: spanish ? 'Switch to English' : 'Cambiar a español', run: function () { window.ygSetLang(spanish ? 'en' : 'es'); } },
     { g: 'Actions', t: 'Open the Palma Alta live site', run: function () { location.href = 'palma-alta/index.html'; } }
   ];
   function renderPal() {
     var q = palInput.value.trim().toLowerCase(), html = '', last = '';
-    shown = commands.filter(function (c) { return !q || (c.g + ' ' + c.t).toLowerCase().indexOf(q) > -1; });
+    shown = commands.filter(function (c) { return !q || (T(c.g) + ' ' + T(c.t) + ' ' + c.g + ' ' + c.t).toLowerCase().indexOf(q) > -1; });
     if (sel >= shown.length) sel = 0;
     shown.forEach(function (c, i) {
-      if (c.g !== last) { html += '<li class="group" role="presentation">' + c.g + '</li>'; last = c.g; }
-      html += '<li role="option" data-i="' + i + '" aria-selected="' + (i === sel) + '">' + c.t + (c.k ? '<small><kbd>' + c.k + '</kbd></small>' : '') + '</li>';
+      if (c.g !== last) { html += '<li class="group" role="presentation">' + T(c.g) + '</li>'; last = c.g; }
+      html += '<li role="option" data-i="' + i + '" aria-selected="' + (i === sel) + '">' + T(c.t) + (c.k ? '<small><kbd>' + c.k + '</kbd></small>' : '') + '</li>';
     });
-    palList.innerHTML = html || '<li class="group">No results. Try "projects" or "dark".</li>';
+    palList.innerHTML = html || '<li class="group">' + T('No results. Try "playground" or "dark".') + '</li>';
   }
   function openPal() { palInput.value = ''; sel = 0; renderPal(); openOverlay(pal); }
   function runSel(i) { var c = shown[i]; if (!c) return; closeOverlay(pal); setTimeout(c.run, 60); }
@@ -276,9 +294,9 @@
   /* ---------- Lab: loading button ---------- */
   $('#loadBtn').addEventListener('click', function () {
     var b = this; if (b.disabled) return;
-    b.disabled = true; b.innerHTML = '<span class="spin"></span>Saving';
-    $('#loadMsg').textContent = 'Saving your changes';
-    setTimeout(function () { b.disabled = false; b.textContent = 'Saved'; $('#loadMsg').textContent = 'All changes saved.'; toast('Changes saved'); setTimeout(function () { b.textContent = 'Save changes'; }, 1500); }, 1400);
+    b.disabled = true; b.innerHTML = '<span class="spin"></span>' + T('Saving');
+    $('#loadMsg').textContent = T('Saving your changes');
+    setTimeout(function () { b.disabled = false; b.textContent = T('Saved'); $('#loadMsg').textContent = T('All changes saved.'); toast('Changes saved'); setTimeout(function () { b.textContent = T('Save changes'); }, 1500); }, 1400);
   });
 
   /* ---------- Lab: pricing ---------- */
@@ -293,17 +311,17 @@
     requestAnimationFrame(function step(t) {
       t0 = t0 || t; var p = Math.min(1, (t - t0) / 300);
       shownPrice = Math.round(from + (target - from) * p);
-      $('#priceOut').textContent = '$' + shownPrice + '/mo';
+      $('#priceOut').textContent = '$' + shownPrice + T('/mo');
       if (p < 1) requestAnimationFrame(step);
     });
   }
   $('#pages').addEventListener('input', price); price();
 
   /* ---------- Lab: rating ---------- */
-  var starsEl = $('#stars'), labels = ['Not for me', 'It is okay', 'Pretty good', 'Really nice', 'I love it'], rating = 0;
+  var starsEl = $('#stars'), labels = ['Not for me', 'It is okay', 'Pretty good', 'Really nice', 'I love it'].map(function (l) { return T(l); }), rating = 0;
   for (var s = 1; s <= 5; s++) {
     var sb = document.createElement('button');
-    sb.setAttribute('role', 'radio'); sb.setAttribute('aria-label', s + ' star' + (s > 1 ? 's' : '')); sb.dataset.v = s;
+    sb.setAttribute('role', 'radio'); sb.setAttribute('aria-label', T(s + ' star' + (s > 1 ? 's' : ''))); sb.dataset.v = s;
     sb.innerHTML = '<svg><use href="#i-star"/></svg>';
     starsEl.appendChild(sb);
   }
@@ -353,7 +371,7 @@
     var r = li.getBoundingClientRect();
     list.insertBefore(dragged, e.clientY > r.top + r.height / 2 ? li.nextSibling : li);
   });
-  function sortMsg() { $('#sortOut').textContent = 'Your top priority: ' + $('li', list).textContent.replace('⋮⋮', '').trim() + '. Noted.'; }
+  function sortMsg() { $('#sortOut').textContent = T('Your top priority: {x}. Noted.', { x: $('li', list).textContent.replace('⋮⋮', '').trim() }); }
 
   /* ---------- Lab: dropzone ---------- */
   var dz = $('#dropzone');
@@ -377,12 +395,12 @@
   var skelHTML = $('#skel').innerHTML;
   $('#skelBtn').addEventListener('click', function () {
     var sk = $('#skel');
-    if (sk.dataset.loaded) { sk.innerHTML = skelHTML; delete sk.dataset.loaded; this.textContent = 'Load content'; return; }
-    this.textContent = 'Loading';
+    if (sk.dataset.loaded) { sk.innerHTML = skelHTML; delete sk.dataset.loaded; this.textContent = T('Load content'); return; }
+    this.textContent = T('Loading');
     var btn = this;
     setTimeout(function () {
-      sk.innerHTML = '<div class="avatar" style="width:40px;height:40px;border-radius:50%;font-size:14px">YG</div><div><b>Content loaded</b><div class="sub">Skeletons keep the layout steady while data arrives.</div></div>';
-      sk.dataset.loaded = '1'; btn.textContent = 'Show skeleton again';
+      sk.innerHTML = '<div class="avatar" style="width:40px;height:40px;border-radius:50%;font-size:14px">YG</div><div><b>' + T('Content loaded') + '</b><div class="sub">' + T('Skeletons keep the layout steady while data arrives.') + '</div></div>';
+      sk.dataset.loaded = '1'; btn.textContent = T('Show skeleton again');
     }, 900);
   });
 
@@ -414,14 +432,14 @@
   function pressed(container) { return $$('.chip[aria-pressed="true"]', container).map(function (c) { return c.textContent; }); }
   chipToggle($('#toolChips'), function () {
     var p = pressed($('#toolChips'));
-    $('#chipOut').textContent = p.length ? 'Good news: I work with ' + p.join(', ') + '.' : '';
+    $('#chipOut').textContent = p.length ? T('Good news: I work with {x}.', { x: new Intl.ListFormat(spanish ? 'es' : 'en').format(p) }) : '';
   });
 
   /* ---------- Reset lab ---------- */
   $('#resetLab').addEventListener('click', function () {
     setAccent('#8051FF'); setTheme('light'); $('#motionSwitch').checked = true; $('#soundSwitch').checked = false;
     $('#pages').value = 5; billSeg.reset(); price();
-    rating = 0; paintStars(0); $('#starsOut').textContent = 'Rate this showroom';
+    rating = 0; paintStars(0); $('#starsOut').textContent = T('Rate this showroom');
     ringN = 72; ring(); $('#files').innerHTML = ''; $('#tblSearch').value = ''; $$('tr', tbody).forEach(function (r) { r.hidden = false; });
     toast('UI kit reset');
   });
@@ -433,13 +451,13 @@
     return {
       name: $('#fName').value.trim(), email: $('#fEmail').value.trim(), company: $('#fCompany').value.trim(),
       needs: pressed($('#needChips')), industry: $('#fIndustry').value, msg: $('#fMsg').value.trim(),
-      budget: fmt($('#fBudget').value), time: ($('input[name=timeline]:checked') || {}).value, call: $('#fCall').checked
+      budget: fmt($('#fBudget').value), time: T(($('input[name=timeline]:checked') || {}).value), call: $('#fCall').checked
     };
   }
   function summary() {
     var d = data();
-    $('#sName').textContent = d.name ? d.name + (d.company ? ', ' + d.company : '') : 'Not added yet';
-    $('#sNeeds').textContent = d.needs.length ? d.needs.join(', ') : 'Not added yet';
+    $('#sName').textContent = d.name ? d.name + (d.company ? ', ' + d.company : '') : T('Not added yet');
+    $('#sNeeds').textContent = d.needs.length ? d.needs.join(', ') : T('Not added yet');
     $('#sInd').textContent = d.industry; $('#sBudget').textContent = d.budget; $('#sTime').textContent = d.time;
   }
   function field(id) { return $('#' + id).closest('.field'); }
@@ -464,7 +482,7 @@
     $$('#wizSteps li').forEach(function (li, i) { li.classList.toggle('current', i + 1 === n); li.classList.toggle('done', i + 1 < n); $('.n', li).innerHTML = i + 1 < n ? '✓' : i + 1; });
     $('#wizProg').style.width = (n / total * 100) + '%';
     $('#wizBack').disabled = n === 1;
-    $('#wizNext').innerHTML = n === total ? '<svg width="14" height="14"><use href="#i-mail"/></svg>Send by email' : 'Continue';
+    $('#wizNext').innerHTML = n === total ? '<svg width="14" height="14"><use href="#i-mail"/></svg>' + T('Send by email') : T('Continue');
     $('#wizNext').className = 'btn ' + (n === total ? 'btn-magic' : 'btn-primary');
     if (n === 4) {
       var d = data();
@@ -474,16 +492,16 @@
     if (first && n > 1) first.focus({ preventScroll: true });
   }
   function body(d) {
-    return 'Hi Yainel,\n\n' + d.msg + '\n\nName: ' + d.name + (d.company ? '\nCompany: ' + d.company : '') + '\nEmail: ' + d.email +
-      '\nNeeds: ' + d.needs.join(', ') + '\nIndustry: ' + d.industry + '\nBudget: about ' + d.budget + '\nTimeline: ' + d.time +
-      (d.call ? '\nI would like a quick video call first.' : '');
+    return T('Hi Yainel,') + '\n\n' + d.msg + '\n\n' + T('Name: ') + d.name + (d.company ? '\n' + T('Company: ') + d.company : '') + '\n' + T('Email: ') + d.email +
+      '\n' + T('Needs: ') + d.needs.join(', ') + '\n' + T('Industry: ') + d.industry + '\n' + T('Budget: about ') + d.budget + '\n' + T('Timeline: ') + d.time +
+      (d.call ? '\n' + T('I would like a quick video call first.') : '');
   }
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     if (!validate(step)) { toast('Check the highlighted fields', true); var bad = $('.field.invalid input, .field.invalid textarea', form); bad && bad.focus(); return; }
     if (step < total) return show(step + 1);
     var d = data();
-    location.href = 'mailto:garcia.yainel@gmail.com?subject=' + encodeURIComponent('New project: ' + (d.needs[0] || 'Website') + ' for ' + (d.company || d.name)) + '&body=' + encodeURIComponent(body(d));
+    location.href = 'mailto:garcia.yainel@gmail.com?subject=' + encodeURIComponent(T('New project: {need} for {who}', { need: d.needs[0] || T('Website'), who: d.company || d.name })) + '&body=' + encodeURIComponent(body(d));
     $$('.step', form).forEach(function (s) { s.hidden = true; });
     $('#wizDone').hidden = false; $('#wizFoot').hidden = true; $('#wizProg').style.width = '100%';
     $$('#wizSteps li').forEach(function (li) { li.className = 'done'; $('.n', li).textContent = '✓'; });

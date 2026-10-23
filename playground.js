@@ -1,8 +1,12 @@
 /* Skills playground. Each demo is defined once (html, css, js); the page renders it
-   and the "View code" button shows that exact source. Plain JavaScript, no dependencies. */
+   and the "View code" button shows that exact source. Plain JavaScript, no dependencies.
+   Bilingual: html and css hold {{English|Español}} pairs, and each demo's js gets t(english, spanish). */
 (function () {
   'use strict';
   var yg = window.yg;
+  var T = window.ygT || function (s) { return s; }, spanish = window.ygLang === 'es';
+  function t(en, es) { return spanish ? es : en; }
+  function loc(src) { return src.replace(/\{\{([^|{}]*)\|([^{}]*)\}\}/g, function (m, en, es) { return spanish ? es : en; }); }
   var demos = [];
   function demo(d) { demos.push(d); }
 
@@ -22,8 +26,8 @@
     desc: 'Buttons lean toward your cursor and spring back with an elastic easing curve.',
     html: `
 <div class="d-mag">
-  <button class="btn btn-primary btn-lg d-mag-btn"><span>Hover near me</span></button>
-  <button class="btn d-mag-btn d-mag-round" aria-label="Next">&rarr;</button>
+  <button class="btn btn-primary btn-lg d-mag-btn"><span>{{Hover near me|Acércate}}</span></button>
+  <button class="btn d-mag-btn d-mag-round" aria-label="{{Next|Siguiente}}">&rarr;</button>
 </div>`,
     css: `
 .d-mag{display:flex;gap:28px;align-items:center;justify-content:center;height:180px}
@@ -53,16 +57,17 @@
     desc: 'Each letter decodes on its own timeline, a classic "hacker" reveal done in about 30 lines.',
     html: `
 <div class="d-scr">
-  <p class="d-scr-text">Design that ships</p>
-  <button class="btn">Next phrase</button>
+  <p class="d-scr-text">{{Design that ships|Diseño que se lanza}}</p>
+  <button class="btn">{{Next phrase|Otra frase}}</button>
 </div>`,
     css: `
 .d-scr{height:180px;display:grid;place-items:center;align-content:center;gap:16px;text-align:center}
 .d-scr-text{font:700 26px/1.2 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:-.02em;min-height:32px}
 .d-scr-text i{font-style:normal;color:var(--magic);opacity:.75}`,
-    js: function (el) {
+    js: function (el, t) {
       var out = el.querySelector('.d-scr-text'), glyphs = '!<>-_/[]{}=+*^?#';
-      var phrases = ['Design that ships', 'Pixels with purpose', 'Code you can trust', 'Calm, clear, fast'];
+      var phrases = t(['Design that ships', 'Pixels with purpose', 'Code you can trust', 'Calm, clear, fast'],
+                      ['Diseño que se lanza', 'Píxeles con propósito', 'Código confiable', 'Sereno, claro, rápido']);
       var n = 0, raf = 0;
       function esc(s) { return s.replace(/[<>&]/g, function (c) { return { '<': '&lt;', '>': '&gt;', '&': '&amp;' }[c]; }); }
       function scramble(to) {
@@ -97,8 +102,8 @@
 <div class="d-aur">
   <span class="d-aur-blob"></span><span class="d-aur-blob"></span><span class="d-aur-blob"></span>
   <div class="d-aur-glass">
-    <b>Monthly goal</b>
-    <span>64% complete &middot; 11 days left</span>
+    <b>{{Monthly goal|Meta del mes}}</b>
+    <span>{{64% complete &middot; 11 days left|64% completado &middot; quedan 11 días}}</span>
     <div class="d-aur-bar"><i></i></div>
   </div>
 </div>`,
@@ -161,15 +166,15 @@
     desc: 'The progress bar and cards are tied to scroll position by CSS alone. Older browsers get a tiny JS fallback.',
     html: `
 <div class="d-st">
-  <div class="row between" style="margin-bottom:8px"><span class="sub">Scroll inside the box</span><span class="badge d-st-mode"></span></div>
+  <div class="row between" style="margin-bottom:8px"><span class="sub">{{Scroll inside the box|Desplázate dentro del recuadro}}</span><span class="badge d-st-mode"></span></div>
   <div class="d-st-bar"><i></i></div>
-  <div class="d-st-box" tabindex="0" aria-label="Scrollable list">
-    <div class="d-st-item">01 &middot; Discover</div>
-    <div class="d-st-item">02 &middot; Define</div>
-    <div class="d-st-item">03 &middot; Design</div>
-    <div class="d-st-item">04 &middot; Build</div>
-    <div class="d-st-item">05 &middot; Test</div>
-    <div class="d-st-item">06 &middot; Launch</div>
+  <div class="d-st-box" tabindex="0" aria-label="{{Scrollable list|Lista desplazable}}">
+    <div class="d-st-item">01 &middot; {{Discover|Descubrir}}</div>
+    <div class="d-st-item">02 &middot; {{Define|Definir}}</div>
+    <div class="d-st-item">03 &middot; {{Design|Diseñar}}</div>
+    <div class="d-st-item">04 &middot; {{Build|Desarrollar}}</div>
+    <div class="d-st-item">05 &middot; {{Test|Probar}}</div>
+    <div class="d-st-item">06 &middot; {{Launch|Lanzar}}</div>
   </div>
 </div>`,
     css: `
@@ -184,9 +189,9 @@
 }
 @keyframes d-st-grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 @keyframes d-st-pop{from{opacity:0;transform:translateX(-24px) scale(.94)}to{opacity:1;transform:none}}`,
-    js: function (el) {
+    js: function (el, t) {
       var native = window.CSS && CSS.supports('animation-timeline: view()');
-      el.querySelector('.d-st-mode').textContent = native ? 'Native CSS' : 'JS fallback';
+      el.querySelector('.d-st-mode').textContent = native ? t('Native CSS', 'CSS nativo') : t('JS fallback', 'Respaldo en JS');
       if (native) return; // the browser does all the work
       var box = el.querySelector('.d-st-box'), bar = el.querySelector('.d-st-bar i');
       box.addEventListener('scroll', function () {
@@ -201,9 +206,9 @@
     html: `
 <div class="d-vt">
   <div class="row">
-    <button class="btn" data-act="shuffle">Shuffle</button>
-    <button class="btn" data-act="sort">Sort</button>
-    <button class="btn" data-act="layout">Change layout</button>
+    <button class="btn" data-act="shuffle">{{Shuffle|Mezclar}}</button>
+    <button class="btn" data-act="sort">{{Sort|Ordenar}}</button>
+    <button class="btn" data-act="layout">{{Change layout|Cambiar diseño}}</button>
   </div>
   <ul class="d-vt-list">
     <li style="--h:0">A</li><li style="--h:1">B</li><li style="--h:2">C</li><li style="--h:3">D</li>
@@ -241,7 +246,7 @@
     id: 'particles', cat: 'motion', wide: true, title: 'Canvas particle field', tags: ['Canvas 2D', 'Physics'],
     desc: 'Drifting nodes link up when close and scatter away from your pointer. It pauses when off screen.',
     html: `
-<canvas class="d-part" aria-label="Particle network that reacts to the pointer"></canvas>`,
+<canvas class="d-part" aria-label="{{Particle network that reacts to the pointer|Red de partículas que reacciona al puntero}}"></canvas>`,
     css: `
 .d-part{width:100%;height:200px;border-radius:12px;display:block;cursor:crosshair;touch-action:none;
   background:radial-gradient(circle at 50% 30%,#1d1640,#0b0a14)}`,
@@ -292,18 +297,18 @@
 <div class="d-dash">
   <div class="d-dash-head">
     <div>
-      <span class="sub">Website visitors</span>
+      <span class="sub">{{Website visitors|Visitas al sitio}}</span>
       <b class="d-dash-total">0</b>
       <span class="badge d-dash-delta"></span>
     </div>
-    <div class="segmented d-seg" role="group" aria-label="Date range">
+    <div class="segmented d-seg" role="group" aria-label="{{Date range|Rango de fechas}}">
       <button aria-pressed="false" data-days="7">7D</button>
       <button aria-pressed="true" data-days="30">30D</button>
       <button aria-pressed="false" data-days="90">90D</button>
     </div>
   </div>
   <div class="d-dash-plot">
-    <svg class="d-dash-svg" tabindex="0" role="img" aria-label="Daily visitors. Use the arrow keys to read each day."></svg>
+    <svg class="d-dash-svg" tabindex="0" role="img" aria-label="{{Daily visitors. Use the arrow keys to read each day.|Visitas diarias. Usa las flechas para leer cada día.}}"></svg>
     <div class="d-dash-tip" hidden></div>
   </div>
   <div class="sr d-dash-live" aria-live="polite"></div>
@@ -325,10 +330,11 @@
 .d-dash-tip{position:absolute;pointer-events:none;background:var(--primary);color:var(--on-primary);font-size:12px;line-height:16px;padding:6px 8px;border-radius:8px;white-space:nowrap;box-shadow:var(--shadow-pop)}
 .d-dash-tip b{display:block;font-size:13px}
 .d-seg button[aria-pressed="true"]{background:var(--surface);box-shadow:var(--shadow-card)}`,
-    js: function (el) {
+    js: function (el, t) {
       var svg = el.querySelector('svg'), plot = el.querySelector('.d-dash-plot'), tip = el.querySelector('.d-dash-tip');
       var totalEl = el.querySelector('.d-dash-total'), deltaEl = el.querySelector('.d-dash-delta'), live = el.querySelector('.d-dash-live');
-      var day = new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric' }), num = new Intl.NumberFormat('en-US');
+      var locale = t('en-US', 'es');
+      var day = new Intl.DateTimeFormat(locale, { month: 'short', day: 'numeric' }), num = new Intl.NumberFormat(locale);
 
       // Sample data: steady growth, a weekly rhythm and some noise (seeded, so it is stable)
       var seed = 11, rnd = function () { seed = seed * 16807 % 2147483647; return seed / 2147483647; };
@@ -379,7 +385,7 @@
         countTo(sum);
         var change = (sum / prev - 1) * 100, up = change >= 0;
         deltaEl.className = 'badge d-dash-delta ' + (up ? 'success' : 'critical');
-        deltaEl.textContent = (up ? '↑ ' : '↓ ') + Math.abs(change).toFixed(1) + '% vs previous ' + days + ' days';
+        deltaEl.textContent = (up ? '↑ ' : '↓ ') + new Intl.NumberFormat(locale, { minimumFractionDigits: 1, maximumFractionDigits: 1 }).format(Math.abs(change)) + t('% vs previous ' + days + ' days', '% vs. los ' + days + ' días anteriores');
         hover(-1);
       }
 
@@ -403,7 +409,7 @@
         var cross = svg.querySelector('.cross'), dot = svg.querySelector('.dot');
         cross.setAttribute('x1', x); cross.setAttribute('x2', x);
         dot.setAttribute('cx', x); dot.setAttribute('cy', y);
-        tip.innerHTML = '<b>' + num.format(pts[i].v) + ' visitors</b>' + day.format(pts[i].d);
+        tip.innerHTML = '<b>' + num.format(pts[i].v) + t(' visitors', ' visitas') + '</b>' + day.format(pts[i].d);
         var left = Math.max(0, Math.min(plot.clientWidth - tip.offsetWidth, x - tip.offsetWidth / 2));
         tip.style.left = left + 'px';
         tip.style.top = Math.max(0, y - tip.offsetHeight - 12) + 'px';
@@ -421,7 +427,7 @@
         e.preventDefault();
         if (idx < 0) next = pts.length - 1;
         hover(Math.max(0, Math.min(pts.length - 1, next)));
-        live.textContent = day.format(pts[idx].d) + ': ' + num.format(pts[idx].v) + ' visitors';
+        live.textContent = day.format(pts[idx].d) + ': ' + num.format(pts[idx].v) + t(' visitors', ' visitas');
       });
 
       el.querySelectorAll('[data-days]').forEach(function (b) {
@@ -440,26 +446,26 @@
     html: `
 <div class="d-kb">
   <div class="d-kb-cols">
-    <section class="d-kb-col"><h4>To do <span class="badge">3</span></h4>
-      <ul class="d-kb-list" aria-label="To do">
-        <li class="d-kb-card" tabindex="0">Moodboard<span style="--c:#8051FF">Design</span></li>
-        <li class="d-kb-card" tabindex="0">Write homepage copy<span style="--c:#29845A">Content</span></li>
-        <li class="d-kb-card" tabindex="0">Set up analytics<span style="--c:#2C6ECB">Dev</span></li>
+    <section class="d-kb-col"><h4>{{To do|Pendiente}} <span class="badge">3</span></h4>
+      <ul class="d-kb-list" aria-label="{{To do|Pendiente}}">
+        <li class="d-kb-card" tabindex="0">Moodboard<span style="--c:#8051FF">{{Design|Diseño}}</span></li>
+        <li class="d-kb-card" tabindex="0">{{Write homepage copy|Textos de la portada}}<span style="--c:#29845A">{{Content|Contenido}}</span></li>
+        <li class="d-kb-card" tabindex="0">{{Set up analytics|Configurar analítica}}<span style="--c:#2C6ECB">Dev</span></li>
       </ul>
     </section>
-    <section class="d-kb-col"><h4>In progress <span class="badge">2</span></h4>
-      <ul class="d-kb-list" aria-label="In progress">
-        <li class="d-kb-card" tabindex="0">Design tokens<span style="--c:#8051FF">Design</span></li>
-        <li class="d-kb-card" tabindex="0">Checkout API<span style="--c:#2C6ECB">Dev</span></li>
+    <section class="d-kb-col"><h4>{{In progress|En curso}} <span class="badge">2</span></h4>
+      <ul class="d-kb-list" aria-label="{{In progress|En curso}}">
+        <li class="d-kb-card" tabindex="0">Design tokens<span style="--c:#8051FF">{{Design|Diseño}}</span></li>
+        <li class="d-kb-card" tabindex="0">{{Checkout API|API de pago}}<span style="--c:#2C6ECB">Dev</span></li>
       </ul>
     </section>
-    <section class="d-kb-col"><h4>Done <span class="badge">1</span></h4>
-      <ul class="d-kb-list" aria-label="Done">
-        <li class="d-kb-card" tabindex="0">Mobile QA pass<span style="--c:#E8731F">QA</span></li>
+    <section class="d-kb-col"><h4>{{Done|Hecho}} <span class="badge">1</span></h4>
+      <ul class="d-kb-list" aria-label="{{Done|Hecho}}">
+        <li class="d-kb-card" tabindex="0">{{Mobile QA pass|Pruebas en móvil}}<span style="--c:#E8731F">QA</span></li>
       </ul>
     </section>
   </div>
-  <p class="sub" style="margin-top:10px">Drag a card, or focus one and use the arrow keys.</p>
+  <p class="sub" style="margin-top:10px">{{Drag a card, or focus one and use the arrow keys.|Arrastra una tarjeta, o enfócala y usa las flechas.}}</p>
   <div class="sr d-kb-live" aria-live="polite"></div>
 </div>`,
     css: `
@@ -473,12 +479,12 @@
 .d-kb-card:focus-visible{outline:2px solid var(--magic);outline-offset:2px}
 .d-kb-card.dragging{position:fixed;z-index:400;pointer-events:none;cursor:grabbing;transform:rotate(3deg) scale(1.04);box-shadow:0 18px 40px rgba(0,0,0,.25)}
 .d-kb-ph{border:2px dashed var(--border-strong);border-radius:10px;background:transparent}`,
-    js: function (el) {
+    js: function (el, t) {
       var lists = [].slice.call(el.querySelectorAll('.d-kb-list')), live = el.querySelector('.d-kb-live'), drag = null;
       function counts() { lists.forEach(function (l) { l.parentNode.querySelector('.badge').textContent = l.children.length; }); }
       function announce(card) {
         var list = card.parentNode;
-        live.textContent = card.firstChild.textContent + ' moved to ' + list.getAttribute('aria-label') + ', position ' + ([].indexOf.call(list.children, card) + 1);
+        live.textContent = card.firstChild.textContent + t(' moved to ', ' movida a ') + list.getAttribute('aria-label') + t(', position ', ', posición ') + ([].indexOf.call(list.children, card) + 1);
       }
 
       el.addEventListener('pointerdown', function (e) {
@@ -546,12 +552,12 @@
     desc: 'Follows the WAI-ARIA combobox pattern: ranked matches, highlighted text and full keyboard support.',
     html: `
 <div class="d-cb">
-  <label class="label" for="d-cb-in" style="display:block;margin-bottom:6px;font-weight:550">Country</label>
+  <label class="label" for="d-cb-in" style="display:block;margin-bottom:6px;font-weight:550">{{Country|País}}</label>
   <div class="d-cb-wrap">
-    <input class="input" id="d-cb-in" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="d-cb-list" autocomplete="off" placeholder="Try &quot;sp&quot; or &quot;united&quot;">
-    <ul id="d-cb-list" class="d-cb-list" role="listbox" aria-label="Countries" hidden></ul>
+    <input class="input" id="d-cb-in" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="d-cb-list" autocomplete="off" placeholder="{{Try &quot;sp&quot; or &quot;united&quot;|Prueba &quot;es&quot; o &quot;rep&quot;}}">
+    <ul id="d-cb-list" class="d-cb-list" role="listbox" aria-label="{{Countries|Países}}" hidden></ul>
   </div>
-  <p class="sub d-cb-out">Up and down to move, Enter to pick, Esc to close.</p>
+  <p class="sub d-cb-out">{{Up and down to move, Enter to pick, Esc to close.|Flechas para moverte, Enter para elegir, Esc para cerrar.}}</p>
 </div>`,
     css: `
 .d-cb{min-height:200px}
@@ -563,11 +569,15 @@
 .d-cb-list mark{background:none;color:var(--magic);font-weight:700}
 .d-cb-list .d-cb-none{color:var(--text-3);cursor:default}
 .d-cb-out{margin-top:10px}`,
-    js: function (el) {
-      var countries = ['Argentina', 'Australia', 'Austria', 'Belgium', 'Brazil', 'Canada', 'Chile', 'China', 'Colombia', 'Costa Rica',
+    js: function (el, t) {
+      var countries = t(['Argentina', 'Australia', 'Austria', 'Belgium', 'Brazil', 'Canada', 'Chile', 'China', 'Colombia', 'Costa Rica',
         'Cuba', 'Denmark', 'Dominican Republic', 'Ecuador', 'Egypt', 'Finland', 'France', 'Germany', 'Greece', 'Guatemala', 'India',
         'Ireland', 'Italy', 'Jamaica', 'Japan', 'Mexico', 'Morocco', 'Netherlands', 'New Zealand', 'Norway', 'Panama', 'Peru',
-        'Portugal', 'Puerto Rico', 'South Korea', 'Spain', 'Sweden', 'Switzerland', 'United Kingdom', 'United States', 'Uruguay', 'Venezuela'];
+        'Portugal', 'Puerto Rico', 'South Korea', 'Spain', 'Sweden', 'Switzerland', 'United Kingdom', 'United States', 'Uruguay', 'Venezuela'],
+        ['Alemania', 'Argentina', 'Australia', 'Austria', 'Bélgica', 'Brasil', 'Canadá', 'Chile', 'China', 'Colombia', 'Corea del Sur',
+        'Costa Rica', 'Cuba', 'Dinamarca', 'Ecuador', 'Egipto', 'España', 'Estados Unidos', 'Finlandia', 'Francia', 'Grecia', 'Guatemala',
+        'India', 'Irlanda', 'Italia', 'Jamaica', 'Japón', 'Marruecos', 'México', 'Noruega', 'Nueva Zelanda', 'Países Bajos', 'Panamá',
+        'Perú', 'Portugal', 'Puerto Rico', 'Reino Unido', 'República Dominicana', 'Suecia', 'Suiza', 'Uruguay', 'Venezuela']);
       var input = el.querySelector('input'), list = el.querySelector('[role=listbox]'), out = el.querySelector('.d-cb-out');
       var items = [], active = -1;
       function esc(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
@@ -581,7 +591,7 @@
           var k = c.toLowerCase().indexOf(q);
           var label = q ? esc(c.slice(0, k)) + '<mark>' + esc(c.slice(k, k + q.length)) + '</mark>' + esc(c.slice(k + q.length)) : esc(c);
           return '<li role="option" id="d-cb-o' + i + '" data-i="' + i + '">' + label + '</li>';
-        }).join('') : '<li class="d-cb-none">No matches</li>';
+        }).join('') : '<li class="d-cb-none">' + t('No matches', 'Sin resultados') + '</li>';
         paint(); open(true);
       }
       function paint() {
@@ -592,7 +602,7 @@
         list.scrollTop = Math.min(list.scrollTop, li.offsetTop - 4);
         if (li.offsetTop + li.offsetHeight > list.scrollTop + list.clientHeight) list.scrollTop = li.offsetTop + li.offsetHeight - list.clientHeight + 4;
       }
-      function pick(i) { input.value = items[i]; open(false); out.textContent = 'Selected: ' + items[i]; }
+      function pick(i) { input.value = items[i]; open(false); out.textContent = t('Selected: ', 'Elegiste: ') + items[i]; }
       input.addEventListener('input', render);
       input.addEventListener('focus', render);
       input.addEventListener('blur', function () { setTimeout(function () { open(false); }, 120); });
@@ -618,12 +628,12 @@
     html: `
 <div class="d-dp">
   <div class="d-dp-head">
-    <button class="btn btn-plain d-dp-prev" aria-label="Previous month">&lsaquo;</button>
+    <button class="btn btn-plain d-dp-prev" aria-label="{{Previous month|Mes anterior}}">&lsaquo;</button>
     <b class="d-dp-month" aria-live="polite"></b>
-    <button class="btn btn-plain d-dp-next" aria-label="Next month">&rsaquo;</button>
+    <button class="btn btn-plain d-dp-next" aria-label="{{Next month|Mes siguiente}}">&rsaquo;</button>
   </div>
   <div class="d-dp-grid"></div>
-  <p class="sub d-dp-out">Pick a check-in date.</p>
+  <p class="sub d-dp-out">{{Pick a check-in date.|Elige la fecha de entrada.}}</p>
 </div>`,
     css: `
 .d-dp-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
@@ -637,24 +647,25 @@
 .d-dp-grid button.in{background:var(--magic-soft);border-radius:0}
 .d-dp-grid button.edge{background:var(--magic);color:#fff}
 .d-dp-out{margin-top:8px;min-height:20px}`,
-    js: function (el) {
+    js: function (el, t) {
       var grid = el.querySelector('.d-dp-grid'), title = el.querySelector('.d-dp-month'), out = el.querySelector('.d-dp-out');
-      var mf = new Intl.DateTimeFormat('en-US', { month: 'long', year: 'numeric' });
-      var df = new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric' });
-      var full = new Intl.DateTimeFormat('en-US', { dateStyle: 'full' });
+      var locale = t('en-US', 'es');
+      var mf = new Intl.DateTimeFormat(locale, { month: 'long', year: 'numeric' });
+      var df = new Intl.DateTimeFormat(locale, { month: 'short', day: 'numeric' });
+      var full = new Intl.DateTimeFormat(locale, { dateStyle: 'full' });
       var today = new Date(); today.setHours(0, 0, 0, 0);
       var view = new Date(today.getFullYear(), today.getMonth(), 1), focus = today.getTime(), start = null, end = null, hover = null;
 
       function render(moveFocus) {
         title.textContent = mf.format(view);
         el.querySelector('.d-dp-prev').disabled = view <= new Date(today.getFullYear(), today.getMonth(), 1);
-        var html = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'].map(function (d) { return '<span class="dow">' + d + '</span>'; }).join('');
+        var html = t(['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'], ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá']).map(function (d) { return '<span class="dow">' + d + '</span>'; }).join('');
         for (var i = 0; i < view.getDay(); i++) html += '<span></span>';
         var n = new Date(view.getFullYear(), view.getMonth() + 1, 0).getDate();
         for (var d = 1; d <= n; d++) {
-          var t = new Date(view.getFullYear(), view.getMonth(), d).getTime();
-          html += '<button type="button" data-t="' + t + '"' + (t < today ? ' disabled' : '') + ' tabindex="' + (t === focus ? 0 : -1) +
-                  '" aria-label="' + full.format(t) + '"' + (t === today.getTime() ? ' class="today"' : '') + '>' + d + '</button>';
+          var ts = new Date(view.getFullYear(), view.getMonth(), d).getTime();
+          html += '<button type="button" data-ts="' + ts + '"' + (ts < today ? ' disabled' : '') + ' tabindex="' + (ts === focus ? 0 : -1) +
+                  '" aria-label="' + full.format(ts) + '"' + (ts === today.getTime() ? ' class="today"' : '') + '>' + d + '</button>';
         }
         grid.innerHTML = html;
         paint();
@@ -663,22 +674,22 @@
       function paint() {
         var to = end || (start && hover > start ? hover : null);
         grid.querySelectorAll('button').forEach(function (b) {
-          var t = +b.dataset.t;
-          b.classList.toggle('edge', t === start || t === end);
-          b.classList.toggle('in', !!(start && to && t > start && t < to));
-          b.setAttribute('aria-pressed', t === start || t === end);
+          var ts = +b.dataset.ts;
+          b.classList.toggle('edge', ts === start || ts === end);
+          b.classList.toggle('in', !!(start && to && ts > start && ts < to));
+          b.setAttribute('aria-pressed', ts === start || ts === end);
         });
-        if (start && end) out.textContent = df.format(start) + ' → ' + df.format(end) + ' · ' + Math.round((end - start) / 864e5) + ' nights';
-        else if (start) out.textContent = 'Check-in ' + df.format(start) + '. Now pick check-out.';
-        else out.textContent = 'Pick a check-in date.';
+        if (start && end) out.textContent = df.format(start) + ' → ' + df.format(end) + ' · ' + Math.round((end - start) / 864e5) + t(' nights', ' noches');
+        else if (start) out.textContent = t('Check-in ', 'Entrada: ') + df.format(start) + t('. Now pick check-out.', '. Ahora elige la salida.');
+        else out.textContent = t('Pick a check-in date.', 'Elige la fecha de entrada.');
       }
       grid.addEventListener('click', function (e) {
         var b = e.target.closest('button'); if (!b) return;
-        var t = +b.dataset.t; focus = t;
-        if (!start || end || t <= start) { start = t; end = null; } else end = t;
+        var ts = +b.dataset.ts; focus = ts;
+        if (!start || end || ts <= start) { start = ts; end = null; } else end = ts;
         paint();
       });
-      grid.addEventListener('mouseover', function (e) { var b = e.target.closest('button'); hover = b ? +b.dataset.t : null; if (start && !end) paint(); });
+      grid.addEventListener('mouseover', function (e) { var b = e.target.closest('button'); hover = b ? +b.dataset.ts : null; if (start && !end) paint(); });
       grid.addEventListener('keydown', function (e) {
         var step = { ArrowLeft: -1, ArrowRight: 1, ArrowUp: -7, ArrowDown: 7 }[e.key];
         if (!step) return;
@@ -706,10 +717,10 @@
     html: `
 <div class="d-vl">
   <div class="row between" style="margin-bottom:8px">
-    <span class="sub">100,000 rows &middot; <b class="d-vl-dom">0</b> in the DOM</span>
-    <input class="input d-vl-jump" type="number" min="1" max="100000" placeholder="Jump to row" aria-label="Jump to row">
+    <span class="sub">{{100,000 rows|100.000 filas}} &middot; <b class="d-vl-dom">0</b> {{in the DOM|en el DOM}}</span>
+    <input class="input d-vl-jump" type="number" min="1" max="100000" placeholder="{{Jump to row|Ir a la fila}}" aria-label="{{Jump to row|Ir a la fila}}">
   </div>
-  <div class="d-vl-view" tabindex="0" aria-label="Orders list">
+  <div class="d-vl-view" tabindex="0" aria-label="{{Orders list|Lista de pedidos}}">
     <div class="d-vl-spacer"></div>
   </div>
 </div>`,
@@ -721,19 +732,19 @@
 .d-vl-row .id{color:var(--text-3)}
 .d-vl-row .amt{text-align:right;font-weight:600}
 .d-vl-row.hit{background:var(--magic-soft)}`,
-    js: function (el) {
+    js: function (el, t) {
       var view = el.querySelector('.d-vl-view'), spacer = el.querySelector('.d-vl-spacer'), dom = el.querySelector('.d-vl-dom');
       var N = 100000, RH = 36, hit = -1, queued = false;
       var first = ['Ana', 'Luis', 'Mia', 'Leo', 'Sofia', 'Diego', 'Emma', 'Noah', 'Valeria', 'Mateo', 'Olivia', 'Lucas'];
       var last = ['Garcia', 'Smith', 'Lopez', 'Chen', 'Rossi', 'Martin', 'Silva', 'Kim', 'Novak', 'Diaz'];
-      var status = [['Paid', 'success'], ['Pending', 'warning'], ['Refunded', '']];
-      var money = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
+      var status = [[t('Paid', 'Pagado'), 'success'], [t('Pending', 'Pendiente'), 'warning'], [t('Refunded', 'Reembolsado'), '']];
+      var money = new Intl.NumberFormat(t('en-US', 'es-US'), { style: 'currency', currency: 'USD' });
       spacer.style.height = N * RH + 'px';
 
       function row(i) { // every row is computed from its index, so nothing is stored
         var h = Math.imul(i + 1, 2654435761) >>> 0, s = status[h % 3];
         return '<div class="d-vl-row' + (i === hit ? ' hit' : '') + '" style="top:' + i * RH + 'px">' +
-          '<span class="id">#' + (i + 1) + '</span><span>' + first[h % 12] + ' ' + last[(h >>> 4) % 10] + '</span>' +
+          '<span class="id">#' + (i + 1).toLocaleString(t('en-US', 'es')) + '</span><span>' + first[h % 12] + ' ' + last[(h >>> 4) % 10] + '</span>' +
           '<span class="badge ' + s[1] + '">' + s[0] + '</span><span class="amt">' + money.format((h % 90000) / 100 + 5) + '</span></div>';
       }
       function render() {
@@ -761,11 +772,11 @@
     desc: 'Auto-advance, smart backspace, paste-to-fill and phone autofill support. Try the code below.',
     html: `
 <div class="d-otp">
-  <p class="sub">Your code is <b>428 913</b>. <button class="btn btn-plain d-otp-copy" type="button">Copy it</button> and paste, or type it.</p>
-  <div class="d-otp-boxes" role="group" aria-label="6-digit code">
-    <input inputmode="numeric" autocomplete="one-time-code" aria-label="Digit 1"><input inputmode="numeric" aria-label="Digit 2"><input inputmode="numeric" aria-label="Digit 3">
+  <p class="sub">{{Your code is|Tu código es}} <b>428 913</b>. <button class="btn btn-plain d-otp-copy" type="button">{{Copy it|Cópialo}}</button> {{and paste, or type it.|y pégalo, o escríbelo.}}</p>
+  <div class="d-otp-boxes" role="group" aria-label="{{6-digit code|Código de 6 dígitos}}">
+    <input inputmode="numeric" autocomplete="one-time-code" aria-label="{{Digit|Dígito}} 1"><input inputmode="numeric" aria-label="{{Digit|Dígito}} 2"><input inputmode="numeric" aria-label="{{Digit|Dígito}} 3">
     <span aria-hidden="true">&ndash;</span>
-    <input inputmode="numeric" aria-label="Digit 4"><input inputmode="numeric" aria-label="Digit 5"><input inputmode="numeric" aria-label="Digit 6">
+    <input inputmode="numeric" aria-label="{{Digit|Dígito}} 4"><input inputmode="numeric" aria-label="{{Digit|Dígito}} 5"><input inputmode="numeric" aria-label="{{Digit|Dígito}} 6">
   </div>
   <p class="d-otp-msg" aria-live="polite"></p>
 </div>`,
@@ -783,7 +794,7 @@
 .d-otp.ok .d-otp-msg{color:var(--success)}
 .d-otp.bad .d-otp-msg{color:var(--critical)}
 @media (max-width:420px){.d-otp-boxes input{width:36px;height:44px;font-size:18px}}`,
-    js: function (el) {
+    js: function (el, t) {
       var boxes = [].slice.call(el.querySelectorAll('input')), msg = el.querySelector('.d-otp-msg'), CODE = '428913';
       function fill(digits, from) {
         digits.split('').forEach(function (c, k) { if (boxes[from + k]) boxes[from + k].value = c; });
@@ -796,10 +807,10 @@
         msg.textContent = '';
         if (v.length < 6) return;
         if (v === CODE) {
-          el.classList.add('ok'); msg.textContent = 'Verified. Welcome back.';
-          if (window.yg) yg.toast('Code verified');
+          el.classList.add('ok'); msg.textContent = t('Verified. Welcome back.', 'Verificado. Bienvenido de nuevo.');
+          if (window.yg) yg.toast(t('Code verified', 'Código verificado'));
         } else {
-          el.classList.add('bad'); msg.textContent = 'That code does not match. Try again.';
+          el.classList.add('bad'); msg.textContent = t('That code does not match. Try again.', 'Ese código no coincide. Inténtalo de nuevo.');
           setTimeout(function () { boxes.forEach(function (b) { b.value = ''; }); el.classList.remove('bad'); boxes[0].focus(); }, 700);
         }
       }
@@ -823,7 +834,7 @@
         });
       });
       el.querySelector('.d-otp-copy').addEventListener('click', function () {
-        if (window.yg) yg.copy(CODE, 'Code copied. Paste it into the first box.');
+        if (window.yg) yg.copy(CODE, t('Code copied. Paste it into the first box.', 'Código copiado. Pégalo en la primera casilla.'));
       });
     }
   });
@@ -838,7 +849,7 @@
     html: `
 <div class="d-cq">
   <div class="row between" style="margin-bottom:10px">
-    <input type="range" class="range d-cq-size" min="35" max="100" value="100" aria-label="Container width" style="flex:1;max-width:220px">
+    <input type="range" class="range d-cq-size" min="35" max="100" value="100" aria-label="{{Container width|Ancho del contenedor}}" style="flex:1;max-width:220px">
     <span class="badge magic d-cq-w"></span>
   </div>
   <div class="d-cq-box">
@@ -846,10 +857,10 @@
       <div class="d-cq-img"></div>
       <div class="d-cq-body">
         <b>Coral Gables loft</b>
-        <span class="sub">2 beds &middot; 1 bath &middot; 900 sq ft</span>
-        <span class="d-cq-price">$2,850/mo</span>
+        <span class="sub">{{2 beds &middot; 1 bath &middot; 900 sq ft|2 hab. &middot; 1 baño &middot; 84 m&sup2;}}</span>
+        <span class="d-cq-price">{{$2,850/mo|$2.850/mes}}</span>
       </div>
-      <button class="btn btn-primary">Book a tour</button>
+      <button class="btn btn-primary">{{Book a tour|Agendar visita}}</button>
     </article>
   </div>
 </div>`,
@@ -867,7 +878,7 @@
   .d-cq-body .sub{display:none}
   .d-cq-card .btn{width:100%}
 }`,
-    js: function (el) {
+    js: function (el, t) {
       var box = el.querySelector('.d-cq-box'), badge = el.querySelector('.d-cq-w');
       el.querySelector('.d-cq-size').addEventListener('input', function () {
         box.style.width = this.value + '%';
@@ -876,7 +887,7 @@
       el.querySelector('.d-cq-size').style.setProperty('--p', '100%');
       new ResizeObserver(function () { // only used for the label; the layout itself is pure CSS
         var w = box.clientWidth - 20;
-        badge.textContent = w + 'px · ' + (w >= 360 ? 'wide' : w <= 200 ? 'compact' : 'stacked');
+        badge.textContent = w + 'px · ' + (w >= 360 ? t('wide', 'ancho') : w <= 200 ? t('compact', 'compacto') : t('stacked', 'apilado'));
       }).observe(box);
     }
   });
@@ -889,10 +900,10 @@
   <label class="d-has-plan"><input type="radio" name="d-has" id="d-has-s"> <b>Starter</b><span>$9</span></label>
   <label class="d-has-plan"><input type="radio" name="d-has" id="d-has-p"> <b>Pro</b><span>$29</span></label>
   <label class="d-has-plan"><input type="radio" name="d-has" id="d-has-t"> <b>Team</b><span>$79</span></label>
-  <label class="d-has-add"><input type="checkbox" id="d-has-x"> Add priority support (+$15)</label>
+  <label class="d-has-add"><input type="checkbox" id="d-has-x"> {{Add priority support (+$15)|Añadir soporte prioritario (+$15)}}</label>
   <div class="d-has-foot">
     <span class="d-has-total"></span>
-    <button class="btn btn-primary d-has-cta">Continue</button>
+    <button class="btn btn-primary d-has-cta">{{Continue|Continuar}}</button>
   </div>
 </form>`,
     css: `
@@ -905,12 +916,12 @@
 .d-has-foot{display:flex;justify-content:space-between;align-items:center;margin-top:4px}
 .d-has-cta{opacity:.45;pointer-events:none;transition:opacity .2s}
 .d-has:has(.d-has-plan :checked) .d-has-cta{opacity:1;pointer-events:auto}
-.d-has-total::after{content:"Choose a plan";color:var(--text-3)}
-.d-has:has(#d-has-s:checked) .d-has-total::after{content:"Starter \\00b7  $9/mo";color:var(--text)}
-.d-has:has(#d-has-p:checked) .d-has-total::after{content:"Pro \\00b7  $29/mo";color:var(--text)}
-.d-has:has(#d-has-t:checked) .d-has-total::after{content:"Team \\00b7  $79/mo";color:var(--text)}
-.d-has:has(#d-has-x:checked) .d-has-total::before{content:"Priority + ";font-weight:600;color:var(--magic)}
-@supports not selector(:has(a)){.d-has-total::after{content:"Your browser does not support :has() yet"}}`,
+.d-has-total::after{content:"{{Choose a plan|Elige un plan}}";color:var(--text-3)}
+.d-has:has(#d-has-s:checked) .d-has-total::after{content:"Starter \\00b7  $9{{/mo|/mes}}";color:var(--text)}
+.d-has:has(#d-has-p:checked) .d-has-total::after{content:"Pro \\00b7  $29{{/mo|/mes}}";color:var(--text)}
+.d-has:has(#d-has-t:checked) .d-has-total::after{content:"Team \\00b7  $79{{/mo|/mes}}";color:var(--text)}
+.d-has:has(#d-has-x:checked) .d-has-total::before{content:"{{Priority + |Prioritario + }}";font-weight:600;color:var(--magic)}
+@supports not selector(:has(a)){.d-has-total::after{content:"{{Your browser does not support :has() yet|Tu navegador aún no admite :has()}}"}}`,
     js: null
   });
 
@@ -920,7 +931,7 @@
     html: `
 <div class="d-intl">
   <div class="row between" style="margin-bottom:10px">
-    <select class="select d-intl-loc" aria-label="Language" style="width:auto">
+    <select class="select d-intl-loc" aria-label="{{Language|Idioma}}" style="width:auto">
       <option value="en-US">English (US)</option>
       <option value="es-ES">Espa&ntilde;ol (Espa&ntilde;a)</option>
       <option value="es-MX">Espa&ntilde;ol (M&eacute;xico)</option>
@@ -928,7 +939,7 @@
       <option value="de-DE">Deutsch</option>
       <option value="ja-JP">&#26085;&#26412;&#35486;</option>
     </select>
-    <label class="sub row" style="gap:6px">Messages <input type="range" class="range d-intl-n" min="0" max="5" value="3" style="width:80px"></label>
+    <label class="sub row" style="gap:6px">{{Messages|Mensajes}} <input type="range" class="range d-intl-n" min="0" max="5" value="3" style="width:80px"></label>
   </div>
   <dl class="d-intl-out"></dl>
 </div>`,
@@ -938,7 +949,8 @@
 .d-intl-out dt{color:var(--text-3);font-size:12px;font-weight:600;background:var(--surface-2)}
 .d-intl-out dd{font-weight:550}
 .d-intl-out :nth-last-child(-n+2){border-bottom:0}`,
-    js: function (el) {
+    js: function (el, t) {
+      if (t('en', 'es') === 'es') el.querySelector('.d-intl-loc').value = 'es-MX'; // start in Spanish on the Spanish site
       var currency = { 'en-US': 'USD', 'es-ES': 'EUR', 'es-MX': 'MXN', 'fr-FR': 'EUR', 'de-DE': 'EUR', 'ja-JP': 'JPY' };
       var messages = {
         en: { one: '# new message', other: '# new messages' },
@@ -952,12 +964,12 @@
         var l = loc.value, n = +count.value, now = new Date(), dict = messages[l.slice(0, 2)];
         count.style.setProperty('--p', n / 5 * 100 + '%');
         var rows = [
-          ['Date', new Intl.DateTimeFormat(l, { dateStyle: 'full' }).format(now)],
-          ['Relative', new Intl.RelativeTimeFormat(l, { numeric: 'auto' }).format(-1, 'day') + ' · ' + new Intl.RelativeTimeFormat(l).format(3, 'week')],
-          ['Price', new Intl.NumberFormat(l, { style: 'currency', currency: currency[l] }).format(1234.5)],
-          ['Compact', new Intl.NumberFormat(l, { notation: 'compact' }).format(2450000)],
+          [t('Date', 'Fecha'), new Intl.DateTimeFormat(l, { dateStyle: 'full' }).format(now)],
+          [t('Relative', 'Relativa'), new Intl.RelativeTimeFormat(l, { numeric: 'auto' }).format(-1, 'day') + ' · ' + new Intl.RelativeTimeFormat(l).format(3, 'week')],
+          [t('Price', 'Precio'), new Intl.NumberFormat(l, { style: 'currency', currency: currency[l] }).format(1234.5)],
+          [t('Compact', 'Compacto'), new Intl.NumberFormat(l, { notation: 'compact' }).format(2450000)],
           ['Plural', (dict[new Intl.PluralRules(l).select(n)] || dict.other).replace('#', new Intl.NumberFormat(l).format(n))],
-          ['List', new Intl.ListFormat(l, { type: 'conjunction' }).format(['HTML', 'CSS', 'JavaScript'])]
+          [t('List', 'Lista'), new Intl.ListFormat(l, { type: 'conjunction' }).format(['HTML', 'CSS', 'JavaScript'])]
         ];
         out.innerHTML = '';
         out.lang = l;
@@ -979,25 +991,25 @@
     html: `
 <div class="d-pop">
   <div class="row" style="justify-content:center">
-    <button class="btn d-pop-btn" popovertarget="d-pop-menu">Actions &#9662;</button>
-    <button class="btn btn-critical d-pop-open">Delete draft</button>
+    <button class="btn d-pop-btn" popovertarget="d-pop-menu">{{Actions|Acciones}} &#9662;</button>
+    <button class="btn btn-critical d-pop-open">{{Delete draft|Eliminar borrador}}</button>
   </div>
   <div id="d-pop-menu" class="d-pop-menu" popover>
-    <button popovertarget="d-pop-menu" popovertargetaction="hide">Edit</button>
-    <button popovertarget="d-pop-menu" popovertargetaction="hide">Duplicate</button>
-    <button popovertarget="d-pop-menu" popovertargetaction="hide">Share link</button>
+    <button popovertarget="d-pop-menu" popovertargetaction="hide">{{Edit|Editar}}</button>
+    <button popovertarget="d-pop-menu" popovertargetaction="hide">{{Duplicate|Duplicar}}</button>
+    <button popovertarget="d-pop-menu" popovertargetaction="hide">{{Share link|Compartir enlace}}</button>
   </div>
   <dialog class="d-pop-dialog">
     <form method="dialog">
-      <h3>Delete this draft?</h3>
-      <p class="sub">A native &lt;dialog&gt;: focus is trapped, Esc closes it and the page behind is inert.</p>
+      <h3>{{Delete this draft?|¿Eliminar este borrador?}}</h3>
+      <p class="sub">{{A native &lt;dialog&gt;: focus is trapped, Esc closes it and the page behind is inert.|Un &lt;dialog&gt; nativo: el foco queda dentro, Esc lo cierra y la página de fondo queda inactiva.}}</p>
       <div class="row" style="justify-content:flex-end;margin-top:16px">
-        <button class="btn" value="cancel">Cancel</button>
-        <button class="btn btn-critical" value="delete">Delete</button>
+        <button class="btn" value="cancel">{{Cancel|Cancelar}}</button>
+        <button class="btn btn-critical" value="delete">{{Delete|Eliminar}}</button>
       </div>
     </form>
   </dialog>
-  <p class="sub d-pop-out" aria-live="polite">Nothing chosen yet.</p>
+  <p class="sub d-pop-out" aria-live="polite">{{Nothing chosen yet.|Aún no has elegido nada.}}</p>
 </div>`,
     css: `
 .d-pop{display:grid;gap:14px;justify-items:center;padding:24px 0}
@@ -1013,17 +1025,17 @@
 .d-pop-dialog[open]{animation:d-pop-in .2s cubic-bezier(.2,.9,.3,1)}
 .d-pop-dialog::backdrop{background:rgba(0,0,0,.4);backdrop-filter:blur(3px)}
 @keyframes d-pop-in{from{opacity:0;transform:translateY(10px) scale(.97)}}`,
-    js: function (el) {
+    js: function (el, t) {
       var out = el.querySelector('.d-pop-out'), dialog = el.querySelector('dialog');
       el.querySelectorAll('.d-pop-menu button').forEach(function (b) {
-        b.addEventListener('click', function () { out.textContent = 'You picked "' + b.textContent + '" from the popover.'; });
+        b.addEventListener('click', function () { out.textContent = t('You picked "', 'Elegiste "') + b.textContent + t('" from the popover.', '" en el popover.'); });
       });
       el.querySelector('.d-pop-open').addEventListener('click', function () { dialog.showModal(); });
       dialog.addEventListener('close', function () {
-        out.textContent = dialog.returnValue === 'delete' ? 'Draft deleted (not really, it is a demo).' : 'Dialog closed without deleting.';
+        out.textContent = dialog.returnValue === 'delete' ? t('Draft deleted (not really, it is a demo).', 'Borrador eliminado (en realidad no, es una demo).') : t('Dialog closed without deleting.', 'Diálogo cerrado sin eliminar.');
         dialog.returnValue = '';
       });
-      if (!HTMLElement.prototype.hasOwnProperty('popover')) out.textContent = 'Your browser does not support popovers yet; the dialog still works.';
+      if (!HTMLElement.prototype.hasOwnProperty('popover')) out.textContent = t('Your browser does not support popovers yet; the dialog still works.', 'Tu navegador aún no admite popovers; el diálogo sí funciona.');
     }
   });
 
@@ -1032,16 +1044,16 @@
     desc: 'Checks any text and background pair against WCAG AA and AAA, using the official relative-luminance formula.',
     html: `
 <div class="d-con">
-  <div class="d-con-preview"><b>Readable text matters</b><span>The quick brown fox jumps over the lazy dog.</span></div>
+  <div class="d-con-preview"><b>{{Readable text matters|Un texto legible importa}}</b><span>{{The quick brown fox jumps over the lazy dog.|El veloz murciélago hindú comía feliz cardillo y kiwi.}}</span></div>
   <div class="d-con-controls">
-    <label><input type="color" name="fg" value="#5b5b5b"> Text <code class="d-con-fg"></code></label>
-    <button class="btn btn-plain d-con-swap" aria-label="Swap colors">&#8646;</button>
-    <label><input type="color" name="bg" value="#f3eeff"> Background <code class="d-con-bg"></code></label>
+    <label><input type="color" name="fg" value="#5b5b5b"> {{Text|Texto}} <code class="d-con-fg"></code></label>
+    <button class="btn btn-plain d-con-swap" aria-label="{{Swap colors|Intercambiar colores}}">&#8646;</button>
+    <label><input type="color" name="bg" value="#f3eeff"> {{Background|Fondo}} <code class="d-con-bg"></code></label>
   </div>
   <div class="d-con-result">
     <b class="d-con-ratio"></b>
     <div class="row">
-      <span class="badge" data-min="4.5">AA</span><span class="badge" data-min="3">AA large</span><span class="badge" data-min="7">AAA</span>
+      <span class="badge" data-min="4.5">AA</span><span class="badge" data-min="3">{{AA large|AA grande}}</span><span class="badge" data-min="7">AAA</span>
     </div>
   </div>
 </div>`,
@@ -1090,18 +1102,18 @@
 <div class="d-ww">
   <div class="d-ww-track"><span class="d-ww-ball"></span></div>
   <div class="row" style="margin-top:12px">
-    <button class="btn d-ww-main">Run on main thread</button>
-    <button class="btn btn-primary d-ww-worker">Run in a worker</button>
+    <button class="btn d-ww-main">{{Run on main thread|Ejecutar en el hilo principal}}</button>
+    <button class="btn btn-primary d-ww-worker">{{Run in a worker|Ejecutar en un worker}}</button>
   </div>
-  <p class="sub d-ww-out" aria-live="polite">Counts the prime numbers below 5 million.</p>
+  <p class="sub d-ww-out" aria-live="polite">{{Counts the prime numbers below 5 million.|Cuenta los números primos menores que 5 millones.}}</p>
 </div>`,
     css: `
 .d-ww-track{position:relative;height:44px;border-radius:22px;background:var(--surface-2);border:1px solid var(--border)}
 .d-ww-ball{position:absolute;top:7px;left:7px;width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--magic),var(--magic-2));box-shadow:0 4px 10px rgba(0,0,0,.2)}
 .d-ww-out{margin-top:10px;min-height:40px}`,
-    js: function (el) {
+    js: function (el, t) {
       var ball = el.querySelector('.d-ww-ball'), track = el.querySelector('.d-ww-track'), out = el.querySelector('.d-ww-out');
-      var buttons = el.querySelectorAll('button'), LIMIT = 5e6, t = 0, visible = false, running = false;
+      var buttons = el.querySelectorAll('button'), LIMIT = 5e6, phase = 0, visible = false, running = false;
       function countPrimes(limit) {
         var n = 0;
         for (var i = 2; i < limit; i++) {
@@ -1113,8 +1125,8 @@
       }
       // The ball is moved by JavaScript on purpose: a CSS animation would keep running even when the main thread is blocked
       function frame() {
-        t += .03;
-        ball.style.transform = 'translateX(' + (Math.sin(t) + 1) / 2 * (track.clientWidth - 44) + 'px)';
+        phase += .03;
+        ball.style.transform = 'translateX(' + (Math.sin(phase) + 1) / 2 * (track.clientWidth - 44) + 'px)';
         if (visible) requestAnimationFrame(frame); else running = false;
       }
       new IntersectionObserver(function (es) {
@@ -1122,14 +1134,14 @@
         if (visible && !running) { running = true; requestAnimationFrame(frame); }
       }).observe(track);
       function busy(on) { buttons.forEach(function (b) { b.disabled = on; }); }
-      function report(where, n, ms) { out.innerHTML = '<b>' + where + ':</b> ' + n.toLocaleString() + ' primes in ' + Math.round(ms) + ' ms.'; busy(false); }
+      function report(where, n, ms) { out.innerHTML = '<b>' + where + ':</b> ' + n.toLocaleString(t('en-US', 'es')) + t(' primes in ', ' primos en ') + Math.round(ms) + ' ms.'; busy(false); }
 
       el.querySelector('.d-ww-main').addEventListener('click', function () {
-        busy(true); out.textContent = 'Working on the main thread. Watch the ball freeze…';
-        setTimeout(function () { var t0 = performance.now(), n = countPrimes(LIMIT); report('Main thread', n, performance.now() - t0); }, 60);
+        busy(true); out.textContent = t('Working on the main thread. Watch the ball freeze…', 'Trabajando en el hilo principal. Mira cómo se congela la bola…');
+        setTimeout(function () { var t0 = performance.now(), n = countPrimes(LIMIT); report(t('Main thread', 'Hilo principal'), n, performance.now() - t0); }, 60);
       });
       el.querySelector('.d-ww-worker').addEventListener('click', function () {
-        busy(true); out.textContent = 'Working in a background thread. The ball keeps moving…';
+        busy(true); out.textContent = t('Working in a background thread. The ball keeps moving…', 'Trabajando en un hilo en segundo plano. La bola sigue moviéndose…');
         var src = 'var countPrimes = ' + countPrimes.toString() + ';\nonmessage = function (e) { postMessage(countPrimes(e.data)); };';
         var url = URL.createObjectURL(new Blob([src], { type: 'text/javascript' }));
         var worker = new Worker(url), t0 = performance.now();
@@ -1147,13 +1159,13 @@
     id: 'palette', cat: 'apps', title: 'Palette generator', tags: ['Color theory', 'HSL'],
     desc: 'Harmonious palettes from real color rules. Lock the colors you like, press Space for more, copy as CSS variables.',
     html: `
-<div class="d-pal" tabindex="0" aria-label="Palette generator. Press Space for a new palette.">
+<div class="d-pal" tabindex="0" aria-label="{{Palette generator. Press Space for a new palette.|Generador de paletas. Pulsa Espacio para una paleta nueva.}}">
   <div class="d-pal-row"></div>
   <div class="row between" style="margin-top:12px">
     <span class="badge magic d-pal-mode"></span>
     <div class="row">
-      <button class="btn d-pal-copy">Copy CSS</button>
-      <button class="btn btn-primary d-pal-gen">Generate <kbd>Space</kbd></button>
+      <button class="btn d-pal-copy">{{Copy CSS|Copiar CSS}}</button>
+      <button class="btn btn-primary d-pal-gen">{{Generate|Generar}} <kbd>{{Space|Espacio}}</kbd></button>
     </div>
   </div>
 </div>`,
@@ -1166,8 +1178,10 @@
 .d-pal-sw .lock[aria-pressed="true"]{opacity:1;background:rgba(0,0,0,.2)}
 .d-pal kbd{font:inherit;font-size:11px;opacity:.7;border:1px solid currentColor;border-radius:4px;padding:0 4px;margin-left:4px}
 .d-pal:focus-visible .d-pal-row{outline:2px solid var(--magic);outline-offset:3px}`,
-    js: function (el) {
+    js: function (el, t) {
       var row = el.querySelector('.d-pal-row'), mode = el.querySelector('.d-pal-mode'), colors = [], locked = [false, false, false, false, false];
+      var names = { Analogous: t('Analogous', 'Análoga'), Complementary: t('Complementary', 'Complementaria'), Triadic: t('Triadic', 'Triádica'),
+        'Split complementary': t('Split complementary', 'Complementaria dividida'), Monochrome: t('Monochrome', 'Monocromática') };
       var rules = {
         Analogous: [-40, -20, 0, 20, 40], Complementary: [0, 10, 0, 180, 190], Triadic: [0, 120, 0, 240, 120],
         'Split complementary': [0, 150, 0, 210, 30], Monochrome: [0, 0, 0, 0, 0]
@@ -1180,13 +1194,13 @@
       }
       function isLight(c) { var n = parseInt(c.slice(1), 16); return (.299 * (n >> 16) + .587 * (n >> 8 & 255) + .114 * (n & 255)) > 150; }
       row.innerHTML = locked.map(function (x, i) {
-        return '<div class="d-pal-sw"><button class="lock" data-lock="' + i + '" aria-pressed="false" aria-label="Lock color ' + (i + 1) + '">&#128275;</button><button class="hex" data-copy="' + i + '"></button></div>';
+        return '<div class="d-pal-sw"><button class="lock" data-lock="' + i + '" aria-pressed="false" aria-label="' + t('Lock color ', 'Bloquear color ') + (i + 1) + '">&#128275;</button><button class="hex" data-copy="' + i + '"></button></div>';
       }).join('');
       var swatches = row.querySelectorAll('.d-pal-sw');
       function generate() {
         var names = Object.keys(rules), name = names[Math.floor(Math.random() * names.length)];
         var base = Math.random() * 360, sat = 55 + Math.random() * 30, light = [88, 70, 55, 38, 20];
-        mode.textContent = name;
+        mode.textContent = names[name];
         rules[name].forEach(function (off, i) {
           if (!locked[i]) colors[i] = hex((base + off + 360) % 360, sat - (name === 'Monochrome' ? i * 4 : 0), light[i]);
           swatches[i].style.background = colors[i];
@@ -1197,13 +1211,13 @@
       el.addEventListener('click', function (e) {
         var lock = e.target.closest('[data-lock]'), copy = e.target.closest('[data-copy]');
         if (lock) { var i = +lock.dataset.lock; locked[i] = !locked[i]; lock.setAttribute('aria-pressed', locked[i]); lock.innerHTML = locked[i] ? '&#128274;' : '&#128275;'; }
-        if (copy && window.yg) yg.copy(colors[+copy.dataset.copy].toUpperCase(), colors[+copy.dataset.copy].toUpperCase() + ' copied');
+        if (copy && window.yg) yg.copy(colors[+copy.dataset.copy].toUpperCase(), colors[+copy.dataset.copy].toUpperCase() + t(' copied', ' copiado'));
       });
       el.addEventListener('keydown', function (e) { if (e.code === 'Space' && e.target === el) { e.preventDefault(); generate(); } });
       el.querySelector('.d-pal-gen').addEventListener('click', generate);
       el.querySelector('.d-pal-copy').addEventListener('click', function () {
         var css = ':root {\n' + colors.map(function (c, i) { return '  --color-' + (i + 1) + '00: ' + c + ';'; }).join('\n') + '\n}';
-        if (window.yg) yg.copy(css, 'Palette copied as CSS variables');
+        if (window.yg) yg.copy(css, t('Palette copied as CSS variables', 'Paleta copiada como variables CSS'));
       });
       generate();
     }
@@ -1216,13 +1230,13 @@
 <div class="d-gr">
   <div class="d-gr-preview"></div>
   <div class="d-gr-controls">
-    <select class="select d-gr-type" aria-label="Gradient type"><option>linear</option><option>radial</option><option>conic</option></select>
+    <select class="select d-gr-type" aria-label="{{Gradient type|Tipo de degradado}}"><option>linear</option><option>radial</option><option>conic</option></select>
     <input type="color" class="d-gr-c" value="#8051ff" aria-label="Color 1">
     <input type="color" class="d-gr-c" value="#2fb5e8" aria-label="Color 2">
     <input type="color" class="d-gr-c" value="#ff6fd8" aria-label="Color 3">
-    <label class="sub d-gr-angle-wrap">Angle <input type="range" class="range d-gr-angle" min="0" max="360" value="135"></label>
+    <label class="sub d-gr-angle-wrap">{{Angle|Ángulo}} <input type="range" class="range d-gr-angle" min="0" max="360" value="135"></label>
   </div>
-  <div class="d-gr-code"><code></code><button class="btn d-gr-copy">Copy</button></div>
+  <div class="d-gr-code"><code></code><button class="btn d-gr-copy">{{Copy|Copiar}}</button></div>
 </div>`,
     css: `
 .d-gr-preview{height:110px;border-radius:12px;transition:background .3s}
@@ -1232,7 +1246,7 @@
 .d-gr-angle-wrap{display:flex;align-items:center;gap:8px;flex:1;min-width:140px}
 .d-gr-code{display:flex;gap:8px;align-items:center;background:var(--surface-2);border-radius:10px;padding:6px 6px 6px 12px}
 .d-gr-code code{flex:1;font:12px/1.4 ui-monospace,Menlo,Consolas,monospace;color:var(--text-2);word-break:break-all}`,
-    js: function (el) {
+    js: function (el, t) {
       var type = el.querySelector('.d-gr-type'), angle = el.querySelector('.d-gr-angle'), cols = el.querySelectorAll('.d-gr-c');
       var preview = el.querySelector('.d-gr-preview'), code = el.querySelector('code'), css = '';
       function update() {
@@ -1247,7 +1261,7 @@
         angle.style.setProperty('--p', a / 360 * 100 + '%');
       }
       el.addEventListener('input', update);
-      el.querySelector('.d-gr-copy').addEventListener('click', function () { if (window.yg) yg.copy(css, 'CSS copied'); });
+      el.querySelector('.d-gr-copy').addEventListener('click', function () { if (window.yg) yg.copy(css, t('CSS copied', 'CSS copiado')); });
       update();
     }
   });
@@ -1257,7 +1271,7 @@
     desc: 'A small Markdown parser written from scratch. It escapes HTML first, so pasted text can never run scripts.',
     html: `
 <div class="d-md">
-  <textarea class="textarea d-md-src" aria-label="Markdown source" spellcheck="false">## Project notes
+  <textarea class="textarea d-md-src" aria-label="{{Markdown source|Texto Markdown}}" spellcheck="false">{{## Project notes
 Write in **Markdown** and see it *instantly*.
 
 - Live preview as you type
@@ -1268,10 +1282,21 @@ Write in **Markdown** and see it *instantly*.
 
 1. Draft
 2. Review
-3. Ship</textarea>
+3. Ship|## Notas del proyecto
+Escribe en **Markdown** y míralo *al instante*.
+
+- Vista previa mientras escribes
+- Seguro: las etiquetas \`<script>\` se ven como texto
+- Enlaces como [mi GitHub](https://github.com/yainel)
+
+> Herramientas simples, hechas con cuidado.
+
+1. Borrador
+2. Revisión
+3. Lanzamiento}}</textarea>
   <div class="d-md-out" aria-live="off"></div>
 </div>
-<div class="row between" style="margin-top:8px"><span class="sub d-md-stat"></span><button class="btn d-md-copy">Copy HTML</button></div>`,
+<div class="row between" style="margin-top:8px"><span class="sub d-md-stat"></span><button class="btn d-md-copy">{{Copy HTML|Copiar HTML}}</button></div>`,
     css: `
 .d-md{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .d-md-src{height:240px;padding:12px;font:13px/1.55 ui-monospace,Menlo,Consolas,monospace;resize:none}
@@ -1282,7 +1307,7 @@ Write in **Markdown** and see it *instantly*.
 .d-md-out blockquote{border-left:3px solid var(--magic);padding-left:12px;color:var(--text-2)}
 .d-md-out code{font:12px ui-monospace,Menlo,Consolas,monospace;background:var(--surface-3);padding:1px 5px;border-radius:5px}
 @media (max-width:640px){.d-md{grid-template-columns:1fr}}`,
-    js: function (el) {
+    js: function (el, t) {
       var src = el.querySelector('.d-md-src'), out = el.querySelector('.d-md-out'), stat = el.querySelector('.d-md-stat');
       function esc(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
       function inline(s) {
@@ -1317,10 +1342,10 @@ Write in **Markdown** and see it *instantly*.
       function update() {
         out.innerHTML = parse(src.value);
         var words = (src.value.match(/\S+/g) || []).length;
-        stat.textContent = words + ' words · ' + Math.max(1, Math.round(words / 230)) + ' min read';
+        stat.textContent = words + t(' words · ', ' palabras · ') + Math.max(1, Math.round(words / 230)) + t(' min read', ' min de lectura');
       }
       src.addEventListener('input', update);
-      el.querySelector('.d-md-copy').addEventListener('click', function () { if (window.yg) yg.copy(out.innerHTML, 'HTML copied'); });
+      el.querySelector('.d-md-copy').addEventListener('click', function () { if (window.yg) yg.copy(out.innerHTML, t('HTML copied', 'HTML copiado')); });
       update();
     }
   });
@@ -1330,19 +1355,19 @@ Write in **Markdown** and see it *instantly*.
     desc: 'A Pomodoro timer that stays accurate even when the tab sleeps, because it measures the clock instead of counting ticks.',
     html: `
 <div class="d-tm">
-  <div class="segmented d-seg d-tm-modes" role="group" aria-label="Timer mode">
-    <button aria-pressed="true" data-min="25">Focus</button>
-    <button aria-pressed="false" data-min="5">Short break</button>
-    <button aria-pressed="false" data-min="15">Long break</button>
+  <div class="segmented d-seg d-tm-modes" role="group" aria-label="{{Timer mode|Modo del temporizador}}">
+    <button aria-pressed="true" data-min="25">{{Focus|Enfoque}}</button>
+    <button aria-pressed="false" data-min="5">{{Short break|Pausa corta}}</button>
+    <button aria-pressed="false" data-min="15">{{Long break|Pausa larga}}</button>
   </div>
   <div class="d-tm-ring">
     <svg viewBox="0 0 120 120"><circle class="track" cx="60" cy="60" r="52"/><circle class="val" cx="60" cy="60" r="52"/></svg>
-    <div><b class="d-tm-time" role="timer">25:00</b><span class="sub d-tm-done">0 sessions done</span></div>
+    <div><b class="d-tm-time" role="timer">25:00</b><span class="sub d-tm-done">{{0 sessions done|0 sesiones hechas}}</span></div>
   </div>
   <div class="row" style="justify-content:center">
-    <button class="btn btn-primary d-tm-go" style="min-width:90px">Start</button>
-    <button class="btn d-tm-reset">Reset</button>
-    <button class="btn btn-plain d-tm-skip">Skip</button>
+    <button class="btn btn-primary d-tm-go" style="min-width:90px">{{Start|Iniciar}}</button>
+    <button class="btn d-tm-reset">{{Reset|Reiniciar}}</button>
+    <button class="btn btn-plain d-tm-skip">{{Skip|Saltar}}</button>
   </div>
 </div>`,
     css: `
@@ -1353,7 +1378,7 @@ Write in **Markdown** and see it *instantly*.
 .d-tm-ring .track{stroke:var(--surface-3)}
 .d-tm-ring .val{stroke:var(--magic);stroke-dasharray:326.7;transition:stroke-dashoffset .3s linear}
 .d-tm-time{display:block;font-size:30px;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums}`,
-    js: function (el) {
+    js: function (el, t) {
       var timeEl = el.querySelector('.d-tm-time'), ring = el.querySelector('.val'), go = el.querySelector('.d-tm-go'), doneEl = el.querySelector('.d-tm-done');
       var total = 25 * 60e3, left = total, endAt = 0, timer = 0, sessions = 0, C = 326.7;
       function show() {
@@ -1366,13 +1391,13 @@ Write in **Markdown** and see it *instantly*.
         show();
         if (!left) finish();
       }
-      function start() { endAt = Date.now() + left; timer = setInterval(tick, 250); go.textContent = 'Pause'; }
-      function pause() { clearInterval(timer); timer = 0; go.textContent = 'Start'; }
+      function start() { endAt = Date.now() + left; timer = setInterval(tick, 250); go.textContent = t('Pause', 'Pausar'); }
+      function pause() { clearInterval(timer); timer = 0; go.textContent = t('Start', 'Iniciar'); }
       function reset() { pause(); left = total; show(); }
       function finish() {
         pause(); sessions++;
-        doneEl.textContent = sessions + ' session' + (sessions === 1 ? '' : 's') + ' done';
-        if (window.yg) { yg.toast('Time is up. Nice work.'); yg.confetti(); }
+        doneEl.textContent = sessions + (sessions === 1 ? t(' session done', ' sesión hecha') : t(' sessions done', ' sesiones hechas'));
+        if (window.yg) { yg.toast(t('Time is up. Nice work.', 'Se acabó el tiempo. Buen trabajo.')); yg.confetti(); }
         left = total; show();
       }
       go.addEventListener('click', function () { timer ? pause() : start(); });
@@ -1393,15 +1418,15 @@ Write in **Markdown** and see it *instantly*.
     desc: 'Adjust a photo with sliders or presets, hold to compare with the original, or load your own image (it never leaves your device).',
     html: `
 <div class="d-fx">
-  <div class="d-fx-view"><img class="d-fx-img" alt="Sample photo: palm tree at sunset"></div>
+  <div class="d-fx-view"><img class="d-fx-img" alt="{{Sample photo: palm tree at sunset|Foto de ejemplo: palmera al atardecer}}"></div>
   <div class="d-fx-sliders"></div>
   <div class="row">
-    <button class="btn btn-plain" data-preset="vivid">Vivid</button>
+    <button class="btn btn-plain" data-preset="vivid">{{Vivid|Vívido}}</button>
     <button class="btn btn-plain" data-preset="noir">Noir</button>
     <button class="btn btn-plain" data-preset="vintage">Vintage</button>
-    <button class="btn btn-plain" data-preset="reset">Reset</button>
-    <button class="btn d-fx-hold" style="margin-left:auto">Hold to compare</button>
-    <label class="btn">Your photo<input type="file" accept="image/*" class="sr d-fx-file"></label>
+    <button class="btn btn-plain" data-preset="reset">{{Reset|Restablecer}}</button>
+    <button class="btn d-fx-hold" style="margin-left:auto">{{Hold to compare|Mantén para comparar}}</button>
+    <label class="btn">{{Your photo|Tu foto}}<input type="file" accept="image/*" class="sr d-fx-file"></label>
   </div>
 </div>`,
     css: `
@@ -1409,8 +1434,9 @@ Write in **Markdown** and see it *instantly*.
 .d-fx-img{width:100%;height:100%;object-fit:cover}
 .d-fx-sliders{display:grid;grid-template-columns:1fr 1fr;gap:6px 16px;margin:12px 0}
 .d-fx-sliders label{display:grid;grid-template-columns:72px 1fr;align-items:center;gap:8px;font-size:12px;color:var(--text-2)}`,
-    js: function (el) {
+    js: function (el, t) {
       var img = el.querySelector('img'), wrap = el.querySelector('.d-fx-sliders');
+      var labels = t(['brightness', 'contrast', 'saturate', 'hue', 'sepia', 'blur'], ['brillo', 'contraste', 'saturación', 'tono', 'sepia', 'desenfoque']);
       var scene = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200"><defs><linearGradient id="s" x2="0" y2="1"><stop offset="0" stop-color="#ff9a8b"/><stop offset=".6" stop-color="#ffd3a5"/></linearGradient></defs>' +
         '<rect width="400" height="200" fill="url(#s)"/><circle cx="290" cy="110" r="34" fill="#fff3c4"/>' +
         '<path d="M0 140 Q80 100 160 130 T320 120 T400 115 V200 H0Z" fill="#e2725b"/><path d="M0 170 Q100 135 200 165 T400 155 V200 H0Z" fill="#2e7d6b"/>' +
@@ -1418,8 +1444,8 @@ Write in **Markdown** and see it *instantly*.
       img.src = 'data:image/svg+xml,' + encodeURIComponent(scene);
       var defs = [['brightness', 0, 200, 100, '%'], ['contrast', 0, 200, 100, '%'], ['saturate', 0, 300, 100, '%'], ['hue-rotate', 0, 360, 0, 'deg'], ['sepia', 0, 100, 0, '%'], ['blur', 0, 8, 0, 'px']];
       var presets = { vivid: [110, 120, 170, 0, 0, 0], noir: [105, 140, 0, 0, 0, 0], vintage: [105, 90, 80, 340, 45, 0], reset: [100, 100, 100, 0, 0, 0] };
-      wrap.innerHTML = defs.map(function (d) {
-        return '<label>' + d[0] + '<input type="range" class="range" min="' + d[1] + '" max="' + d[2] + '" value="' + d[3] + '"></label>';
+      wrap.innerHTML = defs.map(function (d, i) {
+        return '<label>' + labels[i] + '<input type="range" class="range" min="' + d[1] + '" max="' + d[2] + '" value="' + d[3] + '"></label>';
       }).join('');
       var ranges = wrap.querySelectorAll('input');
       function update() {
@@ -1448,17 +1474,17 @@ Write in **Markdown** and see it *instantly*.
     desc: 'Smooth, pressure-aware ink with undo and PNG export. The same idea powers the consent platform I built.',
     html: `
 <div class="d-sig">
-  <canvas class="d-sig-pad" aria-label="Signature area. Draw with a mouse, finger or stylus."></canvas>
+  <canvas class="d-sig-pad" aria-label="{{Signature area. Draw with a mouse, finger or stylus.|Área de firma. Dibuja con el ratón, el dedo o un lápiz.}}"></canvas>
   <div class="row" style="margin-top:10px">
-    <button class="btn d-sig-undo">Undo</button>
-    <button class="btn d-sig-clear">Clear</button>
-    <button class="btn btn-primary d-sig-save" style="margin-left:auto">Download PNG</button>
+    <button class="btn d-sig-undo">{{Undo|Deshacer}}</button>
+    <button class="btn d-sig-clear">{{Clear|Borrar}}</button>
+    <button class="btn btn-primary d-sig-save" style="margin-left:auto">{{Download PNG|Descargar PNG}}</button>
   </div>
 </div>`,
     css: `
 .d-sig-pad{width:100%;height:170px;display:block;border-radius:12px;background:var(--surface-2);touch-action:none;cursor:crosshair;
   background-image:linear-gradient(var(--border-strong),var(--border-strong));background-size:calc(100% - 48px) 1px;background-position:24px 75%;background-repeat:no-repeat}`,
-    js: function (el) {
+    js: function (el, t) {
       var cv = el.querySelector('canvas'), cx = cv.getContext('2d'), strokes = [], cur = null, dpr = Math.min(2, window.devicePixelRatio || 1);
       function ink() { return getComputedStyle(document.documentElement).getPropertyValue('--text').trim() || '#303030'; }
       function size() { cv.width = cv.clientWidth * dpr; cv.height = cv.clientHeight * dpr; redraw(); }
@@ -1495,14 +1521,14 @@ Write in **Markdown** and see it *instantly*.
       el.querySelector('.d-sig-undo').addEventListener('click', function () { strokes.pop(); redraw(); });
       el.querySelector('.d-sig-clear').addEventListener('click', function () { strokes = []; redraw(); });
       el.querySelector('.d-sig-save').addEventListener('click', function () {
-        if (!strokes.length) { if (window.yg) yg.toast('Sign first, then download', true); return; }
+        if (!strokes.length) { if (window.yg) yg.toast(t('Sign first, then download', 'Firma primero y luego descarga'), true); return; }
         var out = document.createElement('canvas'), o = out.getContext('2d');
         out.width = cv.width; out.height = cv.height;
         o.fillStyle = '#fff'; o.fillRect(0, 0, out.width, out.height);
         o.setTransform(dpr, 0, 0, dpr, 0, 0);
         strokes.forEach(function (s) { drawStroke(o, s, '#1a1a1a'); });
         var a = document.createElement('a');
-        a.href = out.toDataURL('image/png'); a.download = 'signature.png'; a.click();
+        a.href = out.toDataURL('image/png'); a.download = t('signature.png', 'firma.png'); a.click();
       });
       new MutationObserver(redraw).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] }); // re-ink on theme change
       new ResizeObserver(size).observe(cv);
@@ -1516,7 +1542,7 @@ Write in **Markdown** and see it *instantly*.
   var root = document.getElementById('pgRoot');
   var style = document.createElement('style');
   style.id = 'pg-demos';
-  style.textContent = demos.map(function (d) { return d.css; }).join('\n');
+  style.textContent = demos.map(function (d) { return loc(d.css); }).join('\n');
   document.head.appendChild(style);
 
   function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
@@ -1525,20 +1551,20 @@ Write in **Markdown** and see it *instantly*.
     var items = demos.filter(function (d) { return d.cat === g.id; });
     var wrap = document.createElement('div');
     wrap.className = 'pg-group'; wrap.id = 'pg-' + g.id; wrap.dataset.cat = g.id;
-    wrap.innerHTML = '<div class="pg-group-head"><h3>' + esc(g.t) + ' <span class="badge">' + items.length + '</span></h3><p>' + esc(g.p) + '</p></div><div class="pg-grid"></div>';
+    wrap.innerHTML = '<div class="pg-group-head"><h3>' + esc(T(g.t)) + ' <span class="badge">' + items.length + '</span></h3><p>' + esc(T(g.p)) + '</p></div><div class="pg-grid"></div>';
     var grid = wrap.querySelector('.pg-grid');
     items.forEach(function (d) {
       byId[d.id] = d;
       var card = document.createElement('article');
       card.className = 'card pg-card reveal' + (d.wide ? ' wide' : '');
       card.id = 'demo-' + d.id;
-      card.dataset.search = (d.title + ' ' + d.desc + ' ' + d.tags.join(' ') + ' ' + g.t).toLowerCase();
+      card.dataset.search = [d.title, d.desc, d.tags.join(' '), g.t, T(d.title), T(d.desc), d.tags.map(function (x) { return T(x); }).join(' '), T(g.t)].join(' ').toLowerCase(); // finds a demo in either language
       card.innerHTML =
-        '<div class="pg-head"><h3>' + esc(d.title) + '</h3><div class="pg-tags">' + d.tags.map(function (t) { return '<span class="badge">' + esc(t) + '</span>'; }).join('') + '</div></div>' +
-        '<p class="pg-desc">' + esc(d.desc) + '</p>' +
+        '<div class="pg-head"><h3>' + esc(T(d.title)) + '</h3><div class="pg-tags">' + d.tags.map(function (x) { return '<span class="badge">' + esc(T(x)) + '</span>'; }).join('') + '</div></div>' +
+        '<p class="pg-desc">' + esc(T(d.desc)) + '</p>' +
         '<div class="pg-stage"></div>' +
-        '<div class="pg-foot"><button class="btn btn-plain pg-code" data-code="' + d.id + '"><svg width="16" height="16" viewBox="0 0 20 20"><path fill="currentColor" d="M7.3 5.3a.8.8 0 0 1 0 1.1L3.7 10l3.6 3.6a.8.8 0 1 1-1.1 1.1L2.1 10.5a.8.8 0 0 1 0-1l4.1-4.2a.8.8 0 0 1 1.1 0Zm5.4 0a.8.8 0 0 1 1.1 0l4.1 4.2c.3.3.3.7 0 1l-4.1 4.2a.8.8 0 1 1-1.1-1.1l3.6-3.6-3.6-3.6a.8.8 0 0 1 0-1.1Z"/></svg>View code</button></div>';
-      card.querySelector('.pg-stage').innerHTML = d.html.trim();
+        '<div class="pg-foot"><button class="btn btn-plain pg-code" data-code="' + d.id + '"><svg width="16" height="16" viewBox="0 0 20 20"><path fill="currentColor" d="M7.3 5.3a.8.8 0 0 1 0 1.1L3.7 10l3.6 3.6a.8.8 0 1 1-1.1 1.1L2.1 10.5a.8.8 0 0 1 0-1l4.1-4.2a.8.8 0 0 1 1.1 0Zm5.4 0a.8.8 0 0 1 1.1 0l4.1 4.2c.3.3.3.7 0 1l-4.1 4.2a.8.8 0 1 1-1.1-1.1l3.6-3.6-3.6-3.6a.8.8 0 0 1 0-1.1Z"/></svg>' + T('View code') + '</button></div>';
+      card.querySelector('.pg-stage').innerHTML = loc(d.html).trim();
       grid.appendChild(card);
       if (yg) yg.reveal(card);
     });
@@ -1552,10 +1578,10 @@ Write in **Markdown** and see it *instantly*.
       starter.unobserve(en.target);
       var d = byId[en.target.id.slice(5)];
       if (!d.js) return;
-      try { d.js(en.target.querySelector('.pg-stage')); }
+      try { d.js(en.target.querySelector('.pg-stage'), t); }
       catch (err) {
         console.error(d.id, err);
-        en.target.querySelector('.pg-stage').insertAdjacentHTML('beforeend', '<p class="sub">This demo needs a newer browser.</p>');
+        en.target.querySelector('.pg-stage').insertAdjacentHTML('beforeend', '<p class="sub">' + T('This demo needs a newer browser.') + '</p>');
       }
     });
   }, { rootMargin: '300px 0px' });
@@ -1611,8 +1637,8 @@ Write in **Markdown** and see it *instantly*.
   var modal = document.getElementById('codeModal'), codeEl = document.getElementById('cmCode'), note = document.getElementById('cmNote');
   var tabs = [].slice.call(modal.querySelectorAll('[role=tab]')), current = null, lang = 'html';
   function source(d, l) {
-    if (l === 'html') return dedent(d.html);
-    if (l === 'css') return dedent(d.css);
+    if (l === 'html') return dedent(loc(d.html));
+    if (l === 'css') return dedent(loc(d.css));
     return d.js ? dedent(d.js.toString()) : '';
   }
   function showLang(l, focusTab) {
@@ -1623,15 +1649,15 @@ Write in **Markdown** and see it *instantly*.
       if (on && focusTab) t.focus();
     });
     var src = source(current, l);
-    codeEl.innerHTML = src ? highlight(src, l) : '<span class="t-c">// No JavaScript needed. This one is pure HTML and CSS.</span>';
+    codeEl.innerHTML = src ? highlight(src, l) : '<span class="t-c">' + T('// No JavaScript needed. This one is pure HTML and CSS.') + '</span>';
     var lines = src ? src.split('\n').length : 0;
-    note.textContent = lines ? lines + ' lines of ' + l.toUpperCase() : 'Zero JavaScript';
+    note.textContent = lines ? T('{n} lines of {l}', { n: lines, l: l.toUpperCase() }) : T('Zero JavaScript');
   }
   document.addEventListener('click', function (e) {
     var b = e.target.closest('[data-code]');
     if (!b) return;
     current = byId[b.dataset.code];
-    document.getElementById('cmTitle').textContent = current.title;
+    document.getElementById('cmTitle').textContent = T(current.title);
     showLang('html');
     yg.openOverlay(modal);
   });
@@ -1644,13 +1670,13 @@ Write in **Markdown** and see it *instantly*.
   });
   document.getElementById('cmCopy').addEventListener('click', function () {
     var src = source(current, lang);
-    if (src) yg.copy(src, lang.toUpperCase() + ' copied to clipboard');
+    if (src) yg.copy(src, T('{l} copied to clipboard', { l: lang.toUpperCase() }));
   });
 
   /* ---------- Quick actions ---------- */
   if (yg) {
     demos.forEach(function (d) {
-      yg.commands.push({ g: 'Playground', t: d.title, run: function () {
+      yg.commands.push({ g: 'Playground', t: T(d.title), run: function () {
         showAll();
         location.hash = ''; location.hash = 'demo-' + d.id;
         var card = document.getElementById('demo-' + d.id);

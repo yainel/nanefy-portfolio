@@ -37,7 +37,7 @@
 
 /* Code viewer */
 .code-modal{width:min(860px,100%);display:flex;flex-direction:column;overflow:hidden}
-.code-modal .tabs{margin:0;padding:0 12px}
+.code-modal .tabs{margin:0;padding:0 12px;overflow-y:hidden}
 .cm-pre{margin:0;background:#15141c;color:#e7e4f0;font:12.5px/1.65 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;padding:16px 18px;overflow:auto;flex:1;min-height:0;tab-size:2;white-space:pre-wrap;overflow-wrap:anywhere}
 .cm-pre .t-c{color:#7f7a93;font-style:italic}
 .cm-pre .t-s{color:#a5e6b0}
