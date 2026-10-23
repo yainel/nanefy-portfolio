@@ -431,7 +431,7 @@
     this.textContent = T('Loading');
     var btn = this;
     setTimeout(function () {
-      sk.innerHTML = '<div class="avatar" style="width:40px;height:40px;border-radius:50%;font-size:14px">YG</div><div><b>' + T('Content loaded') + '</b><div class="sub">' + T('Skeletons keep the layout steady while data arrives.') + '</div></div>';
+      sk.innerHTML = '<div class="avatar" style="width:40px;height:40px;border-radius:50%;font-size:.875rem">YG</div><div><b>' + T('Content loaded') + '</b><div class="sub">' + T('Skeletons keep the layout steady while data arrives.') + '</div></div>';
       sk.dataset.loaded = '1'; btn.textContent = T('Show skeleton again');
     }, 900);
   });
@@ -572,6 +572,42 @@
     });
     if (bits.length) requestAnimationFrame(draw); else { running = false; cx.clearRect(0, 0, cv.width, cv.height); }
   }
+
+  /* ---------- Display preferences: wide layout, high contrast, larger text, reduce transparency ---------- */
+  // The <head> script applies these before the first paint; this keeps the panel and classes in sync after that.
+  var prefKeys = ['wide', 'contrast', 'text', 'solid'];
+  var prefSystem = { contrast: '(prefers-contrast: more)', solid: '(prefers-reduced-transparency: reduce)' };
+  function prefs() { try { return JSON.parse(store('yg-display') || '{}'); } catch (e) { return {}; } }
+  function prefOn(k) { var p = prefs(); return p[k] != null ? p[k] : !!(prefSystem[k] && matchMedia(prefSystem[k]).matches); }
+  function applyPrefs() {
+    prefKeys.forEach(function (k) {
+      root.classList.toggle('pref-' + k, prefOn(k));
+      var box = $('[data-pref="' + k + '"]'); if (box) box.checked = prefOn(k);
+    });
+    window.dispatchEvent(new Event('resize')); // tab bars and charts re-measure for the new width or text size
+  }
+  function setPref(k, on) { var p = prefs(); p[k] = on; store('yg-display', JSON.stringify(p)); applyPrefs(); }
+  var dBtn = $('#displayBtn'), dPanel = $('#displayPanel');
+  function displayPanel(open) {
+    dPanel.hidden = !open; dBtn.setAttribute('aria-expanded', open);
+    if (open) { var first = $$('input', dPanel).filter(function (x) { return x.offsetParent; })[0]; if (first) first.focus(); }
+  }
+  dBtn.addEventListener('click', function () { displayPanel(dPanel.hidden); });
+  document.addEventListener('click', function (e) { if (!dPanel.hidden && !e.target.closest('.display-wrap')) displayPanel(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !dPanel.hidden) { displayPanel(false); dBtn.focus(); } });
+  $$('[data-pref]', dPanel).forEach(function (box) { box.addEventListener('change', function () { setPref(box.dataset.pref, box.checked); }); });
+  $('#displayReset').addEventListener('click', function () {
+    try { localStorage.removeItem('yg-display'); } catch (e) {}
+    applyPrefs(); toast('Display settings reset');
+  });
+  function togglePref(k, label) { var on = !prefOn(k); setPref(k, on); toast(T(on ? '{x}: on' : '{x}: off', { x: T(label) })); }
+  commands.push(
+    { g: 'Display', t: 'Wide layout', run: function () { togglePref('wide', 'Wide layout'); } },
+    { g: 'Display', t: 'High contrast', run: function () { togglePref('contrast', 'High contrast'); } },
+    { g: 'Display', t: 'Larger text', run: function () { togglePref('text', 'Larger text'); } },
+    { g: 'Display', t: 'Reduce transparency', run: function () { togglePref('solid', 'Reduce transparency'); } }
+  );
+  applyPrefs();
 
   /* ---------- Shared helpers for playground.js ---------- */
   window.yg = {
