@@ -30,6 +30,9 @@
     'Profile': 'Perfil',
     'Copy email': 'Copiar correo',
     'Close': 'Cerrar',
+    'Download résumé': 'Descargar CV (en inglés)',
+    'Résumé': 'CV',
+    'PDF · 1 page': 'PDF · 1 página, en inglés',
     'Display settings': 'Ajustes de pantalla',
     'Display': 'Pantalla',
     'Saved on this device.': 'Se guardan en este dispositivo.',
@@ -99,7 +102,7 @@
     'Listen first, then structure (grid, type scale, content order), then refine the details, then build. Desktop and mobile get designed side by side.': 'Primero escucho, luego estructuro (retícula, escala tipográfica, orden del contenido), después refino los detalles y programo. Escritorio y móvil se diseñan a la par.',
     'Spanish is my first language, I work in English every day, and I know some French.': 'El español es mi lengua materna, trabajo en inglés todos los días y sé algo de francés.',
     "I'm in Miami and happy to work remote, hybrid or on site.": 'Estoy en Miami y trabajo a distancia, híbrido o presencial.',
-    "I'm available for freelance and full-time work. The quickest way to start is the Start a project form at the bottom of the page.": 'Estoy disponible para trabajo freelance y a tiempo completo. La forma más rápida de empezar es el formulario Empezar un proyecto, al final de la página.',
+    "I'm available for freelance and full-time work. The quickest way to start is the Start a project form at the bottom of the page, and my résumé is one click away at the top.": 'Estoy disponible para trabajo freelance y a tiempo completo. La forma más rápida de empezar es el formulario Empezar un proyecto, al final de la página, y mi CV está a un clic, arriba del todo.',
     "Good question. That one is better answered in person, so send it through the Start a project form and I'll reply within a day.": 'Buena pregunta. Esa se responde mejor en persona: envíala con el formulario Empezar un proyecto y te respondo en un día.',
 
     // Playground section

@@ -153,7 +153,7 @@
     { k: ['process', 'approach', 'how do you', 'proceso', 'cómo trabajas'], a: 'Listen first, then structure (grid, type scale, content order), then refine the details, then build. Desktop and mobile get designed side by side.' },
     { k: ['spanish', 'language', 'english', 'french', 'español', 'idioma', 'inglés', 'francés'], a: 'Spanish is my first language, I work in English every day, and I know some French.' },
     { k: ['where', 'location', 'miami', 'remote', 'based', 'dónde', 'donde', 'remoto'], a: "I'm in Miami and happy to work remote, hybrid or on site." },
-    { k: ['hire', 'available', 'freelance', 'contact', 'email', 'price', 'cost', 'rate', 'contrat', 'disponib', 'precio', 'costo', 'tarifa', 'correo', 'contacto'], a: "I'm available for freelance and full-time work. The quickest way to start is the Start a project form at the bottom of the page." }
+    { k: ['hire', 'available', 'freelance', 'contact', 'email', 'price', 'cost', 'rate', 'contrat', 'disponib', 'precio', 'costo', 'tarifa', 'correo', 'contacto'], a: "I'm available for freelance and full-time work. The quickest way to start is the Start a project form at the bottom of the page, and my résumé is one click away at the top." }
   ];
   function answer(q) {
     var l = q.toLowerCase(), hit = null;
@@ -299,6 +299,7 @@
     { g: 'Selected work', t: 'Brasa wood-fire restaurant', run: function () { openProject('brasa'); } },
     { g: 'Selected work', t: 'Marea pilates studio', run: function () { openProject('marea'); } },
     { g: 'Actions', t: 'Toggle dark mode', k: 'D', run: function () { setTheme(root.dataset.theme === 'dark' ? 'light' : 'dark'); } },
+    { g: 'Actions', t: 'Download résumé', run: function () { var a = document.createElement('a'); a.href = 'resume/Yainel-Garcia-Alfonso-Resume.pdf'; a.download = ''; document.body.appendChild(a); a.click(); a.remove(); } },
     { g: 'Actions', t: 'Copy email address', run: function () { copy('garcia.yainel@gmail.com', 'Email copied to clipboard'); } },
     { g: 'Actions', t: 'Celebrate', run: function () { confetti(); } },
     { g: 'Actions', t: spanish ? 'Switch to English' : 'Cambiar a español', run: function () { window.ygSetLang(spanish ? 'en' : 'es'); } },
