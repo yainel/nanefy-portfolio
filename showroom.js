@@ -279,9 +279,80 @@
   }
   $$('.overlay').forEach(function (o) {
     o.addEventListener('click', function (e) {
-      if (e.target === o || e.target.closest('[data-close]')) closeOverlay(o);
+      if (e.target === o || e.target.closest('[data-close]')) closeAny(o);
     });
   });
+
+  /* ---------- Site viewer: concept sites and case studies open in a modal ---------- */
+  var viewer = $('#viewer'), vFrame = $('#viewerFrame'), vStage = $('#viewerStage'), vLoading = $('#viewerLoading');
+  var siteNames = { 'palma-alta': 'Palma Alta', tostado: 'Tostado', tally: 'Tally', brasa: 'Brasa', marea: 'Marea' };
+  var sitePath = /(?:^|\/)(?:(palma-alta|tostado|tally|brasa|marea)\/(?:index\.html)?|work\/(palma-alta|tostado|tally|brasa|marea)\.html)$/;
+  function viewerLabel(path) {
+    var m = path.match(sitePath); if (!m) return null;
+    return m[1] ? siteNames[m[1]] : siteNames[m[2]] + ' · ' + T('case study');
+  }
+  function closeAny(o) { if (o === viewer) closeViewer(); else closeOverlay(o); }
+  function openViewer(href, fromHistory) {
+    var url = new URL(href, location.href);
+    $$('.overlay.open').forEach(function (o) { if (o !== viewer) closeOverlay(o); });
+    vLoading.classList.remove('done');
+    load(url.href);
+    showViewerUrl(url);
+    if (!viewer.classList.contains('open')) {
+      openOverlay(viewer);
+      if (!fromHistory) history.pushState({ viewer: url.pathname.replace(/^.*?\/(work\/|[a-z-]+\/)/, '$1') }, '', '#view=' + encodeURIComponent(href));
+    }
+  }
+  function showViewerUrl(url) {
+    var path = url.pathname.replace(/^.*?\/((?:work\/)?[a-z-]+(?:\/|\.html)(?:index\.html)?)$/, '$1');
+    $('#viewerTitle').textContent = viewerLabel(url.pathname) || 'nanefy.com';
+    $('#viewerUrl').textContent = 'nanefy.com/' + path.replace(/index\.html$/, '');
+    $('#viewerNewTab').href = url.href;
+  }
+  // Pages load with location.replace so the iframe never adds its own entries to the browser history
+  function load(href) { try { vFrame.contentWindow.location.replace(href); } catch (err) { vFrame.src = href; } }
+  function closeViewer(fromHistory) {
+    if (!viewer.classList.contains('open')) return;
+    closeOverlay(viewer);
+    load('about:blank');
+    if (!fromHistory && /^#view=/.test(location.hash)) history.replaceState(null, '', location.pathname + location.search);
+  }
+  vFrame.addEventListener('load', function () {
+    vLoading.classList.add('done');
+    try { // same-origin: keep the bar in step, close on Escape, and send links to the homepage back out
+      var w = vFrame.contentWindow, doc = vFrame.contentDocument;
+      if (w.location.href === 'about:blank') return;
+      showViewerUrl(new URL(w.location.href));
+      doc.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeViewer(); });
+      doc.addEventListener('click', function (e) {
+        var a = e.target.closest && e.target.closest('a[href]'); if (!a || a.target === '_blank') return;
+        var to = new URL(a.getAttribute('href'), w.location.href);
+        if (sitePath.test(to.pathname) && !to.hash) { e.preventDefault(); vLoading.classList.remove('done'); load(to.href); return; }
+        if (/\/(index\.html)?$/.test(to.pathname) && !sitePath.test(to.pathname) && to.pathname.split('/').length <= location.pathname.split('/').length) {
+          e.preventDefault(); closeViewer(); if (to.hash) setTimeout(function () { location.hash = to.hash; }, 350);
+        }
+      });
+    } catch (err) {}
+  });
+  segmented($('#viewerSize'), function (b) {
+    var full = b.dataset.w === 'full';
+    vStage.classList.toggle('framed', !full);
+    vFrame.style.width = full ? '' : b.dataset.w + 'px';
+  });
+  addEventListener('popstate', function () {
+    var m = location.hash.match(/^#view=(.+)$/);
+    if (m) openViewer(decodeURIComponent(m[1]), true); else closeViewer(true);
+  });
+  // Any link to a concept site or case study opens in the viewer (new-tab clicks still work normally)
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('a[href]');
+    if (!a || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || a.target === '_blank') return;
+    var href = a.getAttribute('href');
+    if (!sitePath.test(new URL(href, location.href).pathname)) return;
+    e.preventDefault();
+    openViewer(href);
+  });
+  (function () { var m = location.hash.match(/^#view=(.+)$/); if (m) openViewer(decodeURIComponent(m[1]), true); })();
 
   /* ---------- Command palette ---------- */
   var pal = $('#palette'), palInput = $('#palInput'), palList = $('#palList'), sel = 0, shown = [];
@@ -303,7 +374,7 @@
     { g: 'Actions', t: 'Copy email address', run: function () { copy('garcia.yainel@gmail.com', 'Email copied to clipboard'); } },
     { g: 'Actions', t: 'Celebrate', run: function () { confetti(); } },
     { g: 'Actions', t: spanish ? 'Switch to English' : 'Cambiar a español', run: function () { window.ygSetLang(spanish ? 'en' : 'es'); } },
-    { g: 'Actions', t: 'Open the Palma Alta live site', run: function () { location.href = 'palma-alta/index.html'; } }
+    { g: 'Actions', t: 'Open the Palma Alta live site', run: function () { openViewer('palma-alta/index.html'); } }
   ];
   function renderPal() {
     var q = palInput.value.trim().toLowerCase(), html = '', last = '';
@@ -328,7 +399,7 @@
   });
   document.addEventListener('keydown', function (e) {
     if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); pal.classList.contains('open') ? closeOverlay(pal) : openPal(); }
-    if (e.key === 'Escape') $$('.overlay.open').forEach(closeOverlay);
+    if (e.key === 'Escape') $$('.overlay.open').forEach(closeAny);
     var typing = /INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName);
     if (!typing && !e.metaKey && !e.ctrlKey && e.key.toLowerCase() === 'd' && !$('.overlay.open')) setTheme(root.dataset.theme === 'dark' ? 'light' : 'dark');
   });
