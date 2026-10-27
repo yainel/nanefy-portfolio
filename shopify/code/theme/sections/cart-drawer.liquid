@@ -1,0 +1,87 @@
+{%- comment -%}
+  Cart drawer with a free-shipping progress bar.
+  Rendered once in theme.liquid with {% section 'cart-drawer' %}, then re-rendered through the
+  Section Rendering API after every cart change (see assets/cart-drawer.js), so totals, discounts
+  and selling plans always come from Shopify instead of being recalculated in JavaScript.
+{%- endcomment -%}
+
+{%- liquid
+  assign threshold = settings.free_shipping_threshold | times: 100
+  assign remaining = threshold | minus: cart.total_price
+  assign remaining_money = remaining | money
+  assign progress = 0
+  if threshold > 0
+    assign progress = cart.total_price | times: 100 | divided_by: threshold
+    if progress > 100
+      assign progress = 100
+    endif
+  endif
+-%}
+
+<cart-drawer id="CartDrawer" class="drawer" aria-hidden="true">
+  <div class="drawer__overlay" data-close></div>
+  <div class="drawer__inner" role="dialog" aria-modal="true" aria-labelledby="CartDrawerTitle" tabindex="-1">
+    <header class="drawer__header">
+      <h2 id="CartDrawerTitle">{{ 'cart.title' | t }} ({{ cart.item_count }})</h2>
+      <button type="button" class="drawer__close" data-close aria-label="{{ 'cart.close' | t }}">&times;</button>
+    </header>
+
+    {%- if threshold > 0 and cart.item_count > 0 -%}
+      <div class="shipping-bar" role="status">
+        {%- if remaining > 0 -%}
+          <p>{{ 'cart.free_shipping_remaining' | t: amount: remaining_money }}</p>
+        {%- else -%}
+          <p>{{ 'cart.free_shipping_unlocked' | t }}</p>
+        {%- endif -%}
+        <progress value="{{ progress }}" max="100">{{ progress }}%</progress>
+      </div>
+    {%- endif -%}
+
+    <ul class="cart-items">
+      {%- for item in cart.items -%}
+        <li class="cart-item">
+          {%- if item.image -%}
+            {{ item.image | image_url: width: 160 | image_tag: loading: 'lazy', class: 'cart-item__image' }}
+          {%- endif -%}
+          <div class="cart-item__details">
+            <a href="{{ item.url }}">{{ item.product.title }}</a>
+            {%- unless item.product.has_only_default_variant -%}
+              <p>{{ item.variant.title }}</p>
+            {%- endunless -%}
+            {%- if item.selling_plan_allocation -%}
+              <p>{{ item.selling_plan_allocation.selling_plan.name }}</p>
+            {%- endif -%}
+            <div class="quantity">
+              <button type="button" data-line="{{ item.key }}" data-quantity="{{ item.quantity | minus: 1 }}" aria-label="{{ 'cart.decrease' | t: product: item.product.title }}">&minus;</button>
+              <span>{{ item.quantity }}</span>
+              <button type="button" data-line="{{ item.key }}" data-quantity="{{ item.quantity | plus: 1 }}" aria-label="{{ 'cart.increase' | t: product: item.product.title }}">+</button>
+            </div>
+          </div>
+          <span class="cart-item__price">{{ item.final_line_price | money }}</span>
+        </li>
+      {%- else -%}
+        <li class="cart-empty">{{ 'cart.empty' | t }}</li>
+      {%- endfor -%}
+    </ul>
+
+    <p class="drawer__error" role="alert" data-error hidden></p>
+
+    {%- if cart.item_count > 0 -%}
+      <footer class="drawer__footer">
+        <p class="drawer__total">{{ 'cart.subtotal' | t }} <strong>{{ cart.total_price | money }}</strong></p>
+        <form action="{{ routes.cart_url }}" method="post">
+          <button type="submit" name="checkout" class="button">{{ 'cart.checkout' | t }}</button>
+        </form>
+      </footer>
+    {%- endif -%}
+  </div>
+</cart-drawer>
+
+<script src="{{ 'cart-drawer.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Cart drawer",
+  "settings": []
+}
+{% endschema %}

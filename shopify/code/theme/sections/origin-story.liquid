@@ -1,0 +1,55 @@
+{%- comment -%}
+  Origin story powered by a metaobject ("origin": farm, producer, region, altitude, process, story, photo).
+  The merchant fills the farm once in Content › Metaobjects and reuses it on every coffee from that farm:
+  - the section setting picks an origin manually, or
+  - it falls back to the product's custom.origin_story metafield (a metaobject reference)
+{%- endcomment -%}
+
+{%- liquid
+  assign origin = section.settings.origin
+  if origin == blank and product
+    assign origin = product.metafields.custom.origin_story.value
+  endif
+-%}
+
+{%- if origin != blank -%}
+  <section class="origin" aria-labelledby="Origin-{{ section.id }}">
+    {%- if origin.photo != blank -%}
+      <div class="origin__media">
+        {%- render 'responsive-image', image: origin.photo.value, sizes: '(min-width: 750px) 50vw, 100vw' -%}
+      </div>
+    {%- endif -%}
+
+    <div class="origin__content">
+      <p class="origin__eyebrow">{{ origin.country }} · {{ origin.region }}</p>
+      <h2 id="Origin-{{ section.id }}">{{ origin.farm_name }}</h2>
+      {%- if origin.story != blank -%}
+        <div class="origin__story">{{ origin.story | metafield_tag }}</div>
+      {%- endif -%}
+
+      <dl class="origin__facts">
+        {%- if origin.producer != blank -%}<div><dt>{{ 'origin.producer' | t }}</dt><dd>{{ origin.producer }}</dd></div>{%- endif -%}
+        {%- if origin.altitude != blank -%}<div><dt>{{ 'origin.altitude' | t }}</dt><dd>{{ origin.altitude }} m</dd></div>{%- endif -%}
+        {%- if origin.process != blank -%}<div><dt>{{ 'origin.process' | t }}</dt><dd>{{ origin.process }}</dd></div>{%- endif -%}
+      </dl>
+    </div>
+  </section>
+{%- elsif request.design_mode -%}
+  <p class="origin__hint">Choose an origin in the section settings, or set the product's “Origin story” metafield.</p>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Origin story",
+  "settings": [
+    {
+      "type": "metaobject",
+      "metaobject_type": "origin",
+      "id": "origin",
+      "label": "Origin",
+      "info": "Leave empty on product pages to use the product's Origin story metafield."
+    }
+  ],
+  "presets": [{ "name": "Origin story" }]
+}
+{% endschema %}

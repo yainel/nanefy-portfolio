@@ -1,0 +1,119 @@
+{%- comment -%}
+  Coffee product section (Online Store 2.0).
+  - One radio group per option (Size × Grind), sold-out values marked from Shopify's option data
+  - Live price, variant id and URL updates handled by <variant-picker> (assets/variant-picker.js)
+  - Tasting notes and roast level come from product metafields
+  - Subscribe & save through selling plans, with a one-time option unless the product requires a plan
+{%- endcomment -%}
+
+{%- liquid
+  assign current = product.selected_or_first_available_variant
+  assign tasting_notes = product.metafields.custom.tasting_notes.value
+  assign roast_level = product.metafields.custom.roast_level.value
+  assign form_id = 'ProductForm-' | append: section.id
+-%}
+
+<section class="product" id="Product-{{ section.id }}">
+  <div class="product__media">
+    {%- render 'responsive-image',
+      image: product.featured_media.preview_image,
+      sizes: '(min-width: 990px) 50vw, 100vw',
+      loading: 'eager'
+    -%}
+  </div>
+
+  <div class="product__info">
+    <h1 class="product__title">{{ product.title }}</h1>
+    <p class="product__price" data-price>{{ current.price | money }}</p>
+
+    {%- if section.settings.show_tasting_notes and tasting_notes != blank -%}
+      <ul class="product__notes" aria-label="{{ 'products.tasting_notes' | t }}">
+        {%- for note in tasting_notes -%}
+          <li>{{ note }}</li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+
+    {%- if roast_level != blank -%}
+      <p class="product__roast">{{ 'products.roast_level' | t }}: {{ roast_level }}</p>
+    {%- endif -%}
+
+    {%- form 'product', product, id: form_id, class: 'product__form' -%}
+      <variant-picker data-section="{{ section.id }}">
+        {%- unless product.has_only_default_variant -%}
+          {%- for option in product.options_with_values -%}
+            <fieldset class="picker">
+              <legend>{{ option.name }}</legend>
+              {%- for value in option.values -%}
+                {%- assign input_id = section.id | append: '-' | append: option.position | append: '-' | append: forloop.index -%}
+                <input
+                  type="radio"
+                  id="{{ input_id }}"
+                  name="{{ option.name | escape }}"
+                  value="{{ value | escape }}"
+                  {% if option.selected_value == value %}checked{% endif %}
+                >
+                <label for="{{ input_id }}" {% unless value.available %}class="is-unavailable"{% endunless %}>
+                  {{- value -}}
+                </label>
+              {%- endfor -%}
+            </fieldset>
+          {%- endfor -%}
+        {%- endunless -%}
+
+        <script type="application/json" data-variants>
+          {{ product.variants | json }}
+        </script>
+      </variant-picker>
+
+      {%- if product.selling_plan_groups.size > 0 -%}
+        <fieldset class="purchase-options">
+          <legend>{{ 'products.purchase_options' | t }}</legend>
+          {%- unless product.requires_selling_plan -%}
+            <label><input type="radio" name="selling_plan" value="" checked> {{ 'products.one_time' | t }}</label>
+          {%- endunless -%}
+          {%- for group in product.selling_plan_groups -%}
+            {%- for plan in group.selling_plans -%}
+              <label>
+                <input type="radio" name="selling_plan" value="{{ plan.id }}" {% if product.requires_selling_plan and forloop.first %}checked{% endif %}>
+                {{ plan.name }}
+              </label>
+            {%- endfor -%}
+          {%- endfor -%}
+        </fieldset>
+      {%- endif -%}
+
+      <input type="hidden" name="id" value="{{ current.id }}" data-variant-id>
+      <button
+        type="submit"
+        class="button"
+        data-add-button
+        data-text-add="{{ 'products.add_to_cart' | t }}"
+        data-text-sold-out="{{ 'products.sold_out' | t }}"
+        data-text-unavailable="{{ 'products.unavailable' | t }}"
+        {% unless current.available %}disabled{% endunless %}
+      >
+        {%- if current.available -%}{{ 'products.add_to_cart' | t }}{%- else -%}{{ 'products.sold_out' | t }}{%- endif -%}
+      </button>
+    {%- endform -%}
+  </div>
+</section>
+
+<script src="{{ 'variant-picker.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Coffee product",
+  "tag": "section",
+  "class": "section-main-product",
+  "enabled_on": { "templates": ["product"] },
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_tasting_notes",
+      "label": "Show tasting notes",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,38 @@
+{%- comment -%}
+  Responsive image with srcset, so a phone never downloads a desktop-sized photo.
+  Shopify's CDN generates every width on demand and serves WebP/AVIF automatically.
+
+  Accepts:
+  - image {Object} image or media preview_image (required)
+  - sizes {String} how wide the image is on screen, e.g. '(min-width: 990px) 50vw, 100vw'
+  - loading {String} 'lazy' (default) or 'eager' for the first image on the page (LCP)
+
+  Usage:
+  {% render 'responsive-image', image: product.featured_image, sizes: '(min-width: 990px) 50vw, 100vw', loading: 'eager' %}
+{%- endcomment -%}
+
+{%- liquid
+  assign loading = loading | default: 'lazy'
+  assign sizes = sizes | default: '100vw'
+  assign alt = image.alt | escape
+  if loading == 'eager'
+    assign fetchpriority = 'high'
+  else
+    assign fetchpriority = 'auto'
+  endif
+-%}
+
+{%- if image != blank -%}
+  {{
+    image
+    | image_url: width: 1800
+    | image_tag:
+      widths: '360, 540, 720, 900, 1080, 1440, 1800',
+      sizes: sizes,
+      loading: loading,
+      fetchpriority: fetchpriority,
+      alt: alt
+  }}
+{%- else -%}
+  {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
+{%- endif -%}

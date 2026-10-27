@@ -1,0 +1,117 @@
+{%- comment -%}
+  Collection page with Storefront Filtering.
+  - Filters come from Search & Discovery (options, metafields like roast level, price range)
+  - Works as a normal GET form without JavaScript
+  - With JavaScript, changes re-render only this section via the Section Rendering API
+    and update the URL, so filtered pages stay shareable and the back button works
+{%- endcomment -%}
+
+<div class="collection" id="Collection-{{ section.id }}" data-section-id="{{ section.id }}">
+  <form class="filters" data-filters>
+    {%- for filter in collection.filters -%}
+      <details class="filter" {% if filter.active_values.size > 0 or filter.min_value.value or filter.max_value.value %}open{% endif %}>
+        <summary>
+          {{ filter.label }}
+          {%- if filter.active_values.size > 0 %} ({{ filter.active_values.size }}){% endif -%}
+        </summary>
+
+        {%- case filter.type -%}
+          {%- when 'boolean', 'list' -%}
+            <ul>
+              {%- for value in filter.values -%}
+                <li>
+                  <label {% if value.count == 0 and value.active == false %}class="is-disabled"{% endif %}>
+                    <input
+                      type="checkbox"
+                      name="{{ value.param_name }}"
+                      value="{{ value.value }}"
+                      {% if value.active %}checked{% endif %}
+                      {% if value.count == 0 and value.active == false %}disabled{% endif %}
+                    >
+                    {{ value.label }} <span>({{ value.count }})</span>
+                  </label>
+                </li>
+              {%- endfor -%}
+            </ul>
+
+          {%- when 'price_range' -%}
+            <div class="price-range">
+              <label>
+                {{ 'collections.from' | t }}
+                <input type="number" min="0" name="{{ filter.min_value.param_name }}"
+                  {% if filter.min_value.value %}value="{{ filter.min_value.value | money_without_currency | remove: ',' }}"{% endif %}
+                  placeholder="0">
+              </label>
+              <label>
+                {{ 'collections.to' | t }}
+                <input type="number" min="0" name="{{ filter.max_value.param_name }}"
+                  {% if filter.max_value.value %}value="{{ filter.max_value.value | money_without_currency | remove: ',' }}"{% endif %}
+                  placeholder="{{ filter.range_max | money_without_currency | remove: ',' }}">
+              </label>
+            </div>
+        {%- endcase -%}
+      </details>
+    {%- endfor -%}
+
+    <input type="hidden" name="sort_by" value="{{ collection.sort_by | default: collection.default_sort_by }}">
+    <noscript><button type="submit" class="button">{{ 'collections.apply' | t }}</button></noscript>
+  </form>
+
+  <div class="active-filters">
+    {%- for filter in collection.filters -%}
+      {%- for value in filter.active_values -%}
+        <a class="pill" href="{{ value.url_to_remove }}">{{ filter.label }}: {{ value.label }} &times;</a>
+      {%- endfor -%}
+      {%- if filter.type == 'price_range' and filter.url_to_remove != collection.url -%}
+        {%- if filter.min_value.value or filter.max_value.value -%}
+          <a class="pill" href="{{ filter.url_to_remove }}">{{ filter.label }} &times;</a>
+        {%- endif -%}
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+
+  {%- paginate collection.products by 12 -%}
+    <p class="collection__count" role="status">{{ 'collections.product_count' | t: count: collection.products_count }}</p>
+    <ul class="product-grid">
+      {%- for product in collection.products -%}
+        <li class="card">
+          <a href="{{ product.url }}">
+            {%- render 'responsive-image', image: product.featured_image, sizes: '(min-width: 990px) 25vw, 50vw' -%}
+            <h3>{{ product.title }}</h3>
+            <p>{{ product.price | money }}</p>
+          </a>
+        </li>
+      {%- else -%}
+        <li class="collection__empty">{{ 'collections.empty' | t }}</li>
+      {%- endfor -%}
+    </ul>
+    {{ paginate | default_pagination }}
+  {%- endpaginate -%}
+</div>
+
+<script>
+  (() => {
+    const root = document.getElementById('Collection-{{ section.id }}');
+    root.addEventListener('change', async (event) => {
+      const form = event.target.closest('[data-filters]');
+      if (!form) return;
+      const params = new URLSearchParams(new FormData(form));
+      for (const [key, value] of [...params]) if (value === '') params.delete(key);
+      const url = `${window.location.pathname}?${params}`;
+      const response = await fetch(`${url}&section_id=${root.dataset.sectionId}`);
+      const html = new DOMParser().parseFromString(await response.text(), 'text/html');
+      // Swap the contents, not the element, so this listener keeps working
+      root.innerHTML = html.getElementById(root.id).innerHTML;
+      window.history.pushState({}, '', url);
+    });
+    window.addEventListener('popstate', () => window.location.reload(), { once: true });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Collection with filters",
+  "enabled_on": { "templates": ["collection"] },
+  "settings": []
+}
+{% endschema %}

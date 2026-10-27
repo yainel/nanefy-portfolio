@@ -1,0 +1,42 @@
+{%- comment -%}
+  Theme app extension block: star rating.
+  Merchants add it from the theme editor to any product section (no theme code edits),
+  and it reads Shopify's standard reviews.rating metafield, so it works with any reviews app
+  that writes that metafield and also feeds product rich results in search.
+{%- endcomment -%}
+
+{%- liquid
+  assign product = block.settings.product
+  assign rating = product.metafields.reviews.rating.value
+  assign count = product.metafields.reviews.rating_count.value | default: 0
+-%}
+
+{%- if rating != blank -%}
+  {%- assign percent = rating.value | divided_by: rating.scale_max | times: 100 -%}
+  <div class="star-rating" style="--star-color: {{ block.settings.color }}; --star-size: {{ block.settings.size }}px">
+    <span class="star-rating__stars" style="--percent: {{ percent }}%" aria-hidden="true"></span>
+    <span class="star-rating__text">
+      {{ rating.value | round: 1 }}
+      {%- if block.settings.show_count %} ({{ count }}){% endif -%}
+    </span>
+    <span class="visually-hidden">
+      {{ 'star_rating.label' | t: rating: rating.value, max: rating.scale_max, count: count }}
+    </span>
+  </div>
+{%- elsif request.design_mode -%}
+  <p class="star-rating__empty">No rating yet for this product.</p>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Star rating",
+  "target": "section",
+  "stylesheet": "star-rating.css",
+  "settings": [
+    { "type": "product", "id": "product", "label": "Product", "autofill": true },
+    { "type": "color", "id": "color", "label": "Star color", "default": "#C8643B" },
+    { "type": "range", "id": "size", "label": "Star size", "min": 12, "max": 28, "step": 2, "unit": "px", "default": 16 },
+    { "type": "checkbox", "id": "show_count", "label": "Show review count", "default": true }
+  ]
+}
+{% endschema %}

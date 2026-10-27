@@ -1,0 +1,19 @@
+# Input for the "Buy 2+ bags, save 10%" product discount Function.
+# Only the fields the logic needs are requested: Functions are billed on input size and must run in milliseconds.
+query RunInput {
+  cart {
+    lines {
+      id
+      quantity
+      merchandise {
+        __typename
+        ... on ProductVariant {
+          id
+          product {
+            isCoffee: hasAnyTag(tags: ["coffee"])
+          }
+        }
+      }
+    }
+  }
+}

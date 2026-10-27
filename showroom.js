@@ -362,6 +362,7 @@
     { g: 'Go to', t: 'Skills playground', run: go('#playground') },
     { g: 'Go to', t: 'UI kit', run: go('#lab') },
     { g: 'Go to', t: 'Selected work', run: go('#projects') },
+    { g: 'Go to', t: 'Shopify portfolio', run: function () { location.href = 'shopify/'; } },
     { g: 'Go to', t: 'Experience', run: go('#experience') },
     { g: 'Go to', t: 'Start a project', run: go('#contact') },
     { g: 'Selected work', t: 'Palma Alta hotel concept', run: function () { openProject('palma'); } },
