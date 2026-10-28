@@ -32,6 +32,7 @@
     'Close': 'Cerrar',
     // Shopify portfolio
     "Shopify portfolio": "Portafolio Shopify",
+    "Shopify Portfolio": "Portafolio Shopify",
     "Main portfolio": "Portafolio principal",
     "Shopify overview": "Resumen Shopify",
     "Theme development": "Desarrollo de temas",
