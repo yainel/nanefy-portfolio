@@ -1,0 +1,590 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yainel Garcia Alfonso · Web designer & full-stack developer</title>
+<meta name="description" content="Yainel Garcia Alfonso, web designer and full-stack developer in Miami: PHP and Laravel back ends, API integrations and the interfaces on top. A live skills playground: motion and effects, pro UI patterns, modern CSS and browser APIs, and mini apps, each with its source code one click away.">
+<link rel="canonical" href="https://nanefy.com/portfolio/">
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://nanefy.com/portfolio/">
+<meta property="og:title" content="Yainel Garcia Alfonso · Web designer & full-stack developer">
+<meta property="og:description" content="PHP and Laravel back ends, API integrations and the interfaces on top. Live demos with source code, concept projects and case studies.">
+<meta property="og:image" content="https://nanefy.com/portfolio/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Yainel Garcia Alfonso, web designer and full-stack developer, nanefy.com">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://nanefy.com/portfolio/?lang=en">
+<link rel="alternate" hreflang="es" href="https://nanefy.com/portfolio/?lang=es">
+<link rel="alternate" hreflang="x-default" href="https://nanefy.com/portfolio/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;550;600;650;700;750&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="showroom.css">
+<link rel="stylesheet" href="playground.css">
+<script>try{var p=JSON.parse(localStorage.getItem('yg-display')||'{}'),m=function(q){return matchMedia(q).matches},c=document.documentElement.classList;c.toggle('pref-wide',p.wide===true);c.toggle('pref-text',p.text===true);c.toggle('pref-contrast',p.contrast!=null?p.contrast:m('(prefers-contrast: more)'));c.toggle('pref-solid',p.solid!=null?p.solid:m('(prefers-reduced-transparency: reduce)'))}catch(e){}</script>
+<script>try{var t=localStorage.getItem('yg-theme');if(t)document.documentElement.dataset.theme=t;var a=localStorage.getItem('yg-accent');if(a)document.documentElement.style.setProperty('--magic',a)}catch(e){}</script>
+</head>
+<body>
+
+<!-- Icon set -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-home" viewBox="0 0 20 20"><path fill="currentColor" d="M10.6 2.3a1 1 0 0 0-1.2 0l-6.5 5A1 1 0 0 0 2.5 8v8.5c0 .8.7 1.5 1.5 1.5h3.5a.5.5 0 0 0 .5-.5V13a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4.5c0 .3.2.5.5.5H16c.8 0 1.5-.7 1.5-1.5V8a1 1 0 0 0-.4-.7l-6.5-5Z"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 20 20"><path fill="currentColor" d="M3 4.5C3 3.7 3.7 3 4.5 3h3C8.3 3 9 3.7 9 4.5v3C9 8.3 8.3 9 7.5 9h-3C3.7 9 3 8.3 3 7.5v-3Zm8 0c0-.8.7-1.5 1.5-1.5h3c.8 0 1.5.7 1.5 1.5v3c0 .8-.7 1.5-1.5 1.5h-3c-.8 0-1.5-.7-1.5-1.5v-3Zm-8 8c0-.8.7-1.5 1.5-1.5h3c.8 0 1.5.7 1.5 1.5v3c0 .8-.7 1.5-1.5 1.5h-3c-.8 0-1.5-.7-1.5-1.5v-3Zm8 0c0-.8.7-1.5 1.5-1.5h3c.8 0 1.5.7 1.5 1.5v3c0 .8-.7 1.5-1.5 1.5h-3c-.8 0-1.5-.7-1.5-1.5v-3Z"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 20 20"><path fill="currentColor" d="M10 2c.4 0 .7.3.8.6l1.1 3.6c.2.6.7 1.1 1.3 1.3l3.6 1.1a.8.8 0 0 1 0 1.6l-3.6 1.1c-.6.2-1.1.7-1.3 1.3l-1.1 3.6a.8.8 0 0 1-1.6 0l-1.1-3.6c-.2-.6-.7-1.1-1.3-1.3l-3.6-1.1a.8.8 0 0 1 0-1.6l3.6-1.1c.6-.2 1.1-.7 1.3-1.3l1.1-3.6c.1-.3.4-.6.8-.6Zm5.5-1c.2 0 .4.1.5.3l.3 1c.1.2.2.3.4.4l1 .3a.5.5 0 0 1 0 1l-1 .3c-.2.1-.3.2-.4.4l-.3 1a.5.5 0 0 1-1 0l-.3-1c-.1-.2-.2-.3-.4-.4l-1-.3a.5.5 0 0 1 0-1l1-.3c.2-.1.3-.2.4-.4l.3-1c.1-.2.3-.3.5-.3Z"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 20 20"><path fill="currentColor" d="M10 2a8 8 0 1 0 0 16 8 8 0 0 0 0-16Zm.8 4a.8.8 0 0 0-1.6 0v4c0 .2.1.4.2.5l2.5 2.5a.8.8 0 0 0 1.1-1.1l-2.2-2.2V6Z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 20 20"><path fill="currentColor" d="M2 6.2V14c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V6.2l-7.4 4.5a1.2 1.2 0 0 1-1.2 0L2 6.2ZM17.7 4.7A2 2 0 0 0 16 4H4a2 2 0 0 0-1.7.7L10 9.3l7.7-4.6Z"/></symbol>
+  <symbol id="i-search" viewBox="0 0 20 20"><path fill="currentColor" d="M8.5 3a5.5 5.5 0 1 0 3.2 10l3.5 3.5a1 1 0 0 0 1.4-1.4L13.1 11.6A5.5 5.5 0 0 0 8.5 3ZM5 8.5a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0Z"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 20 20"><path fill="currentColor" d="M8.6 2.3a.8.8 0 0 1 .2.9 6.2 6.2 0 0 0 8 8 .8.8 0 0 1 1 1A8 8 0 1 1 7.7 2.2a.8.8 0 0 1 .9.1Z"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5c.4 0 .8.3.8.8v1.4a.8.8 0 0 1-1.6 0V2.3c0-.5.4-.8.8-.8ZM10 6a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm0 10.5c.4 0 .8.3.8.8v.4a.8.8 0 0 1-1.6 0v-.4c0-.5.4-.8.8-.8ZM2.3 9.2h1.4a.8.8 0 0 1 0 1.6H2.3a.8.8 0 0 1 0-1.6Zm14 0h1.4a.8.8 0 0 1 0 1.6h-1.4a.8.8 0 0 1 0-1.6ZM4.5 4.5c.3-.3.8-.3 1.1 0l1 1a.8.8 0 0 1-1.1 1.1l-1-1a.8.8 0 0 1 0-1.1Zm9 9c.3-.3.8-.3 1.1 0l1 1a.8.8 0 0 1-1.1 1.1l-1-1a.8.8 0 0 1 0-1.1Zm2.1-9c.3.3.3.8 0 1.1l-1 1a.8.8 0 0 1-1.1-1.1l1-1c.3-.3.8-.3 1.1 0Zm-9 9c.3.3.3.8 0 1.1l-1 1a.8.8 0 0 1-1.1-1.1l1-1c.3-.3.8-.3 1.1 0Z"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 20 20"><path fill="currentColor" d="M3 5.8c0-.5.3-.8.8-.8h12.4a.8.8 0 0 1 0 1.6H3.8A.8.8 0 0 1 3 5.8Zm0 4.2c0-.4.3-.8.8-.8h12.4a.8.8 0 0 1 0 1.6H3.8A.8.8 0 0 1 3 10Zm.8 3.5a.8.8 0 0 0 0 1.5h12.4a.8.8 0 0 0 0-1.5H3.8Z"/></symbol>
+  <symbol id="i-x" viewBox="0 0 20 20"><path fill="currentColor" d="M5.6 4.4a.8.8 0 0 0-1.2 1.2L8.9 10l-4.5 4.4a.8.8 0 1 0 1.2 1.2l4.4-4.5 4.4 4.5a.8.8 0 1 0 1.2-1.2L11.1 10l4.5-4.4a.8.8 0 0 0-1.2-1.2L10 8.9 5.6 4.4Z"/></symbol>
+  <symbol id="i-star" viewBox="0 0 20 20"><path fill="currentColor" d="M9.3 2.6c.3-.6 1.1-.6 1.4 0l1.9 3.9 4.3.6c.6.1.9.9.4 1.4l-3.1 3 .7 4.3c.1.6-.6 1.1-1.1.8L10 14.6l-3.8 2c-.5.3-1.2-.2-1.1-.8l.7-4.3-3.1-3c-.5-.5-.2-1.3.4-1.4l4.3-.6 1.9-3.9Z"/></symbol>
+  <symbol id="i-check" viewBox="0 0 20 20"><path fill="currentColor" d="M15.8 5.5a.8.8 0 0 1 0 1.1l-7.5 7.5a.8.8 0 0 1-1.1 0L4.2 11.1a.8.8 0 1 1 1.1-1.1l2.5 2.5 6.9-7a.8.8 0 0 1 1.1 0Z"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 20 20"><path fill="currentColor" d="M10 2a8 8 0 1 0 0 16 8 8 0 0 0 0-16Zm0 4c.4 0 .8.3.8.8v3.5a.8.8 0 0 1-1.6 0V6.8c0-.5.4-.8.8-.8Zm0 7.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"/></symbol>
+  <symbol id="i-upload" viewBox="0 0 20 20"><path fill="currentColor" d="M10.5 2.7a.8.8 0 0 0-1 0l-4 3.8a.8.8 0 0 0 1 1.1l2.7-2.5v7.4a.8.8 0 0 0 1.6 0V5.1l2.7 2.5a.8.8 0 0 0 1-1.1l-4-3.8ZM3.8 13c.4 0 .7.3.7.8v1.4c0 .4.4.8.8.8h9.4c.4 0 .8-.4.8-.8v-1.4a.8.8 0 0 1 1.5 0v1.4c0 1.3-1 2.3-2.3 2.3H5.3C4 17.5 3 16.5 3 15.2v-1.4c0-.5.3-.8.8-.8Z"/></symbol>
+  <symbol id="i-display" viewBox="0 0 20 20"><path fill="currentColor" d="M3 5.8c0-.4.3-.8.8-.8h7.4a2.5 2.5 0 0 1 4.6 0h.4a.8.8 0 0 1 0 1.6h-.4a2.5 2.5 0 0 1-4.6 0H3.8a.8.8 0 0 1-.8-.8Zm10.5-.8a.8.8 0 1 0 0 1.6.8.8 0 0 0 0-1.6ZM3 14.2c0-.4.3-.8.8-.8h.4a2.5 2.5 0 0 1 4.6 0h7.4a.8.8 0 0 1 0 1.6H8.8a2.5 2.5 0 0 1-4.6 0h-.4a.8.8 0 0 1-.8-.8Zm3.5-.8a.8.8 0 1 0 0 1.6.8.8 0 0 0 0-1.6Z"/></symbol>
+  <symbol id="i-download" viewBox="0 0 20 20"><path fill="currentColor" d="M10 2.5c.4 0 .8.3.8.8v7.6l2.5-2.5a.8.8 0 0 1 1.1 1.1l-3.8 3.8a.8.8 0 0 1-1.1 0L5.6 9.5a.8.8 0 0 1 1.1-1.1l2.5 2.5V3.3c0-.5.4-.8.8-.8ZM3.8 13c.4 0 .7.3.7.8v1.4c0 .4.4.8.8.8h9.4c.4 0 .8-.4.8-.8v-1.4a.8.8 0 0 1 1.5 0v1.4c0 1.3-1 2.3-2.3 2.3H5.3C4 17.5 3 16.5 3 15.2v-1.4c0-.5.3-.8.8-.8Z"/></symbol>
+  <symbol id="i-external" viewBox="0 0 20 20"><path fill="currentColor" d="M11 3.8c0-.5.3-.8.8-.8h4.4c.4 0 .8.3.8.8v4.4a.8.8 0 0 1-1.6 0V5.6l-6 6a.8.8 0 0 1-1.1-1.1l6-6h-2.5a.8.8 0 0 1-.8-.7ZM5.3 6.5c-.4 0-.8.4-.8.8v7.4c0 .4.4.8.8.8h7.4c.4 0 .8-.4.8-.8v-2.9a.8.8 0 0 1 1.5 0v2.9c0 1.3-1 2.3-2.3 2.3H5.3C4 17 3 16 3 14.7V7.3C3 6 4 5 5.3 5h2.9a.8.8 0 0 1 0 1.5H5.3Z"/></symbol>
+  <symbol id="i-nanefy" viewBox="-80 -80 160 160"><mask id="nanefy-n" maskUnits="userSpaceOnUse" x="-90" y="-90" width="180" height="180"><rect x="-90" y="-90" width="180" height="180" fill="#fff"/><polygon transform="translate(33 38) scale(0.32)" points="-51,62 -51,-62 -25,-62 33,32.6 33,-62 51,-62 51,62 25,62 -33,-32.6 -33,62" fill="#000" stroke="#000" stroke-width="16" stroke-linejoin="round"/></mask><g fill="currentColor" mask="url(#nanefy-n)"><rect x="-80" y="-80" width="86" height="68" rx="16"/><rect x="14" y="-80" width="66" height="68" rx="16"/><rect x="-80" y="-4" width="58" height="84" rx="16"/><rect x="-14" y="-4" width="94" height="84" rx="16"/></g></symbol>
+  <symbol id="i-bag" viewBox="0 0 20 20"><path fill="currentColor" d="M7 6V5a3 3 0 0 1 6 0v1h2.2c.5 0 .9.4 1 .9l.8 9.6a1.4 1.4 0 0 1-1.4 1.5H4.4A1.4 1.4 0 0 1 3 16.5l.8-9.6c.1-.5.5-.9 1-.9H7Zm1.5 0h3V5a1.5 1.5 0 0 0-3 0v1Z"/></symbol>
+  <symbol id="i-brief" viewBox="0 0 20 20"><path fill="currentColor" d="M8 3a2 2 0 0 0-2 2v1H4.5C3.7 6 3 6.7 3 7.5v8c0 .8.7 1.5 1.5 1.5h11c.8 0 1.5-.7 1.5-1.5v-8c0-.8-.7-1.5-1.5-1.5H14V5a2 2 0 0 0-2-2H8Zm4.5 3h-5V5c0-.3.2-.5.5-.5h4c.3 0 .5.2.5.5v1Z"/></symbol>
+</svg>
+
+<header class="topbar">
+  <button class="icon-btn menu-btn" id="menuBtn" aria-label="Open navigation" aria-expanded="false"><svg width="20" height="20"><use href="#i-menu"/></svg></button>
+  <a class="brand" href="#home"><span class="logo">YG</span><span class="name">Yainel Garcia</span></a>
+  <a class="nanefy-link" href="../"><svg width="16" height="16"><use href="#i-nanefy"/></svg><span>Nanefy</span></a>
+  <a class="shop-link" href="shopify/"><svg width="16" height="16"><use href="#i-bag"/></svg><span>Shopify Portfolio</span></a>
+  <button class="search" id="openPalette" aria-label="Search and quick actions">
+    <svg width="16" height="16"><use href="#i-search"/></svg><span>Search demos, skills, actions</span><kbd>⌘ K</kbd>
+  </button>
+  <div class="top-actions">
+    <div class="display-wrap">
+      <button class="icon-btn tooltip" id="displayBtn" data-tip="Display settings" aria-label="Display settings" aria-expanded="false" aria-controls="displayPanel"><svg width="18" height="18"><use href="#i-display"/></svg></button>
+      <div class="display-panel" id="displayPanel" role="dialog" aria-labelledby="displayTitle" hidden>
+        <h3 id="displayTitle">Display</h3>
+        <p class="sub">Saved on this device.</p>
+        <div class="setting only-wide"><div><b>Wide layout</b><div class="sub">Use more of large screens</div></div><label class="switch"><input type="checkbox" data-pref="wide" aria-label="Wide layout"><span></span></label></div>
+        <div class="setting"><div><b>High contrast</b><div class="sub">Stronger text, borders and focus rings</div></div><label class="switch"><input type="checkbox" data-pref="contrast" aria-label="High contrast"><span></span></label></div>
+        <div class="setting"><div><b>Larger text</b><div class="sub">Bigger type across the whole page</div></div><label class="switch"><input type="checkbox" data-pref="text" aria-label="Larger text"><span></span></label></div>
+        <div class="setting"><div><b>Reduce transparency</b><div class="sub">Solid backgrounds instead of see-through layers</div></div><label class="switch"><input type="checkbox" data-pref="solid" aria-label="Reduce transparency"><span></span></label></div>
+        <button class="btn" id="displayReset" type="button">Reset to default</button>
+      </div>
+    </div>
+    <button class="icon-btn tooltip lang-btn" id="langBtn" data-tip="Español" aria-label="Cambiar a español">ES</button>
+    <button class="icon-btn tooltip" id="themeBtn" data-tip="Toggle dark mode" aria-label="Toggle dark mode"><svg width="18" height="18"><use href="#i-moon"/></svg></button>
+    <a class="icon-btn tooltip" href="#contact" data-tip="Start a project" aria-label="Start a project" style="color:inherit"><svg width="18" height="18"><use href="#i-mail"/></svg></a>
+  </div>
+</header>
+
+<nav class="sidebar" id="sidebar" aria-label="Sections">
+  <a class="nav-item active" href="#home"><svg><use href="#i-home"/></svg>Home</a>
+  <a class="nav-item" href="#playground" data-pg-link data-es="Laboratorio"><svg><use href="#i-spark"/></svg>Skills playground<span class="count" id="pgCount">25</span></a>
+  <a class="nav-item nav-sub" href="#pg-motion" data-pg-link>Motion &amp; effects</a>
+  <a class="nav-item nav-sub" href="#pg-ui" data-pg-link>Pro UI patterns</a>
+  <a class="nav-item nav-sub" href="#pg-web" data-pg-link>Modern web platform</a>
+  <a class="nav-item nav-sub" href="#pg-apps" data-pg-link>Mini apps</a>
+  <a class="nav-item" href="#lab"><svg><use href="#i-grid"/></svg>UI kit<span class="count">14</span></a>
+  <a class="nav-item" href="#projects" data-es="Proyectos"><svg><use href="#i-brief"/></svg>Selected work<span class="count">5</span></a>
+  <a class="nav-item" href="shopify/"><svg><use href="#i-bag"/></svg>Shopify portfolio</a>
+  <a class="nav-item" href="../"><svg><use href="#i-nanefy"/></svg>Nanefy for supermarkets</a>
+  <a class="nav-item" href="#experience"><svg><use href="#i-clock"/></svg>Experience</a>
+  <a class="nav-item" href="#contact"><svg><use href="#i-mail"/></svg>Start a project</a>
+  <div class="nav-label">Concepts</div>
+  <a class="nav-item" href="palma-alta/index.html"><svg><use href="#i-spark"/></svg>Palma Alta hotel</a>
+  <a class="nav-item" href="tostado/index.html"><svg><use href="#i-spark"/></svg>Tostado coffee</a>
+  <a class="nav-item" href="tally/index.html"><svg><use href="#i-spark"/></svg>Tally dashboard</a>
+  <a class="nav-item" href="brasa/index.html"><svg><use href="#i-spark"/></svg>Brasa restaurant</a>
+  <a class="nav-item" href="marea/index.html"><svg><use href="#i-spark"/></svg>Marea studio</a>
+  <div class="side-card">
+    <b>Everything here is live.</b>
+    Every demo on this page is a working component I designed and coded, and each one shows its source. Press <kbd style="background:var(--surface-3);border-color:var(--border)">⌘ K</kbd> to jump anywhere.
+  </div>
+</nav>
+<div class="scrim" id="scrim"></div>
+
+<main class="main">
+<div class="page">
+
+  <!-- HOME -->
+  <section class="section" id="home">
+    <div class="card hero reveal">
+      <div class="hero-bg"></div>
+      <div class="hero-inner">
+        <div>
+          <p class="greet" id="greet">Hello there</p>
+          <h1>I design and build <span class="typed-slot"><span><span class="typed" id="typed">web applications</span><span class="caret" aria-hidden="true"></span></span><span class="typed-ghost" aria-hidden="true">web applications</span></span></h1>
+          <p class="role">Web designer &amp; full-stack developer · PHP, JavaScript &amp; API integrations</p>
+          <p class="lede">I'm Yainel, based in Miami, with 10+ years of experience. I build PHP and Laravel back ends, connect business systems through APIs, and design the interfaces on top. This site is my playground: <span data-pg-total>25</span> live demos of motion, interface patterns and modern web features, all hand-coded, each with its source one click away.</p>
+          <div class="row">
+            <a class="btn btn-magic btn-lg" href="#playground" data-pg-link><svg width="16" height="16"><use href="#i-spark"/></svg>Explore the playground</a>
+            <a class="btn btn-lg" href="resume/Yainel-Garcia-Alfonso-Resume.pdf" download data-resume><svg width="16" height="16"><use href="#i-download"/></svg>Download résumé</a>
+            <a class="btn btn-lg btn-plain" href="#contact">Start a project</a>
+          </div>
+        </div>
+        <aside class="profile" aria-label="Profile">
+          <div class="row" style="gap:12px;flex-wrap:nowrap">
+            <div class="avatar">YG</div>
+            <div>
+              <b style="font-size:.9375rem">Yainel Garcia Alfonso</b>
+              <div class="sub" style="color:var(--text-2)">Web designer &amp; full-stack developer</div>
+            </div>
+          </div>
+          <div style="margin-top:14px"><span class="badge success"><span class="dot pulse"></span>Available for new projects</span></div>
+          <dl>
+            <dt>Based in</dt><dd>Miami, Florida</dd>
+            <dt>Local time</dt><dd id="localTime">--:--</dd>
+            <dt>Speaks</dt><dd>Spanish, English, some French</dd>
+            <dt>Email</dt><dd><a href="#" id="copyEmail" title="Copy email">garcia.yainel@gmail.com</a></dd>
+            <dt>LinkedIn</dt><dd><a href="https://www.linkedin.com/in/yainel" target="_blank" rel="noopener">in/yainel</a></dd>
+            <dt>GitHub</dt><dd><a href="https://github.com/yainel" target="_blank" rel="noopener">github.com/yainel</a></dd>
+            <dt>Résumé</dt><dd><a href="resume/Yainel-Garcia-Alfonso-Resume.pdf" download data-resume>PDF · 1 page</a></dd>
+          </dl>
+        </aside>
+      </div>
+    </div>
+
+    <div class="grid g4 stats" style="margin-top:16px">
+      <div class="card stat reveal"><div class="sub">Years building for the web</div><div class="num" data-count="10" data-suffix="+">0</div><svg viewBox="0 0 80 32"><path class="area" d="M0 28 L12 24 L24 26 L36 18 L48 20 L60 10 L72 12 L80 4 L80 32 L0 32Z"/><path d="M0 28 L12 24 L24 26 L36 18 L48 20 L60 10 L72 12 L80 4"/></svg></div>
+      <div class="card stat reveal"><div class="sub">Production releases shipped</div><div class="num" data-count="16" data-suffix="+">0</div><svg viewBox="0 0 80 32"><path class="area" d="M0 26 L10 22 L20 23 L30 16 L40 17 L50 12 L60 14 L70 6 L80 8 L80 32 L0 32Z"/><path d="M0 26 L10 22 L20 23 L30 16 L40 17 L50 12 L60 14 L70 6 L80 8"/></svg></div>
+      <div class="card stat reveal"><div class="sub">Teammates supported daily</div><div class="num" data-count="25" data-suffix="+">0</div><svg viewBox="0 0 80 32"><path class="area" d="M0 24 L16 20 L28 22 L40 14 L52 16 L64 8 L80 6 L80 32 L0 32Z"/><path d="M0 24 L16 20 L28 22 L40 14 L52 16 L64 8 L80 6"/></svg></div>
+      <div class="card stat reveal"><div class="sub">Live demos on this page</div><div class="num" data-count="39">0</div><svg viewBox="0 0 80 32"><path class="area" d="M0 26 L26 26 L28 16 L52 16 L54 6 L80 6 L80 32 L0 32Z"/><path d="M0 26 L26 26 L28 16 L52 16 L54 6 L80 6"/></svg></div>
+    </div>
+
+    <div class="card ask reveal" style="margin-top:16px">
+      <div class="row between">
+        <h3 class="row" style="gap:6px"><svg width="16" height="16" style="color:var(--magic)"><use href="#i-spark"/></svg>Ask about me</h3>
+        <span class="badge magic">Quick answers</span>
+      </div>
+      <div class="ask-log" id="askLog" aria-live="polite"><div class="a">Pick a question below or type your own. Answers are written by me ahead of time.</div></div>
+      <form class="ask-form" id="askForm">
+        <label class="sr" for="askInput">Your question</label>
+        <input class="input" id="askInput" placeholder="What's your design process?" autocomplete="off">
+        <button class="btn btn-primary" type="submit">Ask</button>
+      </form>
+      <div class="suggest" id="suggest">
+        <button type="button">What do you do best?</button>
+        <button type="button">What tools do you use?</button>
+        <button type="button">Can you code the designs?</button>
+        <button type="button">What skills can I see here?</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS PLAYGROUND -->
+  <section class="section" id="playground">
+    <div class="section-head">
+      <div><h2>Skills playground</h2><p><span data-pg-total>25</span> live demos, grouped by skill. Every card has a View code button with its real source.</p></div>
+    </div>
+    <div class="toolbar">
+      <div class="segmented" id="pgFilter" role="group" aria-label="Filter demos">
+        <span class="thumb"></span>
+        <button aria-pressed="true" data-f="all">All</button>
+        <button aria-pressed="false" data-f="motion">Motion</button>
+        <button aria-pressed="false" data-f="ui">UI patterns</button>
+        <button aria-pressed="false" data-f="web">Modern web</button>
+        <button aria-pressed="false" data-f="apps">Mini apps</button>
+      </div>
+      <div class="input-wrap" style="width:220px;max-width:100%">
+        <svg><use href="#i-search"/></svg>
+        <label class="sr" for="pgSearch">Search demos</label>
+        <input class="input" id="pgSearch" placeholder="Search, e.g. canvas, a11y">
+      </div>
+    </div>
+    <div id="pgRoot"></div>
+    <div class="card empty" id="pgEmpty" hidden>
+      <b>No demos match that search.</b>
+      <p style="margin:6px 0 12px">Try a word like "CSS", "keyboard" or "canvas".</p>
+      <button class="btn" id="pgClear">Clear search</button>
+    </div>
+  </section>
+
+  <!-- UI KIT -->
+  <section class="section" id="lab">
+    <div class="section-head">
+      <div><h2>UI kit</h2><p>The everyday building blocks of my design system: buttons, forms, feedback and data. Try everything.</p></div>
+      <button class="btn" id="resetLab">Reset all</button>
+    </div>
+    <div class="lab">
+
+      <div class="card reveal">
+        <h3>Buttons <small>States &amp; feedback</small></h3>
+        <div class="row">
+          <button class="btn btn-primary fx">Primary</button>
+          <button class="btn fx">Secondary</button>
+          <button class="btn btn-magic fx"><svg width="14" height="14"><use href="#i-spark"/></svg>Magic</button>
+          <button class="btn btn-critical fx">Delete</button>
+          <button class="btn btn-plain fx">Plain</button>
+          <button class="btn" disabled>Disabled</button>
+        </div>
+        <div class="divider"></div>
+        <div class="row">
+          <button class="btn btn-primary" id="loadBtn" style="min-width:110px">Save changes</button>
+          <span class="sub" id="loadMsg">Click to see a loading state.</span>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <h3>Accent color <small>Repaints this site</small></h3>
+        <div class="swatch-row" id="swatches">
+          <button style="background:#8051FF" data-c="#8051FF" aria-label="Violet" aria-pressed="true"></button>
+          <button style="background:#008060" data-c="#008060" aria-label="Green" aria-pressed="false"></button>
+          <button style="background:#2C6ECB" data-c="#2C6ECB" aria-label="Blue" aria-pressed="false"></button>
+          <button style="background:#E2408A" data-c="#E2408A" aria-label="Pink" aria-pressed="false"></button>
+          <button style="background:#E8731F" data-c="#E8731F" aria-label="Orange" aria-pressed="false"></button>
+        </div>
+        <p class="sub" style="margin-top:10px">Every component uses design tokens, so one change updates the whole page.</p>
+      </div>
+
+      <div class="card reveal">
+        <h3>Settings <small>Switches</small></h3>
+        <div class="setting"><div><b>Dark mode</b><div class="sub">Easier on the eyes at night</div></div><label class="switch"><input type="checkbox" id="darkSwitch" aria-label="Dark mode"><span></span></label></div>
+        <div class="setting"><div><b>Motion effects</b><div class="sub">Tilt and spotlight on cards</div></div><label class="switch"><input type="checkbox" id="motionSwitch" checked aria-label="Motion effects"><span></span></label></div>
+        <div class="setting"><div><b>Sound on click</b><div class="sub">A soft tick for buttons</div></div><label class="switch"><input type="checkbox" id="soundSwitch" aria-label="Sound on click"><span></span></label></div>
+      </div>
+
+      <div class="card reveal">
+        <h3>Pricing slider <small>Range input</small></h3>
+        <div class="segmented" id="billing" role="group" aria-label="Billing period" style="margin-bottom:14px">
+          <span class="thumb"></span>
+          <button aria-pressed="true" data-m="1">Monthly</button>
+          <button aria-pressed="false" data-m="0.8">Yearly <span class="badge success" style="height:18px;margin-left:4px">-20%</span></button>
+        </div>
+        <label class="label" for="pages">Pages: <b id="pagesOut">5</b></label>
+        <input type="range" class="range" id="pages" min="1" max="20" value="5" style="margin:10px 0 14px">
+        <div class="row between"><span class="sub">Example estimate</span><span class="price-out" id="priceOut">$0</span></div>
+      </div>
+
+      <div class="card reveal">
+        <h3>Toasts <small>Notifications</small></h3>
+        <div class="row">
+          <button class="btn" data-toast="Changes saved">Success</button>
+          <button class="btn" data-toast="Couldn't connect. Try again." data-err>Error</button>
+          <button class="btn" data-toast="Link copied to clipboard">Copy link</button>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <h3>Rating <small>Interactive</small></h3>
+        <div class="row between">
+          <div class="stars" id="stars" role="radiogroup" aria-label="Rate this showroom"></div>
+          <span class="sub" id="starsOut">Rate this showroom</span>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <h3>Progress ring <small>Animated SVG</small></h3>
+        <div class="row" style="gap:16px">
+          <div class="ring">
+            <svg viewBox="0 0 100 100"><defs><linearGradient id="ringGrad"><stop offset="0" stop-color="var(--magic)"/><stop offset="1" stop-color="var(--magic-2)"/></linearGradient></defs><circle class="track" cx="50" cy="50" r="42"/><circle class="val" id="ringVal" cx="50" cy="50" r="42" stroke-dasharray="263.9" stroke-dashoffset="263.9"/></svg>
+            <b id="ringOut">0%</b>
+          </div>
+          <div class="stack" style="gap:8px">
+            <div class="counter"><button id="ringMinus" aria-label="Decrease">−</button><output id="ringNum">72</output><button id="ringPlus" aria-label="Increase">+</button></div>
+            <span class="sub">Project launch checklist</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <h3>Tabs <small>Content switching</small></h3>
+        <div class="tabs" role="tablist" id="tabs">
+          <button role="tab" aria-selected="true" aria-controls="t1" id="tb1">Design</button>
+          <button role="tab" aria-selected="false" aria-controls="t2" id="tb2" tabindex="-1">Build</button>
+          <button role="tab" aria-selected="false" aria-controls="t3" id="tb3" tabindex="-1">Launch</button>
+        </div>
+        <div class="tab-panel" id="t1" role="tabpanel" aria-labelledby="tb1"><p class="sub">Wireframes, a type scale and a color system in Figma, reviewed on desktop and mobile together.</p></div>
+        <div class="tab-panel" id="t2" role="tabpanel" aria-labelledby="tb2" hidden><p class="sub">Clean, responsive HTML, CSS and JavaScript, or WordPress and React when the project needs it.</p></div>
+        <div class="tab-panel" id="t3" role="tabpanel" aria-labelledby="tb3" hidden><p class="sub">Testing on real devices, speed checks, and a walkthrough so your team can update content themselves.</p></div>
+      </div>
+
+      <div class="card reveal">
+        <h3>Sortable list <small>Drag to reorder</small></h3>
+        <ul class="sortable" id="sortable">
+          <li draggable="true"><span class="grip">⋮⋮</span>Typography</li>
+          <li draggable="true"><span class="grip">⋮⋮</span>Spacing</li>
+          <li draggable="true"><span class="grip">⋮⋮</span>Color</li>
+          <li draggable="true"><span class="grip">⋮⋮</span>Motion</li>
+        </ul>
+        <p class="sub" style="margin-top:8px" id="sortOut">What matters most to you? Drag to rank.</p>
+      </div>
+
+      <div class="card reveal">
+        <h3>File upload <small>Drag and drop</small></h3>
+        <label class="dropzone" id="dropzone">
+          <input type="file" id="fileInput" multiple>
+          <svg width="22" height="22" style="margin:0 auto 6px"><use href="#i-upload"/></svg>
+          <b>Drop files here</b><br><span class="sub">or click to browse. Files stay on your device.</span>
+        </label>
+        <ul class="files" id="files"></ul>
+      </div>
+
+      <div class="card reveal">
+        <h3>Loading state <small>Skeleton</small></h3>
+        <div id="skel" class="skeleton"><div class="sk" style="width:40px;height:40px;border-radius:50%"></div><div style="flex:1" class="stack"><div class="sk" style="height:10px;width:60%"></div><div class="sk" style="height:10px;width:90%"></div></div></div>
+        <button class="btn" id="skelBtn" style="margin-top:12px">Load content</button>
+      </div>
+
+      <div class="card reveal">
+        <h3>FAQ <small>Accordion</small></h3>
+        <div class="accordion">
+          <details open><summary>Do you work with existing brands?</summary><p>Yes. I translate a brand's identity into a site that feels like it, and I can extend a brand where it has gaps.</p></details>
+          <details><summary>Can you build what you design?</summary><p>Yes, that's my favorite part. I code responsive front ends and set up WordPress when a team needs to edit content.</p></details>
+          <details><summary>Do you work in Spanish?</summary><p>Sí. I work comfortably in both Spanish and English.</p></details>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <h3>Data table <small>Sort &amp; filter</small></h3>
+        <div class="input-wrap" style="margin-bottom:12px"><svg><use href="#i-search"/></svg><label class="sr" for="tblSearch">Filter skills</label><input class="input" id="tblSearch" placeholder="Filter skills"></div>
+        <div class="table-wrap">
+          <table id="skillTable">
+            <thead><tr><th data-k="0">Skill<span class="arr">↕</span></th><th data-k="1">Area<span class="arr">↕</span></th><th data-k="2">Used in<span class="arr">↕</span></th></tr></thead>
+            <tbody>
+              <tr><td>Figma</td><td>Design</td><td>UI and layouts</td></tr>
+              <tr><td>Photoshop</td><td>Design</td><td>Images and assets</td></tr>
+              <tr><td>Adobe XD</td><td>Design</td><td>Prototypes</td></tr>
+              <tr><td>HTML &amp; CSS</td><td>Front-end</td><td>Every project</td></tr>
+              <tr><td>JavaScript</td><td>Front-end</td><td>Interactions</td></tr>
+              <tr><td>React</td><td>Front-end</td><td>Web apps</td></tr>
+              <tr><td>WordPress</td><td>CMS</td><td>Client sites</td></tr>
+              <tr><td>PHP</td><td>Back-end</td><td>APIs and web apps</td></tr>
+              <tr><td>Laravel</td><td>Back-end</td><td>Web apps</td></tr>
+              <tr><td>Symfony</td><td>Back-end</td><td>Web apps</td></tr>
+              <tr><td>MySQL</td><td>Database</td><td>Every back end</td></tr>
+              <tr><td>REST APIs</td><td>Integrations</td><td>CRM and form systems</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <h3>Tooltips <small>Hover or focus</small></h3>
+        <div class="row">
+          <button class="btn tooltip" data-tip="Saved 2 minutes ago">Hover me</button>
+          <button class="btn tooltip" data-tip="Press ⌘K anywhere">Shortcut</button>
+          <span class="badge magic tooltip" tabindex="0" data-tip="Built with design tokens">Tokens</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SELECTED WORK -->
+  <section class="section" id="projects">
+    <div class="section-head">
+      <div><h2>Selected work</h2><p>Concept projects I designed and built end to end. Click one for the story.</p></div>
+    </div>
+    <div class="grid g3 work-grid">
+      <button class="card project reveal" data-id="palma">
+        <span class="spot"></span>
+        <div class="thumb"><img src="img/work/palma.jpg" alt="" width="720" height="405" loading="lazy" decoding="async"></div>
+        <div class="body">
+          <div class="row between"><h3>Palma Alta</h3><span class="badge magic">Concept</span></div>
+          <p>Website for a fourteen-room boutique hotel in a 1926 Coral Gables house.</p>
+          <div class="row"><span class="badge">Hospitality</span><span class="badge">UI design</span><span class="badge">HTML/CSS</span></div>
+        </div>
+      </button>
+      <button class="card project reveal" data-id="tostado">
+        <span class="spot"></span>
+        <div class="thumb"><img src="img/work/tostado.jpg" alt="" width="720" height="405" loading="lazy" decoding="async"></div>
+        <div class="body">
+          <div class="row between"><h3>Tostado</h3><span class="badge magic">Concept</span></div>
+          <p>Ordering and coffee subscriptions for a small-batch roaster in Little Havana.</p>
+          <div class="row"><span class="badge">Food &amp; drink</span><span class="badge">E-commerce</span><span class="badge">UX</span></div>
+        </div>
+      </button>
+      <button class="card project reveal" data-id="tally">
+        <span class="spot"></span>
+        <div class="thumb"><img src="img/work/tally.jpg" alt="" width="720" height="405" loading="lazy" decoding="async"></div>
+        <div class="body">
+          <div class="row between"><h3>Tally</h3><span class="badge magic">Product concept</span></div>
+          <p>A sales and inventory dashboard for small shops, with charts, onboarding and dark mode.</p>
+          <div class="row"><span class="badge">SaaS</span><span class="badge">Data viz</span><span class="badge">UI system</span></div>
+        </div>
+      </button>
+      <button class="card project reveal" data-id="brasa">
+        <span class="spot"></span>
+        <div class="thumb"><img src="img/work/brasa.jpg" alt="" width="720" height="405" loading="lazy" decoding="async"></div>
+        <div class="body">
+          <div class="row between"><h3>Brasa</h3><span class="badge magic">Concept</span></div>
+          <p>A wood-fire restaurant site with a seasonal menu and a three-step reservation flow.</p>
+          <div class="row"><span class="badge">Restaurant</span><span class="badge">Booking</span><span class="badge">Motion</span></div>
+        </div>
+      </button>
+      <button class="card project reveal" data-id="marea">
+        <span class="spot"></span>
+        <div class="thumb"><img src="img/work/marea.jpg" alt="" width="720" height="405" loading="lazy" decoding="async"></div>
+        <div class="body">
+          <div class="row between"><h3>Marea</h3><span class="badge magic">Concept</span></div>
+          <p>Class schedule, booking and pricing for a pilates and breathwork studio in Brickell.</p>
+          <div class="row"><span class="badge">Wellness</span><span class="badge">Scheduling</span><span class="badge">UX</span></div>
+        </div>
+      </button>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="section" id="experience">
+    <div class="section-head"><div><h2>Experience</h2><p>Where I've worked and what I've learned.</p></div><a class="btn" href="work/palma-alta.html">Read a case study</a></div>
+    <div class="grid" style="grid-template-columns:1.5fr 1fr">
+      <div class="card reveal">
+        <ol class="timeline">
+          <li><span class="mark"></span><div class="when">2025 – Present</div><h4>IT Specialist / Internal Systems Developer, Dolls Plastic Surgery</h4><p>Design and build the internal web applications the team uses every day, from UX to production, shipped across 16+ releases.</p></li>
+          <li><span class="mark"></span><div class="when">2022 – 2025</div><h4>Project Manager, Técnica Systems</h4><p>Led setup and customization of sales software for clients, and trained teams to use it with confidence.</p></li>
+          <li><span class="mark"></span><div class="when">2010 – 2020</div><h4>PHP Developer, Freelance</h4><p>Built and maintained websites and web applications in PHP for clients, handling every project from the first meeting to launch.</p></li>
+          <li><span class="mark"></span><div class="when">2010</div><h4>Engineer's Degree in Computer Science, UCI Havana</h4><p>The engineering foundation behind everything I design.</p></li>
+        </ol>
+      </div>
+      <div class="card reveal">
+        <h3>Toolkit</h3>
+        <p class="sub" style="margin-bottom:12px">Tap to highlight what you need.</p>
+        <div class="chips" id="toolChips">
+          <button class="chip" aria-pressed="false">Figma</button><button class="chip" aria-pressed="false">Adobe XD</button><button class="chip" aria-pressed="false">Photoshop</button><button class="chip" aria-pressed="false">HTML5</button><button class="chip" aria-pressed="false">CSS &amp; Sass</button><button class="chip" aria-pressed="false">Tailwind</button><button class="chip" aria-pressed="false">JavaScript</button><button class="chip" aria-pressed="false">TypeScript</button><button class="chip" aria-pressed="false">React</button><button class="chip" aria-pressed="false">WordPress</button><button class="chip" aria-pressed="false">PHP</button><button class="chip" aria-pressed="false">Laravel</button><button class="chip" aria-pressed="false">Symfony</button><button class="chip" aria-pressed="false">MySQL</button><button class="chip" aria-pressed="false">REST APIs</button><button class="chip" aria-pressed="false">Docker</button><button class="chip" aria-pressed="false">Git</button>
+        </div>
+        <p class="sub" id="chipOut" style="margin-top:12px"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT WIZARD -->
+  <section class="section" id="contact">
+    <div class="section-head"><div><h2>Start a project</h2><p>Four quick steps. Your message opens in your email app, ready to send.</p></div></div>
+    <div class="card wizard reveal">
+      <div class="progress"><i id="wizProg" style="width:25%"></i></div>
+      <ol class="steps" id="wizSteps">
+        <li class="current"><span class="n">1</span><span class="label-t">About you</span></li>
+        <li><span class="n">2</span><span class="label-t">Project</span></li>
+        <li><span class="n">3</span><span class="label-t">Budget</span></li>
+        <li><span class="n">4</span><span class="label-t">Review</span></li>
+      </ol>
+      <form id="wizard" novalidate>
+        <div class="wizard-body">
+          <div class="wizard-form">
+            <div class="step" data-step="1">
+              <h3>About you</h3><p class="sub">So I know who I'm talking to.</p>
+              <div class="stack">
+                <div class="field"><label for="fName">Name</label><input class="input" id="fName" name="name" autocomplete="name" required><span class="error"><svg width="14" height="14"><use href="#i-alert"/></svg>Enter your name</span></div>
+                <div class="field"><label for="fEmail">Email</label><input class="input" id="fEmail" name="email" type="email" autocomplete="email" required><span class="error"><svg width="14" height="14"><use href="#i-alert"/></svg>Enter a valid email, like name@company.com</span></div>
+                <div class="field"><label for="fCompany">Company <span class="help">(optional)</span></label><input class="input" id="fCompany" name="company" autocomplete="organization"></div>
+              </div>
+            </div>
+            <div class="step" data-step="2" hidden>
+              <h3>Your project</h3><p class="sub">Pick everything that applies.</p>
+              <div class="stack">
+                <div class="field"><span class="label">What do you need?</span><div class="chips" id="needChips"><button type="button" class="chip" aria-pressed="false">Website design</button><button type="button" class="chip" aria-pressed="false">Website build</button><button type="button" class="chip" aria-pressed="false">Redesign</button><button type="button" class="chip" aria-pressed="false">UI system</button><button type="button" class="chip" aria-pressed="false">WordPress</button><button type="button" class="chip" aria-pressed="false">Web app</button></div><span class="error" id="needErr"><svg width="14" height="14"><use href="#i-alert"/></svg>Pick at least one</span></div>
+                <div class="field"><label for="fIndustry">Industry</label><select class="select" id="fIndustry" name="industry"><option>Hospitality</option><option>Lifestyle</option><option>Luxury</option><option>Arts &amp; culture</option><option>Civic</option><option>Healthcare</option><option>Other</option></select></div>
+                <div class="field"><label for="fMsg">Tell me about it</label><textarea class="textarea" id="fMsg" name="message" maxlength="600" required></textarea><div class="row between"><span class="error"><svg width="14" height="14"><use href="#i-alert"/></svg>Add a few words about the project</span><span class="count-left" id="msgCount" style="margin-left:auto">0 / 600</span></div></div>
+              </div>
+            </div>
+            <div class="step" data-step="3" hidden>
+              <h3>Budget and timing</h3><p class="sub">A rough idea is fine.</p>
+              <div class="stack">
+                <div class="field"><label for="fBudget">Budget: <b id="budgetOut">$5,000</b></label><input type="range" class="range" id="fBudget" min="1000" max="30000" step="500" value="5000"></div>
+                <div class="field"><span class="label">Timeline</span>
+                  <label class="check"><input type="radio" name="timeline" value="As soon as possible" checked>As soon as possible</label>
+                  <label class="check"><input type="radio" name="timeline" value="In 1 to 3 months">In 1 to 3 months</label>
+                  <label class="check"><input type="radio" name="timeline" value="Just exploring">Just exploring</label>
+                </div>
+                <label class="check"><input type="checkbox" id="fCall">I'd like a quick video call first</label>
+              </div>
+            </div>
+            <div class="step" data-step="4" hidden>
+              <h3>Review and send</h3><p class="sub">Check the summary. Sending opens your email app with everything filled in.</p>
+              <div class="card" style="background:var(--surface-2);box-shadow:none;border:1px solid var(--border)"><pre id="preview" style="white-space:pre-wrap;font-family:inherit;font-size:.8125rem;color:var(--text-2)"></pre></div>
+            </div>
+            <div class="done-state" id="wizDone" hidden>
+              <div class="ok"><svg width="28" height="28"><use href="#i-check"/></svg></div>
+              <h3>Your email is ready</h3>
+              <p class="sub" style="margin:6px auto 16px;max-width:40ch">Your email app should have opened with the message. Hit send there and I'll reply within a day.</p>
+              <button type="button" class="btn" id="wizRestart">Start over</button>
+            </div>
+          </div>
+          <aside class="summary" aria-label="Live summary">
+            <h4>Summary</h4>
+            <dl>
+              <div><dt>Name</dt><dd id="sName">Not added yet</dd></div>
+              <div><dt>Needs</dt><dd id="sNeeds">Not added yet</dd></div>
+              <div><dt>Industry</dt><dd id="sInd">Hospitality</dd></div>
+              <div><dt>Budget</dt><dd id="sBudget">$5,000</dd></div>
+              <div><dt>Timeline</dt><dd id="sTime">As soon as possible</dd></div>
+            </dl>
+          </aside>
+        </div>
+        <div class="wizard-foot" id="wizFoot">
+          <button type="button" class="btn" id="wizBack" disabled>Back</button>
+          <button type="submit" class="btn btn-primary" id="wizNext">Continue</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <footer><a href="https://www.linkedin.com/in/yainel" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://github.com/yainel" target="_blank" rel="noopener">GitHub</a> · <a href="mailto:garcia.yainel@gmail.com">Email</a> · <a href="resume/Yainel-Garcia-Alfonso-Resume.pdf" download data-resume>Résumé</a><br>Designed and coded by Yainel Garcia Alfonso in Miami. Press <kbd style="background:var(--surface-3);border-color:var(--border);color:var(--text-2)">⌘ K</kbd> for quick actions.</footer>
+</div>
+</main>
+
+<!-- Project modal -->
+<div class="overlay" id="projModal" role="dialog" aria-modal="true" aria-labelledby="pmTitle">
+  <div class="modal">
+    <div class="modal-head"><h3 id="pmTitle">Project</h3><button class="icon-btn" data-close aria-label="Close" style="color:var(--text-2)"><svg width="18" height="18"><use href="#i-x"/></svg></button></div>
+    <div class="modal-body" id="pmBody"></div>
+    <div class="modal-foot" id="pmFoot"></div>
+  </div>
+</div>
+
+<!-- Site viewer: concept sites and case studies open here -->
+<div class="overlay viewer-overlay" id="viewer" role="dialog" aria-modal="true" aria-labelledby="viewerTitle">
+  <div class="viewer">
+    <div class="viewer-bar">
+      <span class="viewer-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+      <div class="viewer-info"><b id="viewerTitle">Site</b><span class="viewer-url" id="viewerUrl"></span></div>
+      <div class="segmented viewer-size" id="viewerSize" role="group" aria-label="Screen size">
+        <span class="thumb"></span>
+        <button aria-pressed="true" data-w="full">Desktop</button>
+        <button aria-pressed="false" data-w="820">Tablet</button>
+        <button aria-pressed="false" data-w="390">Phone</button>
+      </div>
+      <a class="icon-btn tooltip" id="viewerNewTab" href="#" target="_blank" rel="noopener" data-tip="Open in a new tab" aria-label="Open in a new tab"><svg width="18" height="18"><use href="#i-external"/></svg></a>
+      <button class="icon-btn" data-close aria-label="Close"><svg width="18" height="18"><use href="#i-x"/></svg></button>
+    </div>
+    <div class="viewer-stage" id="viewerStage">
+      <iframe id="viewerFrame" title="Site preview"></iframe>
+      <div class="viewer-loading" id="viewerLoading" aria-hidden="true"><span class="spin"></span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Code viewer -->
+<div class="overlay" id="codeModal" role="dialog" aria-modal="true" aria-labelledby="cmTitle">
+  <div class="modal code-modal">
+    <div class="modal-head"><h3 id="cmTitle">Code</h3><button class="icon-btn" data-close aria-label="Close" style="color:var(--text-2)"><svg width="18" height="18"><use href="#i-x"/></svg></button></div>
+    <div class="tabs" role="tablist" aria-label="Language">
+      <button role="tab" data-lang="html" aria-selected="true">HTML</button>
+      <button role="tab" data-lang="css" aria-selected="false" tabindex="-1">CSS</button>
+      <button role="tab" data-lang="js" aria-selected="false" tabindex="-1">JavaScript</button>
+    </div>
+    <pre class="cm-pre" tabindex="0"><code id="cmCode"></code></pre>
+    <div class="cm-foot"><span class="sub" id="cmNote"></span><button class="btn btn-primary" id="cmCopy">Copy</button></div>
+  </div>
+</div>
+
+<!-- Command palette -->
+<div class="overlay" id="palette" role="dialog" aria-modal="true" aria-label="Quick actions">
+  <div class="modal palette">
+    <label class="sr" for="palInput">Search</label>
+    <input class="input" id="palInput" placeholder="Type a command or search" autocomplete="off" role="combobox" aria-controls="palList" aria-expanded="true">
+    <ul id="palList" role="listbox"></ul>
+    <div class="palette-foot"><span><kbd>↑</kbd> <kbd>↓</kbd> to move</span><span><kbd>Enter</kbd> to open</span><span><kbd>Esc</kbd> to close</span></div>
+  </div>
+</div>
+
+<div class="toasts" id="toasts" aria-live="polite"></div>
+<canvas id="confetti"></canvas>
+<script src="i18n.js"></script>
+<script src="showroom.js"></script>
+<script src="playground.js"></script>
+</body>
+</html>

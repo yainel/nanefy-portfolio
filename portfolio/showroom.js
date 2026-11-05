@@ -306,7 +306,7 @@
   function showViewerUrl(url) {
     var path = url.pathname.replace(/^.*?\/((?:work\/)?[a-z-]+(?:\/|\.html)(?:index\.html)?)$/, '$1');
     $('#viewerTitle').textContent = viewerLabel(url.pathname) || 'nanefy.com';
-    $('#viewerUrl').textContent = 'nanefy.com/' + path.replace(/index\.html$/, '');
+    $('#viewerUrl').textContent = 'nanefy.com/portfolio/' + path.replace(/index\.html$/, '');
     $('#viewerNewTab').href = url.href;
   }
   // Pages load with location.replace so the iframe never adds its own entries to the browser history

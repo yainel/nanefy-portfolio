@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Moved · Nanefy</title>
+<script>
+(function () {
+  var p = location.pathname, rest = location.search + location.hash;
+  if (/^\/tecnica(\/|$)/.test(p)) { location.replace('/' + rest); return; }
+  if (!/^\/portfolio(\/|$)/.test(p)) { location.replace('/portfolio' + p + rest); return; }
+  document.documentElement.className = 'gone';
+})();
+</script>
+<style>
+body{margin:0;min-height:100vh;display:grid;place-items:center;background:#09090D;color:#EEEEF3;font:16px/1.6 Inter,system-ui,sans-serif;text-align:center;padding:24px}
+.gone-text{display:none}.gone .gone-text{display:block}.gone .moving{display:none}
+a{color:#2FB5E8}
+</style>
+</head>
+<body>
+<p class="moving">Redirecting…</p>
+<div class="gone-text"><h1 style="font-size:1.6rem;margin:0 0 8px">This page does not exist</h1><p><a href="/">Nanefy</a> · <a href="/portfolio/">Portfolio</a></p></div>
+</body>
+</html>

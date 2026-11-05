@@ -1,590 +1,1243 @@
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang="es" data-lang="es">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Yainel Garcia Alfonso · Web designer & full-stack developer</title>
-<meta name="description" content="Yainel Garcia Alfonso, web designer and full-stack developer in Miami: PHP and Laravel back ends, API integrations and the interfaces on top. A live skills playground: motion and effects, pro UI patterns, modern CSS and browser APIs, and mini apps, each with its source code one click away.">
+<title>Nanefy · Módulos para supermercados con LOC SMS</title>
+<meta name="description" content="Nanefy pone a trabajar los precios de LOC SMS: Label Designer, Price Verifier, Digital Signage, Product Map y Tickets. Cada módulo se contrata por separado.">
 <link rel="canonical" href="https://nanefy.com/">
-<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="img/nanefy-icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="img/nanefy-icon-180.png">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://nanefy.com/">
-<meta property="og:title" content="Yainel Garcia Alfonso · Web designer & full-stack developer">
-<meta property="og:description" content="PHP and Laravel back ends, API integrations and the interfaces on top. Live demos with source code, concept projects and case studies.">
-<meta property="og:image" content="https://nanefy.com/img/og.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Yainel Garcia Alfonso, web designer and full-stack developer, nanefy.com">
-<meta name="twitter:card" content="summary_large_image">
-<link rel="alternate" hreflang="en" href="https://nanefy.com/?lang=en">
-<link rel="alternate" hreflang="es" href="https://nanefy.com/?lang=es">
-<link rel="alternate" hreflang="x-default" href="https://nanefy.com/">
+<meta property="og:title" content="Nanefy · Módulos para supermercados con LOC SMS">
+<meta property="og:description" content="Etiquetas, verificadores de precio, pantallas, mapa de la tienda y soporte, con los precios de LOC SMS.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;550;600;650;700;750&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="showroom.css">
-<link rel="stylesheet" href="playground.css">
-<script>try{var p=JSON.parse(localStorage.getItem('yg-display')||'{}'),m=function(q){return matchMedia(q).matches},c=document.documentElement.classList;c.toggle('pref-wide',p.wide===true);c.toggle('pref-text',p.text===true);c.toggle('pref-contrast',p.contrast!=null?p.contrast:m('(prefers-contrast: more)'));c.toggle('pref-solid',p.solid!=null?p.solid:m('(prefers-reduced-transparency: reduce)'))}catch(e){}</script>
-<script>try{var t=localStorage.getItem('yg-theme');if(t)document.documentElement.dataset.theme=t;var a=localStorage.getItem('yg-accent');if(a)document.documentElement.style.setProperty('--magic',a)}catch(e){}</script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="portfolio/fx/fx.css">
+<script>(function(){var h=location.hash.slice(1);if(h&&['top','modulos','label-designer','price-verifier','digital-signage','product-map','tickets','como','planes','faq','demo'].indexOf(h)<0)location.replace('portfolio/'+location.search+location.hash)})();document.documentElement.classList.add('fx');try{var l=new URLSearchParams(location.search).get('lang')||localStorage.getItem('tec-lang');if(l==='en'||l==='es'){document.documentElement.dataset.lang=l;document.documentElement.lang=l}}catch(e){}</script>
+<style>
+:root{
+  --bg:#09090D;
+  --bg-2:#0F0F15;
+  --surface:#15151D;
+  --surface-2:#1C1C26;
+  --line:rgba(255,255,255,.09);
+  --text:#EEEEF3;
+  --muted:#A4A4B4;
+  --violet:#8051FF;
+  --purple:#B24BF3;
+  --cyan:#2FB5E8;
+  --pink:#FF6FD8;
+  --grad:linear-gradient(135deg,var(--violet),var(--purple) 55%,var(--cyan));
+  --pv:#2DD4BF;
+  --ld:#60A5FA;
+  --ds:#FBBF24;
+  --pm:#34D399;
+  --tk:#C4B5FD;
+  --wrap:1180px;
+  --font:"Inter",-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{overflow-x:hidden;overflow-x:clip;scroll-behavior:smooth;scroll-padding-top:84px}
+body{overflow-x:clip;background:var(--bg);color:var(--text);font-family:var(--font);font-size:1.0625rem;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:6px}
+svg{display:block}
+img{max-width:100%}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 28px}
+:root[data-lang=es] .en,:root[data-lang=en] .es{display:none!important}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* Progress and header */
+[data-progress]{background:var(--grad)}
+.top{position:fixed;inset:0 0 auto;z-index:30;height:68px;display:flex;align-items:center}
+.top.fx-scrolled{background:rgba(9,9,13,.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--line)}
+.top .wrap{display:flex;align-items:center;gap:28px;width:100%}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:700;font-size:1.3rem;letter-spacing:-.03em}
+.brand svg{width:30px;height:30px}
+.nav{display:flex;gap:24px;margin-left:auto;font-size:.92rem;font-weight:500;color:var(--muted)}
+.nav a{text-decoration:none;transition:color .2s}
+.nav a:hover{color:var(--text)}
+.signin{font-size:.92rem;font-weight:600;text-decoration:none;color:var(--text);padding:8px 4px}
+.signin:hover{color:var(--cyan)}
+.lang{display:flex;padding:3px;border-radius:999px;background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px var(--line)}
+.lang button{padding:5px 11px;border-radius:999px;font-size:.78rem;font-weight:700;color:var(--muted);letter-spacing:.04em}
+.lang button[aria-pressed=true]{background:#fff;color:#111}
+.btn{display:inline-flex;align-items:center;gap:9px;padding:13px 22px;border-radius:12px;font-weight:650;font-size:.97rem;text-decoration:none;transition:transform .2s,box-shadow .2s,background .2s;white-space:nowrap}
+.btn-magic{background:var(--grad);color:#fff;box-shadow:0 10px 30px -10px var(--violet),inset 0 1px 0 rgba(255,255,255,.25)}
+.btn-magic:hover{transform:translateY(-2px);box-shadow:0 16px 40px -12px var(--violet),inset 0 1px 0 rgba(255,255,255,.25)}
+.btn-ghost{box-shadow:inset 0 0 0 1px rgba(255,255,255,.18)}
+.btn-ghost:hover{background:rgba(255,255,255,.06)}
+.btn-sm{padding:9px 16px;font-size:.88rem;border-radius:10px}
+.btn svg{width:18px;height:18px}
+
+/* Hero */
+.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:center;padding:120px 0 80px;isolation:isolate;overflow:hidden}
+.aurora{position:absolute;inset:-15%;z-index:-2;background:
+  radial-gradient(38% 45% at 18% 22%,rgba(128,81,255,.42),transparent 70%),
+  radial-gradient(30% 40% at 85% 28%,rgba(47,181,232,.30),transparent 70%),
+  radial-gradient(42% 45% at 60% 100%,rgba(255,111,216,.22),transparent 70%);filter:blur(18px)}
+@media (prefers-reduced-motion:no-preference){.aurora{animation:drift 16s ease-in-out infinite alternate}}
+@keyframes drift{to{transform:translate(-4%,5%) scale(1.1)}}
+.dots{position:absolute;inset:0;z-index:-1;background-image:radial-gradient(rgba(255,255,255,.07) 1px,transparent 1.5px);background-size:24px 24px;-webkit-mask-image:radial-gradient(70% 60% at 50% 40%,#000,transparent);mask-image:radial-gradient(70% 60% at 50% 40%,#000,transparent)}
+.hero-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 14px 6px 8px;border-radius:999px;background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px var(--line);font-size:.82rem;font-weight:600;color:#D8D8E4}
+.eyebrow b{display:inline-block;white-space:nowrap;flex:none;padding:2px 8px;border-radius:999px;background:var(--grad);color:#fff;font-size:.72rem;letter-spacing:.04em}
+h1{font-size:clamp(2.4rem,5.4vw,4.2rem);line-height:1.04;letter-spacing:-.04em;font-weight:800;margin:22px 0 20px}
+.grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{font-size:1.18rem;color:#C8C8D6;max-width:34em}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:34px}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border-radius:10px;background:rgba(255,255,255,.04);box-shadow:inset 0 0 0 1px var(--line);font-size:.85rem;font-weight:550;color:#D6D6E2}
+.chip i{width:8px;height:8px;border-radius:50%;background:var(--c)}
+
+/* Hero visual: one price change, everywhere */
+.sync{position:relative;height:460px}
+.sync svg.links{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.sync .links path{fill:none;stroke:rgba(255,255,255,.12);stroke-width:2}
+.sync .links path.flow{stroke:url(#flowGrad);stroke-width:2.5;stroke-dasharray:14 380;stroke-dashoffset:394;opacity:0}
+.sync.go .links path.flow{animation:flow 1.1s cubic-bezier(.4,0,.2,1) forwards}
+@keyframes flow{0%{opacity:1;stroke-dashoffset:394}100%{opacity:1;stroke-dashoffset:0}}
+.node{position:absolute;border-radius:16px;background:var(--surface);box-shadow:0 0 0 1px var(--line),0 30px 60px -30px rgba(0,0,0,.8)}
+.src{left:0;top:50%;width:150px;transform:translateY(-50%);padding:16px;text-align:center}
+.src .ico{width:46px;height:46px;margin:0 auto 10px;border-radius:12px;display:grid;place-items:center;background:rgba(255,255,255,.06)}
+.src .ico svg{width:24px;height:24px;color:#fff}
+.src strong{display:block;font-size:.95rem}
+.src small{font-size:.75rem;color:var(--muted)}
+.src .pulse{position:absolute;inset:-1px;border-radius:16px;box-shadow:0 0 0 0 rgba(128,81,255,.55);pointer-events:none}
+.sync.go .src .pulse{animation:ring 1.2s ease-out}
+@keyframes ring{to{box-shadow:0 0 0 22px rgba(128,81,255,0)}}
+.src .edit{margin-top:10px;padding:6px 8px;border-radius:8px;background:rgba(255,255,255,.05);font:600 .8rem/1 var(--font);color:#fff;display:flex;justify-content:space-between}
+.src .edit s{color:var(--muted);font-weight:500}
+.dst{right:0;width:62%;padding:14px 16px;display:flex;align-items:center;gap:14px}
+.dst .tag{font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--c)}
+.dst .name{font-size:.86rem;color:#D4D4E0}
+.dst .price{margin-left:auto;font-weight:800;font-size:1.55rem;letter-spacing:-.02em;transition:color .3s}
+.dst .pic{width:58px;height:44px;border-radius:9px;flex:none;display:grid;place-items:center;background:rgba(255,255,255,.05)}
+.dst .pic svg{width:28px;height:28px;color:var(--c)}
+.dst.flash .price{animation:pop .7s cubic-bezier(.2,.9,.3,1.4)}
+.dst.flash{animation:glow 1.2s ease-out}
+@keyframes pop{0%{transform:scale(.6);opacity:0}100%{transform:none;opacity:1}}
+@keyframes glow{0%{box-shadow:0 0 0 1px var(--c),0 0 40px -6px var(--c)}100%{box-shadow:0 0 0 1px var(--line),0 30px 60px -30px rgba(0,0,0,.8)}}
+.d1{top:6%}.d2{top:40%}.d3{top:74%}
+.sync .note{position:absolute;left:0;bottom:-6px;font-size:.8rem;color:var(--muted)}
+
+/* Sections */
+section{position:relative}
+.sec{padding:120px 0}
+.sec-head{max-width:760px;margin:0 auto 64px;text-align:center}
+.kicker{font-size:.8rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan)}
+h2{font-size:clamp(2rem,4vw,3rem);line-height:1.08;letter-spacing:-.035em;font-weight:800;margin:14px 0 16px}
+.sec-head p{color:var(--muted);font-size:1.1rem}
+
+/* Marquee */
+.marquee{border-block:1px solid var(--line);overflow:hidden;background:var(--bg-2)}
+.marquee .track{display:flex;gap:48px;width:max-content;padding:18px 0;animation:slide 38s linear infinite}
+.marquee span{display:flex;align-items:center;gap:12px;color:#CFCFDB;font-weight:600;white-space:nowrap}
+.marquee span::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--grad)}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* Module index */
+.mods{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
+.mod-card{position:relative;padding:22px 18px 20px;border-radius:18px;background:var(--surface);box-shadow:inset 0 0 0 1px var(--line);text-decoration:none;overflow:hidden;transition:transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s}
+.mod-card::after{content:"";position:absolute;inset:auto -30% -60% -30%;height:120%;background:radial-gradient(closest-side,var(--c),transparent);opacity:.12;transition:opacity .3s}
+.mod-card:hover{transform:translateY(-6px);box-shadow:inset 0 0 0 1px color-mix(in oklab,var(--c) 55%,transparent)}
+.mod-card:hover::after{opacity:.26}
+.mod-card .ic{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:color-mix(in oklab,var(--c) 16%,transparent);color:var(--c);margin-bottom:16px}
+.mod-card .ic svg{width:22px;height:22px}
+.mod-card strong{display:block;font-size:1.05rem;letter-spacing:-.01em}
+.mod-card span{display:block;font-size:.86rem;color:var(--muted);margin-top:4px;line-height:1.45}
+
+/* Module feature */
+.feature{padding:110px 0;border-top:1px solid var(--line)}
+.feature .grid{display:grid;grid-template-columns:1fr 1.08fr;gap:72px;align-items:center}
+.feature.flip .grid{grid-template-columns:1.08fr 1fr}
+.feature.flip .copy{order:2}
+.feature .label{display:inline-flex;align-items:center;gap:10px;font-size:.82rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--c)}
+.feature .label i{width:26px;height:2px;background:var(--c);border-radius:2px}
+.feature h3{font-size:clamp(2rem,3.6vw,2.9rem);line-height:1.05;letter-spacing:-.035em;font-weight:800;margin:14px 0 6px}
+.feature .tagline{font-size:1.25rem;font-weight:600;color:#DADAE6;margin-bottom:18px}
+.feature .copy>p{color:var(--muted);margin-bottom:26px}
+.points{list-style:none;display:grid;gap:14px;margin-bottom:28px}
+.points li{display:grid;grid-template-columns:30px 1fr;gap:12px;align-items:start}
+.points li svg{width:30px;height:30px;padding:6px;border-radius:9px;background:color-mix(in oklab,var(--c) 15%,transparent);color:var(--c)}
+.points b{display:block;font-weight:650}
+.points small{display:block;color:var(--muted);font-size:.93rem;line-height:1.5}
+.unit{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:10px;background:rgba(255,255,255,.04);box-shadow:inset 0 0 0 1px var(--line);font-size:.86rem;color:#D4D4E0}
+.unit b{color:var(--c)}
+.stage{position:relative;border-radius:24px;padding:34px;background:linear-gradient(180deg,var(--surface),var(--bg-2));box-shadow:inset 0 0 0 1px var(--line),0 40px 80px -40px rgba(0,0,0,.9);overflow:hidden;isolation:isolate;min-height:420px;display:flex;align-items:center;justify-content:center}
+.stage::before{content:"";position:absolute;inset:-30%;z-index:-1;background:radial-gradient(45% 40% at 30% 20%,color-mix(in oklab,var(--c) 26%,transparent),transparent 70%),radial-gradient(40% 40% at 80% 90%,rgba(128,81,255,.18),transparent 70%)}
+.stage .hint{position:absolute;left:18px;bottom:14px;font-size:.75rem;color:var(--muted)}
+.play{position:absolute;right:16px;bottom:12px;display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:9px;background:rgba(255,255,255,.08);font-size:.8rem;font-weight:600}
+.play:hover{background:rgba(255,255,255,.14)}
+.play svg{width:14px;height:14px}
+
+/* Label Designer demo */
+.ld-demo{display:grid;grid-template-columns:1fr 200px;gap:18px;width:100%;align-items:center}
+.shelf-label{position:relative;background:#fff;color:#111;border-radius:6px;padding:14px 16px 12px;box-shadow:0 20px 40px -18px rgba(0,0,0,.8);aspect-ratio:2.67/1.5;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto 1fr;gap:4px 10px;overflow:hidden}
+.shelf-label::before{content:"";position:absolute;inset:0 0 auto;height:7px;background:#1F3A93}
+.shelf-label .n{grid-column:1/3;font-weight:800;font-size:1.05rem;line-height:1.15;margin-top:4px}
+.shelf-label .b{grid-column:1/3;font-size:.72rem;letter-spacing:.06em;color:#555;text-transform:uppercase}
+.shelf-label .bars{align-self:end;height:52px;background:repeating-linear-gradient(90deg,#111 0 2px,transparent 2px 3px,#111 3px 4px,transparent 4px 6px,#111 6px 9px,transparent 9px 10px);position:relative}
+.shelf-label .bars::after{content:attr(data-code);position:absolute;left:0;right:0;bottom:-15px;text-align:center;font:600 .62rem/1 ui-monospace,monospace;letter-spacing:.1em}
+.shelf-label .p{align-self:end;justify-self:end;font-weight:800;line-height:.8;font-size:3.4rem;letter-spacing:-.04em;display:flex;align-items:flex-start}
+.shelf-label .p small{font-size:1.3rem;margin-top:.15em}
+.shelf-label .p sup{font-size:1.5rem;margin-top:.12em}
+.shelf-label.swap{animation:labelIn .55s cubic-bezier(.2,.8,.2,1)}
+@keyframes labelIn{0%{transform:translateY(14px) rotate(-2deg);opacity:0}100%{transform:none;opacity:1}}
+.stamp{position:absolute;right:10px;top:16px;padding:4px 9px;border-radius:6px;border:2px solid #16a34a;color:#16a34a;font:800 .7rem/1 var(--font);letter-spacing:.08em;transform:rotate(-8deg) scale(1.6);opacity:0}
+.shelf-label.printed .stamp{animation:stamp .5s .45s cubic-bezier(.2,.9,.3,1.4) forwards}
+@keyframes stamp{to{opacity:1;transform:rotate(-8deg) scale(1)}}
+.changes{display:grid;gap:8px}
+.changes h4{font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+.chg{padding:10px 12px;border-radius:11px;background:rgba(255,255,255,.04);box-shadow:inset 0 0 0 1px var(--line);font-size:.8rem;transition:background .3s,box-shadow .3s}
+.chg b{display:block;font-size:.82rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chg span{color:var(--muted)}
+.chg em{font-style:normal;color:var(--c);font-weight:700}
+.chg.on{background:color-mix(in oklab,var(--c) 14%,transparent);box-shadow:inset 0 0 0 1px color-mix(in oklab,var(--c) 60%,transparent)}
+.chg.done{opacity:.45}
+.chg.done em::after{content:" ✓"}
+
+/* Price Verifier demo */
+.kiosk{width:300px;position:relative}
+.kiosk .screen{border-radius:20px;background:#0B1220;padding:12px;box-shadow:0 0 0 10px #1f2430,0 0 0 11px #2c3241,0 40px 70px -30px #000}
+.kiosk .inner{position:relative;height:320px;border-radius:12px;background:linear-gradient(160deg,#122036,#0b1528);overflow:hidden;display:grid;place-items:center;text-align:center;padding:20px}
+.kiosk .stand{width:26px;height:56px;margin:0 auto;background:linear-gradient(90deg,#2a2f3b,#3b4252,#2a2f3b)}
+.kiosk .base{width:130px;height:10px;margin:0 auto;border-radius:10px;background:#2a2f3b}
+.k-idle,.k-scan,.k-result{position:absolute;inset:20px;display:grid;place-items:center;align-content:center;gap:14px;transition:opacity .35s}
+.kiosk:not(.idle) .k-idle,.kiosk:not(.scan) .k-scan,.kiosk:not(.result) .k-result{opacity:0;pointer-events:none}
+.k-idle .barico{width:84px;height:62px;border-radius:12px;background:rgba(255,255,255,.07);display:grid;place-items:center}
+.k-idle .barico i{width:52px;height:30px;background:repeating-linear-gradient(90deg,#fff 0 3px,transparent 3px 5px,#fff 5px 6px,transparent 6px 9px)}
+.k-idle strong{font-size:1.25rem;line-height:1.2}
+.k-idle .steps{display:flex;gap:6px;justify-content:center;font-size:.66rem;color:#9fb3cf}
+.k-idle .steps>span{padding:4px 8px;border-radius:999px;background:rgba(255,255,255,.07)}
+.bubble{position:absolute;left:50%;top:14px;transform:translate(-50%,-14px) scale(.8);opacity:0;padding:8px 14px;border-radius:14px;background:#fff;color:#111;font-weight:800;font-size:.85rem;white-space:nowrap;box-shadow:0 10px 30px -10px rgba(0,0,0,.6)}
+.bubble::after{content:"";position:absolute;left:50%;bottom:-6px;width:12px;height:12px;background:#fff;transform:translateX(-50%) rotate(45deg)}
+.kiosk.call .bubble{animation:bubble 2.6s cubic-bezier(.2,.9,.3,1.3)}
+@keyframes bubble{0%{opacity:0;transform:translate(-50%,-14px) scale(.6)}12%{opacity:1;transform:translate(-50%,0) scale(1.05)}20%{transform:translate(-50%,0) scale(1)}85%{opacity:1;transform:translate(-50%,0) scale(1)}100%{opacity:0;transform:translate(-50%,-6px) scale(.95)}}
+.waves{position:absolute;right:-46px;top:40px;width:40px;opacity:0;color:var(--c)}
+.kiosk.call .waves{animation:wave 1.4s ease-out 2}
+@keyframes wave{0%{opacity:0;transform:translateX(-6px)}30%{opacity:1}100%{opacity:0;transform:translateX(8px)}}
+.k-scan .beam{width:80%;height:3px;background:#ff3b3b;box-shadow:0 0 18px 4px rgba(255,59,59,.7);border-radius:3px;animation:beam .9s ease-in-out infinite alternate}
+@keyframes beam{from{transform:translateY(-50px)}to{transform:translateY(50px)}}
+.k-scan small{color:#9fb3cf;font-size:.8rem}
+.k-result .pname{font-size:.95rem;color:#c9d6ea}
+.k-result .pprice{font-size:3.6rem;font-weight:800;letter-spacing:-.04em;line-height:1}
+.k-result .deal{display:inline-block;padding:5px 12px;border-radius:999px;background:#FDE68A;color:#111;font-weight:800;font-size:.82rem}
+.kiosk.result .pprice{animation:pop .6s cubic-bezier(.2,.9,.3,1.4)}
+
+/* Digital Signage demo */
+.tv{width:100%;max-width:470px}
+.tv .frame{border-radius:14px;padding:10px;background:#16161c;box-shadow:0 0 0 1px #2a2a33,0 40px 70px -30px #000}
+.tv .board{border-radius:6px;background:linear-gradient(160deg,#1a1206,#0f0b05);padding:18px 20px;min-height:250px;position:relative;overflow:hidden}
+.tv .head{display:flex;justify-content:space-between;align-items:baseline;border-bottom:2px solid rgba(251,191,36,.5);padding-bottom:8px;margin-bottom:8px}
+.tv .head strong{font-size:1.35rem;letter-spacing:-.01em}
+.tv .head span{font-size:.72rem;color:#d6c3a0}
+.tv .rows{transition:opacity .4s,transform .4s}
+.tv .rows.out{opacity:0;transform:translateY(8px)}
+.tv .row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px dashed rgba(255,255,255,.08);font-size:1rem}
+.tv .row b{color:var(--ds);font-size:1.1rem;transition:color .3s}
+.tv .row.flip b{animation:flip .8s ease}
+@keyframes flip{0%{transform:rotateX(0)}50%{transform:rotateX(90deg);color:#fff}100%{transform:rotateX(0)}}
+.tv .foot{display:flex;align-items:center;gap:8px;margin-top:12px;font-size:.74rem;color:#bfae8e}
+.tv .foot i{width:8px;height:8px;border-radius:50%;background:#34D399;box-shadow:0 0 0 0 rgba(52,211,153,.6);animation:live 1.8s infinite}
+@keyframes live{to{box-shadow:0 0 0 8px rgba(52,211,153,0)}}
+.tv .dots{position:absolute;right:16px;bottom:14px;display:flex;gap:5px;inset:auto 16px 14px auto;background:none;-webkit-mask:none;mask:none}
+.tv .dots i{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.25)}
+.tv .dots i.on{background:var(--ds)}
+.tv .stand{width:120px;height:14px;margin:0 auto;background:linear-gradient(#2a2a33,#16161c);clip-path:polygon(18% 0,82% 0,100% 100%,0 100%)}
+
+/* Product Map demo */
+.pm-demo{display:grid;grid-template-columns:200px 1fr;gap:22px;align-items:center;width:100%}
+.phone{width:200px;border-radius:30px;background:#0d0d12;padding:9px;box-shadow:0 0 0 1px #2c2c36,0 40px 70px -30px #000}
+.phone .scr{border-radius:22px;background:#f3f5f1;color:#111;height:360px;padding:14px 12px;overflow:hidden;position:relative}
+.phone .search{display:flex;align-items:center;gap:8px;padding:9px 12px;border-radius:999px;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.08);font-size:.85rem;min-height:38px}
+.phone .search svg{width:15px;height:15px;color:#666;flex:none}
+.phone .caret{display:inline-block;width:1.5px;height:15px;background:#111;margin-left:1px;animation:blink 1s step-end infinite;vertical-align:middle}
+@keyframes blink{50%{opacity:0}}
+.phone .res{margin-top:12px;display:grid;gap:8px}
+.phone .res div{padding:9px 10px;border-radius:12px;background:#fff;font-size:.78rem;box-shadow:0 1px 4px rgba(0,0,0,.06);opacity:0;transform:translateY(6px);transition:all .35s}
+.phone .res div b{display:block;font-size:.8rem}
+.phone .res div span{color:#2d6a4f;font-weight:700}
+.phone.found .res div{opacity:1;transform:none}
+.phone.found .res div:nth-child(2){transition-delay:.08s}
+.phone.found .res div:nth-child(3){transition-delay:.16s}
+.phone .qrtag{position:absolute;left:12px;right:12px;bottom:12px;padding:8px;border-radius:12px;background:#111;color:#fff;font-size:.7rem;text-align:center}
+.floor{width:100%;aspect-ratio:1.25;border-radius:18px;background:#e9ece4;position:relative;overflow:hidden;box-shadow:0 30px 60px -30px #000}
+.floor svg{width:100%;height:100%}
+.floor .route{fill:none;stroke:#7c3aed;stroke-width:4;stroke-linecap:round;stroke-dasharray:6 8;stroke-dashoffset:0;opacity:0}
+.floor.go .route{opacity:1;animation:march 1s linear infinite}
+@keyframes march{to{stroke-dashoffset:-28}}
+.floor .pin{transform-box:fill-box;transform-origin:50% 100%;opacity:0}
+.floor.go .pin{animation:drop .6s .2s cubic-bezier(.2,.9,.3,1.5) forwards}
+@keyframes drop{0%{opacity:0;transform:translateY(-30px)}100%{opacity:1;transform:none}}
+.floor .aisle.hit{fill:var(--pm)}
+
+/* Tickets demo */
+.board-tk{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;width:100%;position:relative}
+.col{border-radius:14px;background:rgba(255,255,255,.035);box-shadow:inset 0 0 0 1px var(--line);padding:12px;min-height:330px}
+.col h5{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between;margin-bottom:10px}
+.col h5 span{padding:1px 7px;border-radius:999px;background:rgba(255,255,255,.08);color:#ddd}
+.tk-card{border-radius:11px;background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--line);padding:10px;margin-bottom:8px;font-size:.78rem}
+.tk-card b{display:block;font-size:.82rem;margin:2px 0 6px;line-height:1.3}
+.tk-card small{color:var(--muted)}
+.tk-card .who{display:flex;align-items:center;gap:6px;margin-top:7px;color:#ccc}
+.tk-card .av{width:18px;height:18px;border-radius:50%;display:grid;place-items:center;font-size:.6rem;font-weight:800;background:var(--grad)}
+.tk-card .wave{display:flex;align-items:center;gap:2px;height:16px;margin:4px 0}
+.tk-card .wave i{width:2px;border-radius:2px;background:var(--c)}
+.moving{position:absolute;z-index:3;width:calc((100% - 24px)/3 - 24px);box-shadow:inset 0 0 0 1px color-mix(in oklab,var(--c) 70%,transparent),0 20px 30px -14px #000;transition:left .8s cubic-bezier(.6,0,.2,1),top .8s cubic-bezier(.6,0,.2,1)}
+.moving .st{display:inline-block;padding:2px 8px;border-radius:999px;font-size:.66rem;font-weight:800;background:rgba(196,181,253,.18);color:var(--c)}
+
+/* How it works */
+.how{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;position:relative}
+.step{position:relative;padding:28px 24px;border-radius:20px;background:var(--surface);box-shadow:inset 0 0 0 1px var(--line)}
+.step .num{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;font-weight:800;background:var(--grad);margin-bottom:18px}
+.step h4{font-size:1.15rem;margin-bottom:8px;letter-spacing:-.01em}
+.step p{color:var(--muted);font-size:.96rem}
+.step+.step::before{content:"";position:absolute;left:-20px;top:46px;width:20px;height:2px;background:linear-gradient(90deg,transparent,var(--cyan))}
+
+/* Why */
+.why{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.why div{padding:24px;border-radius:18px;background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.015));box-shadow:inset 0 0 0 1px var(--line)}
+.why svg{width:26px;height:26px;color:var(--cyan);margin-bottom:14px}
+.why b{display:block;font-size:1.04rem;margin-bottom:6px}
+.why p{color:var(--muted);font-size:.93rem}
+
+/* Plans */
+.plans{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
+.plan{border-radius:18px;padding:22px 18px;background:var(--surface);box-shadow:inset 0 0 0 1px var(--line);display:flex;flex-direction:column;gap:8px}
+.plan .dot{width:10px;height:10px;border-radius:50%;background:var(--c);box-shadow:0 0 18px var(--c)}
+.plan strong{font-size:1.02rem;margin-top:6px}
+.plan .per{font-size:.86rem;color:var(--muted)}
+.plan .per b{display:block;font-size:1.25rem;color:var(--text);letter-spacing:-.02em;margin-top:6px}
+.plans-note{text-align:center;color:var(--muted);margin-top:22px;font-size:.95rem}
+
+/* FAQ */
+.faq{max-width:820px;margin:0 auto;display:grid;gap:10px}
+.faq details{border-radius:16px;background:var(--surface);box-shadow:inset 0 0 0 1px var(--line);padding:4px 22px}
+.faq summary{list-style:none;cursor:pointer;padding:16px 0;font-weight:650;display:flex;justify-content:space-between;gap:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:1.4rem;line-height:1;color:var(--cyan);transition:transform .3s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{color:var(--muted);padding-bottom:18px}
+
+/* Final CTA */
+.final{padding:120px 0;text-align:center;position:relative;overflow:hidden;isolation:isolate}
+.final .aurora{inset:-30%;opacity:.8;-webkit-mask-image:linear-gradient(transparent,#000 35%);mask-image:linear-gradient(transparent,#000 35%)}
+.final h2{font-size:clamp(2.2rem,5vw,3.6rem);max-width:16em;margin:0 auto 16px}
+.final p{color:#C8C8D6;max-width:36em;margin:0 auto 34px;font-size:1.12rem}
+footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-size:.88rem}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer a{text-decoration:none}
+footer a:hover{color:var(--text)}
+
+/* Small screens */
+@media (max-width:1040px){
+  .hero-grid,.feature .grid,.feature.flip .grid{grid-template-columns:1fr;gap:44px}
+  .feature.flip .copy{order:0}
+  .mods,.plans{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .why{grid-template-columns:1fr 1fr}
+  .sync{height:420px;max-width:560px}
+}
+@media (max-width:720px){
+  .wrap{padding:0 18px}
+  .nav{display:none}
+  .top .btn{display:none}
+  .lang{margin-left:auto}
+  .hero{padding-top:100px}
+  .sec,.feature{padding:80px 0}
+  .mods,.plans,.why,.how{grid-template-columns:1fr}
+  .step+.step::before{display:none}
+  .ld-demo,.pm-demo{grid-template-columns:1fr}
+  .phone{margin:0 auto}
+  .stage{padding:26px 18px 54px;min-height:0}
+  .sync{height:400px}
+  .src{width:118px;padding:12px}
+  .dst{width:64%;padding:10px 12px;gap:10px}
+  .dst .pic{display:none}
+  .dst .price{font-size:1.2rem}
+  .board-tk{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+  .col{padding:8px;min-height:250px}
+  .tk-card{padding:8px;font-size:.7rem}
+  .moving{width:calc((100% - 12px)/3 - 16px)}
+  .shelf-label .p{font-size:2.6rem}
+}
+@media (prefers-reduced-motion:reduce){
+  .marquee .track,.floor.go .route{animation:none}
+}
+
+/* Tour: how each module works, on real screens, in a dialog */
+.actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+.actions .unit{box-shadow:inset 0 0 0 1px var(--line)}
+.tour-open{display:inline-flex;align-items:center;gap:9px;padding:10px 16px 10px 10px;border-radius:12px;background:color-mix(in oklab,var(--c) 16%,transparent);box-shadow:inset 0 0 0 1px color-mix(in oklab,var(--c) 45%,transparent);font-weight:650;font-size:.92rem;transition:background .2s,transform .2s}
+.tour-open:hover{background:color-mix(in oklab,var(--c) 26%,transparent);transform:translateY(-1px)}
+.tour-open .pl{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:var(--c);color:#0b0b10}
+.tour-open .pl svg{width:12px;height:12px;margin-left:2px}
+.stage .tour-open{position:absolute;top:14px;right:14px;z-index:4;padding:7px 12px 7px 7px;font-size:.8rem;background:rgba(9,9,13,.6);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.stage .tour-open .pl{width:22px;height:22px}
+
+.tour{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:24px;opacity:0;visibility:hidden;transition:opacity .35s,visibility .35s}
+.tour.open{opacity:1;visibility:visible}
+.tour-back{position:absolute;inset:0;background:rgba(5,5,9,.78);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.tour-box{position:relative;width:min(1180px,100%);max-height:calc(100vh - 48px);max-height:calc(100dvh - 48px);display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:0;border-radius:24px;background:var(--surface);box-shadow:0 0 0 1px var(--line),0 60px 120px -40px #000;overflow:hidden;transform:translateY(24px) scale(.97);transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+.tour.open .tour-box{transform:none}
+.tour-view{position:relative;display:grid;place-items:center;padding:28px;background:radial-gradient(60% 60% at 30% 20%,color-mix(in oklab,var(--c) 20%,transparent),transparent 70%),var(--bg-2);min-height:0;overflow:hidden}
+.device{position:relative;width:100%;max-width:820px;border-radius:14px;background:#1b1b22;box-shadow:0 0 0 1px rgba(255,255,255,.08),0 40px 80px -30px #000;overflow:hidden;transition:max-width .5s cubic-bezier(.2,.8,.2,1),border-radius .5s}
+.device .chrome{display:flex;align-items:center;gap:7px;height:34px;padding:0 12px;background:#202028;border-bottom:1px solid rgba(255,255,255,.06)}
+.device .chrome i{width:10px;height:10px;border-radius:50%;background:#3a3a46}
+.device .chrome i:nth-child(1){background:#ff5f57}.device .chrome i:nth-child(2){background:#febc2e}.device .chrome i:nth-child(3){background:#28c840}
+.device .chrome span{flex:1;margin:0 40px 0 14px;height:20px;border-radius:6px;background:rgba(255,255,255,.06);font-size:.7rem;color:var(--muted);display:flex;align-items:center;justify-content:center;white-space:nowrap;overflow:hidden}
+.device.phone-mode{max-width:280px;border-radius:38px;padding:10px;background:#0d0d12;box-shadow:0 0 0 1px #2c2c36,0 40px 80px -30px #000}
+.device.phone-mode .chrome{display:none}
+.device.phone-mode .screen{border-radius:28px}
+.device.tv-mode .chrome{display:none}
+.device.tv-mode{padding:10px;border-radius:14px;background:#111116}
+.screen{position:relative;overflow:hidden;background:#000;aspect-ratio:var(--ratio,16/10)}
+.screen img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .6s ease;transform-origin:var(--fx,50%) var(--fy,50%)}
+.screen img.on{opacity:1}
+.screen img.zoom{animation:kenburns var(--dur,6s) cubic-bezier(.3,0,.3,1) forwards}
+@keyframes kenburns{0%{transform:scale(1)}100%{transform:scale(var(--z,1.18))}}
+.cursor{position:absolute;z-index:3;left:50%;top:60%;width:26px;height:26px;margin:-3px 0 0 -4px;pointer-events:none;transition:left 1.1s cubic-bezier(.6,0,.2,1),top 1.1s cubic-bezier(.6,0,.2,1),opacity .3s;filter:drop-shadow(0 3px 6px rgba(0,0,0,.5))}
+.cursor svg{width:26px;height:26px}
+.cursor.tap svg{animation:tap .35s ease}
+@keyframes tap{50%{transform:scale(.82)}}
+.ripple{position:absolute;z-index:2;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;border:2px solid #fff;opacity:0;pointer-events:none}
+.ripple.go{animation:ripple .8s ease-out}
+@keyframes ripple{0%{opacity:.9;transform:scale(.4)}100%{opacity:0;transform:scale(3.4)}}
+.spot{position:absolute;z-index:1;width:var(--sw,26%);aspect-ratio:1.6;margin:0;border-radius:18px;box-shadow:0 0 0 2px var(--c),0 0 0 9999px rgba(0,0,0,.28);opacity:0;transform:translate(-50%,-50%) scale(1.15);transition:opacity .5s,transform .6s cubic-bezier(.2,.8,.2,1),left .8s,top .8s;pointer-events:none}
+.spot.on{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.tour-side{display:flex;flex-direction:column;padding:26px 24px 20px;border-left:1px solid var(--line);min-height:0}
+.tour-side .kick{display:flex;align-items:center;gap:8px;font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--c)}
+.tour-side .kick i{width:8px;height:8px;border-radius:50%;background:var(--c);box-shadow:0 0 12px var(--c)}
+.tour-side h3{font-size:1.6rem;letter-spacing:-.03em;margin:6px 0 18px;line-height:1.1}
+.tour-steps{list-style:none;display:grid;gap:6px;overflow:auto;margin-bottom:16px;padding-right:4px}
+.tour-steps li button{display:grid;grid-template-columns:28px 1fr;gap:10px;width:100%;text-align:left;padding:10px;border-radius:12px;color:var(--muted);transition:background .2s,color .2s}
+.tour-steps li button:hover{background:rgba(255,255,255,.04)}
+.tour-steps li.on button{background:color-mix(in oklab,var(--c) 13%,transparent);color:var(--text);box-shadow:inset 0 0 0 1px color-mix(in oklab,var(--c) 40%,transparent)}
+.tour-steps .n{width:28px;height:28px;border-radius:8px;display:grid;place-items:center;font-weight:800;font-size:.8rem;background:rgba(255,255,255,.06);position:relative;overflow:hidden}
+.tour-steps li.on .n{background:var(--c);color:#0b0b10}
+.tour-steps li.done .n{color:var(--c)}
+.tour-steps b{display:block;font-size:.92rem;line-height:1.3}
+.tour-steps small{display:block;font-size:.82rem;line-height:1.45;margin-top:3px;color:var(--muted)}
+.tour-steps li:not(.on) small{display:none}
+.tour-steps .bar{grid-column:1/-1;height:3px;border-radius:3px;background:rgba(255,255,255,.08);overflow:hidden;margin-top:8px;display:none}
+.tour-steps li.on .bar{display:block}
+.tour-steps .bar i{display:block;height:100%;width:0;background:var(--c)}
+.tour-steps li.on .bar i{animation:fill var(--dur,6s) linear forwards}
+.tour.paused .tour-steps li.on .bar i,.tour.paused .screen img.zoom{animation-play-state:paused}
+@keyframes fill{to{width:100%}}
+.tour-ctrl{display:flex;gap:8px;margin-top:auto;padding-top:6px}
+.tour-ctrl button{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:6px;height:40px;border-radius:11px;background:rgba(255,255,255,.06);font-size:.85rem;font-weight:600}
+.tour-ctrl button:hover{background:rgba(255,255,255,.11)}
+.tour-ctrl svg{width:15px;height:15px}
+.tour-close{position:absolute;top:12px;right:12px;z-index:5;width:36px;height:36px;border-radius:10px;display:grid;place-items:center;background:rgba(255,255,255,.08)}
+.tour-close:hover{background:rgba(255,255,255,.16)}
+.tour-close svg{width:18px;height:18px}
+.tour-note{font-size:.72rem;color:var(--muted);margin-top:10px}
+@media (max-width:900px){
+  .tour{padding:0}
+  .tour-box{grid-template-columns:1fr;grid-template-rows:auto minmax(0,1fr);border-radius:0;height:100%;max-height:none}
+  .tour-view{padding:56px 14px 16px}
+  .device.phone-mode{max-width:200px}
+  .tour-side{border-left:0;border-top:1px solid var(--line);padding:18px 18px 16px}
+  .tour-side h3{font-size:1.25rem;margin-bottom:10px}
+}
+@media (prefers-reduced-motion:reduce){
+  .screen img.zoom{animation:none}
+  .cursor{transition:none}
+}
+</style>
 </head>
 <body>
 
-<!-- Icon set -->
+<div data-progress></div>
+
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <symbol id="i-home" viewBox="0 0 20 20"><path fill="currentColor" d="M10.6 2.3a1 1 0 0 0-1.2 0l-6.5 5A1 1 0 0 0 2.5 8v8.5c0 .8.7 1.5 1.5 1.5h3.5a.5.5 0 0 0 .5-.5V13a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4.5c0 .3.2.5.5.5H16c.8 0 1.5-.7 1.5-1.5V8a1 1 0 0 0-.4-.7l-6.5-5Z"/></symbol>
-  <symbol id="i-grid" viewBox="0 0 20 20"><path fill="currentColor" d="M3 4.5C3 3.7 3.7 3 4.5 3h3C8.3 3 9 3.7 9 4.5v3C9 8.3 8.3 9 7.5 9h-3C3.7 9 3 8.3 3 7.5v-3Zm8 0c0-.8.7-1.5 1.5-1.5h3c.8 0 1.5.7 1.5 1.5v3c0 .8-.7 1.5-1.5 1.5h-3c-.8 0-1.5-.7-1.5-1.5v-3Zm-8 8c0-.8.7-1.5 1.5-1.5h3c.8 0 1.5.7 1.5 1.5v3c0 .8-.7 1.5-1.5 1.5h-3c-.8 0-1.5-.7-1.5-1.5v-3Zm8 0c0-.8.7-1.5 1.5-1.5h3c.8 0 1.5.7 1.5 1.5v3c0 .8-.7 1.5-1.5 1.5h-3c-.8 0-1.5-.7-1.5-1.5v-3Z"/></symbol>
-  <symbol id="i-spark" viewBox="0 0 20 20"><path fill="currentColor" d="M10 2c.4 0 .7.3.8.6l1.1 3.6c.2.6.7 1.1 1.3 1.3l3.6 1.1a.8.8 0 0 1 0 1.6l-3.6 1.1c-.6.2-1.1.7-1.3 1.3l-1.1 3.6a.8.8 0 0 1-1.6 0l-1.1-3.6c-.2-.6-.7-1.1-1.3-1.3l-3.6-1.1a.8.8 0 0 1 0-1.6l3.6-1.1c.6-.2 1.1-.7 1.3-1.3l1.1-3.6c.1-.3.4-.6.8-.6Zm5.5-1c.2 0 .4.1.5.3l.3 1c.1.2.2.3.4.4l1 .3a.5.5 0 0 1 0 1l-1 .3c-.2.1-.3.2-.4.4l-.3 1a.5.5 0 0 1-1 0l-.3-1c-.1-.2-.2-.3-.4-.4l-1-.3a.5.5 0 0 1 0-1l1-.3c.2-.1.3-.2.4-.4l.3-1c.1-.2.3-.3.5-.3Z"/></symbol>
-  <symbol id="i-clock" viewBox="0 0 20 20"><path fill="currentColor" d="M10 2a8 8 0 1 0 0 16 8 8 0 0 0 0-16Zm.8 4a.8.8 0 0 0-1.6 0v4c0 .2.1.4.2.5l2.5 2.5a.8.8 0 0 0 1.1-1.1l-2.2-2.2V6Z"/></symbol>
-  <symbol id="i-mail" viewBox="0 0 20 20"><path fill="currentColor" d="M2 6.2V14c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V6.2l-7.4 4.5a1.2 1.2 0 0 1-1.2 0L2 6.2ZM17.7 4.7A2 2 0 0 0 16 4H4a2 2 0 0 0-1.7.7L10 9.3l7.7-4.6Z"/></symbol>
-  <symbol id="i-search" viewBox="0 0 20 20"><path fill="currentColor" d="M8.5 3a5.5 5.5 0 1 0 3.2 10l3.5 3.5a1 1 0 0 0 1.4-1.4L13.1 11.6A5.5 5.5 0 0 0 8.5 3ZM5 8.5a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0Z"/></symbol>
-  <symbol id="i-moon" viewBox="0 0 20 20"><path fill="currentColor" d="M8.6 2.3a.8.8 0 0 1 .2.9 6.2 6.2 0 0 0 8 8 .8.8 0 0 1 1 1A8 8 0 1 1 7.7 2.2a.8.8 0 0 1 .9.1Z"/></symbol>
-  <symbol id="i-sun" viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5c.4 0 .8.3.8.8v1.4a.8.8 0 0 1-1.6 0V2.3c0-.5.4-.8.8-.8ZM10 6a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm0 10.5c.4 0 .8.3.8.8v.4a.8.8 0 0 1-1.6 0v-.4c0-.5.4-.8.8-.8ZM2.3 9.2h1.4a.8.8 0 0 1 0 1.6H2.3a.8.8 0 0 1 0-1.6Zm14 0h1.4a.8.8 0 0 1 0 1.6h-1.4a.8.8 0 0 1 0-1.6ZM4.5 4.5c.3-.3.8-.3 1.1 0l1 1a.8.8 0 0 1-1.1 1.1l-1-1a.8.8 0 0 1 0-1.1Zm9 9c.3-.3.8-.3 1.1 0l1 1a.8.8 0 0 1-1.1 1.1l-1-1a.8.8 0 0 1 0-1.1Zm2.1-9c.3.3.3.8 0 1.1l-1 1a.8.8 0 0 1-1.1-1.1l1-1c.3-.3.8-.3 1.1 0Zm-9 9c.3.3.3.8 0 1.1l-1 1a.8.8 0 0 1-1.1-1.1l1-1c.3-.3.8-.3 1.1 0Z"/></symbol>
-  <symbol id="i-menu" viewBox="0 0 20 20"><path fill="currentColor" d="M3 5.8c0-.5.3-.8.8-.8h12.4a.8.8 0 0 1 0 1.6H3.8A.8.8 0 0 1 3 5.8Zm0 4.2c0-.4.3-.8.8-.8h12.4a.8.8 0 0 1 0 1.6H3.8A.8.8 0 0 1 3 10Zm.8 3.5a.8.8 0 0 0 0 1.5h12.4a.8.8 0 0 0 0-1.5H3.8Z"/></symbol>
-  <symbol id="i-x" viewBox="0 0 20 20"><path fill="currentColor" d="M5.6 4.4a.8.8 0 0 0-1.2 1.2L8.9 10l-4.5 4.4a.8.8 0 1 0 1.2 1.2l4.4-4.5 4.4 4.5a.8.8 0 1 0 1.2-1.2L11.1 10l4.5-4.4a.8.8 0 0 0-1.2-1.2L10 8.9 5.6 4.4Z"/></symbol>
-  <symbol id="i-star" viewBox="0 0 20 20"><path fill="currentColor" d="M9.3 2.6c.3-.6 1.1-.6 1.4 0l1.9 3.9 4.3.6c.6.1.9.9.4 1.4l-3.1 3 .7 4.3c.1.6-.6 1.1-1.1.8L10 14.6l-3.8 2c-.5.3-1.2-.2-1.1-.8l.7-4.3-3.1-3c-.5-.5-.2-1.3.4-1.4l4.3-.6 1.9-3.9Z"/></symbol>
-  <symbol id="i-check" viewBox="0 0 20 20"><path fill="currentColor" d="M15.8 5.5a.8.8 0 0 1 0 1.1l-7.5 7.5a.8.8 0 0 1-1.1 0L4.2 11.1a.8.8 0 1 1 1.1-1.1l2.5 2.5 6.9-7a.8.8 0 0 1 1.1 0Z"/></symbol>
-  <symbol id="i-alert" viewBox="0 0 20 20"><path fill="currentColor" d="M10 2a8 8 0 1 0 0 16 8 8 0 0 0 0-16Zm0 4c.4 0 .8.3.8.8v3.5a.8.8 0 0 1-1.6 0V6.8c0-.5.4-.8.8-.8Zm0 7.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"/></symbol>
-  <symbol id="i-upload" viewBox="0 0 20 20"><path fill="currentColor" d="M10.5 2.7a.8.8 0 0 0-1 0l-4 3.8a.8.8 0 0 0 1 1.1l2.7-2.5v7.4a.8.8 0 0 0 1.6 0V5.1l2.7 2.5a.8.8 0 0 0 1-1.1l-4-3.8ZM3.8 13c.4 0 .7.3.7.8v1.4c0 .4.4.8.8.8h9.4c.4 0 .8-.4.8-.8v-1.4a.8.8 0 0 1 1.5 0v1.4c0 1.3-1 2.3-2.3 2.3H5.3C4 17.5 3 16.5 3 15.2v-1.4c0-.5.3-.8.8-.8Z"/></symbol>
-  <symbol id="i-display" viewBox="0 0 20 20"><path fill="currentColor" d="M3 5.8c0-.4.3-.8.8-.8h7.4a2.5 2.5 0 0 1 4.6 0h.4a.8.8 0 0 1 0 1.6h-.4a2.5 2.5 0 0 1-4.6 0H3.8a.8.8 0 0 1-.8-.8Zm10.5-.8a.8.8 0 1 0 0 1.6.8.8 0 0 0 0-1.6ZM3 14.2c0-.4.3-.8.8-.8h.4a2.5 2.5 0 0 1 4.6 0h7.4a.8.8 0 0 1 0 1.6H8.8a2.5 2.5 0 0 1-4.6 0h-.4a.8.8 0 0 1-.8-.8Zm3.5-.8a.8.8 0 1 0 0 1.6.8.8 0 0 0 0-1.6Z"/></symbol>
-  <symbol id="i-download" viewBox="0 0 20 20"><path fill="currentColor" d="M10 2.5c.4 0 .8.3.8.8v7.6l2.5-2.5a.8.8 0 0 1 1.1 1.1l-3.8 3.8a.8.8 0 0 1-1.1 0L5.6 9.5a.8.8 0 0 1 1.1-1.1l2.5 2.5V3.3c0-.5.4-.8.8-.8ZM3.8 13c.4 0 .7.3.7.8v1.4c0 .4.4.8.8.8h9.4c.4 0 .8-.4.8-.8v-1.4a.8.8 0 0 1 1.5 0v1.4c0 1.3-1 2.3-2.3 2.3H5.3C4 17.5 3 16.5 3 15.2v-1.4c0-.5.3-.8.8-.8Z"/></symbol>
-  <symbol id="i-external" viewBox="0 0 20 20"><path fill="currentColor" d="M11 3.8c0-.5.3-.8.8-.8h4.4c.4 0 .8.3.8.8v4.4a.8.8 0 0 1-1.6 0V5.6l-6 6a.8.8 0 0 1-1.1-1.1l6-6h-2.5a.8.8 0 0 1-.8-.7ZM5.3 6.5c-.4 0-.8.4-.8.8v7.4c0 .4.4.8.8.8h7.4c.4 0 .8-.4.8-.8v-2.9a.8.8 0 0 1 1.5 0v2.9c0 1.3-1 2.3-2.3 2.3H5.3C4 17 3 16 3 14.7V7.3C3 6 4 5 5.3 5h2.9a.8.8 0 0 1 0 1.5H5.3Z"/></symbol>
-  <symbol id="i-nanefy" viewBox="-80 -80 160 160"><mask id="nanefy-n" maskUnits="userSpaceOnUse" x="-90" y="-90" width="180" height="180"><rect x="-90" y="-90" width="180" height="180" fill="#fff"/><polygon transform="translate(33 38) scale(0.32)" points="-51,62 -51,-62 -25,-62 33,32.6 33,-62 51,-62 51,62 25,62 -33,-32.6 -33,62" fill="#000" stroke="#000" stroke-width="16" stroke-linejoin="round"/></mask><g fill="currentColor" mask="url(#nanefy-n)"><rect x="-80" y="-80" width="86" height="68" rx="16"/><rect x="14" y="-80" width="66" height="68" rx="16"/><rect x="-80" y="-4" width="58" height="84" rx="16"/><rect x="-14" y="-4" width="94" height="84" rx="16"/></g></symbol>
-  <symbol id="i-bag" viewBox="0 0 20 20"><path fill="currentColor" d="M7 6V5a3 3 0 0 1 6 0v1h2.2c.5 0 .9.4 1 .9l.8 9.6a1.4 1.4 0 0 1-1.4 1.5H4.4A1.4 1.4 0 0 1 3 16.5l.8-9.6c.1-.5.5-.9 1-.9H7Zm1.5 0h3V5a1.5 1.5 0 0 0-3 0v1Z"/></symbol>
-  <symbol id="i-brief" viewBox="0 0 20 20"><path fill="currentColor" d="M8 3a2 2 0 0 0-2 2v1H4.5C3.7 6 3 6.7 3 7.5v8c0 .8.7 1.5 1.5 1.5h11c.8 0 1.5-.7 1.5-1.5v-8c0-.8-.7-1.5-1.5-1.5H14V5a2 2 0 0 0-2-2H8Zm4.5 3h-5V5c0-.3.2-.5.5-.5h4c.3 0 .5.2.5.5v1Z"/></symbol>
+  <defs>
+    <linearGradient id="markGrad" gradientUnits="userSpaceOnUse" x1="-14" y1="-4" x2="80" y2="80"><stop offset="0" stop-color="#8051FF"/><stop offset=".55" stop-color="#B24BF3"/><stop offset="1" stop-color="#2FB5E8"/></linearGradient>
+    <mask id="markN" maskUnits="userSpaceOnUse" x="-90" y="-90" width="180" height="180"><rect x="-90" y="-90" width="180" height="180" fill="#fff"/><polygon transform="translate(33 38) scale(0.32)" points="-51,62 -51,-62 -25,-62 33,32.6 33,-62 51,-62 51,62 25,62 -33,-32.6 -33,62" fill="#000" stroke="#000" stroke-width="16" stroke-linejoin="round"/></mask>
+  </defs>
+  <symbol id="mark" viewBox="-80 -80 160 160"><g mask="url(#markN)" fill="currentColor"><rect x="-80" y="-80" width="86" height="68" rx="16"/><rect x="14" y="-80" width="66" height="68" rx="16"/><rect x="-80" y="-4" width="58" height="84" rx="16"/><rect x="-14" y="-4" width="94" height="84" rx="16" fill="url(#markGrad)"/></g></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-tag" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M3.5 4.5h8l9 9-7.5 7.5-9-9z"/><circle cx="8" cy="9" r="1.6" fill="currentColor"/></symbol>
+  <symbol id="i-scan" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M4 8V5h3M17 5h3v3M20 16v3h-3M7 19H4v-3M4 12h16"/></symbol>
+  <symbol id="i-tv" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M8 21h8"/></symbol>
+  <symbol id="i-map" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M12 21s-7-6.5-7-12a7 7 0 0 1 14 0c0 5.5-7 12-7 12z"/><circle cx="12" cy="9" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+  <symbol id="i-life" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3.5" fill="none" stroke="currentColor" stroke-width="2"/><path stroke="currentColor" stroke-width="2" d="m5.6 5.6 3.9 3.9m5 5 3.9 3.9m0-12.8-3.9 3.9m-5 5-3.9 3.9"/></symbol>
+  <symbol id="i-db" viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="7" ry="3" fill="none" stroke="currentColor" stroke-width="2"/><path fill="none" stroke="currentColor" stroke-width="2" d="M5 6v12c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 12c0 1.7 3.1 3 7 3s7-1.3 7-3"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path fill="currentColor" d="M8 5.5v13l11-6.5z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/><path fill="none" stroke="currentColor" stroke-width="2" d="m4 7 8 6 8-6"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-5-5 5 5-5 5"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M13 3 5 13h6l-1 8 8-10h-6z"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path fill="none" stroke="currentColor" stroke-width="2" d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9S14.5 18.4 12 21c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path fill="none" stroke="currentColor" stroke-width="2" d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></symbol>
+  <symbol id="i-blocks" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="2"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="2"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="2"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+  <symbol id="i-printer" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M7 9V3.5h10V9M7 17H4.5V9.5h15V17H17M7 14h10v6.5H7z"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M4 20V4m0 16h16M8 16v-4m4 4V8m4 8v-6"/></symbol>
 </svg>
 
-<header class="topbar">
-  <button class="icon-btn menu-btn" id="menuBtn" aria-label="Open navigation" aria-expanded="false"><svg width="20" height="20"><use href="#i-menu"/></svg></button>
-  <a class="brand" href="#home"><span class="logo">YG</span><span class="name">Yainel Garcia</span></a>
-  <a class="nanefy-link" href="tecnica/"><svg width="16" height="16"><use href="#i-nanefy"/></svg><span>Nanefy</span></a>
-  <a class="shop-link" href="shopify/"><svg width="16" height="16"><use href="#i-bag"/></svg><span>Shopify Portfolio</span></a>
-  <button class="search" id="openPalette" aria-label="Search and quick actions">
-    <svg width="16" height="16"><use href="#i-search"/></svg><span>Search demos, skills, actions</span><kbd>⌘ K</kbd>
-  </button>
-  <div class="top-actions">
-    <div class="display-wrap">
-      <button class="icon-btn tooltip" id="displayBtn" data-tip="Display settings" aria-label="Display settings" aria-expanded="false" aria-controls="displayPanel"><svg width="18" height="18"><use href="#i-display"/></svg></button>
-      <div class="display-panel" id="displayPanel" role="dialog" aria-labelledby="displayTitle" hidden>
-        <h3 id="displayTitle">Display</h3>
-        <p class="sub">Saved on this device.</p>
-        <div class="setting only-wide"><div><b>Wide layout</b><div class="sub">Use more of large screens</div></div><label class="switch"><input type="checkbox" data-pref="wide" aria-label="Wide layout"><span></span></label></div>
-        <div class="setting"><div><b>High contrast</b><div class="sub">Stronger text, borders and focus rings</div></div><label class="switch"><input type="checkbox" data-pref="contrast" aria-label="High contrast"><span></span></label></div>
-        <div class="setting"><div><b>Larger text</b><div class="sub">Bigger type across the whole page</div></div><label class="switch"><input type="checkbox" data-pref="text" aria-label="Larger text"><span></span></label></div>
-        <div class="setting"><div><b>Reduce transparency</b><div class="sub">Solid backgrounds instead of see-through layers</div></div><label class="switch"><input type="checkbox" data-pref="solid" aria-label="Reduce transparency"><span></span></label></div>
-        <button class="btn" id="displayReset" type="button">Reset to default</button>
-      </div>
+<header class="top" data-autohide>
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Nanefy"><svg aria-hidden="true"><use href="#mark"/></svg>nanefy</a>
+    <nav class="nav" aria-label="Secciones">
+      <a href="#modulos"><span class="es">Módulos</span><span class="en">Modules</span></a>
+      <a href="#como"><span class="es">Cómo funciona</span><span class="en">How it works</span></a>
+      <a href="#planes"><span class="es">Planes</span><span class="en">Plans</span></a>
+      <a href="#faq"><span class="es">Preguntas</span><span class="en">FAQ</span></a>
+    </nav>
+    <div class="lang" role="group" aria-label="Idioma / Language">
+      <button type="button" data-set-lang="es" aria-pressed="true">ES</button>
+      <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
     </div>
-    <button class="icon-btn tooltip lang-btn" id="langBtn" data-tip="Español" aria-label="Cambiar a español">ES</button>
-    <button class="icon-btn tooltip" id="themeBtn" data-tip="Toggle dark mode" aria-label="Toggle dark mode"><svg width="18" height="18"><use href="#i-moon"/></svg></button>
-    <a class="icon-btn tooltip" href="#contact" data-tip="Start a project" aria-label="Start a project" style="color:inherit"><svg width="18" height="18"><use href="#i-mail"/></svg></a>
+    <a class="signin" href="https://app.nanefy.com/app/login"><span class="es">Entrar</span><span class="en">Sign in</span></a>
+    <a class="btn btn-magic btn-sm" href="#demo"><span class="es">Pedir una demo</span><span class="en">Book a demo</span></a>
   </div>
 </header>
 
-<nav class="sidebar" id="sidebar" aria-label="Sections">
-  <a class="nav-item active" href="#home"><svg><use href="#i-home"/></svg>Home</a>
-  <a class="nav-item" href="#playground" data-pg-link data-es="Laboratorio"><svg><use href="#i-spark"/></svg>Skills playground<span class="count" id="pgCount">25</span></a>
-  <a class="nav-item nav-sub" href="#pg-motion" data-pg-link>Motion &amp; effects</a>
-  <a class="nav-item nav-sub" href="#pg-ui" data-pg-link>Pro UI patterns</a>
-  <a class="nav-item nav-sub" href="#pg-web" data-pg-link>Modern web platform</a>
-  <a class="nav-item nav-sub" href="#pg-apps" data-pg-link>Mini apps</a>
-  <a class="nav-item" href="#lab"><svg><use href="#i-grid"/></svg>UI kit<span class="count">14</span></a>
-  <a class="nav-item" href="#projects" data-es="Proyectos"><svg><use href="#i-brief"/></svg>Selected work<span class="count">5</span></a>
-  <a class="nav-item" href="shopify/"><svg><use href="#i-bag"/></svg>Shopify portfolio</a>
-  <a class="nav-item" href="tecnica/"><svg><use href="#i-nanefy"/></svg>Nanefy for supermarkets</a>
-  <a class="nav-item" href="#experience"><svg><use href="#i-clock"/></svg>Experience</a>
-  <a class="nav-item" href="#contact"><svg><use href="#i-mail"/></svg>Start a project</a>
-  <div class="nav-label">Concepts</div>
-  <a class="nav-item" href="palma-alta/index.html"><svg><use href="#i-spark"/></svg>Palma Alta hotel</a>
-  <a class="nav-item" href="tostado/index.html"><svg><use href="#i-spark"/></svg>Tostado coffee</a>
-  <a class="nav-item" href="tally/index.html"><svg><use href="#i-spark"/></svg>Tally dashboard</a>
-  <a class="nav-item" href="brasa/index.html"><svg><use href="#i-spark"/></svg>Brasa restaurant</a>
-  <a class="nav-item" href="marea/index.html"><svg><use href="#i-spark"/></svg>Marea studio</a>
-  <div class="side-card">
-    <b>Everything here is live.</b>
-    Every demo on this page is a working component I designed and coded, and each one shows its source. Press <kbd style="background:var(--surface-3);border-color:var(--border)">⌘ K</kbd> to jump anywhere.
+<main id="top">
+
+<!-- Hero -->
+<section class="hero">
+  <div class="aurora" aria-hidden="true"></div>
+  <div class="dots" aria-hidden="true"></div>
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow" data-reveal="up"><b>LOC SMS</b><span class="es">Para supermercados que ya usan LOC SMS</span><span class="en">For supermarkets already on LOC SMS</span></span>
+      <h1 data-reveal="up" style="--d:80ms">
+        <span class="es">Su sistema ya sabe los precios. <span class="grad">Nanefy los pone a trabajar.</span></span>
+        <span class="en">Your system already knows the prices. <span class="grad">Nanefy puts them to work.</span></span>
+      </h1>
+      <p class="lead" data-reveal="up" style="--d:160ms">
+        <span class="es">Etiquetas, verificadores de precio, pantallas, el mapa de la tienda y el soporte, conectados a LOC SMS. Un precio cambia una vez y se actualiza en todas partes.</span>
+        <span class="en">Shelf labels, price checkers, screens, the store map and support, connected to LOC SMS. A price changes once and updates everywhere.</span>
+      </p>
+      <div class="cta-row" data-reveal="up" style="--d:240ms">
+        <a class="btn btn-magic" href="#demo"><svg aria-hidden="true"><use href="#i-mail"/></svg><span class="es">Pedir una demostración</span><span class="en">Book a demo</span></a>
+        <a class="btn btn-ghost" href="#modulos"><span class="es">Ver los 5 módulos</span><span class="en">See the 5 modules</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      </div>
+      <div class="chips" data-reveal="up" style="--d:320ms">
+        <span class="chip" style="--c:var(--ld)"><i></i>Label Designer</span>
+        <span class="chip" style="--c:var(--pv)"><i></i>Price Verifier</span>
+        <span class="chip" style="--c:var(--ds)"><i></i>Digital Signage</span>
+        <span class="chip" style="--c:var(--pm)"><i></i>Product Map</span>
+        <span class="chip" style="--c:var(--tk)"><i></i>Tickets</span>
+      </div>
+    </div>
+
+    <div class="sync" id="sync" data-reveal="zoom" style="--d:200ms" aria-label="Un cambio de precio en LOC SMS llega a la etiqueta, al verificador y a la pantalla">
+      <svg class="links" viewBox="0 0 500 460" preserveAspectRatio="none" aria-hidden="true">
+        <defs><linearGradient id="flowGrad" x1="0" x2="1"><stop offset="0" stop-color="#8051FF"/><stop offset="1" stop-color="#2FB5E8"/></linearGradient></defs>
+        <path d="M150 230 C 210 230, 200 62, 190 62"/>
+        <path d="M150 230 C 210 230, 200 218, 190 218"/>
+        <path d="M150 230 C 210 230, 200 374, 190 374"/>
+        <path class="flow" d="M150 230 C 210 230, 200 62, 190 62"/>
+        <path class="flow" d="M150 230 C 210 230, 200 218, 190 218"/>
+        <path class="flow" d="M150 230 C 210 230, 200 374, 190 374"/>
+      </svg>
+      <div class="node src">
+        <span class="pulse"></span>
+        <div class="ico"><svg aria-hidden="true"><use href="#i-db"/></svg></div>
+        <strong>LOC SMS</strong>
+        <small><span class="es">Cambio de precio</span><span class="en">Price change</span></small>
+        <div class="edit"><s id="srcOld">$4.29</s><span id="srcNew">$3.99</span></div>
+      </div>
+      <div class="node dst d1" style="--c:var(--ld)"><div class="pic"><svg aria-hidden="true"><use href="#i-tag"/></svg></div><div><div class="tag">Label Designer</div><div class="name"><span class="es">Etiqueta lista para imprimir</span><span class="en">Label ready to print</span></div></div><div class="price" data-price>$4.29</div></div>
+      <div class="node dst d2" style="--c:var(--pv)"><div class="pic"><svg aria-hidden="true"><use href="#i-scan"/></svg></div><div><div class="tag">Price Verifier</div><div class="name"><span class="es">El cliente escanea</span><span class="en">The shopper scans</span></div></div><div class="price" data-price>$4.29</div></div>
+      <div class="node dst d3" style="--c:var(--ds)"><div class="pic"><svg aria-hidden="true"><use href="#i-tv"/></svg></div><div><div class="tag">Digital Signage</div><div class="name"><span class="es">La TV del deli</span><span class="en">The deli TV</span></div></div><div class="price" data-price>$4.29</div></div>
+    </div>
   </div>
-</nav>
-<div class="scrim" id="scrim"></div>
+</section>
 
-<main class="main">
-<div class="page">
-
-  <!-- HOME -->
-  <section class="section" id="home">
-    <div class="card hero reveal">
-      <div class="hero-bg"></div>
-      <div class="hero-inner">
-        <div>
-          <p class="greet" id="greet">Hello there</p>
-          <h1>I design and build <span class="typed-slot"><span><span class="typed" id="typed">web applications</span><span class="caret" aria-hidden="true"></span></span><span class="typed-ghost" aria-hidden="true">web applications</span></span></h1>
-          <p class="role">Web designer &amp; full-stack developer · PHP, JavaScript &amp; API integrations</p>
-          <p class="lede">I'm Yainel, based in Miami, with 10+ years of experience. I build PHP and Laravel back ends, connect business systems through APIs, and design the interfaces on top. This site is my playground: <span data-pg-total>25</span> live demos of motion, interface patterns and modern web features, all hand-coded, each with its source one click away.</p>
-          <div class="row">
-            <a class="btn btn-magic btn-lg" href="#playground" data-pg-link><svg width="16" height="16"><use href="#i-spark"/></svg>Explore the playground</a>
-            <a class="btn btn-lg" href="resume/Yainel-Garcia-Alfonso-Resume.pdf" download data-resume><svg width="16" height="16"><use href="#i-download"/></svg>Download résumé</a>
-            <a class="btn btn-lg btn-plain" href="#contact">Start a project</a>
-          </div>
-        </div>
-        <aside class="profile" aria-label="Profile">
-          <div class="row" style="gap:12px;flex-wrap:nowrap">
-            <div class="avatar">YG</div>
-            <div>
-              <b style="font-size:.9375rem">Yainel Garcia Alfonso</b>
-              <div class="sub" style="color:var(--text-2)">Web designer &amp; full-stack developer</div>
-            </div>
-          </div>
-          <div style="margin-top:14px"><span class="badge success"><span class="dot pulse"></span>Available for new projects</span></div>
-          <dl>
-            <dt>Based in</dt><dd>Miami, Florida</dd>
-            <dt>Local time</dt><dd id="localTime">--:--</dd>
-            <dt>Speaks</dt><dd>Spanish, English, some French</dd>
-            <dt>Email</dt><dd><a href="#" id="copyEmail" title="Copy email">garcia.yainel@gmail.com</a></dd>
-            <dt>LinkedIn</dt><dd><a href="https://www.linkedin.com/in/yainel" target="_blank" rel="noopener">in/yainel</a></dd>
-            <dt>GitHub</dt><dd><a href="https://github.com/yainel" target="_blank" rel="noopener">github.com/yainel</a></dd>
-            <dt>Résumé</dt><dd><a href="resume/Yainel-Garcia-Alfonso-Resume.pdf" download data-resume>PDF · 1 page</a></dd>
-          </dl>
-        </aside>
-      </div>
-    </div>
-
-    <div class="grid g4 stats" style="margin-top:16px">
-      <div class="card stat reveal"><div class="sub">Years building for the web</div><div class="num" data-count="10" data-suffix="+">0</div><svg viewBox="0 0 80 32"><path class="area" d="M0 28 L12 24 L24 26 L36 18 L48 20 L60 10 L72 12 L80 4 L80 32 L0 32Z"/><path d="M0 28 L12 24 L24 26 L36 18 L48 20 L60 10 L72 12 L80 4"/></svg></div>
-      <div class="card stat reveal"><div class="sub">Production releases shipped</div><div class="num" data-count="16" data-suffix="+">0</div><svg viewBox="0 0 80 32"><path class="area" d="M0 26 L10 22 L20 23 L30 16 L40 17 L50 12 L60 14 L70 6 L80 8 L80 32 L0 32Z"/><path d="M0 26 L10 22 L20 23 L30 16 L40 17 L50 12 L60 14 L70 6 L80 8"/></svg></div>
-      <div class="card stat reveal"><div class="sub">Teammates supported daily</div><div class="num" data-count="25" data-suffix="+">0</div><svg viewBox="0 0 80 32"><path class="area" d="M0 24 L16 20 L28 22 L40 14 L52 16 L64 8 L80 6 L80 32 L0 32Z"/><path d="M0 24 L16 20 L28 22 L40 14 L52 16 L64 8 L80 6"/></svg></div>
-      <div class="card stat reveal"><div class="sub">Live demos on this page</div><div class="num" data-count="39">0</div><svg viewBox="0 0 80 32"><path class="area" d="M0 26 L26 26 L28 16 L52 16 L54 6 L80 6 L80 32 L0 32Z"/><path d="M0 26 L26 26 L28 16 L52 16 L54 6 L80 6"/></svg></div>
-    </div>
-
-    <div class="card ask reveal" style="margin-top:16px">
-      <div class="row between">
-        <h3 class="row" style="gap:6px"><svg width="16" height="16" style="color:var(--magic)"><use href="#i-spark"/></svg>Ask about me</h3>
-        <span class="badge magic">Quick answers</span>
-      </div>
-      <div class="ask-log" id="askLog" aria-live="polite"><div class="a">Pick a question below or type your own. Answers are written by me ahead of time.</div></div>
-      <form class="ask-form" id="askForm">
-        <label class="sr" for="askInput">Your question</label>
-        <input class="input" id="askInput" placeholder="What's your design process?" autocomplete="off">
-        <button class="btn btn-primary" type="submit">Ask</button>
-      </form>
-      <div class="suggest" id="suggest">
-        <button type="button">What do you do best?</button>
-        <button type="button">What tools do you use?</button>
-        <button type="button">Can you code the designs?</button>
-        <button type="button">What skills can I see here?</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- SKILLS PLAYGROUND -->
-  <section class="section" id="playground">
-    <div class="section-head">
-      <div><h2>Skills playground</h2><p><span data-pg-total>25</span> live demos, grouped by skill. Every card has a View code button with its real source.</p></div>
-    </div>
-    <div class="toolbar">
-      <div class="segmented" id="pgFilter" role="group" aria-label="Filter demos">
-        <span class="thumb"></span>
-        <button aria-pressed="true" data-f="all">All</button>
-        <button aria-pressed="false" data-f="motion">Motion</button>
-        <button aria-pressed="false" data-f="ui">UI patterns</button>
-        <button aria-pressed="false" data-f="web">Modern web</button>
-        <button aria-pressed="false" data-f="apps">Mini apps</button>
-      </div>
-      <div class="input-wrap" style="width:220px;max-width:100%">
-        <svg><use href="#i-search"/></svg>
-        <label class="sr" for="pgSearch">Search demos</label>
-        <input class="input" id="pgSearch" placeholder="Search, e.g. canvas, a11y">
-      </div>
-    </div>
-    <div id="pgRoot"></div>
-    <div class="card empty" id="pgEmpty" hidden>
-      <b>No demos match that search.</b>
-      <p style="margin:6px 0 12px">Try a word like "CSS", "keyboard" or "canvas".</p>
-      <button class="btn" id="pgClear">Clear search</button>
-    </div>
-  </section>
-
-  <!-- UI KIT -->
-  <section class="section" id="lab">
-    <div class="section-head">
-      <div><h2>UI kit</h2><p>The everyday building blocks of my design system: buttons, forms, feedback and data. Try everything.</p></div>
-      <button class="btn" id="resetLab">Reset all</button>
-    </div>
-    <div class="lab">
-
-      <div class="card reveal">
-        <h3>Buttons <small>States &amp; feedback</small></h3>
-        <div class="row">
-          <button class="btn btn-primary fx">Primary</button>
-          <button class="btn fx">Secondary</button>
-          <button class="btn btn-magic fx"><svg width="14" height="14"><use href="#i-spark"/></svg>Magic</button>
-          <button class="btn btn-critical fx">Delete</button>
-          <button class="btn btn-plain fx">Plain</button>
-          <button class="btn" disabled>Disabled</button>
-        </div>
-        <div class="divider"></div>
-        <div class="row">
-          <button class="btn btn-primary" id="loadBtn" style="min-width:110px">Save changes</button>
-          <span class="sub" id="loadMsg">Click to see a loading state.</span>
-        </div>
-      </div>
-
-      <div class="card reveal">
-        <h3>Accent color <small>Repaints this site</small></h3>
-        <div class="swatch-row" id="swatches">
-          <button style="background:#8051FF" data-c="#8051FF" aria-label="Violet" aria-pressed="true"></button>
-          <button style="background:#008060" data-c="#008060" aria-label="Green" aria-pressed="false"></button>
-          <button style="background:#2C6ECB" data-c="#2C6ECB" aria-label="Blue" aria-pressed="false"></button>
-          <button style="background:#E2408A" data-c="#E2408A" aria-label="Pink" aria-pressed="false"></button>
-          <button style="background:#E8731F" data-c="#E8731F" aria-label="Orange" aria-pressed="false"></button>
-        </div>
-        <p class="sub" style="margin-top:10px">Every component uses design tokens, so one change updates the whole page.</p>
-      </div>
-
-      <div class="card reveal">
-        <h3>Settings <small>Switches</small></h3>
-        <div class="setting"><div><b>Dark mode</b><div class="sub">Easier on the eyes at night</div></div><label class="switch"><input type="checkbox" id="darkSwitch" aria-label="Dark mode"><span></span></label></div>
-        <div class="setting"><div><b>Motion effects</b><div class="sub">Tilt and spotlight on cards</div></div><label class="switch"><input type="checkbox" id="motionSwitch" checked aria-label="Motion effects"><span></span></label></div>
-        <div class="setting"><div><b>Sound on click</b><div class="sub">A soft tick for buttons</div></div><label class="switch"><input type="checkbox" id="soundSwitch" aria-label="Sound on click"><span></span></label></div>
-      </div>
-
-      <div class="card reveal">
-        <h3>Pricing slider <small>Range input</small></h3>
-        <div class="segmented" id="billing" role="group" aria-label="Billing period" style="margin-bottom:14px">
-          <span class="thumb"></span>
-          <button aria-pressed="true" data-m="1">Monthly</button>
-          <button aria-pressed="false" data-m="0.8">Yearly <span class="badge success" style="height:18px;margin-left:4px">-20%</span></button>
-        </div>
-        <label class="label" for="pages">Pages: <b id="pagesOut">5</b></label>
-        <input type="range" class="range" id="pages" min="1" max="20" value="5" style="margin:10px 0 14px">
-        <div class="row between"><span class="sub">Example estimate</span><span class="price-out" id="priceOut">$0</span></div>
-      </div>
-
-      <div class="card reveal">
-        <h3>Toasts <small>Notifications</small></h3>
-        <div class="row">
-          <button class="btn" data-toast="Changes saved">Success</button>
-          <button class="btn" data-toast="Couldn't connect. Try again." data-err>Error</button>
-          <button class="btn" data-toast="Link copied to clipboard">Copy link</button>
-        </div>
-      </div>
-
-      <div class="card reveal">
-        <h3>Rating <small>Interactive</small></h3>
-        <div class="row between">
-          <div class="stars" id="stars" role="radiogroup" aria-label="Rate this showroom"></div>
-          <span class="sub" id="starsOut">Rate this showroom</span>
-        </div>
-      </div>
-
-      <div class="card reveal">
-        <h3>Progress ring <small>Animated SVG</small></h3>
-        <div class="row" style="gap:16px">
-          <div class="ring">
-            <svg viewBox="0 0 100 100"><defs><linearGradient id="ringGrad"><stop offset="0" stop-color="var(--magic)"/><stop offset="1" stop-color="var(--magic-2)"/></linearGradient></defs><circle class="track" cx="50" cy="50" r="42"/><circle class="val" id="ringVal" cx="50" cy="50" r="42" stroke-dasharray="263.9" stroke-dashoffset="263.9"/></svg>
-            <b id="ringOut">0%</b>
-          </div>
-          <div class="stack" style="gap:8px">
-            <div class="counter"><button id="ringMinus" aria-label="Decrease">−</button><output id="ringNum">72</output><button id="ringPlus" aria-label="Increase">+</button></div>
-            <span class="sub">Project launch checklist</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="card reveal">
-        <h3>Tabs <small>Content switching</small></h3>
-        <div class="tabs" role="tablist" id="tabs">
-          <button role="tab" aria-selected="true" aria-controls="t1" id="tb1">Design</button>
-          <button role="tab" aria-selected="false" aria-controls="t2" id="tb2" tabindex="-1">Build</button>
-          <button role="tab" aria-selected="false" aria-controls="t3" id="tb3" tabindex="-1">Launch</button>
-        </div>
-        <div class="tab-panel" id="t1" role="tabpanel" aria-labelledby="tb1"><p class="sub">Wireframes, a type scale and a color system in Figma, reviewed on desktop and mobile together.</p></div>
-        <div class="tab-panel" id="t2" role="tabpanel" aria-labelledby="tb2" hidden><p class="sub">Clean, responsive HTML, CSS and JavaScript, or WordPress and React when the project needs it.</p></div>
-        <div class="tab-panel" id="t3" role="tabpanel" aria-labelledby="tb3" hidden><p class="sub">Testing on real devices, speed checks, and a walkthrough so your team can update content themselves.</p></div>
-      </div>
-
-      <div class="card reveal">
-        <h3>Sortable list <small>Drag to reorder</small></h3>
-        <ul class="sortable" id="sortable">
-          <li draggable="true"><span class="grip">⋮⋮</span>Typography</li>
-          <li draggable="true"><span class="grip">⋮⋮</span>Spacing</li>
-          <li draggable="true"><span class="grip">⋮⋮</span>Color</li>
-          <li draggable="true"><span class="grip">⋮⋮</span>Motion</li>
-        </ul>
-        <p class="sub" style="margin-top:8px" id="sortOut">What matters most to you? Drag to rank.</p>
-      </div>
-
-      <div class="card reveal">
-        <h3>File upload <small>Drag and drop</small></h3>
-        <label class="dropzone" id="dropzone">
-          <input type="file" id="fileInput" multiple>
-          <svg width="22" height="22" style="margin:0 auto 6px"><use href="#i-upload"/></svg>
-          <b>Drop files here</b><br><span class="sub">or click to browse. Files stay on your device.</span>
-        </label>
-        <ul class="files" id="files"></ul>
-      </div>
-
-      <div class="card reveal">
-        <h3>Loading state <small>Skeleton</small></h3>
-        <div id="skel" class="skeleton"><div class="sk" style="width:40px;height:40px;border-radius:50%"></div><div style="flex:1" class="stack"><div class="sk" style="height:10px;width:60%"></div><div class="sk" style="height:10px;width:90%"></div></div></div>
-        <button class="btn" id="skelBtn" style="margin-top:12px">Load content</button>
-      </div>
-
-      <div class="card reveal">
-        <h3>FAQ <small>Accordion</small></h3>
-        <div class="accordion">
-          <details open><summary>Do you work with existing brands?</summary><p>Yes. I translate a brand's identity into a site that feels like it, and I can extend a brand where it has gaps.</p></details>
-          <details><summary>Can you build what you design?</summary><p>Yes, that's my favorite part. I code responsive front ends and set up WordPress when a team needs to edit content.</p></details>
-          <details><summary>Do you work in Spanish?</summary><p>Sí. I work comfortably in both Spanish and English.</p></details>
-        </div>
-      </div>
-
-      <div class="card reveal">
-        <h3>Data table <small>Sort &amp; filter</small></h3>
-        <div class="input-wrap" style="margin-bottom:12px"><svg><use href="#i-search"/></svg><label class="sr" for="tblSearch">Filter skills</label><input class="input" id="tblSearch" placeholder="Filter skills"></div>
-        <div class="table-wrap">
-          <table id="skillTable">
-            <thead><tr><th data-k="0">Skill<span class="arr">↕</span></th><th data-k="1">Area<span class="arr">↕</span></th><th data-k="2">Used in<span class="arr">↕</span></th></tr></thead>
-            <tbody>
-              <tr><td>Figma</td><td>Design</td><td>UI and layouts</td></tr>
-              <tr><td>Photoshop</td><td>Design</td><td>Images and assets</td></tr>
-              <tr><td>Adobe XD</td><td>Design</td><td>Prototypes</td></tr>
-              <tr><td>HTML &amp; CSS</td><td>Front-end</td><td>Every project</td></tr>
-              <tr><td>JavaScript</td><td>Front-end</td><td>Interactions</td></tr>
-              <tr><td>React</td><td>Front-end</td><td>Web apps</td></tr>
-              <tr><td>WordPress</td><td>CMS</td><td>Client sites</td></tr>
-              <tr><td>PHP</td><td>Back-end</td><td>APIs and web apps</td></tr>
-              <tr><td>Laravel</td><td>Back-end</td><td>Web apps</td></tr>
-              <tr><td>Symfony</td><td>Back-end</td><td>Web apps</td></tr>
-              <tr><td>MySQL</td><td>Database</td><td>Every back end</td></tr>
-              <tr><td>REST APIs</td><td>Integrations</td><td>CRM and form systems</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="card reveal">
-        <h3>Tooltips <small>Hover or focus</small></h3>
-        <div class="row">
-          <button class="btn tooltip" data-tip="Saved 2 minutes ago">Hover me</button>
-          <button class="btn tooltip" data-tip="Press ⌘K anywhere">Shortcut</button>
-          <span class="badge magic tooltip" tabindex="0" data-tip="Built with design tokens">Tokens</span>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- SELECTED WORK -->
-  <section class="section" id="projects">
-    <div class="section-head">
-      <div><h2>Selected work</h2><p>Concept projects I designed and built end to end. Click one for the story.</p></div>
-    </div>
-    <div class="grid g3 work-grid">
-      <button class="card project reveal" data-id="palma">
-        <span class="spot"></span>
-        <div class="thumb"><img src="img/work/palma.jpg" alt="" width="720" height="405" loading="lazy" decoding="async"></div>
-        <div class="body">
-          <div class="row between"><h3>Palma Alta</h3><span class="badge magic">Concept</span></div>
-          <p>Website for a fourteen-room boutique hotel in a 1926 Coral Gables house.</p>
-          <div class="row"><span class="badge">Hospitality</span><span class="badge">UI design</span><span class="badge">HTML/CSS</span></div>
-        </div>
-      </button>
-      <button class="card project reveal" data-id="tostado">
-        <span class="spot"></span>
-        <div class="thumb"><img src="img/work/tostado.jpg" alt="" width="720" height="405" loading="lazy" decoding="async"></div>
-        <div class="body">
-          <div class="row between"><h3>Tostado</h3><span class="badge magic">Concept</span></div>
-          <p>Ordering and coffee subscriptions for a small-batch roaster in Little Havana.</p>
-          <div class="row"><span class="badge">Food &amp; drink</span><span class="badge">E-commerce</span><span class="badge">UX</span></div>
-        </div>
-      </button>
-      <button class="card project reveal" data-id="tally">
-        <span class="spot"></span>
-        <div class="thumb"><img src="img/work/tally.jpg" alt="" width="720" height="405" loading="lazy" decoding="async"></div>
-        <div class="body">
-          <div class="row between"><h3>Tally</h3><span class="badge magic">Product concept</span></div>
-          <p>A sales and inventory dashboard for small shops, with charts, onboarding and dark mode.</p>
-          <div class="row"><span class="badge">SaaS</span><span class="badge">Data viz</span><span class="badge">UI system</span></div>
-        </div>
-      </button>
-      <button class="card project reveal" data-id="brasa">
-        <span class="spot"></span>
-        <div class="thumb"><img src="img/work/brasa.jpg" alt="" width="720" height="405" loading="lazy" decoding="async"></div>
-        <div class="body">
-          <div class="row between"><h3>Brasa</h3><span class="badge magic">Concept</span></div>
-          <p>A wood-fire restaurant site with a seasonal menu and a three-step reservation flow.</p>
-          <div class="row"><span class="badge">Restaurant</span><span class="badge">Booking</span><span class="badge">Motion</span></div>
-        </div>
-      </button>
-      <button class="card project reveal" data-id="marea">
-        <span class="spot"></span>
-        <div class="thumb"><img src="img/work/marea.jpg" alt="" width="720" height="405" loading="lazy" decoding="async"></div>
-        <div class="body">
-          <div class="row between"><h3>Marea</h3><span class="badge magic">Concept</span></div>
-          <p>Class schedule, booking and pricing for a pilates and breathwork studio in Brickell.</p>
-          <div class="row"><span class="badge">Wellness</span><span class="badge">Scheduling</span><span class="badge">UX</span></div>
-        </div>
-      </button>
-    </div>
-  </section>
-
-  <!-- EXPERIENCE -->
-  <section class="section" id="experience">
-    <div class="section-head"><div><h2>Experience</h2><p>Where I've worked and what I've learned.</p></div><a class="btn" href="work/palma-alta.html">Read a case study</a></div>
-    <div class="grid" style="grid-template-columns:1.5fr 1fr">
-      <div class="card reveal">
-        <ol class="timeline">
-          <li><span class="mark"></span><div class="when">2025 – Present</div><h4>IT Specialist / Internal Systems Developer, Dolls Plastic Surgery</h4><p>Design and build the internal web applications the team uses every day, from UX to production, shipped across 16+ releases.</p></li>
-          <li><span class="mark"></span><div class="when">2022 – 2025</div><h4>Project Manager, Técnica Systems</h4><p>Led setup and customization of sales software for clients, and trained teams to use it with confidence.</p></li>
-          <li><span class="mark"></span><div class="when">2010 – 2020</div><h4>PHP Developer, Freelance</h4><p>Built and maintained websites and web applications in PHP for clients, handling every project from the first meeting to launch.</p></li>
-          <li><span class="mark"></span><div class="when">2010</div><h4>Engineer's Degree in Computer Science, UCI Havana</h4><p>The engineering foundation behind everything I design.</p></li>
-        </ol>
-      </div>
-      <div class="card reveal">
-        <h3>Toolkit</h3>
-        <p class="sub" style="margin-bottom:12px">Tap to highlight what you need.</p>
-        <div class="chips" id="toolChips">
-          <button class="chip" aria-pressed="false">Figma</button><button class="chip" aria-pressed="false">Adobe XD</button><button class="chip" aria-pressed="false">Photoshop</button><button class="chip" aria-pressed="false">HTML5</button><button class="chip" aria-pressed="false">CSS &amp; Sass</button><button class="chip" aria-pressed="false">Tailwind</button><button class="chip" aria-pressed="false">JavaScript</button><button class="chip" aria-pressed="false">TypeScript</button><button class="chip" aria-pressed="false">React</button><button class="chip" aria-pressed="false">WordPress</button><button class="chip" aria-pressed="false">PHP</button><button class="chip" aria-pressed="false">Laravel</button><button class="chip" aria-pressed="false">Symfony</button><button class="chip" aria-pressed="false">MySQL</button><button class="chip" aria-pressed="false">REST APIs</button><button class="chip" aria-pressed="false">Docker</button><button class="chip" aria-pressed="false">Git</button>
-        </div>
-        <p class="sub" id="chipOut" style="margin-top:12px"></p>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT WIZARD -->
-  <section class="section" id="contact">
-    <div class="section-head"><div><h2>Start a project</h2><p>Four quick steps. Your message opens in your email app, ready to send.</p></div></div>
-    <div class="card wizard reveal">
-      <div class="progress"><i id="wizProg" style="width:25%"></i></div>
-      <ol class="steps" id="wizSteps">
-        <li class="current"><span class="n">1</span><span class="label-t">About you</span></li>
-        <li><span class="n">2</span><span class="label-t">Project</span></li>
-        <li><span class="n">3</span><span class="label-t">Budget</span></li>
-        <li><span class="n">4</span><span class="label-t">Review</span></li>
-      </ol>
-      <form id="wizard" novalidate>
-        <div class="wizard-body">
-          <div class="wizard-form">
-            <div class="step" data-step="1">
-              <h3>About you</h3><p class="sub">So I know who I'm talking to.</p>
-              <div class="stack">
-                <div class="field"><label for="fName">Name</label><input class="input" id="fName" name="name" autocomplete="name" required><span class="error"><svg width="14" height="14"><use href="#i-alert"/></svg>Enter your name</span></div>
-                <div class="field"><label for="fEmail">Email</label><input class="input" id="fEmail" name="email" type="email" autocomplete="email" required><span class="error"><svg width="14" height="14"><use href="#i-alert"/></svg>Enter a valid email, like name@company.com</span></div>
-                <div class="field"><label for="fCompany">Company <span class="help">(optional)</span></label><input class="input" id="fCompany" name="company" autocomplete="organization"></div>
-              </div>
-            </div>
-            <div class="step" data-step="2" hidden>
-              <h3>Your project</h3><p class="sub">Pick everything that applies.</p>
-              <div class="stack">
-                <div class="field"><span class="label">What do you need?</span><div class="chips" id="needChips"><button type="button" class="chip" aria-pressed="false">Website design</button><button type="button" class="chip" aria-pressed="false">Website build</button><button type="button" class="chip" aria-pressed="false">Redesign</button><button type="button" class="chip" aria-pressed="false">UI system</button><button type="button" class="chip" aria-pressed="false">WordPress</button><button type="button" class="chip" aria-pressed="false">Web app</button></div><span class="error" id="needErr"><svg width="14" height="14"><use href="#i-alert"/></svg>Pick at least one</span></div>
-                <div class="field"><label for="fIndustry">Industry</label><select class="select" id="fIndustry" name="industry"><option>Hospitality</option><option>Lifestyle</option><option>Luxury</option><option>Arts &amp; culture</option><option>Civic</option><option>Healthcare</option><option>Other</option></select></div>
-                <div class="field"><label for="fMsg">Tell me about it</label><textarea class="textarea" id="fMsg" name="message" maxlength="600" required></textarea><div class="row between"><span class="error"><svg width="14" height="14"><use href="#i-alert"/></svg>Add a few words about the project</span><span class="count-left" id="msgCount" style="margin-left:auto">0 / 600</span></div></div>
-              </div>
-            </div>
-            <div class="step" data-step="3" hidden>
-              <h3>Budget and timing</h3><p class="sub">A rough idea is fine.</p>
-              <div class="stack">
-                <div class="field"><label for="fBudget">Budget: <b id="budgetOut">$5,000</b></label><input type="range" class="range" id="fBudget" min="1000" max="30000" step="500" value="5000"></div>
-                <div class="field"><span class="label">Timeline</span>
-                  <label class="check"><input type="radio" name="timeline" value="As soon as possible" checked>As soon as possible</label>
-                  <label class="check"><input type="radio" name="timeline" value="In 1 to 3 months">In 1 to 3 months</label>
-                  <label class="check"><input type="radio" name="timeline" value="Just exploring">Just exploring</label>
-                </div>
-                <label class="check"><input type="checkbox" id="fCall">I'd like a quick video call first</label>
-              </div>
-            </div>
-            <div class="step" data-step="4" hidden>
-              <h3>Review and send</h3><p class="sub">Check the summary. Sending opens your email app with everything filled in.</p>
-              <div class="card" style="background:var(--surface-2);box-shadow:none;border:1px solid var(--border)"><pre id="preview" style="white-space:pre-wrap;font-family:inherit;font-size:.8125rem;color:var(--text-2)"></pre></div>
-            </div>
-            <div class="done-state" id="wizDone" hidden>
-              <div class="ok"><svg width="28" height="28"><use href="#i-check"/></svg></div>
-              <h3>Your email is ready</h3>
-              <p class="sub" style="margin:6px auto 16px;max-width:40ch">Your email app should have opened with the message. Hit send there and I'll reply within a day.</p>
-              <button type="button" class="btn" id="wizRestart">Start over</button>
-            </div>
-          </div>
-          <aside class="summary" aria-label="Live summary">
-            <h4>Summary</h4>
-            <dl>
-              <div><dt>Name</dt><dd id="sName">Not added yet</dd></div>
-              <div><dt>Needs</dt><dd id="sNeeds">Not added yet</dd></div>
-              <div><dt>Industry</dt><dd id="sInd">Hospitality</dd></div>
-              <div><dt>Budget</dt><dd id="sBudget">$5,000</dd></div>
-              <div><dt>Timeline</dt><dd id="sTime">As soon as possible</dd></div>
-            </dl>
-          </aside>
-        </div>
-        <div class="wizard-foot" id="wizFoot">
-          <button type="button" class="btn" id="wizBack" disabled>Back</button>
-          <button type="submit" class="btn btn-primary" id="wizNext">Continue</button>
-        </div>
-      </form>
-    </div>
-  </section>
-
-  <footer><a href="https://www.linkedin.com/in/yainel" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://github.com/yainel" target="_blank" rel="noopener">GitHub</a> · <a href="mailto:garcia.yainel@gmail.com">Email</a> · <a href="resume/Yainel-Garcia-Alfonso-Resume.pdf" download data-resume>Résumé</a><br>Designed and coded by Yainel Garcia Alfonso in Miami. Press <kbd style="background:var(--surface-3);border-color:var(--border);color:var(--text-2)">⌘ K</kbd> for quick actions.</footer>
+<div class="marquee" aria-hidden="true">
+  <div class="track">
+    <span class="es">Sin teclear precios</span><span class="en">No retyping prices</span>
+    <span class="es">Etiquetas siempre al día</span><span class="en">Labels always current</span>
+    <span class="es">Ofertas que se ven en la tienda</span><span class="en">Sales you can see in the aisle</span>
+    <span class="es">Cualquier TV con navegador</span><span class="en">Any TV with a browser</span>
+    <span class="es">En español y en inglés</span><span class="en">In Spanish and English</span>
+    <span class="es">Cada módulo por separado</span><span class="en">Each module on its own</span>
+    <span class="es">Sin teclear precios</span><span class="en">No retyping prices</span>
+    <span class="es">Etiquetas siempre al día</span><span class="en">Labels always current</span>
+    <span class="es">Ofertas que se ven en la tienda</span><span class="en">Sales you can see in the aisle</span>
+    <span class="es">Cualquier TV con navegador</span><span class="en">Any TV with a browser</span>
+    <span class="es">En español y en inglés</span><span class="en">In Spanish and English</span>
+    <span class="es">Cada módulo por separado</span><span class="en">Each module on its own</span>
+  </div>
 </div>
+
+<!-- Modules index -->
+<section class="sec" id="modulos">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker" data-reveal="up"><span class="es">Cinco módulos</span><span class="en">Five modules</span></div>
+      <h2 data-reveal="up" style="--d:60ms"><span class="es">Elija lo que su tienda necesita</span><span class="en">Pick what your store needs</span></h2>
+      <p data-reveal="up" style="--d:120ms"><span class="es">Todos leen los mismos productos y precios de LOC SMS. Empiece con uno y agregue los demás cuando quiera.</span><span class="en">They all read the same products and prices from LOC SMS. Start with one and add the rest whenever you like.</span></p>
+    </div>
+    <div class="mods">
+      <a class="mod-card" href="#label-designer" style="--c:var(--ld)" data-reveal="up"><div class="ic"><svg aria-hidden="true"><use href="#i-tag"/></svg></div><strong>Label Designer</strong><span class="es">Etiquetas de góndola con el precio de LOC SMS.</span><span class="en">Shelf labels with the LOC SMS price.</span></a>
+      <a class="mod-card" href="#price-verifier" style="--c:var(--pv)" data-reveal="up"><div class="ic"><svg aria-hidden="true"><use href="#i-scan"/></svg></div><strong>Price Verifier</strong><span class="es">El cliente escanea y ve su precio.</span><span class="en">Shoppers scan and see their price.</span></a>
+      <a class="mod-card" href="#digital-signage" style="--c:var(--ds)" data-reveal="up"><div class="ic"><svg aria-hidden="true"><use href="#i-tv"/></svg></div><strong>Digital Signage</strong><span class="es">Precios en las TVs, al día solos.</span><span class="en">Prices on your TVs, always current.</span></a>
+      <a class="mod-card" href="#product-map" style="--c:var(--pm)" data-reveal="up"><div class="ic"><svg aria-hidden="true"><use href="#i-map"/></svg></div><strong>Product Map</strong><span class="es">Encontrar cualquier producto en la tienda.</span><span class="en">Find any product in the store.</span></a>
+      <a class="mod-card" href="#tickets" style="--c:var(--tk)" data-reveal="up"><div class="ic"><svg aria-hidden="true"><use href="#i-life"/></svg></div><strong>Tickets</strong><span class="es">La tienda pide ayuda y sigue la respuesta.</span><span class="en">Stores ask for help and follow the answer.</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- Label Designer -->
+<section class="feature" id="label-designer" style="--c:var(--ld)">
+  <div class="wrap grid">
+    <div class="copy">
+      <div class="label" data-reveal="up"><i></i><span class="es">Etiquetas de góndola</span><span class="en">Shelf labels</span></div>
+      <h3 data-reveal="up" style="--d:60ms">Label Designer</h3>
+      <p class="tagline" data-reveal="up" style="--d:100ms"><span class="es">Etiquetas profesionales, siempre con el precio actual.</span><span class="en">Professional labels, always with the current price.</span></p>
+      <p data-reveal="up" style="--d:140ms"><span class="es">El nombre, el precio y el código salen de LOC SMS. Nadie los teclea, nadie se equivoca, y la tienda sabe cada día qué etiquetas quedaron viejas.</span><span class="en">Name, price and barcode come from LOC SMS. Nobody types them, nobody gets them wrong, and the store knows every day which labels went out of date.</span></p>
+      <ul class="points" data-reveal="up" style="--d:180ms">
+        <li><svg aria-hidden="true"><use href="#i-bolt"/></svg><div><b class="es">Aviso de precios cambiados</b><b class="en">Changed-price alerts</b><small class="es">Lo que cambió desde la última impresión, listo para imprimir de una vez.</small><small class="en">What changed since the last print, ready to print in one go.</small></div></li>
+        <li><svg aria-hidden="true"><use href="#i-blocks"/></svg><div><b class="es">Diseñador visual</b><b class="en">Visual designer</b><small class="es">Arrastre campos, ofertas, códigos y logos. Plantillas compartidas entre tiendas.</small><small class="en">Drag fields, sale tags, barcodes and logos. Templates shared across stores.</small></div></li>
+        <li><svg aria-hidden="true"><use href="#i-printer"/></svg><div><b class="es">Cualquier impresora</b><b class="en">Any printer</b><small class="es">Hojas carta, Avery o rollos térmicos para el deli y la carnicería.</small><small class="en">Letter sheets, Avery or thermal rolls for the deli and meat counter.</small></div></li>
+      </ul>
+      <div class="actions" data-reveal="up"><button class="tour-open" type="button" data-tour="ld"><span class="pl"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 4.5v15l12.5-7.5z"/></svg></span><span class="es">Ver cómo funciona</span><span class="en">See how it works</span></button><span class="unit"><span class="es">Se contrata</span><span class="en">Billed</span> <b><span class="es">por tienda</span><span class="en">per store</span></b></span></div>
+    </div>
+    <div class="stage" data-reveal="right">
+      <button class="tour-open" type="button" data-tour="ld"><span class="pl"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 4.5v15l12.5-7.5z"/></svg></span><span class="es">Ver cómo funciona</span><span class="en">See how it works</span></button>
+      <div class="ld-demo" id="ldDemo">
+        <div class="shelf-label" id="ldLabel">
+          <div class="n" data-f="n">Arroz Selecto 5 lb</div>
+          <div class="b" data-f="b">Selecto · 5 lb</div>
+          <div class="bars" data-code="0 41331 02405 9"></div>
+          <div class="p"><small>$</small><span data-f="d">4</span><sup data-f="c">29</sup></div>
+          <span class="stamp"><span class="es">IMPRESA</span><span class="en">PRINTED</span></span>
+        </div>
+        <div class="changes" id="ldChanges">
+          <h4><span class="es">Precios cambiados hoy</span><span class="en">Changed today</span></h4>
+          <div class="chg"><b>Arroz Selecto 5 lb</b><span>$4.29 → </span><em>$3.99</em></div>
+          <div class="chg"><b>Café Bustelo 10 oz</b><span>$5.79 → </span><em>$5.49</em></div>
+          <div class="chg"><b>Leche entera 1 gal</b><span>$3.89 → </span><em>$4.19</em></div>
+        </div>
+      </div>
+      <span class="hint"><span class="es">Datos de ejemplo</span><span class="en">Sample data</span></span>
+    </div>
+  </div>
+</section>
+
+<!-- Price Verifier -->
+<section class="feature flip" id="price-verifier" style="--c:var(--pv)">
+  <div class="wrap grid">
+    <div class="copy">
+      <div class="label" data-reveal="up"><i></i><span class="es">Verificador de precios</span><span class="en">Price checker</span></div>
+      <h3 data-reveal="up" style="--d:60ms">Price Verifier</h3>
+      <p class="tagline" data-reveal="up" style="--d:100ms"><span class="es">El cliente escanea y ve su precio y su oferta al instante.</span><span class="en">Shoppers scan and see their price and deal instantly.</span></p>
+      <p data-reveal="up" style="--d:140ms"><span class="es">Una tableta junto a los estantes se vuelve un verificador con la marca de la tienda. Mientras espera, muestra sus ofertas.</span><span class="en">A tablet by the shelves becomes a price checker with the store's brand. While it waits, it shows your deals.</span></p>
+      <ul class="points" data-reveal="up" style="--d:180ms">
+        <li><svg aria-hidden="true"><use href="#i-check"/></svg><div><b class="es">El mismo precio que la caja</b><b class="en">The same price as the register</b><small class="es">Precio y oferta leídos de LOC SMS.</small><small class="en">Price and deal read from LOC SMS.</small></div></li>
+        <li><svg aria-hidden="true"><use href="#i-play"/></svg><div><b class="es">Anuncios entre escaneos</b><b class="en">Ads between scans</b><small class="es">Imágenes, videos y temas que cambian solos por fecha.</small><small class="en">Images, videos and themes that switch by date on their own.</small></div></li>
+        <li><svg aria-hidden="true"><use href="#i-bolt"/></svg><div><b class="es">Llama la atención</b><b class="en">Draws attention</b><small class="es">Con la cámara nota cuando alguien se acerca, silba y lo invita a escanear.</small><small class="en">Its camera notices someone walking up; it whistles and invites them to scan.</small></div></li>
+      </ul>
+      <div class="actions" data-reveal="up"><button class="tour-open" type="button" data-tour="pv"><span class="pl"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 4.5v15l12.5-7.5z"/></svg></span><span class="es">Ver cómo funciona</span><span class="en">See how it works</span></button><span class="unit"><span class="es">Se contrata</span><span class="en">Billed</span> <b><span class="es">por quiosco</span><span class="en">per kiosk</span></b></span></div>
+    </div>
+    <div class="stage" data-reveal="left">
+      <button class="tour-open" type="button" data-tour="pv"><span class="pl"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 4.5v15l12.5-7.5z"/></svg></span><span class="es">Ver cómo funciona</span><span class="en">See how it works</span></button>
+      <div class="kiosk idle" id="kiosk">
+        <div class="screen"><div class="inner">
+          <div class="bubble"><span class="es">¡Oye! Verifique aquí el precio</span><span class="en">Hey! Check your price here</span></div>
+          <div class="k-idle">
+            <div class="barico"><i></i></div>
+            <strong><span class="es">Escanee un producto para ver su precio</span><span class="en">Scan a product to see its price</span></strong>
+            <div class="steps"><span>1 · <span class="es">Busque el código</span><span class="en">Find the barcode</span></span><span>2 · <span class="es">Escanéelo</span><span class="en">Scan it</span></span></div>
+          </div>
+          <div class="k-scan"><div class="beam"></div><small><span class="es">Buscando el precio…</span><span class="en">Looking up the price…</span></small></div>
+          <div class="k-result">
+            <div class="pname">Leche entera 1 gal</div>
+            <div class="pprice">$3.99</div>
+            <span class="deal"><span class="es">Oferta: 2 x $7.00</span><span class="en">Deal: 2 for $7.00</span></span>
+          </div>
+        </div></div>
+        <svg class="waves" viewBox="0 0 40 60" aria-hidden="true"><path d="M6 20q8 10 0 20M16 12q14 18 0 36M26 4q20 26 0 52" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>
+        <div class="stand"></div><div class="base"></div>
+      </div>
+      <button class="play" type="button" id="scanBtn"><svg aria-hidden="true"><use href="#i-scan"/></svg><span class="es">Simular un escaneo</span><span class="en">Simulate a scan</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- Digital Signage -->
+<section class="feature" id="digital-signage" style="--c:var(--ds)">
+  <div class="wrap grid">
+    <div class="copy">
+      <div class="label" data-reveal="up"><i></i><span class="es">Pantallas de precios</span><span class="en">Price displays</span></div>
+      <h3 data-reveal="up" style="--d:60ms">Digital Signage</h3>
+      <p class="tagline" data-reveal="up" style="--d:100ms"><span class="es">Las pantallas de su tienda se actualizan solas con cada precio.</span><span class="en">Your store's screens update themselves with every price.</span></p>
+      <p data-reveal="up" style="--d:140ms"><span class="es">Charcutería, carnicería y panadería muestran el precio de LOC SMS en sus televisores, con menús, ofertas y anuncios.</span><span class="en">Deli, meat counter and bakery show the LOC SMS price on their TVs, with menus, deals and ads.</span></p>
+      <ul class="points" data-reveal="up" style="--d:180ms">
+        <li><svg aria-hidden="true"><use href="#i-bolt"/></svg><div><b class="es">Precios sincronizados</b><b class="en">Synced prices</b><small class="es">Cambie el precio en LOC SMS y la TV lo muestra sola.</small><small class="en">Change the price in LOC SMS and the TV shows it on its own.</small></div></li>
+        <li><svg aria-hidden="true"><use href="#i-blocks"/></svg><div><b class="es">Temas listos</b><b class="en">Ready-made themes</b><small class="es">Diseños profesionales; ajuste colores, componentes y productos.</small><small class="en">Professional designs; adjust colors, components and products.</small></div></li>
+        <li><svg aria-hidden="true"><use href="#i-globe"/></svg><div><b class="es">Un enlace por TV</b><b class="en">One link per TV</b><small class="es">Cualquier TV con navegador sirve. Se abre el enlace y listo.</small><small class="en">Any TV with a browser works. Open the link and you are done.</small></div></li>
+      </ul>
+      <div class="actions" data-reveal="up"><button class="tour-open" type="button" data-tour="ds"><span class="pl"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 4.5v15l12.5-7.5z"/></svg></span><span class="es">Ver cómo funciona</span><span class="en">See how it works</span></button><span class="unit"><span class="es">Se contrata</span><span class="en">Billed</span> <b><span class="es">por pantalla</span><span class="en">per screen</span></b></span></div>
+    </div>
+    <div class="stage" data-reveal="right">
+      <button class="tour-open" type="button" data-tour="ds"><span class="pl"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 4.5v15l12.5-7.5z"/></svg></span><span class="es">Ver cómo funciona</span><span class="en">See how it works</span></button>
+      <div class="tv">
+        <div class="frame"><div class="board">
+          <div class="head"><strong id="tvTitle">Charcutería</strong><span><span class="es">precio por lb</span><span class="en">price per lb</span></span></div>
+          <div class="rows" id="tvRows"></div>
+          <div class="foot"><i></i><span class="es">Actualizado desde LOC SMS</span><span class="en">Updated from LOC SMS</span></div>
+          <div class="dots" id="tvDots"><i class="on"></i><i></i><i></i></div>
+        </div></div>
+        <div class="stand"></div>
+      </div>
+      <span class="hint"><span class="es">Datos de ejemplo</span><span class="en">Sample data</span></span>
+    </div>
+  </div>
+</section>
+
+<!-- Product Map -->
+<section class="feature flip" id="product-map" style="--c:var(--pm)">
+  <div class="wrap grid">
+    <div class="copy">
+      <div class="label" data-reveal="up"><i></i><span class="es">Mapa de la tienda</span><span class="en">Store map</span></div>
+      <h3 data-reveal="up" style="--d:60ms">Product Map</h3>
+      <p class="tagline" data-reveal="up" style="--d:100ms"><span class="es">El cliente busca un producto en su teléfono y ve dónde está.</span><span class="en">Shoppers search a product on their phone and see where it is.</span></p>
+      <p data-reveal="up" style="--d:140ms"><span class="es">Un código QR en la entrada abre el mapa de la tienda. Sin descargar nada.</span><span class="en">A QR code at the entrance opens the store map. Nothing to download.</span></p>
+      <ul class="points" data-reveal="up" style="--d:180ms">
+        <li><svg aria-hidden="true"><use href="#i-map"/></svg><div><b class="es">Encuentra en segundos</b><b class="en">Found in seconds</b><small class="es">Lo ve marcado en una vista de la tienda, con el camino desde la entrada.</small><small class="en">They see it pinned on a view of the store, with the way from the entrance.</small></div></li>
+        <li><svg aria-hidden="true"><use href="#i-blocks"/></svg><div><b class="es">Un mapa de cada tienda</b><b class="en">A map of each store</b><small class="es">Pasillos, góndolas y departamentos; los productos se ubican por subdepartamento y categoría.</small><small class="en">Aisles, shelves and departments; products find their place by subdepartment and category.</small></div></li>
+        <li><svg aria-hidden="true"><use href="#i-tag"/></svg><div><b class="es">Ofertas en el mapa</b><b class="en">Specials on the map</b><small class="es">Destaque sus especiales con su precio. En español o en inglés.</small><small class="en">Highlight your specials with their price. In Spanish or English.</small></div></li>
+      </ul>
+      <div class="actions" data-reveal="up"><button class="tour-open" type="button" data-tour="pm"><span class="pl"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 4.5v15l12.5-7.5z"/></svg></span><span class="es">Ver cómo funciona</span><span class="en">See how it works</span></button><span class="unit"><span class="es">Se contrata</span><span class="en">Billed</span> <b><span class="es">por tienda</span><span class="en">per store</span></b></span></div>
+    </div>
+    <div class="stage" data-reveal="left">
+      <button class="tour-open" type="button" data-tour="pm"><span class="pl"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 4.5v15l12.5-7.5z"/></svg></span><span class="es">Ver cómo funciona</span><span class="en">See how it works</span></button>
+      <div class="pm-demo">
+        <div class="phone" id="phone">
+          <div class="scr">
+            <div class="search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="m16 16 4 4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg><span id="typed"></span><i class="caret"></i></div>
+            <div class="res">
+              <div><b>Arroz Selecto 5 lb</b><span><span class="es">Pasillo 5</span><span class="en">Aisle 5</span></span> · $4.29</div>
+              <div><b>Arroz Goya 3 lb</b><span><span class="es">Pasillo 5</span><span class="en">Aisle 5</span></span> · $3.49</div>
+              <div><b>Arroz Valencia 2 lb</b><span><span class="es">Pasillo 5</span><span class="en">Aisle 5</span></span> · $2.79</div>
+            </div>
+            <div class="qrtag"><span class="es">Abierto desde el QR de la entrada</span><span class="en">Opened from the entrance QR</span></div>
+          </div>
+        </div>
+        <div class="floor" id="floor">
+          <svg viewBox="0 0 400 320" aria-label="Mapa de ejemplo de una tienda">
+            <rect x="10" y="10" width="380" height="300" rx="10" fill="#f6f7f2" stroke="#cfd6c8" stroke-width="2"/>
+            <rect x="24" y="22" width="352" height="16" rx="4" fill="#9fd3ff"/>
+            <rect x="24" y="52" width="16" height="200" rx="4" fill="#fca5a5"/>
+            <g fill="#cbd5c4">
+              <rect class="aisle" x="70" y="62" width="24" height="170" rx="4"/>
+              <rect class="aisle" x="120" y="62" width="24" height="170" rx="4"/>
+              <rect class="aisle" x="170" y="62" width="24" height="170" rx="4"/>
+              <rect class="aisle" x="220" y="62" width="24" height="170" rx="4"/>
+              <rect class="aisle" id="aisle5" x="270" y="62" width="24" height="170" rx="4"/>
+              <rect class="aisle" x="320" y="62" width="24" height="170" rx="4"/>
+            </g>
+            <g fill="#c4b5fd"><rect x="80" y="262" width="40" height="20" rx="4"/><rect x="140" y="262" width="40" height="20" rx="4"/><rect x="200" y="262" width="40" height="20" rx="4"/></g>
+            <rect x="290" y="298" width="70" height="8" rx="3" fill="#22c55e"/>
+            <text x="325" y="294" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#15803d"><tspan class="es">Entrada</tspan><tspan class="en">Entrance</tspan></text>
+            <path class="route" d="M325 296 V 252 H 307 V 150"/>
+            <g transform="translate(296 118)"><g class="pin"><path d="M11 34s-11-10.5-11-19.5a11 11 0 0 1 22 0C22 23.5 11 34 11 34z" fill="#DC2626"/><circle cx="11" cy="14" r="4.5" fill="#fff"/></g></g>
+            <text x="282" y="248" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" font-weight="700" fill="#475569">5</text>
+          </svg>
+        </div>
+      </div>
+      <span class="hint"><span class="es">Datos de ejemplo</span><span class="en">Sample data</span></span>
+    </div>
+  </div>
+</section>
+
+<!-- Tickets -->
+<section class="feature" id="tickets" style="--c:var(--tk)">
+  <div class="wrap grid">
+    <div class="copy">
+      <div class="label" data-reveal="up"><i></i><span class="es">Soporte técnico</span><span class="en">Tech support</span></div>
+      <h3 data-reveal="up" style="--d:60ms">Tickets</h3>
+      <p class="tagline" data-reveal="up" style="--d:100ms"><span class="es">¿Algo no funciona? La tienda abre un ticket y sigue la respuesta.</span><span class="en">Something not working? The store opens a ticket and follows the answer.</span></p>
+      <p data-reveal="up" style="--d:140ms"><span class="es">Para el equipo que da soporte a las tiendas: todo queda escrito, nada se pierde en llamadas o mensajes sueltos.</span><span class="en">For the team that supports the stores: everything is written down, nothing gets lost in calls or loose messages.</span></p>
+      <ul class="points" data-reveal="up" style="--d:180ms">
+        <li><svg aria-hidden="true"><use href="#i-play"/></svg><div><b class="es">Por escrito o con la voz</b><b class="en">In writing or by voice</b><small class="es">Una nota de voz se transcribe sola.</small><small class="en">Voice notes are transcribed automatically.</small></div></li>
+        <li><svg aria-hidden="true"><use href="#i-arrow"/></svg><div><b class="es">Llega al equipo correcto</b><b class="en">Reaches the right team</b><small class="es">Mesa de ayuda, técnicos de campo o proyectos, con su historial de cambios.</small><small class="en">Help Desk, field technicians or projects, with its full history.</small></div></li>
+        <li><svg aria-hidden="true"><use href="#i-chart"/></svg><div><b class="es">Todo a la vista</b><b class="en">Everything in view</b><small class="es">Tablero para la TV de la oficina y el teléfono, y rutas de técnicos ordenadas.</small><small class="en">A dashboard for the office TV and the phone, and ordered technician routes.</small></div></li>
+      </ul>
+      <div class="actions" data-reveal="up"><button class="tour-open" type="button" data-tour="tk"><span class="pl"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 4.5v15l12.5-7.5z"/></svg></span><span class="es">Ver cómo funciona</span><span class="en">See how it works</span></button><span class="unit"><span class="es">Para</span><span class="en">For</span> <b><span class="es">el equipo y sus tiendas</span><span class="en">the team and its stores</span></b></span></div>
+    </div>
+    <div class="stage" data-reveal="right">
+      <button class="tour-open" type="button" data-tour="tk"><span class="pl"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 4.5v15l12.5-7.5z"/></svg></span><span class="es">Ver cómo funciona</span><span class="en">See how it works</span></button>
+      <div class="board-tk" id="tkBoard">
+        <div class="col"><h5><span class="es">Nuevo</span><span class="en">New</span><span>2</span></h5>
+          <div class="tk-card"><small>#T-128 · Help Desk</small><b><span class="es">No imprime la impresora de etiquetas</span><span class="en">Label printer won't print</span></b></div>
+        </div>
+        <div class="col"><h5><span class="es">En curso</span><span class="en">In progress</span><span>2</span></h5>
+          <div class="tk-card"><small>#T-121</small><b><span class="es">Wi-Fi se cae en el almacén</span><span class="en">Wi-Fi drops in the back</span></b><div class="who"><span class="av">A</span>Alex</div></div>
+        </div>
+        <div class="col"><h5><span class="es">Cerrado</span><span class="en">Closed</span><span>12</span></h5>
+          <div class="tk-card"><small>#T-117</small><b><span class="es">Escáner de la caja 2</span><span class="en">Register 2 scanner</span></b></div>
+        </div>
+        <div class="tk-card moving" id="tkMoving">
+          <small>#T-130 · <span class="es">Tienda #3</span><span class="en">Store #3</span></small>
+          <b><span class="es">La caja 3 no enciende</span><span class="en">Register 3 is down</span></b>
+          <div class="wave" aria-hidden="true"></div>
+          <span class="st" id="tkStatus"></span>
+          <div class="who" id="tkWho" style="opacity:0"><span class="av">R</span>Roberto</div>
+        </div>
+      </div>
+      <span class="hint"><span class="es">Datos de ejemplo</span><span class="en">Sample data</span></span>
+    </div>
+  </div>
+</section>
+
+<!-- How it works -->
+<section class="sec" id="como" style="background:var(--bg-2);border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker" data-reveal="up"><span class="es">Cómo funciona</span><span class="en">How it works</span></div>
+      <h2 data-reveal="up" style="--d:60ms"><span class="es">Se conecta a LOC SMS. Lo demás es automático.</span><span class="en">It connects to LOC SMS. The rest is automatic.</span></h2>
+      <p data-reveal="up" style="--d:120ms"><span class="es">La tienda sigue trabajando en su sistema de siempre.</span><span class="en">The store keeps working in the system it already uses.</span></p>
+    </div>
+    <div class="how">
+      <div class="step" data-reveal="up"><div class="num">1</div><h4><span class="es">Un agente en la tienda</span><span class="en">An agent at the store</span></h4><p><span class="es">Se instala en la computadora de la tienda y lee de LOC SMS los productos, precios y ofertas.</span><span class="en">It is installed on the store's computer and reads products, prices and deals from LOC SMS.</span></p></div>
+      <div class="step" data-reveal="up" style="--d:120ms"><div class="num">2</div><h4><span class="es">Nanefy lo organiza</span><span class="en">Nanefy organizes it</span></h4><p><span class="es">Cada tienda tiene su portal, sus usuarios y permisos, y los módulos que contrató.</span><span class="en">Each store has its own portal, users and permissions, and the modules it signed up for.</span></p></div>
+      <div class="step" data-reveal="up" style="--d:240ms"><div class="num">3</div><h4><span class="es">Llega a cada pantalla</span><span class="en">It reaches every screen</span></h4><p><span class="es">Etiquetas, verificadores, televisores y el mapa muestran el mismo precio.</span><span class="en">Labels, price checkers, TVs and the map show the same price.</span></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Why -->
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker" data-reveal="up"><span class="es">Por qué Nanefy</span><span class="en">Why Nanefy</span></div>
+      <h2 data-reveal="up" style="--d:60ms"><span class="es">Hecho para el supermercado de barrio</span><span class="en">Built for the neighborhood supermarket</span></h2>
+    </div>
+    <div class="why">
+      <div data-reveal="up"><svg aria-hidden="true"><use href="#i-db"/></svg><b><span class="es">Sin cambiar de sistema</span><span class="en">No new system</span></b><p><span class="es">Trabaja con LOC SMS tal como está. Nada que migrar.</span><span class="en">Works with LOC SMS as it is. Nothing to migrate.</span></p></div>
+      <div data-reveal="up" style="--d:80ms"><svg aria-hidden="true"><use href="#i-bolt"/></svg><b><span class="es">Menos errores de precio</span><span class="en">Fewer price mistakes</span></b><p><span class="es">El precio se escribe una sola vez: en LOC SMS.</span><span class="en">The price is typed once: in LOC SMS.</span></p></div>
+      <div data-reveal="up" style="--d:160ms"><svg aria-hidden="true"><use href="#i-globe"/></svg><b><span class="es">Español e inglés</span><span class="en">Spanish and English</span></b><p><span class="es">Cada usuario elige su idioma; los clientes también.</span><span class="en">Every user picks their language; shoppers too.</span></p></div>
+      <div data-reveal="up"><svg aria-hidden="true"><use href="#i-lock"/></svg><b><span class="es">Permisos por usuario</span><span class="en">Per-user permissions</span></b><p><span class="es">Quién diseña, quién imprime y qué módulos ve cada uno.</span><span class="en">Who designs, who prints and which modules each person sees.</span></p></div>
+      <div data-reveal="up" style="--d:80ms"><svg aria-hidden="true"><use href="#i-tv"/></svg><b><span class="es">El equipo que ya tiene</span><span class="en">The hardware you have</span></b><p><span class="es">Tabletas, televisores con navegador e impresoras normales o térmicas.</span><span class="en">Tablets, TVs with a browser, and regular or thermal printers.</span></p></div>
+      <div data-reveal="up" style="--d:160ms"><svg aria-hidden="true"><use href="#i-blocks"/></svg><b><span class="es">Para una tienda o una cadena</span><span class="en">One store or a chain</span></b><p><span class="es">Plantillas y temas que se comparten entre las tiendas de un grupo.</span><span class="en">Templates and themes shared across the stores of a group.</span></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Plans -->
+<section class="sec" id="planes" style="background:var(--bg-2);border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker" data-reveal="up"><span class="es">Planes</span><span class="en">Plans</span></div>
+      <h2 data-reveal="up" style="--d:60ms"><span class="es">Pague solo lo que usa</span><span class="en">Pay only for what you use</span></h2>
+      <p data-reveal="up" style="--d:120ms"><span class="es">Sin paquetes: cada módulo se contrata por separado, según lo que tenga su tienda.</span><span class="en">No bundles: each module is billed on its own, by what your store has.</span></p>
+    </div>
+    <div class="plans">
+      <div class="plan" style="--c:var(--ld)" data-reveal="up"><span class="dot"></span><strong>Label Designer</strong><div class="per"><span class="es">Una cuota</span><span class="en">One fee</span><b><span class="es">por tienda</span><span class="en">per store</span></b></div></div>
+      <div class="plan" style="--c:var(--pv);--d:60ms" data-reveal="up"><span class="dot"></span><strong>Price Verifier</strong><div class="per"><span class="es">Una cuota</span><span class="en">One fee</span><b><span class="es">por quiosco</span><span class="en">per kiosk</span></b></div></div>
+      <div class="plan" style="--c:var(--ds)" data-reveal="up"><span class="dot"></span><strong>Digital Signage</strong><div class="per"><span class="es">Una cuota</span><span class="en">One fee</span><b><span class="es">por pantalla</span><span class="en">per screen</span></b></div></div>
+      <div class="plan" style="--c:var(--pm)" data-reveal="up"><span class="dot"></span><strong>Product Map</strong><div class="per"><span class="es">Una cuota</span><span class="en">One fee</span><b><span class="es">por tienda</span><span class="en">per store</span></b></div></div>
+      <div class="plan" style="--c:var(--tk)" data-reveal="up"><span class="dot"></span><strong>Tickets</strong><div class="per"><span class="es">Para</span><span class="en">For</span><b><span class="es">su equipo</span><span class="en">your team</span></b></div></div>
+    </div>
+    <p class="plans-note" data-reveal="up"><span class="es">Le preparamos una propuesta según sus tiendas, quioscos y pantallas.</span><span class="en">We prepare a quote for your stores, kiosks and screens.</span></p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec" id="faq">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker" data-reveal="up"><span class="es">Preguntas</span><span class="en">Questions</span></div>
+      <h2 data-reveal="up" style="--d:60ms"><span class="es">Lo que suelen preguntar</span><span class="en">What people usually ask</span></h2>
+    </div>
+    <div class="faq">
+      <details data-reveal="up"><summary><span class="es">¿Tengo que cambiar de sistema?</span><span class="en">Do I have to change systems?</span></summary><p><span class="es">No. Nanefy lee los productos y precios de LOC SMS; la tienda sigue cobrando y cambiando precios en LOC SMS como siempre.</span><span class="en">No. Nanefy reads products and prices from LOC SMS; the store keeps ringing up and changing prices in LOC SMS as always.</span></p></details>
+      <details data-reveal="up"><summary><span class="es">¿Qué equipo necesito?</span><span class="en">What hardware do I need?</span></summary><p><span class="es">Para las etiquetas, una impresora normal o térmica. Para el verificador, una tableta o quiosco con Chrome. Para las pantallas, cualquier TV con navegador. El mapa se abre en el teléfono del cliente.</span><span class="en">For labels, a regular or thermal printer. For the price checker, a tablet or kiosk with Chrome. For screens, any TV with a browser. The map opens on the shopper's phone.</span></p></details>
+      <details data-reveal="up"><summary><span class="es">¿Puedo empezar con un solo módulo?</span><span class="en">Can I start with one module?</span></summary><p><span class="es">Sí. Cada módulo se contrata por separado y se puede agregar o quitar cuando quiera.</span><span class="en">Yes. Each module is billed on its own and can be added or removed whenever you like.</span></p></details>
+      <details data-reveal="up"><summary><span class="es">¿Funciona en español?</span><span class="en">Does it work in Spanish?</span></summary><p><span class="es">Sí. Cada usuario elige español o inglés, y las páginas para clientes, como el mapa, también.</span><span class="en">Yes. Every user picks Spanish or English, and so do the shopper pages, like the map.</span></p></details>
+      <details data-reveal="up"><summary><span class="es">¿Sirve para varias tiendas?</span><span class="en">Does it work for several stores?</span></summary><p><span class="es">Sí. Cada tienda tiene su portal, y las plantillas y temas se pueden compartir entre las tiendas de un grupo.</span><span class="en">Yes. Each store has its own portal, and templates and themes can be shared across the stores of a group.</span></p></details>
+    </div>
+  </div>
+</section>
+
+<!-- Final CTA -->
+<section class="final" id="demo">
+  <div class="aurora" aria-hidden="true"></div>
+  <div class="wrap">
+    <h2 data-reveal="up"><span class="es">Veámoslo funcionando <span class="grad">en su tienda</span></span><span class="en">Let's see it working <span class="grad">in your store</span></span></h2>
+    <p data-reveal="up" style="--d:80ms"><span class="es">Le mostramos los módulos con sus propios productos y precios de LOC SMS.</span><span class="en">We'll show you the modules with your own LOC SMS products and prices.</span></p>
+    <div class="cta-row" style="justify-content:center;--d:160ms" data-reveal="up">
+      <a class="btn btn-magic" href="mailto:garcia.yainel@gmail.com?subject=Demo%20de%20Nanefy"><svg aria-hidden="true"><use href="#i-mail"/></svg><span class="es">Pedir una demostración</span><span class="en">Book a demo</span></a>
+      <a class="btn btn-ghost" href="#modulos"><span class="es">Volver a los módulos</span><span class="en">Back to the modules</span></a>
+    </div>
+  </div>
+</section>
+
 </main>
 
-<!-- Project modal -->
-<div class="overlay" id="projModal" role="dialog" aria-modal="true" aria-labelledby="pmTitle">
-  <div class="modal">
-    <div class="modal-head"><h3 id="pmTitle">Project</h3><button class="icon-btn" data-close aria-label="Close" style="color:var(--text-2)"><svg width="18" height="18"><use href="#i-x"/></svg></button></div>
-    <div class="modal-body" id="pmBody"></div>
-    <div class="modal-foot" id="pmFoot"></div>
-  </div>
-</div>
-
-<!-- Site viewer: concept sites and case studies open here -->
-<div class="overlay viewer-overlay" id="viewer" role="dialog" aria-modal="true" aria-labelledby="viewerTitle">
-  <div class="viewer">
-    <div class="viewer-bar">
-      <span class="viewer-dots" aria-hidden="true"><i></i><i></i><i></i></span>
-      <div class="viewer-info"><b id="viewerTitle">Site</b><span class="viewer-url" id="viewerUrl"></span></div>
-      <div class="segmented viewer-size" id="viewerSize" role="group" aria-label="Screen size">
-        <span class="thumb"></span>
-        <button aria-pressed="true" data-w="full">Desktop</button>
-        <button aria-pressed="false" data-w="820">Tablet</button>
-        <button aria-pressed="false" data-w="390">Phone</button>
+<div class="tour" id="tour" role="dialog" aria-modal="true" aria-labelledby="tourTitle" aria-hidden="true">
+  <div class="tour-back" data-tour-close></div>
+  <div class="tour-box">
+    <button class="tour-close" type="button" data-tour-close aria-label="Cerrar / Close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
+    <div class="tour-view">
+      <div class="device" id="tourDevice">
+        <div class="chrome"><i></i><i></i><i></i><span id="tourUrl">nanefy · Supermercado Demo</span></div>
+        <div class="screen" id="tourScreen">
+          <img alt="" id="tourA"><img alt="" id="tourB">
+          <div class="spot" id="tourSpot"></div>
+          <div class="ripple" id="tourRipple"></div>
+          <div class="cursor" id="tourCursor"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 2.5 19.5 13l-7 1.4L9 21z" fill="#fff" stroke="#111" stroke-width="1.4" stroke-linejoin="round"/></svg></div>
+        </div>
       </div>
-      <a class="icon-btn tooltip" id="viewerNewTab" href="#" target="_blank" rel="noopener" data-tip="Open in a new tab" aria-label="Open in a new tab"><svg width="18" height="18"><use href="#i-external"/></svg></a>
-      <button class="icon-btn" data-close aria-label="Close"><svg width="18" height="18"><use href="#i-x"/></svg></button>
     </div>
-    <div class="viewer-stage" id="viewerStage">
-      <iframe id="viewerFrame" title="Site preview"></iframe>
-      <div class="viewer-loading" id="viewerLoading" aria-hidden="true"><span class="spin"></span></div>
+    <div class="tour-side">
+      <div class="kick"><i></i><span id="tourKick"></span></div>
+      <h3 id="tourTitle"></h3>
+      <ol class="tour-steps" id="tourSteps"></ol>
+      <div class="tour-ctrl">
+        <button type="button" id="tourPrev"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="es">Anterior</span><span class="en">Back</span></button>
+        <button type="button" id="tourPause" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path id="tourPauseIcon" d="M8 5v14M16 5v14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg><span class="es" id="tourPauseEs">Pausa</span><span class="en" id="tourPauseEn">Pause</span></button>
+        <button type="button" id="tourNext"><span class="es">Siguiente</span><span class="en">Next</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>
+      <p class="tour-note"><span class="es">Pantallas reales de Nanefy, con una tienda y productos de ejemplo.</span><span class="en">Real Nanefy screens, with a sample store and products.</span></p>
     </div>
   </div>
 </div>
 
-<!-- Code viewer -->
-<div class="overlay" id="codeModal" role="dialog" aria-modal="true" aria-labelledby="cmTitle">
-  <div class="modal code-modal">
-    <div class="modal-head"><h3 id="cmTitle">Code</h3><button class="icon-btn" data-close aria-label="Close" style="color:var(--text-2)"><svg width="18" height="18"><use href="#i-x"/></svg></button></div>
-    <div class="tabs" role="tablist" aria-label="Language">
-      <button role="tab" data-lang="html" aria-selected="true">HTML</button>
-      <button role="tab" data-lang="css" aria-selected="false" tabindex="-1">CSS</button>
-      <button role="tab" data-lang="js" aria-selected="false" tabindex="-1">JavaScript</button>
-    </div>
-    <pre class="cm-pre" tabindex="0"><code id="cmCode"></code></pre>
-    <div class="cm-foot"><span class="sub" id="cmNote"></span><button class="btn btn-primary" id="cmCopy">Copy</button></div>
+<footer>
+  <div class="wrap">
+    <span>© 2026 Nanefy. <span class="es">Todos los derechos reservados.</span><span class="en">All rights reserved.</span></span>
+    <a href="portfolio/"><span class="es">Hecho por Yainel Garcia Alfonso</span><span class="en">Made by Yainel Garcia Alfonso</span></a>
   </div>
-</div>
+</footer>
 
-<!-- Command palette -->
-<div class="overlay" id="palette" role="dialog" aria-modal="true" aria-label="Quick actions">
-  <div class="modal palette">
-    <label class="sr" for="palInput">Search</label>
-    <input class="input" id="palInput" placeholder="Type a command or search" autocomplete="off" role="combobox" aria-controls="palList" aria-expanded="true">
-    <ul id="palList" role="listbox"></ul>
-    <div class="palette-foot"><span><kbd>↑</kbd> <kbd>↓</kbd> to move</span><span><kbd>Enter</kbd> to open</span><span><kbd>Esc</kbd> to close</span></div>
-  </div>
-</div>
+<script>
+(function () {
+  var root = document.documentElement;
+  var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var $ = function (s, el) { return (el || document).querySelector(s); };
+  var $$ = function (s, el) { return Array.prototype.slice.call((el || document).querySelectorAll(s)); };
+  var es = function () { return root.dataset.lang !== 'en'; };
 
-<div class="toasts" id="toasts" aria-live="polite"></div>
-<canvas id="confetti"></canvas>
-<script src="i18n.js"></script>
-<script src="showroom.js"></script>
-<script src="playground.js"></script>
+  // Language
+  function setLang(lang) {
+    root.dataset.lang = lang;
+    root.lang = lang;
+    $$('[data-set-lang]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.setLang === lang)); });
+    try { localStorage.setItem('tec-lang', lang); } catch (e) {}
+    document.title = lang === 'en' ? 'Nanefy · Modules for supermarkets on LOC SMS' : 'Nanefy · Módulos para supermercados con LOC SMS';
+    renderTv();
+  }
+  $$('[data-set-lang]').forEach(function (b) { b.addEventListener('click', function () { setLang(b.dataset.setLang); }); });
+
+  // Runs a demo only while it is on screen.
+  function whenVisible(el, start, stop) {
+    if (!('IntersectionObserver' in window)) { start(); return; }
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) start(); else if (stop) stop(); });
+    }, { threshold: 0.25 }).observe(el);
+  }
+  function loop(fn, ms) {
+    var timer = null;
+    return {
+      start: function () { if (timer || still) return; fn(); timer = setInterval(fn, ms); },
+      stop: function () { clearInterval(timer); timer = null; },
+    };
+  }
+
+  // Hero: a price changes in LOC SMS and reaches every screen.
+  var sync = $('#sync');
+  var prices = [['$4.29', '$3.99'], ['$3.99', '$4.29']];
+  var turn = 0;
+  var heroLoop = loop(function () {
+    var pair = prices[turn++ % 2];
+    $('#srcOld').textContent = pair[0];
+    $('#srcNew').textContent = pair[1];
+    sync.classList.remove('go'); void sync.offsetWidth; sync.classList.add('go');
+    $$('.dst', sync).forEach(function (node, i) {
+      setTimeout(function () {
+        $('[data-price]', node).textContent = pair[1];
+        node.classList.remove('flash'); void node.offsetWidth; node.classList.add('flash');
+      }, 900 + i * 140);
+    });
+  }, 4200);
+  whenVisible(sync, heroLoop.start, heroLoop.stop);
+  if (still) $$('[data-price]', sync).forEach(function (p) { p.textContent = '$3.99'; });
+
+  // Label Designer: each changed price goes onto the label and prints.
+  var items = [['Arroz Selecto 5 lb', 'Selecto · 5 lb', '3', '99', '0 41331 02405 9'], ['Café Bustelo 10 oz', 'Bustelo · 10 oz', '5', '49', '0 74471 00055 2'], ['Leche entera 1 gal', 'Lácteos · 1 gal', '4', '19', '0 70038 30012 4']];
+  var label = $('#ldLabel');
+  var chg = $$('#ldChanges .chg');
+  var at = 0;
+  var ldLoop = loop(function () {
+    if (at === 0) chg.forEach(function (c) { c.classList.remove('done', 'on'); });
+    var it = items[at];
+    chg.forEach(function (c, i) { c.classList.toggle('on', i === at); });
+    $('[data-f=n]', label).textContent = it[0];
+    $('[data-f=b]', label).textContent = it[1];
+    $('[data-f=d]', label).textContent = it[2];
+    $('[data-f=c]', label).textContent = it[3];
+    $('.bars', label).dataset.code = it[4];
+    label.classList.remove('swap', 'printed'); void label.offsetWidth; label.classList.add('swap', 'printed');
+    var done = at;
+    setTimeout(function () { chg[done].classList.remove('on'); chg[done].classList.add('done'); }, 1500);
+    at = (at + 1) % items.length;
+  }, 2600);
+  whenVisible($('#ldDemo'), ldLoop.start, ldLoop.stop);
+
+  // Price Verifier: it calls shoppers over, then a scan shows the price.
+  var kiosk = $('#kiosk');
+  var busy = false;
+  function state(s) { kiosk.classList.remove('idle', 'scan', 'result'); kiosk.classList.add(s); }
+  function call() { if (busy) return; kiosk.classList.remove('call'); void kiosk.offsetWidth; kiosk.classList.add('call'); }
+  function scan() {
+    if (busy) return;
+    busy = true;
+    kiosk.classList.remove('call');
+    state('scan');
+    setTimeout(function () { state('result'); }, 1100);
+    setTimeout(function () { state('idle'); busy = false; }, 4300);
+  }
+  $('#scanBtn').addEventListener('click', scan);
+  var pvTick = 0;
+  var pvLoop = loop(function () { (pvTick++ % 2 === 0) ? call() : scan(); }, 4800);
+  whenVisible(kiosk, pvLoop.start, pvLoop.stop);
+
+  // Digital Signage: the board pages through departments; prices update live.
+  var pages = [
+    { es: 'Charcutería', en: 'Deli', rows: [['Jamón de pierna', 'Ham', '6.99'], ['Queso suizo', 'Swiss cheese', '8.49'], ['Pavo ahumado', 'Smoked turkey', '7.29'], ['Salami Génova', 'Genoa salami', '9.19']] },
+    { es: 'Carnicería', en: 'Meat', rows: [['Bistec de palomilla', 'Top sirloin steak', '8.99'], ['Muslos de pollo', 'Chicken thighs', '2.49'], ['Masa de cerdo', 'Pork chunks', '4.29'], ['Carne molida 80/20', 'Ground beef 80/20', '5.49']] },
+    { es: 'Panadería', en: 'Bakery', rows: [['Pan cubano', 'Cuban bread', '2.49'], ['Pastelitos de guayaba', 'Guava pastries', '0.99'], ['Croquetas de jamón', 'Ham croquettes', '0.89'], ['Cake de vainilla', 'Vanilla cake', '14.99']] },
+  ];
+  var page = 0;
+  function renderTv(flipRow) {
+    var p = pages[page];
+    $('#tvTitle').textContent = es() ? p.es : p.en;
+    $('#tvRows').innerHTML = p.rows.map(function (r, i) {
+      return '<div class="row' + (i === flipRow ? ' flip' : '') + '"><span>' + (es() ? r[0] : r[1]) + '</span><b>$' + r[2] + '</b></div>';
+    }).join('');
+    $$('#tvDots i').forEach(function (d, i) { d.classList.toggle('on', i === page); });
+  }
+  var tvTick = 0;
+  var tvLoop = loop(function () {
+    tvTick++;
+    if (tvTick % 2 === 0) {
+      var rows = $('#tvRows');
+      rows.classList.add('out');
+      setTimeout(function () { page = (page + 1) % pages.length; renderTv(); rows.classList.remove('out'); }, 400);
+    } else {
+      // A price changes in LOC SMS while the board is showing.
+      var row = pages[page].rows[tvTick % 4];
+      var cents = Math.max(0.49, parseFloat(row[2]) + (tvTick % 3 === 0 ? 0.3 : -0.2));
+      row[2] = cents.toFixed(2);
+      renderTv(tvTick % 4);
+    }
+  }, 2600);
+  renderTv();
+  whenVisible($('.tv'), tvLoop.start, tvLoop.stop);
+
+  // Product Map: a search, the results, and the way to aisle 5.
+  var phone = $('#phone');
+  var floor = $('#floor');
+  var typed = $('#typed');
+  var pmTimers = [];
+  function pmRun() {
+    pmTimers.forEach(clearTimeout); pmTimers = [];
+    var word = es() ? 'arroz' : 'rice';
+    typed.textContent = '';
+    phone.classList.remove('found');
+    floor.classList.remove('go');
+    $('#aisle5').classList.remove('hit');
+    word.split('').forEach(function (ch, i) { pmTimers.push(setTimeout(function () { typed.textContent += ch; }, 300 + i * 160)); });
+    pmTimers.push(setTimeout(function () { phone.classList.add('found'); }, 450 + word.length * 160));
+    pmTimers.push(setTimeout(function () { floor.classList.add('go'); $('#aisle5').classList.add('hit'); }, 1100 + word.length * 160));
+  }
+  var pmLoop = loop(pmRun, 6200);
+  whenVisible(floor, pmLoop.start, pmLoop.stop);
+  if (still) { typed.textContent = 'arroz'; phone.classList.add('found'); floor.classList.add('go'); $('#aisle5').classList.add('hit'); }
+
+  // Tickets: a ticket opened by a store crosses the board to closed.
+  var board = $('#tkBoard');
+  var card = $('#tkMoving');
+  var wave = $('.wave', card);
+  for (var i = 0; i < 26; i++) { var bar = document.createElement('i'); bar.style.height = (4 + Math.round(Math.abs(Math.sin(i * 1.7)) * 12)) + 'px'; wave.appendChild(bar); }
+  var steps = [[0, 'Nuevo', 'New', false], [1, 'En curso', 'In progress', true], [2, 'Cerrado', 'Closed', true]];
+  var stepAt = 0;
+  function place() {
+    var cols = $$('.col', board);
+    var s = steps[stepAt];
+    var col = cols[s[0]];
+    var top = col.offsetTop + col.offsetHeight - card.offsetHeight - 12;
+    card.style.left = (col.offsetLeft + 12) + 'px';
+    card.style.top = top + 'px';
+    $('#tkStatus').textContent = es() ? s[1] : s[2];
+    $('#tkWho').style.opacity = s[3] ? 1 : 0;
+  }
+  var tkLoop = loop(function () { place(); stepAt = (stepAt + 1) % steps.length; }, 2200);
+  addEventListener('resize', function () { stepAt = (stepAt + steps.length - 1) % steps.length; place(); stepAt = (stepAt + 1) % steps.length; });
+  place();
+  whenVisible(board, tkLoop.start, tkLoop.stop);
+
+  setLang(root.dataset.lang === 'en' ? 'en' : 'es');
+})();
+</script>
+<script>
+// The tours: how each module works, step by step, on real screens of a sample store.
+(function () {
+  var root = document.documentElement;
+  var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var es = function () { return root.dataset.lang !== 'en'; };
+  var APP = '16/10', WIDE = '16/9', PHONE = '390/844';
+  var TOURS = {
+    ld: { c: 'var(--ld)', name: 'Label Designer', kick: ['Etiquetas de góndola', 'Shelf labels'], url: 'Plantillas de etiquetas', steps: [
+      { img: 'ld1', r: APP, x: 31, y: 16, z: 1.35, t: ['La tienda ve qué cambió', 'The store sees what changed'], d: ['Al abrir Nanefy, el panel dice cuántas etiquetas quedaron viejas y cuáles productos cambiaron de precio en LOC SMS.', 'On opening Nanefy, the dashboard says how many labels went out of date and which products changed price in LOC SMS.'] },
+      { img: 'ld4', r: APP, x: 24, y: 62, z: 1.3, t: ['Imprimir en un clic', 'Print in one click'], d: ['Esos productos ya están en la lista de impresión, con su plantilla y su hoja. Solo queda pulsar Imprimir.', 'Those products are already on the print list, with their template and sheet. All that is left is Print.'] },
+      { img: 'ld2', r: APP, x: 76, y: 72, z: 1.25, t: ['Una biblioteca de plantillas', 'A library of templates'], d: ['Etiquetas de góndola, ofertas, rollos térmicos y carteles, cada una con su vista previa real.', 'Shelf tags, sale tags, thermal rolls and signs, each with a real preview.'] },
+      { img: 'ld3', r: APP, x: 40, y: 66, z: 1.3, t: ['Diseñar a su gusto', 'Design it your way'], d: ['El diseñador arrastra campos de LOC SMS, precios, códigos y logos. Lo que se ve es lo que se imprime.', 'The designer drags in LOC SMS fields, prices, barcodes and logos. What you see is what prints.'] },
+    ] },
+    pv: { c: 'var(--pv)', name: 'Price Verifier', kick: ['Verificador de precios', 'Price checker'], url: 'Quiosco · Pasillo 5', steps: [
+      { img: 'pv2', r: APP, x: 88, y: 52, z: 1.3, t: ['Un tema con la marca de la tienda', 'A theme with the store\'s brand'], d: ['La pantalla del quiosco se diseña aquí: logo, anuncios, colores y cómo llamar la atención.', 'The kiosk screen is designed here: logo, ads, colors and how to call shoppers over.'] },
+      { img: 'pv3', r: WIDE, m: 'tv', x: 55, y: 30, z: 1.2, t: ['Llama a los clientes', 'It calls shoppers over'], d: ['Cuando alguien se acerca, el quiosco silba y muestra un mensaje para que escanee.', 'When someone walks up, the kiosk whistles and shows a message inviting a scan.'] },
+      { img: 'pv4', r: WIDE, m: 'tv', x: 78, y: 46, z: 1.3, t: ['El precio al instante', 'The price, instantly'], d: ['El cliente escanea y ve el precio de LOC SMS, la oferta y cuánto ahorra.', 'The shopper scans and sees the LOC SMS price, the deal and what they save.'] },
+      { img: 'pv1', r: APP, x: 50, y: 36, z: 1.3, t: ['Cada quiosco bajo control', 'Every kiosk in view'], d: ['La tienda ve qué quioscos están conectados, cuántas consultas hacen y qué no se encontró.', 'The store sees which kiosks are online, how many checks they do and what was not found.'] },
+    ] },
+    ds: { c: 'var(--ds)', name: 'Digital Signage', kick: ['Pantallas de precios', 'Price displays'], url: 'Pantallas', steps: [
+      { img: 'ds1', r: APP, x: 54, y: 35, z: 1.35, t: ['Una pantalla por mostrador', 'A screen per counter'], d: ['Se elige qué subdepartamentos o productos muestra cada TV y con qué tema.', 'Pick which subdepartments or products each TV shows, and with which theme.'] },
+      { img: 'ds2', r: WIDE, m: 'tv', x: 26, y: 37, z: 1.25, t: ['La TV muestra los precios', 'The TV shows the prices'], d: ['Cualquier TV con navegador abre su enlace y muestra los productos, con las ofertas marcadas.', 'Any TV with a browser opens its link and shows the products, with deals marked.'] },
+      { img: 'ds2', r: WIDE, m: 'tv', x: 82, y: 34, z: 1.4, t: ['Cambia en LOC SMS, cambia en la TV', 'Change it in LOC SMS, it changes on the TV'], d: ['Nadie toca la TV: cuando el precio cambia en el sistema, la pantalla se actualiza sola.', 'Nobody touches the TV: when the price changes in the system, the screen updates on its own.'] },
+    ] },
+    pm: { c: 'var(--pm)', name: 'Product Map', kick: ['Mapa de la tienda', 'Store map'], url: 'Editor del mapa', steps: [
+      { img: 'pm1', r: APP, x: 44, y: 53, z: 1.25, t: ['Se dibuja la tienda', 'The store is drawn'], d: ['Pasillos, góndolas, refrigeradores y cajas, y qué subdepartamentos hay en cada uno.', 'Aisles, shelves, fridges and checkouts, and which subdepartments are on each.'] },
+      { img: 'pm2', r: PHONE, m: 'phone', x: 8, y: 11, z: 1.12, t: ['El cliente escanea el QR', 'The shopper scans the QR'], d: ['El código de la entrada abre la tienda en 3D en su teléfono. Sin descargar nada.', 'The code at the entrance opens the store in 3D on their phone. Nothing to download.'] },
+      { img: 'pm3', r: PHONE, m: 'phone', x: 50, y: 93, z: 1.12, t: ['Busca un producto', 'Searches a product'], d: ['Escribe "arroz" y el mapa busca en todo el catálogo de LOC SMS.', 'Types "rice" and the map searches the whole LOC SMS catalog.'] },
+      { img: 'pm4', r: PHONE, m: 'phone', x: 62, y: 40, z: 1.08, t: ['Y sigue las huellas', 'And follows the footsteps'], d: ['El pasillo se marca y unas huellas lo llevan desde la entrada hasta el producto.', 'The aisle lights up and footsteps lead from the entrance to the product.'] },
+    ] },
+    tk: { c: 'var(--tk)', name: 'Tickets', kick: ['Soporte técnico', 'Tech support'], url: 'Tickets', steps: [
+      { img: 'tk2', r: APP, x: 50, y: 66, z: 1.3, t: ['La tienda pide ayuda', 'The store asks for help'], d: ['Escribe qué pasa o graba una nota de voz, que se transcribe sola, en español o en inglés.', 'Writes what is wrong or records a voice note, transcribed automatically, in Spanish or English.'] },
+      { img: 'tk1', r: APP, x: 26, y: 31, z: 1.3, t: ['Sigue sus tickets', 'Follows its tickets'], d: ['Cada ticket muestra su estado y quién lo atiende: Mesa de ayuda, técnicos o proyectos.', 'Each ticket shows its status and who handles it: Help Desk, technicians or projects.'] },
+      { img: 'tk3', r: APP, x: 60, y: 33, z: 1.25, t: ['Toda la conversación', 'The whole conversation'], d: ['La etapa, la visita del técnico, las respuestas y cada cambio quedan en un solo lugar.', 'The stage, the technician\'s visit, the answers and every change, all in one place.'] },
+    ] },
+  };
+  var DUR = 6200;
+  var tour = document.getElementById('tour');
+  var device = document.getElementById('tourDevice');
+  var screen = document.getElementById('tourScreen');
+  var imgs = [document.getElementById('tourA'), document.getElementById('tourB')];
+  var cursor = document.getElementById('tourCursor');
+  var ripple = document.getElementById('tourRipple');
+  var spot = document.getElementById('tourSpot');
+  var list = document.getElementById('tourSteps');
+  var current = null, at = 0, front = 0, timer = null, tapTimer = null, paused = false, opener = null;
+
+  function src(name) { return 'img/tour/' + name + '.webp'; }
+  function text(pair) { return es() ? pair[0] : pair[1]; }
+
+  function renderList() {
+    list.innerHTML = current.steps.map(function (s, i) {
+      return '<li class="' + (i === at ? 'on' : (i < at ? 'done' : '')) + '"><button type="button" data-step="' + i + '"><span class="n">' + (i + 1) + '</span><span><b>' + text(s.t) + '</b><small>' + text(s.d) + '</small></span><span class="bar"><i></i></span></button></li>';
+    }).join('');
+    var on = list.querySelector('li.on');
+    if (on) list.scrollTop = on.offsetTop - list.offsetTop - 8;
+  }
+
+  function show(i) {
+    clearTimeout(timer); clearTimeout(tapTimer);
+    at = (i + current.steps.length) % current.steps.length;
+    var s = current.steps[at];
+    device.classList.toggle('phone-mode', s.m === 'phone');
+    device.classList.toggle('tv-mode', s.m === 'tv');
+    screen.style.setProperty('--ratio', s.r);
+    var next = imgs[1 - front], prev = imgs[front];
+    next.classList.remove('zoom');
+    next.style.setProperty('--fx', s.x + '%');
+    next.style.setProperty('--fy', s.y + '%');
+    next.style.setProperty('--z', s.z);
+    next.style.setProperty('--dur', DUR + 'ms');
+    var swap = function () {
+      void next.offsetWidth;
+      next.classList.add('on'); if (!still) next.classList.add('zoom');
+      prev.classList.remove('on');
+      front = 1 - front;
+    };
+    if (next.getAttribute('src') === src(s.img) && next.complete) swap();
+    else { next.onload = swap; next.src = src(s.img); }
+    spot.classList.remove('on');
+    cursor.style.left = s.x + '%'; cursor.style.top = s.y + '%';
+    tapTimer = setTimeout(function () {
+      ripple.style.left = s.x + '%'; ripple.style.top = s.y + '%';
+      ripple.classList.remove('go'); void ripple.offsetWidth; ripple.classList.add('go');
+      cursor.classList.remove('tap'); void cursor.offsetWidth; cursor.classList.add('tap');
+      spot.style.left = s.x + '%'; spot.style.top = s.y + '%';
+      spot.style.setProperty('--sw', s.m === 'phone' ? '70%' : '24%');
+      spot.classList.add('on');
+    }, still ? 0 : 1250);
+    tour.style.setProperty('--dur', DUR + 'ms');
+    renderList();
+    if (!paused) timer = setTimeout(function () { show(at + 1); }, DUR);
+  }
+
+  function open(key, from) {
+    current = TOURS[key];
+    opener = from;
+    tour.style.setProperty('--c', current.c);
+    document.getElementById('tourTitle').textContent = current.name;
+    document.getElementById('tourKick').textContent = text(current.kick);
+    document.getElementById('tourUrl').textContent = 'nanefy · Supermercado Demo';
+    // The first step's picture before anything shows, the rest behind it.
+    current.steps.forEach(function (s) { var p = new Image(); p.src = src(s.img); });
+    tour.classList.add('open');
+    tour.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    setPaused(false);
+    show(0);
+    document.getElementById('tourNext').focus();
+  }
+
+  function close() {
+    clearTimeout(timer); clearTimeout(tapTimer);
+    tour.classList.remove('open');
+    tour.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    if (opener) opener.focus();
+  }
+
+  function setPaused(value) {
+    paused = value;
+    tour.classList.toggle('paused', paused);
+    var b = document.getElementById('tourPause');
+    b.setAttribute('aria-pressed', String(paused));
+    document.getElementById('tourPauseIcon').setAttribute('d', paused ? 'M8 5.5v13l11-6.5z' : 'M8 5v14M16 5v14');
+    document.getElementById('tourPauseIcon').setAttribute('fill', paused ? 'currentColor' : 'none');
+    document.getElementById('tourPauseEs').textContent = paused ? 'Seguir' : 'Pausa';
+    document.getElementById('tourPauseEn').textContent = paused ? 'Play' : 'Pause';
+  }
+
+  document.querySelectorAll('[data-tour]').forEach(function (b) { b.addEventListener('click', function () { open(b.dataset.tour, b); }); });
+  document.querySelectorAll('[data-tour-close]').forEach(function (b) { b.addEventListener('click', close); });
+  document.getElementById('tourNext').addEventListener('click', function () { show(at + 1); });
+  document.getElementById('tourPrev').addEventListener('click', function () { show(at - 1); });
+  document.getElementById('tourPause').addEventListener('click', function () {
+    setPaused(!paused);
+    if (paused) clearTimeout(timer); else show(at);
+  });
+  list.addEventListener('click', function (e) { var b = e.target.closest('[data-step]'); if (b) show(Number(b.dataset.step)); });
+  document.addEventListener('keydown', function (e) {
+    if (!tour.classList.contains('open')) return;
+    if (e.key === 'Escape') close();
+    else if (e.key === 'ArrowRight') show(at + 1);
+    else if (e.key === 'ArrowLeft') show(at - 1);
+    else if (e.key === 'Tab') {
+      var f = Array.prototype.slice.call(tour.querySelectorAll('button')).filter(function (x) { return x.offsetParent; });
+      if (e.shiftKey && document.activeElement === f[0]) { e.preventDefault(); f[f.length - 1].focus(); }
+      else if (!e.shiftKey && document.activeElement === f[f.length - 1]) { e.preventDefault(); f[0].focus(); }
+    }
+  });
+  // The language switch also redraws an open tour.
+  document.querySelectorAll('[data-set-lang]').forEach(function (b) { b.addEventListener('click', function () {
+    if (current && tour.classList.contains('open')) { document.getElementById('tourKick').textContent = text(current.kick); renderList(); }
+  }); });
+})();
+</script>
+<script src="portfolio/fx/fx.js"></script>
 </body>
 </html>
