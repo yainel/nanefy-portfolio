@@ -1,0 +1,606 @@
+<!doctype html>
+<html lang="es" data-lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Nanefy · Instalación segura</title>
+<link rel="icon" href="../img/nanefy-icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<script>try{var l=localStorage.getItem('tec-lang');if(l==='en'||l==='es'){document.documentElement.dataset.lang=l;document.documentElement.lang=l}}catch(e){}</script>
+<!--
+  How the product sync agent is installed in a store, and why it is safe: an animated walk through the one-line
+  install command (eight steps), for store IT and owners. Over nanefy.com, blurred behind. Behind a shared password:
+  it only keeps the page from casual visitors; the page's text is still in its source.
+-->
+<style>
+:root{
+  --bg:#09090D;--bg-2:#0F0F15;--surface:#15151D;--surface-2:#1C1C26;--line:rgba(255,255,255,.09);
+  --text:#EEEEF3;--muted:#A4A4B4;--violet:#8051FF;--purple:#B24BF3;--cyan:#2FB5E8;--good:#34D399;--bad:#F87171;--warn:#FBBF24;
+  --grad:linear-gradient(135deg,var(--violet),var(--purple) 55%,var(--cyan));
+  --c:var(--cyan);
+  --font:"Inter",-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --mono:"JetBrains Mono",Consolas,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden}
+body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:1rem;line-height:1.55;-webkit-font-smoothing:antialiased}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer;border:0;background:none}
+:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:6px}
+svg{display:block}
+:root[data-lang=es] .en,:root[data-lang=en] .es{display:none!important}
+
+/* nanefy.com behind, blurred */
+.behind{position:fixed;inset:-24px;width:calc(100% + 48px);height:calc(100% + 48px);border:0;filter:blur(12px) saturate(1.1);pointer-events:none}
+.veil{position:fixed;inset:0;background:rgba(5,5,9,.62)}
+
+/* The password */
+.gate{position:fixed;inset:0;z-index:10;display:grid;place-items:center;padding:16px;transition:opacity .4s,visibility .4s}
+.gate.gone{opacity:0;visibility:hidden}
+.gate-card{width:min(400px,100%);padding:30px 28px 26px;border-radius:22px;background:var(--surface);box-shadow:0 0 0 1px var(--line),0 50px 100px -40px #000;text-align:center}
+.gate-card img{width:48px;height:48px;margin:0 auto 14px}
+.gate-card h1{font-size:1.35rem;letter-spacing:-.02em}
+.gate-card p{color:var(--muted);font-size:.92rem;margin:6px 0 18px}
+.gate-card form{display:grid;gap:10px}
+.gate-card input{height:48px;padding:0 14px;border-radius:12px;border:0;background:var(--bg-2);box-shadow:inset 0 0 0 1px var(--line);font-size:1rem}
+.gate-card input:focus{outline:none;box-shadow:inset 0 0 0 2px var(--cyan)}
+.gate-card .go{height:48px;border-radius:12px;background:var(--grad);font-weight:700}
+.gate-card .err{min-height:1.4em;color:var(--bad);font-size:.85rem;font-weight:600}
+.gate-card.shake{animation:shake .4s}
+@keyframes shake{25%{transform:translateX(-8px)}50%{transform:translateX(7px)}75%{transform:translateX(-4px)}}
+
+.lang{position:fixed;top:14px;right:14px;z-index:20;display:flex;padding:3px;border-radius:999px;background:rgba(21,21,29,.85);box-shadow:inset 0 0 0 1px var(--line)}
+.lang button{padding:5px 11px;border-radius:999px;font-size:.78rem;font-weight:700;color:var(--muted);letter-spacing:.04em}
+.lang button[aria-pressed=true]{background:rgba(255,255,255,.1);color:var(--text)}
+
+/* The tour, as the modules' on nanefy.com */
+.tour{position:fixed;inset:0;z-index:5;display:grid;place-items:center;padding:24px;opacity:0;visibility:hidden;transition:opacity .4s,visibility .4s}
+.tour.open{opacity:1;visibility:visible}
+.tour-box{position:relative;width:min(1180px,100%);height:min(720px,calc(100dvh - 48px));display:grid;grid-template-columns:minmax(0,1fr) 320px;border-radius:24px;background:var(--surface);box-shadow:0 0 0 1px var(--line),0 60px 120px -40px #000;overflow:hidden;transform:translateY(24px) scale(.97);transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.tour.open .tour-box{transform:none}
+.tour-view{position:relative;display:grid;place-items:center;padding:28px;background:radial-gradient(60% 60% at 30% 20%,color-mix(in oklab,var(--c) 18%,transparent),transparent 70%),var(--bg-2);min-height:0;overflow:hidden}
+.tour-side{display:flex;flex-direction:column;padding:26px 24px 20px;border-left:1px solid var(--line);min-height:0}
+.kick{display:flex;align-items:center;gap:8px;font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--c)}
+.kick i{width:8px;height:8px;border-radius:50%;background:var(--c);box-shadow:0 0 12px var(--c)}
+.tour-side h2{font-size:1.5rem;letter-spacing:-.03em;margin:6px 0 16px;line-height:1.15}
+.steps{list-style:none;display:grid;gap:6px;overflow:auto;margin-bottom:14px;padding-right:4px;align-content:start}
+.steps li button{display:grid;grid-template-columns:28px 1fr;gap:10px;width:100%;text-align:left;padding:10px;border-radius:12px;color:var(--muted);transition:background .2s,color .2s}
+.steps li button:hover{background:rgba(255,255,255,.04)}
+.steps li.on button{background:color-mix(in oklab,var(--c) 13%,transparent);color:var(--text);box-shadow:inset 0 0 0 1px color-mix(in oklab,var(--c) 40%,transparent)}
+.steps .n{width:28px;height:28px;border-radius:8px;display:grid;place-items:center;font-weight:800;font-size:.8rem;background:rgba(255,255,255,.06)}
+.steps li.on .n{background:var(--c);color:#0b0b10}
+.steps li.done .n{color:var(--c)}
+.steps b{display:block;font-size:.92rem;line-height:1.3}
+.steps small{display:block;font-size:.82rem;line-height:1.45;margin-top:3px;color:var(--muted)}
+.steps li:not(.on) small{display:none}
+.steps .bar{grid-column:1/-1;height:3px;border-radius:3px;background:rgba(255,255,255,.08);overflow:hidden;margin-top:8px;display:none}
+.steps li.on .bar{display:block}
+.steps .bar i{display:block;height:100%;width:0;background:var(--c)}
+.steps li.on .bar i{animation:fill var(--dur,9s) linear forwards}
+@keyframes fill{to{width:100%}}
+.tour.paused .steps li.on .bar i,.tour.paused .scene *{animation-play-state:paused!important}
+.ctrl{display:flex;gap:8px;margin-top:auto}
+.ctrl button{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:6px;height:42px;border-radius:11px;background:rgba(255,255,255,.06);font-size:.85rem;font-weight:600}
+.ctrl button:hover{background:rgba(255,255,255,.11)}
+.ctrl svg{width:15px;height:15px}
+.foot{font-size:.72rem;color:var(--muted);margin-top:10px}
+
+/* The scenes */
+.scene{position:absolute;inset:0;display:grid;place-items:center;padding:32px;opacity:0;visibility:hidden;transition:opacity .45s}
+.scene.on{opacity:1;visibility:visible}
+.stage{position:relative;width:min(640px,100%);display:grid;gap:18px;justify-items:center}
+.card{width:100%;border-radius:16px;background:var(--surface);box-shadow:0 0 0 1px var(--line),0 30px 60px -30px #000;padding:18px 20px}
+.label{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.pill{display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border-radius:999px;font-size:.82rem;font-weight:650;background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px var(--line)}
+.pill svg{width:15px;height:15px}
+.pill.good{color:var(--good);background:color-mix(in oklab,var(--good) 12%,transparent);box-shadow:inset 0 0 0 1px color-mix(in oklab,var(--good) 35%,transparent)}
+.pill.bad{color:var(--bad);background:color-mix(in oklab,var(--bad) 12%,transparent);box-shadow:inset 0 0 0 1px color-mix(in oklab,var(--bad) 35%,transparent)}
+.pill.cyan{color:var(--cyan);background:color-mix(in oklab,var(--cyan) 12%,transparent);box-shadow:inset 0 0 0 1px color-mix(in oklab,var(--cyan) 35%,transparent)}
+.row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.mono{font-family:var(--mono)}
+/* Enter one after another while the scene plays */
+.in{opacity:0;transform:translateY(12px)}
+.scene.play .in{animation:rise .6s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:var(--d,0s)}
+@keyframes rise{to{opacity:1;transform:none}}
+
+/* 1 · The code */
+.admin{display:grid;gap:14px}
+.admin-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.code{font-family:var(--mono);font-size:clamp(1.8rem,5vw,2.6rem);letter-spacing:.08em;font-weight:500;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.timer{display:flex;align-items:center;gap:10px}
+.ring{width:44px;height:44px;transform:rotate(-90deg)}
+.ring circle{fill:none;stroke-width:4}
+.ring .t{stroke:rgba(255,255,255,.1)}
+.ring .v{stroke:var(--cyan);stroke-dasharray:113;stroke-dashoffset:0;stroke-linecap:round}
+.scene.play .ring .v{animation:drain 9s linear forwards}
+@keyframes drain{to{stroke-dashoffset:90}}
+
+/* 2 · The command */
+.ps{width:100%;border-radius:14px;overflow:hidden;background:#012456;box-shadow:0 0 0 1px rgba(255,255,255,.1),0 30px 60px -30px #000}
+.ps-bar{display:flex;align-items:center;gap:8px;height:32px;padding:0 12px;background:#0b1e3d;font-size:.72rem;color:#c8d4ea}
+.ps-bar b{margin-left:auto;color:var(--warn);font-weight:600}
+.ps pre{padding:16px;font-family:var(--mono);font-size:.82rem;line-height:1.6;color:#eef3ff;white-space:pre-wrap;word-break:break-all;min-height:7.5em}
+.ps .typed{display:inline;overflow:hidden}
+.ps .caret{display:inline-block;width:.55em;height:1.1em;vertical-align:-.2em;background:#eef3ff;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.ps .k{color:#7dd3fc}.ps .s{color:#fde68a}.ps .p{color:#c4b5fd}
+.wire{display:flex;align-items:center;gap:10px;width:100%}
+.wire .end{flex:none;display:grid;justify-items:center;gap:4px;font-size:.78rem;color:var(--muted)}
+.wire .end svg{width:38px;height:38px;color:var(--text)}
+.wire .line{position:relative;flex:1;height:2px;background:rgba(255,255,255,.12);border-radius:2px;overflow:visible}
+.wire .dot{position:absolute;top:50%;left:0;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;background:var(--cyan);box-shadow:0 0 14px var(--cyan);opacity:0}
+.scene.play .wire .dot{animation:travel 2.2s ease-in-out infinite;animation-delay:var(--d,0s)}
+.scene.play .wire .dot.back{animation-name:travelBack}
+@keyframes travel{0%{left:0;opacity:0}12%{opacity:1}88%{opacity:1}100%{left:100%;opacity:0}}
+@keyframes travelBack{0%{left:100%;opacity:0}12%{opacity:1}88%{opacity:1}100%{left:0;opacity:0}}
+.wire .tag{position:absolute;left:50%;top:-30px;transform:translateX(-50%);white-space:nowrap}
+
+/* 3 · Code for key */
+.swap{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:14px;width:100%}
+.token{display:grid;justify-items:center;gap:6px;padding:16px 10px;border-radius:14px;background:var(--surface);box-shadow:0 0 0 1px var(--line)}
+.token .mono{font-size:1.05rem}
+.used{position:relative}
+.used::after{content:"";position:absolute;left:-4px;right:-4px;top:50%;height:2px;background:var(--bad);transform:scaleX(0);transform-origin:left}
+.scene.play .used::after{animation:strike .5s ease forwards;animation-delay:3.2s}
+@keyframes strike{to{transform:scaleX(1)}}
+.server{display:grid;justify-items:center;gap:6px;color:var(--muted);font-size:.78rem}
+.server svg{width:44px;height:44px;color:var(--text)}
+.vault{display:flex;align-items:center;gap:14px;width:100%;padding:16px 18px;border-radius:14px;background:color-mix(in oklab,var(--good) 8%,var(--surface));box-shadow:inset 0 0 0 1px color-mix(in oklab,var(--good) 30%,transparent)}
+.vault svg{flex:none;width:36px;height:36px;color:var(--good)}
+.vault p{font-size:.88rem;color:var(--muted)}
+.vault b{color:var(--text)}
+.key-dots{letter-spacing:.2em;color:var(--good)}
+
+/* 4 · Fingerprint */
+.hashes{display:grid;gap:10px;width:100%}
+.hash{display:grid;grid-template-columns:150px 1fr;gap:12px;align-items:center;padding:12px 14px;border-radius:12px;background:var(--surface);box-shadow:0 0 0 1px var(--line);font-size:.82rem}
+.hash .mono{font-size:.78rem;word-break:break-all;color:var(--muted)}
+.hash .mono em{font-style:normal;color:var(--text)}
+.scene.play .hash .mono em{animation:glow .9s ease forwards;animation-delay:var(--d,0s)}
+@keyframes glow{50%{color:var(--good);text-shadow:0 0 12px var(--good)}to{color:var(--good)}}
+.verdict{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+
+/* 5 · Read only */
+.db{display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:center;width:100%}
+.cyl{width:120px;height:150px;color:var(--cyan)}
+.ops{display:grid;gap:10px}
+.op{display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;background:var(--surface);box-shadow:0 0 0 1px var(--line);font-weight:600;font-size:.92rem}
+.op .mono{font-size:.85rem}
+.op .mark{margin-left:auto;width:24px;height:24px;border-radius:50%;display:grid;place-items:center}
+.op .mark svg{width:14px;height:14px}
+.op.ok .mark{background:color-mix(in oklab,var(--good) 20%,transparent);color:var(--good)}
+.op.no{color:var(--muted)}
+.op.no .mark{background:color-mix(in oklab,var(--bad) 20%,transparent);color:var(--bad)}
+.op.no .mono{text-decoration:line-through;text-decoration-color:var(--bad)}
+
+/* 6 · Folder and schedule */
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:14px;width:100%}
+.box{display:grid;gap:10px;justify-items:start;padding:18px;border-radius:16px;background:var(--surface);box-shadow:0 0 0 1px var(--line)}
+.box > svg{width:40px;height:40px;color:var(--violet)}
+.box h3{font-size:1rem}
+.box p{font-size:.85rem;color:var(--muted)}
+.who{display:grid;gap:6px;width:100%}
+.who span{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:.82rem;padding:7px 10px;border-radius:9px;background:rgba(255,255,255,.04)}
+.who span b{font-weight:600}
+.clock{width:40px;height:40px;color:var(--violet)}
+.clock .hand{transform-origin:20px 20px}
+.scene.play .clock .hand{animation:spin 2.4s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ticks{display:flex;gap:6px}
+.ticks i{width:22px;height:8px;border-radius:4px;background:rgba(255,255,255,.08)}
+.scene.play .ticks i{animation:tick 4.8s steps(1) infinite;animation-delay:calc(var(--i) * .6s)}
+@keyframes tick{0%{background:var(--violet)}12%{background:rgba(255,255,255,.08)}}
+
+/* 7 · What leaves */
+.flow{display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:center;width:100%}
+.list{display:grid;gap:8px}
+.item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:11px;background:var(--surface);box-shadow:0 0 0 1px var(--line);font-size:.86rem}
+.item svg{flex:none;width:18px;height:18px}
+.item small{display:block;color:var(--muted);font-size:.76rem}
+.item.y svg{color:var(--good)}
+.item.w svg{color:var(--warn)}
+.arrow{display:grid;justify-items:center;gap:6px;color:var(--muted);font-size:.74rem}
+.arrow svg{width:40px;height:40px;color:var(--cyan)}
+.scene.play .arrow svg{animation:nudge 1.4s ease-in-out infinite}
+@keyframes nudge{50%{transform:translateX(6px)}}
+
+/* 8 · Review first */
+.doc{width:100%;border-radius:14px;overflow:hidden;background:#101018;box-shadow:0 0 0 1px var(--line),0 30px 60px -30px #000}
+.doc-bar{display:flex;align-items:center;gap:8px;height:34px;padding:0 12px;background:#17171f;font-size:.75rem;color:var(--muted)}
+.doc-bar i{width:10px;height:10px;border-radius:50%;background:#3a3a46}
+.doc pre{padding:14px 16px;font-family:var(--mono);font-size:.76rem;line-height:1.7;color:#cfcfe0;white-space:pre-wrap}
+.doc .c{color:#6b6b80}
+.doc .hl{display:block;margin:0 -16px;padding:0 16px;background:color-mix(in oklab,var(--cyan) 0%,transparent)}
+.scene.play .doc .hl{animation:scan 1.2s ease forwards;animation-delay:var(--d,0s)}
+@keyframes scan{to{background:color-mix(in oklab,var(--cyan) 14%,transparent)}}
+
+@media (max-width:900px){
+  .tour{padding:0}
+  .tour-box{grid-template-columns:1fr;grid-template-rows:minmax(0,1.5fr) minmax(0,1fr);border-radius:0;height:100%}
+  .tour-view{padding:0}
+  /* Room on top for the language switch. */
+  .scene{padding:52px 16px 16px}
+  .tour-side{border-left:0;border-top:1px solid var(--line);padding:14px 16px}
+  .tour-side h2{font-size:1.1rem;margin:4px 0 8px}
+  .stage{gap:12px}
+  .card{padding:14px}
+  .swap{gap:8px}
+  .token{padding:12px 6px}
+  .token .mono{font-size:.85rem}
+  .swap .server{font-size:0}
+  .vault p > span:not(b){display:none}
+  .vault br{display:none}
+  .flow{grid-template-columns:1fr}
+  .flow .list:last-child{display:none}
+  .flow .arrow{grid-auto-flow:column;align-items:center}
+  .flow .arrow svg{transform:rotate(90deg);width:28px;height:28px}
+  .scene.play .flow .arrow svg{animation-name:nudgeDown}
+  .pair{grid-template-columns:1fr;gap:10px}
+  .box{padding:14px;gap:8px}
+  .pair .box:last-child{grid-template-columns:auto 1fr;align-items:center}
+  .pair .box:last-child p,.pair .box:last-child .ticks{display:none}
+  .pair .box > svg{width:32px;height:32px}
+  .who span{padding:5px 10px}
+  .db{grid-template-columns:1fr;justify-items:center;gap:12px}
+  .cyl{width:70px;height:88px}
+  .hash{grid-template-columns:1fr;gap:4px}
+  .ps pre{font-size:.72rem}
+}
+@keyframes nudgeDown{0%,100%{transform:rotate(90deg)}50%{transform:rotate(90deg) translateX(5px)}}
+@media (prefers-reduced-motion:reduce){
+  .scene.play .in{animation:none;opacity:1;transform:none}
+  .scene.play *{animation-duration:.01s!important;animation-iteration-count:1!important}
+}
+</style>
+</head>
+<body>
+
+<iframe class="behind" src="/" title="nanefy.com" tabindex="-1" aria-hidden="true"></iframe>
+<div class="veil"></div>
+
+<div class="lang" role="group" aria-label="Idioma / Language">
+  <button type="button" data-set-lang="es" aria-pressed="true">ES</button>
+  <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
+</div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4.5" y="10.5" width="15" height="10" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></symbol>
+    <symbol id="i-pc" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 20h8M12 16v4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7 18.5h10.5a4 4 0 0 0 .6-7.95A6 6 0 0 0 6.5 9.6 4.5 4.5 0 0 0 7 18.5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15m-5-5 5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-warn" viewBox="0 0 24 24"><path d="M12 4 2.5 20h19Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 10v4.5M12 17.2v.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  </defs>
+</svg>
+
+<!-- The password -->
+<div class="gate" id="gate">
+  <div class="gate-card" id="gateCard">
+    <img src="../img/nanefy-icon.svg" alt="Nanefy">
+    <h1><span class="es">Acceso restringido</span><span class="en">Restricted access</span></h1>
+    <p><span class="es">Escriba la contraseña que le dio el equipo de Nanefy.</span><span class="en">Enter the password the Nanefy team gave you.</span></p>
+    <form id="gateForm" autocomplete="off">
+      <label class="es" for="pass" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Contraseña</label>
+      <input id="pass" type="password" required autofocus aria-describedby="gateErr" placeholder="••••••••••">
+      <button class="go" type="submit"><span class="es">Entrar</span><span class="en">Enter</span></button>
+      <p class="err" id="gateErr" role="alert"></p>
+    </form>
+  </div>
+</div>
+
+<!-- The tour -->
+<div class="tour" id="tour" aria-hidden="true">
+  <div class="tour-box" role="dialog" aria-modal="true" aria-labelledby="tourTitle">
+    <div class="tour-view">
+
+      <!-- 1 · The code -->
+      <section class="scene" data-scene="0">
+        <div class="stage">
+          <div class="card admin in" style="--d:.1s">
+            <div class="admin-top">
+              <span class="label"><span class="es">Admin · Tiendas · Presidente #3 · Sincronización</span><span class="en">Admin · Stores · Presidente #3 · Product sync</span></span>
+            </div>
+            <div class="admin-top">
+              <span class="code">UTQA-66ZK</span>
+              <span class="timer"><svg class="ring" viewBox="0 0 44 44"><circle class="t" cx="22" cy="22" r="18"/><circle class="v" cx="22" cy="22" r="18"/></svg><b class="mono">30:00</b></span>
+            </div>
+          </div>
+          <div class="row">
+            <span class="pill cyan in" style="--d:.9s"><svg><use href="#i-lock"/></svg><span class="es">Válido 30 minutos</span><span class="en">Valid for 30 minutes</span></span>
+            <span class="pill cyan in" style="--d:1.4s"><svg><use href="#i-check"/></svg><span class="es">Un solo uso</span><span class="en">Works once</span></span>
+            <span class="pill cyan in" style="--d:1.9s"><svg><use href="#i-check"/></svg><span class="es">Solo para esta tienda</span><span class="en">For this store only</span></span>
+          </div>
+          <p class="in" style="--d:2.6s;color:var(--muted);font-size:.88rem;text-align:center;max-width:460px"><span class="es">Nanefy guarda solo la huella del código (SHA-256), nunca el código. Uno usado o vencido no instala nada.</span><span class="en">Nanefy keeps only the code's fingerprint (SHA-256), never the code. A used or expired code installs nothing.</span></p>
+        </div>
+      </section>
+
+      <!-- 2 · The command -->
+      <section class="scene" data-scene="1">
+        <div class="stage">
+          <div class="ps in" style="--d:.1s">
+            <div class="ps-bar">Windows PowerShell <b><span class="es">Administrador</span><span class="en">Administrator</span></b></div>
+            <pre><span class="p">PS C:\&gt;</span> <span class="typed" id="typed"></span><span class="caret"></span></pre>
+          </div>
+          <div class="wire in" style="--d:.4s">
+            <span class="end"><svg><use href="#i-pc"/></svg><span class="es">Computadora de la tienda</span><span class="en">Store computer</span></span>
+            <span class="line"><span class="pill good tag"><svg><use href="#i-lock"/></svg>HTTPS · TLS 1.2</span><i class="dot" style="--d:0s"></i><i class="dot" style="--d:1.1s"></i></span>
+            <span class="end"><svg><use href="#i-cloud"/></svg>app.nanefy.com</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3 · Code for key -->
+      <section class="scene" data-scene="2">
+        <div class="stage">
+          <div class="swap">
+            <div class="token in" style="--d:.1s"><span class="label"><span class="es">Envía</span><span class="en">Sends</span></span><span class="mono used">UTQA-66ZK</span><span class="pill bad in" style="--d:3.4s"><span class="es">Gastado</span><span class="en">Spent</span></span></div>
+            <div class="server in" style="--d:.5s"><svg><use href="#i-arrow"/></svg>app.nanefy.com</div>
+            <div class="token in" style="--d:1.6s"><span class="label"><span class="es">Recibe</span><span class="en">Receives</span></span><span class="mono key-dots">••••••••••••</span><span class="pill good"><span class="es">Llave de la tienda</span><span class="en">Store key</span></span></div>
+          </div>
+          <div class="vault in" style="--d:2.4s">
+            <svg><use href="#i-lock"/></svg>
+            <p><b><span class="es">Cifrada con Windows DPAPI para esta computadora.</span><span class="en">Encrypted with Windows DPAPI for this computer.</span></b><br><span class="es">Nunca se muestra en pantalla. Copiada a otra máquina, no sirve.</span><span class="en">Never shown on screen. Copied to another machine, it is useless.</span></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4 · Fingerprint -->
+      <section class="scene" data-scene="3">
+        <div class="stage">
+          <div class="label in" style="--d:.1s">nanefy-sync.ps1</div>
+          <div class="hashes">
+            <div class="hash in" style="--d:.4s"><b><span class="es">Huella esperada</span><span class="en">Expected fingerprint</span></b><span class="mono"><em style="--d:2s">7F3A 91C2</em> 4E0B … D58A <em style="--d:2.6s">0C61</em></span></div>
+            <div class="hash in" style="--d:1s"><b><span class="es">Archivo descargado</span><span class="en">Downloaded file</span></b><span class="mono"><em style="--d:2s">7F3A 91C2</em> 4E0B … D58A <em style="--d:2.6s">0C61</em></span></div>
+          </div>
+          <div class="verdict">
+            <span class="pill good in" style="--d:3.2s"><svg><use href="#i-check"/></svg><span class="es">Coinciden: se instala</span><span class="en">They match: it installs</span></span>
+            <span class="pill bad in" style="--d:3.8s"><svg><use href="#i-x"/></svg><span class="es">Si no: se borra y no se instala nada</span><span class="en">If not: deleted, nothing installed</span></span>
+          </div>
+          <p class="in" style="--d:4.4s;color:var(--muted);font-size:.86rem;text-align:center;max-width:480px"><span class="es">Las actualizaciones automáticas del agente pasan por la misma verificación.</span><span class="en">The agent's automatic updates go through the same check.</span></p>
+        </div>
+      </section>
+
+      <!-- 5 · Read only -->
+      <section class="scene" data-scene="4">
+        <div class="stage">
+          <div class="db">
+            <svg class="cyl in" style="--d:.1s" viewBox="0 0 120 150" aria-hidden="true"><ellipse cx="60" cy="22" rx="52" ry="16" fill="none" stroke="currentColor" stroke-width="3"/><path d="M8 22v106c0 9 23 16 52 16s52-7 52-16V22" fill="color-mix(in oklab, currentColor 10%, transparent)" stroke="currentColor" stroke-width="3"/><path d="M8 58c0 9 23 16 52 16s52-7 52-16M8 94c0 9 23 16 52 16s52-7 52-16" fill="none" stroke="currentColor" stroke-width="2" opacity=".5"/><text x="60" y="88" text-anchor="middle" fill="currentColor" font-family="Inter" font-weight="700" font-size="15">LOC SMS</text></svg>
+            <div class="ops">
+              <span class="label in" style="--d:.4s"><span class="es">Permiso del agente:</span><span class="en">The agent's permission:</span> <span class="mono" style="color:var(--cyan)">db_datareader</span></span>
+              <div class="op ok in" style="--d:.9s"><span class="mono">SELECT</span><span class="es">Leer</span><span class="en">Read</span><span class="mark"><svg><use href="#i-check"/></svg></span></div>
+              <div class="op no in" style="--d:1.5s"><span class="mono">INSERT</span><span class="es">Agregar</span><span class="en">Add</span><span class="mark"><svg><use href="#i-x"/></svg></span></div>
+              <div class="op no in" style="--d:2s"><span class="mono">UPDATE</span><span class="es">Cambiar</span><span class="en">Change</span><span class="mark"><svg><use href="#i-x"/></svg></span></div>
+              <div class="op no in" style="--d:2.5s"><span class="mono">DELETE</span><span class="es">Borrar</span><span class="en">Delete</span><span class="mark"><svg><use href="#i-x"/></svg></span></div>
+            </div>
+          </div>
+          <p class="in" style="--d:3.2s;color:var(--muted);font-size:.88rem;text-align:center;max-width:480px"><span class="es">Puede leer la base de datos de la tienda, nada más. No puede cambiar un precio ni borrar un artículo.</span><span class="en">It can read the store's database, nothing more. It cannot change a price or delete an item.</span></p>
+        </div>
+      </section>
+
+      <!-- 6 · Folder and schedule -->
+      <section class="scene" data-scene="5">
+        <div class="stage">
+          <div class="pair">
+            <div class="box in" style="--d:.1s">
+              <svg viewBox="0 0 24 24"><path d="M3 7.5A2.5 2.5 0 0 1 5.5 5H10l2 2.5h6.5A2.5 2.5 0 0 1 21 10v7.5a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 17.5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><rect x="9" y="12.5" width="6" height="4.5" rx="1" fill="currentColor"/><path d="M10.2 12.5v-1a1.8 1.8 0 0 1 3.6 0v1" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+              <h3><span class="es">Carpeta protegida</span><span class="en">Locked folder</span></h3>
+              <p class="mono" style="font-size:.74rem">C:\storeman\Options\Nanefy_Sync</p>
+              <div class="who">
+                <span class="in" style="--d:.8s"><b>SYSTEM</b><span class="pill good" style="padding:2px 8px"><span class="es">cambia</span><span class="en">can change</span></span></span>
+                <span class="in" style="--d:1.2s"><b><span class="es">Administradores</span><span class="en">Administrators</span></b><span class="pill good" style="padding:2px 8px"><span class="es">cambia</span><span class="en">can change</span></span></span>
+                <span class="in" style="--d:1.6s"><b><span class="es">Otros usuarios</span><span class="en">Other users</span></b><span class="pill bad" style="padding:2px 8px"><span class="es">no</span><span class="en">no</span></span></span>
+              </div>
+            </div>
+            <div class="box in" style="--d:.5s">
+              <svg class="clock" viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" fill="none" stroke="currentColor" stroke-width="2.4"/><path class="hand" d="M20 20V9" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/><circle cx="20" cy="20" r="2" fill="currentColor"/></svg>
+              <h3><span class="es">Cada 5 minutos</span><span class="en">Every 5 minutes</span></h3>
+              <p><span class="es">Una tarea programada de Windows, como SYSTEM: funciona sin nadie conectado y después de reiniciar.</span><span class="en">A Windows scheduled task, as SYSTEM: it runs with nobody signed in, and after a restart.</span></p>
+              <div class="ticks" aria-hidden="true"><i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i><i style="--i:3"></i><i style="--i:4"></i><i style="--i:5"></i><i style="--i:6"></i><i style="--i:7"></i></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7 · What leaves -->
+      <section class="scene" data-scene="6">
+        <div class="stage">
+          <div class="flow">
+            <div class="list">
+              <span class="label in" style="--d:.1s"><span class="es">Sale de la tienda</span><span class="en">Leaves the store</span></span>
+              <div class="item y in" style="--d:.5s"><svg><use href="#i-check"/></svg><span><span class="es">Productos</span><span class="en">Products</span><small><span class="es">código, nombre, precio, departamento…</span><span class="en">code, name, price, department…</span></small></span></div>
+              <div class="item y in" style="--d:1s"><svg><use href="#i-check"/></svg><span><span class="es">Ventas y auditoría</span><span class="en">Sales and audit</span><small><span class="es">totales, solo si esos módulos están activos</span><span class="en">totals, only when those modules are on</span></small></span></div>
+              <div class="item w in" style="--d:1.5s"><svg><use href="#i-warn"/></svg><span><span class="es">Nombres de tablas y columnas</span><span class="en">Table and column names</span><small><span class="es">con algunos valores de muestra, al configurar</span><span class="en">with a few sample values, at setup</span></small></span></div>
+            </div>
+            <div class="arrow in" style="--d:2s"><svg><use href="#i-arrow"/></svg>HTTPS</div>
+            <div class="list">
+              <span class="label in" style="--d:2.4s"><span class="es">Para qué</span><span class="en">What for</span></span>
+              <div class="item in" style="--d:2.8s"><svg style="color:var(--cyan)"><use href="#i-check"/></svg><span><span class="es">Etiquetas, verificadores de precio, pantallas, mapa</span><span class="en">Labels, price checkers, screens, map</span></span></div>
+              <div class="item in" style="--d:3.2s"><svg style="color:var(--cyan)"><use href="#i-check"/></svg><span><span class="es">Elegir de qué tabla salen los productos, en el admin</span><span class="en">Choosing which table products come from, in the admin</span></span></div>
+            </div>
+          </div>
+          <p class="in" style="--d:3.8s;color:var(--muted);font-size:.86rem;text-align:center;max-width:500px"><span class="es">Solo lo que se configura en el admin de Nanefy, con la llave de esa tienda.</span><span class="en">Only what is set up in Nanefy's admin, with that store's key.</span></p>
+        </div>
+      </section>
+
+      <!-- 8 · Review first -->
+      <section class="scene" data-scene="7">
+        <div class="stage">
+          <div class="doc in" style="--d:.1s">
+            <div class="doc-bar"><i></i><i></i><i></i>&nbsp; install-nanefy-sync.ps1</div>
+<pre><span class="c"># Nanefy product sync: installer</span>
+<span class="hl" style="--d:1s"><span class="c">#  1.</span> <span class="es">encuentra la base de datos de la tienda</span><span class="en">finds the store's database</span></span><span class="hl" style="--d:1.6s"><span class="c">#  2.</span> <span class="es">cambia el código por la llave (nunca se muestra)</span><span class="en">trades the code for the key (never shown)</span></span><span class="hl" style="--d:2.2s"><span class="c">#  3.</span> <span class="es">instala el agente, llave cifrada, carpeta protegida</span><span class="en">installs the agent, key encrypted, folder locked</span></span><span class="hl" style="--d:2.8s"><span class="c">#  4.</span> <span class="es">revisa cambios cada 5 minutos</span><span class="en">checks for changes every 5 minutes</span></span><span class="hl" style="--d:3.4s"><span class="c">#  5.</span> <span class="es">si usted acepta, una línea en DEPLOY_CHG.sql (con copia)</span><span class="en">if you agree, one line in DEPLOY_CHG.sql (with a copy)</span></span><span class="hl" style="--d:4s"><span class="c">#  6.</span> <span class="es">primera sincronización, a la vista</span><span class="en">a first sync, on screen</span></span></pre>
+          </div>
+          <div class="row">
+            <span class="pill cyan in" style="--d:4.6s"><span class="mono">…/install/CODE?download=1</span></span>
+            <span class="pill in" style="--d:5s"><span class="mono">powershell -File .\install-nanefy-sync.ps1</span></span>
+          </div>
+          <p class="in" style="--d:5.4s;color:var(--muted);font-size:.86rem;text-align:center;max-width:500px"><span class="es">¿Prefiere no usar <span class="mono">| iex</span>? Descargue el instalador, léalo y ejecútelo usted. Cada instalación queda en el registro de actividad de Nanefy, con el nombre de la computadora.</span><span class="en">Rather not use <span class="mono">| iex</span>? Download the installer, read it and run it yourself. Every install is in Nanefy's activity log, with the computer's name.</span></p>
+        </div>
+      </section>
+
+    </div>
+
+    <aside class="tour-side">
+      <div class="kick"><i></i><span class="es">Sincronización de productos</span><span class="en">Product sync</span></div>
+      <h2 id="tourTitle"><span class="es">Una línea, instalada con seguridad</span><span class="en">One line, installed safely</span></h2>
+      <ol class="steps" id="steps"></ol>
+      <div class="ctrl">
+        <button type="button" id="prev" aria-label="Anterior / Previous"><svg viewBox="0 0 24 24"><path d="M15 5 8 12l7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button type="button" id="play"><span id="playIcon"></span><span id="playText"></span></button>
+        <button type="button" id="next" aria-label="Siguiente / Next"><svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>
+      <p class="foot">© Nanefy</p>
+    </aside>
+  </div>
+</div>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  // The password's fingerprint (SHA-256), not the password. This only keeps the page from casual visitors.
+  var PASS = '49b61af1a4a4eebcc579461141fc8d2ed46aff4e92ed655f40b0502e6d3d63ea';
+  var KEY = 'nanefy-install-ok';
+
+  var STEPS = [
+    { es: ['Un código de un solo uso', 'El admin de Nanefy crea un código para una tienda: sirve una vez y por 30 minutos.'],
+      en: ['A one-time code', "Nanefy's admin makes a code for one store: it works once, for 30 minutes."] },
+    { es: ['El comando, por HTTPS', 'Se pega en PowerShell como administrador. Descarga el instalador de app.nanefy.com por un canal cifrado.'],
+      en: ['The command, over HTTPS', 'Pasted into PowerShell as administrator. It downloads the installer from app.nanefy.com over an encrypted channel.'] },
+    { es: ['El código se cambia por la llave', 'El código queda gastado. La llave de la tienda llega cifrada para esa computadora y nunca se ve.'],
+      en: ['The code is traded for the key', "The code is spent. The store's key arrives encrypted for that computer and is never shown."] },
+    { es: ['El agente se verifica', 'Antes de instalarlo, su huella SHA-256 debe coincidir con la que da Nanefy. Si no, no se instala.'],
+      en: ['The agent is verified', 'Before it is installed, its SHA-256 fingerprint must match the one Nanefy gives. If not, nothing is installed.'] },
+    { es: ['Solo lectura', 'El agente solo puede leer la base de datos de LOC SMS (db_datareader). No puede cambiar ni borrar nada.'],
+      en: ['Read only', "The agent can only read LOC SMS's database (db_datareader). It cannot change or delete anything."] },
+    { es: ['Protegido y automático', 'Su carpeta solo la cambian SYSTEM y los administradores. Revisa cambios cada 5 minutos.'],
+      en: ['Locked down and automatic', 'Only SYSTEM and administrators can change its folder. It checks for changes every 5 minutes.'] },
+    { es: ['Qué sale de la tienda', 'Productos y, si están activos, totales de ventas y auditoría. Al configurar, nombres de tablas con muestras.'],
+      en: ['What leaves the store', 'Products and, when on, sales and audit totals. At setup, table names with samples.'] },
+    { es: ['Revíselo antes, si prefiere', 'El instalador es texto plano: se puede descargar, leer y ejecutar a mano. Todo queda registrado.'],
+      en: ['Review it first, if you prefer', 'The installer is plain text: it can be downloaded, read and run by hand. Everything is logged.'] }
+  ];
+  var DUR = [9, 10, 9, 9, 9, 9, 10, 11];
+  var COMMAND = "<span class=\"k\">[Net.ServicePointManager]</span>::SecurityProtocol = <span class=\"s\">'Tls12'</span>; <span class=\"k\">irm</span> <span class=\"s\">'https://app.nanefy.com/install/UTQA-66ZK'</span> | <span class=\"k\">iex</span>";
+
+  var gate = document.getElementById('gate'), card = document.getElementById('gateCard'), form = document.getElementById('gateForm');
+  var pass = document.getElementById('pass'), err = document.getElementById('gateErr');
+  var tour = document.getElementById('tour'), list = document.getElementById('steps');
+  var scenes = [].slice.call(document.querySelectorAll('.scene'));
+  var at = 0, paused = false, timer = null, typing = null;
+
+  var lang = function () { return root.dataset.lang === 'en' ? 'en' : 'es'; };
+
+  // Language
+  [].forEach.call(document.querySelectorAll('[data-set-lang]'), function (b) {
+    b.addEventListener('click', function () { setLang(b.dataset.setLang); });
+  });
+  function setLang(l) {
+    root.dataset.lang = l; root.lang = l;
+    try { localStorage.setItem('tec-lang', l); } catch (e) {}
+    [].forEach.call(document.querySelectorAll('[data-set-lang]'), function (b) { b.setAttribute('aria-pressed', b.dataset.setLang === l ? 'true' : 'false'); });
+    pass.placeholder = '••••••••••';
+    drawSteps(); drawPlay();
+  }
+
+  // The steps on the side
+  function drawSteps() {
+    list.innerHTML = STEPS.map(function (s, i) {
+      var t = s[lang()];
+      return '<li class="' + (i === at ? 'on' : i < at ? 'done' : '') + '"><button type="button" data-go="' + i + '"><span class="n">' + (i + 1) + '</span><span><b>' + t[0] + '</b><small>' + t[1] + '</small></span><span class="bar"><i style="--dur:' + DUR[i] + 's"></i></span></button></li>';
+    }).join('');
+    var on = list.querySelector('li.on'); if (on) on.scrollIntoView({ block: 'nearest' });
+  }
+  list.addEventListener('click', function (e) { var b = e.target.closest('[data-go]'); if (b) show(+b.dataset.go); });
+
+  function drawPlay() {
+    document.getElementById('playIcon').innerHTML = paused
+      ? '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>'
+      : '<svg viewBox="0 0 24 24"><path d="M7 5h4v14H7zM13 5h4v14h-4z" fill="currentColor"/></svg>';
+    document.getElementById('playText').textContent = paused ? (lang() === 'en' ? 'Play' : 'Seguir') : (lang() === 'en' ? 'Pause' : 'Pausa');
+    tour.classList.toggle('paused', paused);
+  }
+
+  // Types the command in step 2, a few characters at a time.
+  function typeCommand() {
+    var el = document.getElementById('typed'), plain = COMMAND.replace(/<[^>]+>/g, ''), n = 0;
+    clearInterval(typing); el.innerHTML = '';
+    typing = setInterval(function () {
+      if (paused) return;
+      n += 3;
+      if (n >= plain.length) { el.innerHTML = COMMAND; clearInterval(typing); return; }
+      el.textContent = plain.slice(0, n);
+    }, 45);
+  }
+
+  function show(i) {
+    at = (i + STEPS.length) % STEPS.length;
+    scenes.forEach(function (s, k) {
+      s.classList.remove('play');
+      s.classList.toggle('on', k === at);
+    });
+    void scenes[at].offsetWidth; // restart the scene's animations
+    scenes[at].classList.add('play');
+    if (at === 1) typeCommand();
+    drawSteps();
+    schedule();
+  }
+
+  // The next step when the bar fills; held while paused.
+  var left = 0, started = 0;
+  function schedule() {
+    clearTimeout(timer);
+    left = DUR[at] * 1000; started = Date.now();
+    if (!paused) timer = setTimeout(function () { show(at + 1); }, left);
+  }
+  document.getElementById('play').addEventListener('click', function () {
+    paused = !paused;
+    if (paused) { clearTimeout(timer); left -= Date.now() - started; }
+    else { started = Date.now(); timer = setTimeout(function () { show(at + 1); }, Math.max(0, left)); }
+    drawPlay();
+  });
+  document.getElementById('prev').addEventListener('click', function () { show(at - 1); });
+  document.getElementById('next').addEventListener('click', function () { show(at + 1); });
+  document.addEventListener('keydown', function (e) {
+    if (!tour.classList.contains('open')) return;
+    if (e.key === 'ArrowRight') show(at + 1);
+    if (e.key === 'ArrowLeft') show(at - 1);
+    if (e.key === ' ' && e.target === document.body) { e.preventDefault(); document.getElementById('play').click(); }
+  });
+
+  function open() {
+    gate.classList.add('gone');
+    tour.classList.add('open'); tour.setAttribute('aria-hidden', 'false');
+    show(0); drawPlay();
+    document.getElementById('play').focus();
+  }
+
+  async function fingerprint(text) {
+    var bytes = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+    return [].map.call(new Uint8Array(bytes), function (b) { return b.toString(16).padStart(2, '0'); }).join('');
+  }
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    if ((await fingerprint(pass.value)) === PASS) {
+      try { sessionStorage.setItem(KEY, '1'); } catch (x) {}
+      err.textContent = '';
+      open();
+    } else {
+      err.textContent = lang() === 'en' ? 'That is not the password.' : 'Esa no es la contraseña.';
+      card.classList.remove('shake'); void card.offsetWidth; card.classList.add('shake');
+      pass.select();
+    }
+  });
+
+  setLang(lang());
+  var ok = false; try { ok = sessionStorage.getItem(KEY) === '1'; } catch (x) {}
+  if (ok) open();
+})();
+</script>
+</body>
+</html>
