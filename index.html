@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="es" data-lang="es">
+<html lang="en" data-lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Nanefy · Módulos para supermercados con LOC SMS</title>
+<title>Nanefy · Modules for supermarkets on LOC SMS</title>
 <meta name="description" content="Nanefy pone a trabajar los precios de LOC SMS: Label Designer, Price Verifier, Digital Signage, Product Map y Tickets. Cada módulo se contrata por separado.">
 <link rel="canonical" href="https://nanefy.com/">
 <link rel="icon" href="img/nanefy-icon.svg" type="image/svg+xml">
@@ -16,7 +16,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="portfolio/fx/fx.css">
-<script>(function(){var h=location.hash.slice(1);if(h&&['top','modulos','label-designer','price-verifier','digital-signage','product-map','tickets','como','planes','faq','demo'].indexOf(h)<0)location.replace('portfolio/'+location.search+location.hash)})();document.documentElement.classList.add('fx');try{var l=new URLSearchParams(location.search).get('lang')||localStorage.getItem('tec-lang');if(l==='en'||l==='es'){document.documentElement.dataset.lang=l;document.documentElement.lang=l}}catch(e){}</script>
+<script>(function(){var h=location.hash.slice(1);if(h&&['top','modulos','label-designer','price-verifier','digital-signage','product-map','tickets','como','planes','faq','demo'].indexOf(h)<0)location.replace('portfolio/'+location.search+location.hash)})();document.documentElement.classList.add('fx');try{var l=new URLSearchParams(location.search).get('lang');if(l==='en'||l==='es'){document.documentElement.dataset.lang=l;document.documentElement.lang=l}}catch(e){}</script>
 <style>
 :root{
   --bg:#09090D;
@@ -487,8 +487,8 @@ footer a:hover{color:var(--text)}
       <a href="#faq"><span class="es">Preguntas</span><span class="en">FAQ</span></a>
     </nav>
     <div class="lang" role="group" aria-label="Idioma / Language">
-      <button type="button" data-set-lang="es" aria-pressed="true">ES</button>
-      <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
+      <button type="button" data-set-lang="es" aria-pressed="false">ES</button>
+      <button type="button" data-set-lang="en" aria-pressed="true">EN</button>
     </div>
     <a class="btn btn-magic btn-sm" href="#demo"><span class="es">Pedir una demo</span><span class="en">Book a demo</span></a>
   </div>
@@ -1075,7 +1075,7 @@ footer a:hover{color:var(--text)}
   place();
   whenVisible(board, tkLoop.start, tkLoop.stop);
 
-  setLang(root.dataset.lang === 'en' ? 'en' : 'es');
+  setLang(root.dataset.lang === 'es' ? 'es' : 'en');
 })();
 </script>
 <script>
