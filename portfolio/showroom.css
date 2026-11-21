@@ -506,9 +506,10 @@ html.pref-solid ::backdrop{background:rgba(10,10,10,.88)}
 @media (max-width:600px){.shop-link span{display:none}.shop-link{padding:0 9px}}
 .nanefy-link + .search{margin-left:0}
 
-/* The other portfolio, at the top of the sidebar: the top bar's button, as wide as the sidebar (Shopify's green here;
-   the main portfolio's, from the Shopify one, in the top bar's dark). */
-.side-pill{display:flex;align-items:center;gap:8px;height:36px;padding:0 12px;margin-bottom:8px;border-radius:9px;color:#fff;font-weight:600;font-size:.8125rem;text-decoration:none;white-space:nowrap;flex:none}
+/* The other portfolio, at the top of the sidebar: the very button the top bar had, as it was there (its size, its
+   corners, its type), on the sidebar's left (Shopify's green here; the main portfolio's, from the Shopify one, in the
+   top bar's dark). */
+.side-pill{display:inline-flex;align-self:flex-start;align-items:center;gap:6px;height:34px;padding:0 12px;margin:0 0 8px 4px;border-radius:9px;color:#fff;font-weight:600;font-size:.8125rem;line-height:1;text-decoration:none;white-space:nowrap;flex:none}
 .side-pill svg{width:16px;height:16px;flex:none}
 .side-pill:hover{text-decoration:none}
 .side-pill:focus-visible{outline:2px solid var(--text);outline-offset:2px}
