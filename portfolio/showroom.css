@@ -506,16 +506,28 @@ html.pref-solid ::backdrop{background:rgba(10,10,10,.88)}
 @media (max-width:600px){.shop-link span{display:none}.shop-link{padding:0 9px}}
 .nanefy-link + .search{margin-left:0}
 
-/* The other portfolio, at the top of the sidebar: the very button the top bar had, as it was there (its size, its
-   corners, its type), on the sidebar's left (Shopify's green here; the main portfolio's, from the Shopify one, in the
-   top bar's dark). */
-.side-pill{display:inline-flex;align-self:flex-start;align-items:center;gap:6px;height:34px;padding:0 12px;margin:0 0 8px 4px;border-radius:9px;color:#fff;font-weight:600;font-size:.8125rem;line-height:1;text-decoration:none;white-space:nowrap;flex:none}
-.side-pill svg{width:16px;height:16px;flex:none}
-.side-pill:hover{text-decoration:none}
-.side-pill:focus-visible{outline:2px solid var(--text);outline-offset:2px}
-.side-pill-shop{background:#008060}
-.side-pill-shop:hover{background:#006e52}
-.side-pill-main{background:#1A1A1A;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
-.side-pill-main:hover{background:#303030}
-[data-theme="dark"] .side-pill-main{background:#303030;box-shadow:inset 0 0 0 1px rgba(255,255,255,.14)}
-[data-theme="dark"] .side-pill-main:hover{background:#3d3d3d}
+/*
+ * The other portfolio, a card at the top of the sidebar: its icon and "Portfolio" over its name, a line on what is
+ * there and its tags; an arrow that leaves on hover. Shopify's in its greens, with a light from the top corner and a
+ * fine dotted grid; the main portfolio's, from the Shopify one, in the top bar's dark lit by the site's violet and blue.
+ */
+.pf-card{position:relative;isolation:isolate;display:flex;flex-direction:column;gap:6px;flex:none;margin:0 0 10px;padding:14px 14px 13px;border-radius:14px;overflow:hidden;color:#fff;text-decoration:none;box-shadow:0 10px 24px -14px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.14);transition:transform .2s,box-shadow .2s}
+.pf-card::before{content:"";position:absolute;inset:0;z-index:-1;background-image:radial-gradient(rgba(255,255,255,.16) 1px,transparent 1.2px);background-size:12px 12px;-webkit-mask-image:linear-gradient(200deg,#000 10%,transparent 65%);mask-image:linear-gradient(200deg,#000 10%,transparent 65%)}
+.pf-card:hover{text-decoration:none;transform:translateY(-2px);box-shadow:0 16px 30px -14px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.18)}
+.pf-card:focus-visible{outline:2px solid var(--text);outline-offset:2px}
+.pf-card-head{display:flex;align-items:center;gap:9px;margin-bottom:4px}
+.pf-card-icon{display:grid;place-items:center;width:32px;height:32px;flex:none;border-radius:9px;background:rgba(255,255,255,.16);box-shadow:inset 0 0 0 1px rgba(255,255,255,.22);backdrop-filter:blur(4px)}
+.pf-card-eyebrow{font-size:.6875rem;font-weight:650;letter-spacing:.08em;text-transform:uppercase;opacity:.78}
+.pf-card-arrow{margin-left:auto;opacity:.75;transition:transform .2s,opacity .2s}
+.pf-card:hover .pf-card-arrow{transform:translate(2px,-2px);opacity:1}
+.pf-card-title{font-size:1.125rem;font-weight:700;letter-spacing:-.01em;line-height:1.15}
+.pf-card-text{font-size:.78rem;line-height:1.4;opacity:.86}
+.pf-card-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}
+.pf-card-tags span{padding:2px 7px;border-radius:999px;background:rgba(255,255,255,.14);font-size:.6875rem;font-weight:600;line-height:1.4}
+
+.pf-card-shop{background:radial-gradient(120% 90% at 100% 0%,rgba(149,191,71,.55),transparent 55%),linear-gradient(155deg,#008060 0%,#00694f 55%,#004c3f 100%)}
+
+.pf-card-main{background:radial-gradient(110% 80% at 100% 0%,rgba(128,81,255,.55),transparent 55%),radial-gradient(90% 70% at 0% 100%,rgba(47,181,232,.32),transparent 60%),linear-gradient(155deg,#26262b 0%,#18181b 100%);box-shadow:0 10px 24px -14px rgba(0,0,0,.55),inset 0 0 0 1px rgba(255,255,255,.08)}
+.pf-card-main:hover{box-shadow:0 16px 30px -14px rgba(0,0,0,.6),inset 0 0 0 1px rgba(255,255,255,.14)}
+.pf-card-yg{background:conic-gradient(from 200deg,#8051FF,#2FB5E8,#FF6FD8,#8051FF);font-size:.75rem;font-weight:700;letter-spacing:0}
+@media (prefers-reduced-motion:reduce){.pf-card,.pf-card-arrow{transition:none}.pf-card:hover{transform:none}}

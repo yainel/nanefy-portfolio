@@ -35,6 +35,10 @@
     "Shopify Portfolio": "Portafolio Shopify",
     "Nanefy for supermarkets": "Nanefy para supermercados",
     "Main portfolio": "Portafolio principal",
+    // The other portfolio's card, at the top of the sidebar
+    "Portfolio": "Portafolio",
+    "Themes, apps, checkout and headless stores, each running live.": "Temas, apps, checkout y tiendas headless, todo funcionando en vivo.",
+    "Web apps, PHP and Laravel back ends, and live UI demos.": "Aplicaciones web, back ends en PHP y Laravel, y demos de interfaz en vivo.",
     "Shopify overview": "Resumen Shopify",
     "Theme development": "Desarrollo de temas",
     "Apps & APIs": "Apps y APIs",
