@@ -33,7 +33,6 @@
     // Shopify portfolio
     "Shopify portfolio": "Portafolio Shopify",
     "Shopify Portfolio": "Portafolio Shopify",
-    "Nanefy for supermarkets": "Nanefy para supermercados",
     "Main portfolio": "Portafolio principal",
     // The other portfolio's card, at the top of the sidebar
     "Portfolio": "Portafolio",

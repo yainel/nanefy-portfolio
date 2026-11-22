@@ -4,12 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<title>Moved · Nanefy</title>
+<title>Not found · Yainel Garcia Alfonso</title>
 <script>
 (function () {
+  // The portfolio used to live at /portfolio/ and now lives at the root
   var p = location.pathname, rest = location.search + location.hash;
+  if (/^\/portfolio(\/|$)/.test(p)) { location.replace((p.replace(/^\/portfolio/, '') || '/') + rest); return; }
   if (/^\/tecnica(\/|$)/.test(p)) { location.replace('/' + rest); return; }
-  if (!/^\/portfolio(\/|$)/.test(p)) { location.replace('/portfolio' + p + rest); return; }
   document.documentElement.className = 'gone';
 })();
 </script>
@@ -21,6 +22,6 @@ a{color:#2FB5E8}
 </head>
 <body>
 <p class="moving">Redirecting…</p>
-<div class="gone-text"><h1 style="font-size:1.6rem;margin:0 0 8px">This page does not exist</h1><p><a href="/">Nanefy</a> · <a href="/portfolio/">Portfolio</a></p></div>
+<div class="gone-text"><h1 style="font-size:1.6rem;margin:0 0 8px">This page does not exist</h1><p><a href="/">Yainel Garcia Alfonso · Portfolio</a></p></div>
 </body>
 </html>
