@@ -691,7 +691,7 @@
       if (es[v]) el.setAttribute(a, es[v]);
     });
   });
-  document.title = 'Yainel Garcia Alfonso · Diseñador web y desarrollador full-stack';
+  document.title = 'Yainel Garcia · Diseñador web y desarrollador full-stack';
   var desc = document.querySelector('meta[name=description]');
-  if (desc) desc.content = 'Yainel Garcia Alfonso, diseñador web y desarrollador full-stack en Miami: back ends en PHP y Laravel, integraciones de API y las interfaces que van encima. Un laboratorio de habilidades en vivo: animación y efectos, patrones de interfaz, CSS moderno y APIs del navegador, y mini apps, cada una con su código a un clic.';
+  if (desc) desc.content = 'Yainel Garcia, diseñador web y desarrollador full-stack en Miami: back ends en PHP y Laravel, integraciones de API y las interfaces que van encima. Un laboratorio de habilidades en vivo: animación y efectos, patrones de interfaz, CSS moderno y APIs del navegador, y mini apps, cada una con su código a un clic.';
 })();
