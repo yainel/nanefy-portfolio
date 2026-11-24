@@ -21,7 +21,7 @@
     'Everything here is live.': 'Todo aquí funciona de verdad.',
     'Every demo on this page is a working component I designed and coded, and each one shows its source. Press': 'Cada demo de esta página es un componente real que diseñé y programé, y cada uno muestra su código. Pulsa',
     'to jump anywhere.': 'para ir a cualquier parte.',
-    'Designed and coded by Yainel Garcia Alfonso in Miami. Press': 'Diseñado y programado por Yainel Garcia Alfonso en Miami. Pulsa',
+    'Designed and coded by Yainel Garcia in Miami. Press': 'Diseñado y programado por Yainel Garcia en Miami. Pulsa',
     'for quick actions.': 'para acciones rápidas.',
     'Open navigation': 'Abrir navegación',
     'Search and quick actions': 'Búsqueda y acciones rápidas',
@@ -691,7 +691,7 @@
       if (es[v]) el.setAttribute(a, es[v]);
     });
   });
-  document.title = 'Yainel Garcia Alfonso · Diseñador web y desarrollador full-stack';
+  document.title = 'Yainel Garcia · Diseñador web y desarrollador full-stack';
   var desc = document.querySelector('meta[name=description]');
-  if (desc) desc.content = 'Yainel Garcia Alfonso, diseñador web y desarrollador full-stack en Miami: back ends en PHP y Laravel, integraciones de API y las interfaces que van encima. Un laboratorio de habilidades en vivo: animación y efectos, patrones de interfaz, CSS moderno y APIs del navegador, y mini apps, cada una con su código a un clic.';
+  if (desc) desc.content = 'Yainel Garcia, diseñador web y desarrollador full-stack en Miami: back ends en PHP y Laravel, integraciones de API y las interfaces que van encima. Un laboratorio de habilidades en vivo: animación y efectos, patrones de interfaz, CSS moderno y APIs del navegador, y mini apps, cada una con su código a un clic.';
 })();
