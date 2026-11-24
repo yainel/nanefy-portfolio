@@ -371,7 +371,7 @@
     { g: 'Selected work', t: 'Brasa wood-fire restaurant', run: function () { openProject('brasa'); } },
     { g: 'Selected work', t: 'Marea pilates studio', run: function () { openProject('marea'); } },
     { g: 'Actions', t: 'Toggle dark mode', k: 'D', run: function () { setTheme(root.dataset.theme === 'dark' ? 'light' : 'dark'); } },
-    { g: 'Actions', t: 'Download résumé', run: function () { var a = document.createElement('a'); a.href = 'resume/Yainel-Garcia-Alfonso-Resume.pdf?v=20261122'; a.download = ''; document.body.appendChild(a); a.click(); a.remove(); } },
+    { g: 'Actions', t: 'Download résumé', run: function () { var a = document.createElement('a'); a.href = 'resume/Yainel-Garcia-Resume.pdf?v=20261124'; a.download = ''; document.body.appendChild(a); a.click(); a.remove(); } },
     { g: 'Actions', t: 'Copy email address', run: function () { copy('garcia.yainel@gmail.com', 'Email copied to clipboard'); } },
     { g: 'Actions', t: 'Celebrate', run: function () { confetti(); } },
     { g: 'Actions', t: spanish ? 'Switch to English' : 'Cambiar a español', run: function () { window.ygSetLang(spanish ? 'en' : 'es'); } },
